@@ -1,0 +1,23 @@
+# Archivos del sistema y del editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Archivos temporales de QGIS
+*.qgz~
+*.qgs~
+
+# Datos pesados de trabajo (no publicar en GitHub)
+data/raw/
+assets/images/raw/
+*.tif
+*.tiff
+*.las
+*.laz
+*.psx
+*.psz
+*.files/
+
+# Variables privadas
+.env
+.env.*
