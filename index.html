@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Atlas interactivo de fallas geológicas del Ecuador con información tectónica, geomorfológica y bibliográfica."
+    />
+    <title>Fallas del Ecuador | Atlas interactivo</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://tile.openstreetmap.org" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#map">Ir directamente al mapa</a>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="Inicio de Fallas del Ecuador">
+          <span class="brand-mark" aria-hidden="true">FE</span>
+          <span>
+            <strong>Fallas del Ecuador</strong>
+            <small>Atlas geológico interactivo</small>
+          </span>
+        </a>
+        <span class="project-status"><span aria-hidden="true"></span> Proyecto en desarrollo</span>
+      </header>
+
+      <main class="workspace">
+        <aside class="sidebar" aria-label="Catálogo y filtros">
+          <section class="intro">
+            <p class="eyebrow">Explorador tectónico</p>
+            <h1>Conoce las fallas geológicas del Ecuador</h1>
+            <p>
+              Consulta trazas documentadas, tipo de movimiento, evidencias de actividad y
+              referencias científicas desde un solo mapa.
+            </p>
+          </section>
+
+          <section class="summary-grid" aria-label="Resumen del catálogo">
+            <article>
+              <strong id="fault-count">0</strong>
+              <span>trazas visibles</span>
+            </article>
+            <article>
+              <strong id="source-count">0</strong>
+              <span>fuentes citadas</span>
+            </article>
+          </section>
+
+          <section class="filters" aria-labelledby="filters-title">
+            <div class="section-heading">
+              <h2 id="filters-title">Buscar en el catálogo</h2>
+              <button id="clear-filters" class="text-button" type="button">Limpiar</button>
+            </div>
+
+            <label for="fault-search">Nombre, provincia o sistema</label>
+            <input
+              id="fault-search"
+              type="search"
+              placeholder="Ej.: Pallatanga"
+              autocomplete="off"
+            />
+
+            <label for="movement-filter">Tipo de movimiento</label>
+            <select id="movement-filter">
+              <option value="all">Todos</option>
+              <option value="inversa">Inversa</option>
+              <option value="normal">Normal</option>
+              <option value="dextral">Dextral</option>
+              <option value="sinestral">Sinestral</option>
+              <option value="desconocido">No determinado</option>
+            </select>
+          </section>
+
+          <section class="catalog" aria-labelledby="catalog-title">
+            <div class="section-heading">
+              <h2 id="catalog-title">Resultados</h2>
+              <span id="result-count">0</span>
+            </div>
+            <div id="catalog-state" class="empty-state" role="status">
+              <strong>Catálogo en preparación</strong>
+              <p>El mapa está listo para recibir las primeras trazas verificadas.</p>
+            </div>
+            <ul id="fault-list" class="fault-list" aria-live="polite"></ul>
+          </section>
+
+          <section class="method-note">
+            <h2>Lectura responsable</h2>
+            <p>
+              Las trazas se presentarán con su fuente, escala y nivel de confianza. Este visor
+              tiene fines científicos y educativos; no sustituye un estudio oficial de amenaza.
+            </p>
+          </section>
+        </aside>
+
+        <section class="map-panel" aria-label="Mapa de fallas geológicas">
+          <div class="map-title">
+            <span>República del Ecuador</span>
+            <button id="reset-view" type="button">Ver todo el país</button>
+          </div>
+          <div id="map" tabindex="0" aria-label="Mapa interactivo del Ecuador"></div>
+          <div class="legend" aria-label="Leyenda de tipos de movimiento">
+            <strong>Tipo de movimiento</strong>
+            <span><i class="reverse"></i> Inversa</span>
+            <span><i class="normal"></i> Normal</span>
+            <span><i class="dextral"></i> Dextral</span>
+            <span><i class="sinistral"></i> Sinestral</span>
+            <span><i class="unknown"></i> No determinado</span>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <span>Desarrollado por Henry P. Conteron Moreta</span>
+        <span>Geociencias · SIG · Ecuador</span>
+      </footer>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="assets/js/map.js"></script>
+  </body>
+</html>
