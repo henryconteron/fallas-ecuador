@@ -3,136 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Atlas interactivo de fallas geológicas del Ecuador con información tectónica, geomorfológica y bibliográfica."
-    />
+    <meta name="description" content="Atlas interactivo de fallas geológicas del Ecuador con información tectónica, geomorfológica y bibliográfica." />
     <title>Fallas del Ecuador | Atlas interactivo</title>
     <link rel="preconnect" href="https://unpkg.com" />
     <link rel="preconnect" href="https://tile.openstreetmap.org" />
+    <link rel="preconnect" href="https://tile.opentopomap.org" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
-  <body>
-    <a class="skip-link" href="#map">Ir directamente al mapa</a>
+  <body data-page="map">
+    <a class="skip-link" href="#map" data-i18n="skip.map">Ir directamente al mapa</a>
 
     <div class="app-shell">
       <header class="topbar">
-        <a class="brand" href="./" aria-label="Inicio de Fallas del Ecuador">
+        <a class="brand" href="./" data-i18n-aria="brand.homeAria" aria-label="Inicio de Fallas del Ecuador">
           <span class="brand-mark" aria-hidden="true">FE</span>
-          <span>
-            <strong>Fallas del Ecuador</strong>
-            <small>Atlas geológico interactivo</small>
+          <span class="brand-copy">
+            <strong data-i18n="brand.name">Fallas del Ecuador</strong>
+            <small data-i18n="brand.subtitle">Atlas geológico interactivo</small>
           </span>
         </a>
-        <span class="project-status" aria-label="Proyecto en desarrollo">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span class="status-full" aria-hidden="true">Proyecto en desarrollo</span>
-          <span class="status-short" aria-hidden="true">Beta</span>
-        </span>
+
+        <nav class="main-nav" data-i18n-aria="nav.aria" aria-label="Navegación principal">
+          <a class="is-active" href="./" aria-current="page" data-i18n="nav.map">Mapa</a>
+          <a href="learn.html" data-i18n="nav.learn">Aprende</a>
+        </nav>
+
+        <div class="header-actions">
+          <span class="project-status" data-i18n-aria="status.development" aria-label="Proyecto en desarrollo">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span class="status-full" data-i18n="status.development">Proyecto en desarrollo</span>
+            <span class="status-short">Beta</span>
+          </span>
+          <button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button>
+        </div>
       </header>
 
       <main class="workspace">
-        <section class="map-panel" aria-label="Mapa de fallas geológicas">
+        <section class="map-panel" data-i18n-aria="map.panelAria" aria-label="Mapa de fallas geológicas">
           <div class="map-title">
-            <span class="map-region">Ecuador continental</span>
-            <span id="data-mode" class="data-mode" hidden>Datos sintéticos</span>
-            <button id="reset-view" type="button">Restablecer vista</button>
+            <div class="map-context">
+              <span class="map-region" data-i18n="map.region">Ecuador continental</span>
+              <span id="data-mode" class="data-mode" hidden data-i18n="status.synthetic">Datos sintéticos</span>
+            </div>
+            <div class="map-actions">
+              <div class="basemap-switch" role="group" data-i18n-aria="basemap.aria" aria-label="Seleccionar mapa base">
+                <button class="is-active" data-basemap="topographic" type="button" aria-pressed="true">
+                  <span class="basemap-icon relief-icon" aria-hidden="true"></span><span data-i18n="basemap.topographic">Topográfico</span>
+                </button>
+                <button data-basemap="streets" type="button" aria-pressed="false">
+                  <span class="basemap-icon street-icon" aria-hidden="true"></span><span data-i18n="basemap.streets">Calles</span>
+                </button>
+              </div>
+              <button id="reset-view" class="reset-view" type="button" data-i18n-title="map.reset">
+                <span aria-hidden="true">↗</span><span class="reset-label" data-i18n="map.reset">Restablecer vista</span>
+              </button>
+            </div>
           </div>
-          <div id="map" tabindex="0" aria-label="Mapa interactivo del Ecuador continental"></div>
+
+          <div id="map" tabindex="0" data-i18n-aria="map.aria" aria-label="Mapa interactivo del Ecuador continental"></div>
           <div id="map-error" class="map-error" role="alert" hidden>
-            <strong>El mapa no está disponible</strong>
-            <p>Comprueba la conexión y vuelve a cargar la página.</p>
+            <strong data-i18n="errors.mapUnavailable">El mapa no está disponible</strong>
+            <p data-i18n="errors.checkConnection">Comprueba la conexión y vuelve a cargar la página.</p>
           </div>
           <details class="legend" open>
-            <summary>Leyenda</summary>
-            <div class="legend-items" aria-label="Tipos de movimiento">
-              <span><i class="reverse"></i> Inversa</span>
-              <span><i class="normal"></i> Normal</span>
-              <span><i class="dextral"></i> Dextral</span>
-              <span><i class="sinistral"></i> Sinestral</span>
-              <span><i class="unknown"></i> No determinado</span>
+            <summary data-i18n="legend.title">Leyenda</summary>
+            <div class="legend-items" data-i18n-aria="legend.movementAria" aria-label="Tipos de movimiento">
+              <span><i class="reverse"></i><span data-i18n="movement.inversa">Inversa</span></span>
+              <span><i class="normal"></i><span data-i18n="movement.normal">Normal</span></span>
+              <span><i class="dextral"></i><span data-i18n="movement.dextral">Dextral</span></span>
+              <span><i class="sinistral"></i><span data-i18n="movement.sinestral">Sinestral</span></span>
+              <span><i class="unknown"></i><span data-i18n="movement.desconocido">No determinado</span></span>
             </div>
           </details>
         </section>
 
-        <aside class="sidebar" aria-label="Catálogo y filtros">
+        <aside class="sidebar" data-i18n-aria="sidebar.aria" aria-label="Catálogo y filtros">
           <section class="intro">
-            <p class="eyebrow">Explorador tectónico</p>
-            <h1>Conoce las fallas geológicas del Ecuador</h1>
-            <p>
-              Consulta trazas documentadas, tipo de movimiento, evidencias de actividad y
-              referencias científicas desde un solo mapa.
-            </p>
+            <p class="eyebrow" data-i18n="intro.eyebrow">Explorador tectónico</p>
+            <h1 data-i18n="intro.title">Conoce las fallas geológicas del Ecuador</h1>
+            <p data-i18n="intro.copy">Explora trazas documentadas, su movimiento y las huellas que dejan en el relieve.</p>
+            <a class="learn-link" href="learn.html"><span data-i18n="intro.learn">Aprende a leer el paisaje</span><span aria-hidden="true">↗</span></a>
           </section>
 
-          <section class="summary-grid" aria-label="Resumen del catálogo">
-            <article>
-              <strong id="fault-count">0</strong>
-              <span>trazas visibles</span>
-            </article>
-            <article>
-              <strong id="source-count">0</strong>
-              <span>fuentes citadas</span>
-            </article>
+          <section class="summary-grid" data-i18n-aria="summary.aria" aria-label="Resumen del catálogo">
+            <article><strong id="fault-count">0</strong><span data-i18n="summary.faults">trazas visibles</span></article>
+            <article><strong id="evidence-count">0</strong><span data-i18n="summary.evidence">formas del relieve</span></article>
+            <article><strong id="source-count">0</strong><span data-i18n="summary.sources">fuentes citadas</span></article>
+          </section>
+
+          <section class="layer-panel" aria-labelledby="layers-title">
+            <div class="section-heading"><h2 id="layers-title" data-i18n="layers.title">Capas interpretativas</h2></div>
+            <label class="layer-switch" for="evidence-toggle">
+              <span><strong data-i18n="layers.evidence">Indicadores geomorfológicos</strong><small data-i18n="layers.evidenceHint">Escarpes, facetas y drenajes desplazados</small></span>
+              <input id="evidence-toggle" type="checkbox" disabled />
+              <span class="switch-track" aria-hidden="true"><span></span></span>
+            </label>
           </section>
 
           <section class="filters" aria-labelledby="filters-title">
             <div class="section-heading">
-              <h2 id="filters-title">Buscar en el catálogo</h2>
-              <button id="clear-filters" class="text-button" type="button" disabled>
-                Limpiar
-              </button>
+              <h2 id="filters-title" data-i18n="filters.title">Buscar en el catálogo</h2>
+              <button id="clear-filters" class="text-button" type="button" disabled data-i18n="filters.clear">Limpiar</button>
             </div>
-
-            <label for="fault-search">Nombre, provincia o sistema</label>
-            <input
-              id="fault-search"
-              type="search"
-              placeholder="Ej.: Pallatanga"
-              autocomplete="off"
-              disabled
-            />
-
-            <label for="movement-filter">Tipo de movimiento</label>
+            <label for="fault-search" data-i18n="filters.searchLabel">Nombre, provincia o sistema</label>
+            <input id="fault-search" type="search" placeholder="Ej.: Pallatanga" data-i18n-placeholder="filters.searchPlaceholder" autocomplete="off" disabled />
+            <label for="movement-filter" data-i18n="filters.movementLabel">Tipo de movimiento</label>
             <select id="movement-filter" disabled>
-              <option value="all">Todos</option>
-              <option value="inversa">Inversa</option>
-              <option value="normal">Normal</option>
-              <option value="dextral">Dextral</option>
-              <option value="sinestral">Sinestral</option>
-              <option value="desconocido">No determinado</option>
+              <option value="all" data-i18n="movement.all">Todos</option>
+              <option value="inversa" data-i18n="movement.inversa">Inversa</option>
+              <option value="normal" data-i18n="movement.normal">Normal</option>
+              <option value="dextral" data-i18n="movement.dextral">Dextral</option>
+              <option value="sinestral" data-i18n="movement.sinestral">Sinestral</option>
+              <option value="desconocido" data-i18n="movement.desconocido">No determinado</option>
             </select>
           </section>
 
           <section class="catalog" aria-labelledby="catalog-title">
-            <div class="section-heading">
-              <h2 id="catalog-title">Resultados</h2>
-              <span id="result-count">0</span>
-            </div>
+            <div class="section-heading"><h2 id="catalog-title" data-i18n="catalog.title">Resultados</h2><span id="result-count">0</span></div>
             <div id="catalog-state" class="empty-state" role="status">
-              <strong>Cargando catálogo</strong>
-              <p>Estamos preparando las trazas disponibles.</p>
+              <strong data-i18n="catalog.loadingTitle">Cargando catálogo</strong><p data-i18n="catalog.loadingCopy">Estamos preparando las trazas disponibles.</p>
             </div>
             <ul id="fault-list" class="fault-list" aria-live="polite"></ul>
           </section>
 
           <section class="method-note">
-            <h2>Lectura responsable</h2>
-            <p>
-              Las trazas se presentarán con su fuente, escala y nivel de confianza. Este visor
-              tiene fines científicos y educativos; no sustituye un estudio oficial de amenaza.
-            </p>
+            <p class="eyebrow" data-i18n="responsible.eyebrow">Nota científica</p>
+            <h2 data-i18n="responsible.title">Leer el mapa con criterio</h2>
+            <p data-i18n="responsible.copy">Una forma del relieve es una pista, no una prueba aislada. Este visor es educativo y no sustituye un estudio oficial de amenaza.</p>
           </section>
         </aside>
       </main>
 
-      <footer>
-        <span>Desarrollado por Henry P. Conteron Moreta</span>
-        <span>Geociencias · SIG · Ecuador</span>
-      </footer>
+      <footer><span data-i18n="footer.credit">Desarrollado por Henry P. Conteron Moreta</span><span data-i18n="footer.disciplines">Geociencias · SIG · Ecuador</span></footer>
     </div>
 
+    <script src="assets/js/i18n.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="assets/js/map.js"></script>
   </body>

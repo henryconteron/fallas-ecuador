@@ -8,14 +8,22 @@
       "id": "demo-norte",
       "properties": {
         "nombre": "Traza sintética Norte",
+        "nombre_en": "Northern synthetic trace",
         "sistema": "Sistema de demostración A",
+        "sistema_en": "Demonstration system A",
         "provincia": "Zona norte de prueba",
+        "provincia_en": "Northern test area",
         "tipo_movimiento": "inversa",
         "actividad": "Dato ficticio",
+        "actividad_en": "Fictional data",
         "confianza": "Demostración",
+        "confianza_en": "Demonstration",
         "fuente": "Demostración interna — sin valor científico",
+        "fuente_en": "Internal demonstration — no scientific value",
         "escala": "No aplica",
-        "descripcion": "Geometría creada únicamente para comprobar colores, selección, fichas y navegación del visor."
+        "escala_en": "Not applicable",
+        "descripcion": "Geometría creada únicamente para comprobar colores, selección, fichas y navegación del visor.",
+        "descripcion_en": "Geometry created only to test colors, selection, information cards, and viewer navigation."
       },
       "geometry": {
         "type": "LineString",
@@ -31,14 +39,22 @@
       "id": "demo-centro",
       "properties": {
         "nombre": "Traza sintética Centro",
+        "nombre_en": "Central synthetic trace",
         "sistema": "Sistema de demostración A",
+        "sistema_en": "Demonstration system A",
         "provincia": "Zona central de prueba",
+        "provincia_en": "Central test area",
         "tipo_movimiento": "dextral",
         "actividad": "Dato ficticio",
+        "actividad_en": "Fictional data",
         "confianza": "Demostración",
+        "confianza_en": "Demonstration",
         "fuente": "Demostración interna — sin valor científico",
+        "fuente_en": "Internal demonstration — no scientific value",
         "escala": "No aplica",
-        "descripcion": "Ejemplo artificial destinado a validar la búsqueda por nombre, zona y sistema."
+        "escala_en": "Not applicable",
+        "descripcion": "Ejemplo artificial destinado a validar la búsqueda por nombre, zona y sistema.",
+        "descripcion_en": "Artificial example used to test searches by name, area, and system."
       },
       "geometry": {
         "type": "LineString",
@@ -54,14 +70,22 @@
       "id": "demo-sur",
       "properties": {
         "nombre": "Traza sintética Sur",
+        "nombre_en": "Southern synthetic trace",
         "sistema": "Sistema de demostración B",
+        "sistema_en": "Demonstration system B",
         "provincia": "Zona sur de prueba",
+        "provincia_en": "Southern test area",
         "tipo_movimiento": "normal",
         "actividad": "Dato ficticio",
+        "actividad_en": "Fictional data",
         "confianza": "Demostración",
+        "confianza_en": "Demonstration",
         "fuente": "Demostración interna — sin valor científico",
+        "fuente_en": "Internal demonstration — no scientific value",
         "escala": "No aplica",
-        "descripcion": "Línea ficticia para revisar el encuadre automático y el contenido explicativo de la ficha."
+        "escala_en": "Not applicable",
+        "descripcion": "Línea ficticia para revisar el encuadre automático y el contenido explicativo de la ficha.",
+        "descripcion_en": "Fictional line used to review automatic framing and the explanatory card content."
       },
       "geometry": {
         "type": "LineString",
@@ -77,14 +101,22 @@
       "id": "demo-suroeste",
       "properties": {
         "nombre": "Traza sintética Suroeste",
+        "nombre_en": "Southwestern synthetic trace",
         "sistema": "Sistema de demostración B",
+        "sistema_en": "Demonstration system B",
         "provincia": "Zona suroeste de prueba",
+        "provincia_en": "Southwestern test area",
         "tipo_movimiento": "sinestral",
         "actividad": "Dato ficticio",
+        "actividad_en": "Fictional data",
         "confianza": "Demostración",
+        "confianza_en": "Demonstration",
         "fuente": "Demostración interna — sin valor científico",
+        "fuente_en": "Internal demonstration — no scientific value",
         "escala": "No aplica",
-        "descripcion": "Segmento sin interpretación geológica utilizado para comprobar filtros y simbología."
+        "escala_en": "Not applicable",
+        "descripcion": "Segmento sin interpretación geológica utilizado para comprobar filtros y simbología.",
+        "descripcion_en": "Segment without geological interpretation, used to test filters and symbology."
       },
       "geometry": {
         "type": "MultiLineString",

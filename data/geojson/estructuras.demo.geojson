@@ -1,0 +1,66 @@
+{
+  "type": "FeatureCollection",
+  "name": "estructuras_geomorfologicas_demo",
+  "metadata": {
+    "status": "synthetic-demo",
+    "warning": "Datos ficticios creados únicamente para probar la interfaz. No usar con fines científicos."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "demo-escarpe-1",
+      "properties": {
+        "nombre": "Escarpe demostrativo de Alóag",
+        "nombre_en": "Alóag demonstration scarp",
+        "tipo": "escarpe",
+        "observacion": "Cambio de pendiente lineal y continuo sobre el piedemonte.",
+        "observacion_en": "A linear, continuous slope break across the piedmont.",
+        "fuente": "Demostración interna — sin valor científico",
+        "fuente_en": "Internal demonstration — no scientific value"
+      },
+      "geometry": { "type": "Point", "coordinates": [-78.59, -0.47] }
+    },
+    {
+      "type": "Feature",
+      "id": "demo-facetas-1",
+      "properties": {
+        "nombre": "Facetas demostrativas del Callejón Interandino",
+        "nombre_en": "Inter-Andean Valley demonstration facets",
+        "tipo": "faceta_triangular",
+        "observacion": "Serie de frentes triangulares alineados al pie de la cordillera.",
+        "observacion_en": "A series of triangular fronts aligned along the mountain base.",
+        "fuente": "Demostración interna — sin valor científico",
+        "fuente_en": "Internal demonstration — no scientific value"
+      },
+      "geometry": { "type": "Point", "coordinates": [-78.45, -1.16] }
+    },
+    {
+      "type": "Feature",
+      "id": "demo-drenaje-1",
+      "properties": {
+        "nombre": "Drenaje demostrativo desplazado",
+        "nombre_en": "Demonstration offset stream",
+        "tipo": "drenaje_desplazado",
+        "observacion": "Quiebre lateral del cauce coincidente con una traza sintética.",
+        "observacion_en": "A lateral channel bend coinciding with a synthetic trace.",
+        "fuente": "Demostración interna — sin valor científico",
+        "fuente_en": "Internal demonstration — no scientific value"
+      },
+      "geometry": { "type": "Point", "coordinates": [-78.96, -2.19] }
+    },
+    {
+      "type": "Feature",
+      "id": "demo-laguna-1",
+      "properties": {
+        "nombre": "Depresión demostrativa de Pallatanga",
+        "nombre_en": "Pallatanga demonstration depression",
+        "tipo": "laguna_sag",
+        "observacion": "Pequeña depresión húmeda alineada con el corredor de falla sintético.",
+        "observacion_en": "A small wet depression aligned with the synthetic fault corridor.",
+        "fuente": "Demostración interna — sin valor científico",
+        "fuente_en": "Internal demonstration — no scientific value"
+      },
+      "geometry": { "type": "Point", "coordinates": [-78.99, -1.99] }
+    }
+  ]
+}
