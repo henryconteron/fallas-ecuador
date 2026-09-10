@@ -75,6 +75,14 @@
               <span><i class="sinistral"></i><span data-i18n="movement.sinestral">Sinestral</span></span>
               <span><i class="unknown"></i><span data-i18n="movement.desconocido">No determinado</span></span>
             </div>
+            <div class="legend-divider" aria-hidden="true"></div>
+            <p class="legend-subtitle" data-i18n="legend.earthquakes">Sismos por profundidad</p>
+            <div class="legend-items earthquake-legend" data-i18n-aria="legend.depthAria" aria-label="Profundidad de los sismos">
+              <span><i class="earthquake-depth shallow"></i><span data-i18n="earthquakes.shallow">0–30 km</span></span>
+              <span><i class="earthquake-depth intermediate"></i><span data-i18n="earthquakes.intermediate">30–70 km</span></span>
+              <span><i class="earthquake-depth deep"></i><span data-i18n="earthquakes.deep">70–300 km</span></span>
+              <span><i class="earthquake-depth very-deep"></i><span data-i18n="earthquakes.veryDeep">Más de 300 km</span></span>
+            </div>
           </details>
         </section>
 
@@ -89,6 +97,7 @@
           <section class="summary-grid" data-i18n-aria="summary.aria" aria-label="Resumen del catálogo">
             <article><strong id="fault-count">0</strong><span data-i18n="summary.faults">trazas visibles</span></article>
             <article><strong id="evidence-count">0</strong><span data-i18n="summary.evidence">formas del relieve</span></article>
+            <article><strong id="earthquake-count">—</strong><span data-i18n="summary.earthquakes">sismos M ≥ 3</span></article>
             <article><strong id="source-count">0</strong><span data-i18n="summary.sources">fuentes citadas</span></article>
           </section>
 
@@ -99,6 +108,16 @@
               <input id="evidence-toggle" type="checkbox" disabled />
               <span class="switch-track" aria-hidden="true"><span></span></span>
             </label>
+            <label class="layer-switch" for="earthquake-toggle">
+              <span><strong data-i18n="layers.earthquakes">Sismicidad reciente</strong><small data-i18n="layers.earthquakesHint">USGS · últimos 365 días · M ≥ 3,0</small></span>
+              <input id="earthquake-toggle" type="checkbox" checked disabled />
+              <span class="switch-track" aria-hidden="true"><span></span></span>
+            </label>
+            <p id="earthquake-status" class="layer-status" role="status" data-i18n="earthquakes.loading">Consultando el catálogo del USGS…</p>
+            <a class="official-source-link" href="https://www.igepn.edu.ec/mapas/sismicidad/mapa-sismicidad-tectonica-365.html" target="_blank" rel="noopener noreferrer">
+              <span data-i18n="layers.officialEarthquakes">Ver mapa oficial del IG-EPN</span><span aria-hidden="true">↗</span>
+            </a>
+            <p class="layer-caution" data-i18n="earthquakes.caution">La cercanía entre un epicentro y una traza no demuestra que esa falla originó el sismo.</p>
           </section>
 
           <section class="filters" aria-labelledby="filters-title">

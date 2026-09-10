@@ -5,8 +5,9 @@ clara, su contexto tectónico, evidencias geomorfológicas y fuentes científica
 
 ## Estado
 
-El proyecto se encuentra en su fase inicial. La interfaz y el lector de GeoJSON están preparados;
-las trazas se incorporarán únicamente después de verificar su procedencia, atributos y licencia.
+El proyecto se encuentra en su fase inicial. La interfaz y el lector de GeoJSON están preparados,
+y la primera capa científica consulta sismicidad reciente mediante el servicio FDSN del USGS. Las
+trazas se incorporarán únicamente después de verificar su procedencia, atributos y licencia.
 
 ## Funciones iniciales
 
@@ -15,6 +16,9 @@ las trazas se incorporarán únicamente después de verificar su procedencia, at
 - búsqueda por nombre, provincia o sistema de fallas;
 - filtro por tipo de movimiento;
 - capa independiente para indicadores geomorfológicos;
+- capa dinámica de sismicidad del USGS para los últimos 365 días y magnitud mínima 3.0;
+- simbología sísmica por profundidad y tamaño proporcional a la magnitud;
+- enlace al mapa oficial de sismicidad del IG-EPN;
 - contenido y navegación bilingües en español e inglés;
 - guía visual sobre fallas, escarpes, facetas triangulares y drenajes desplazados;
 - simbología y fichas emergentes generadas desde GeoJSON;
@@ -82,6 +86,19 @@ formas del relieve.
 La vista inicial y el botón de restablecimiento cubren Ecuador continental. La incorporación de
 Galápagos se definirá como una vista geográfica independiente para evitar reducir excesivamente la
 escala del territorio continental.
+
+## Sismicidad reciente
+
+La capa sísmica consulta en tiempo real el servicio [FDSN Event Web Service del
+USGS](https://earthquake.usgs.gov/fdsnws/event/1/) para una extensión rectangular que abarca el
+Ecuador y sectores fronterizos y oceánicos próximos. El visor muestra magnitud, profundidad, fecha
+UTC, localización reportada, red del catálogo y un enlace a la ficha original del evento.
+
+El Instituto Geofísico de la Escuela Politécnica Nacional continúa siendo la referencia oficial
+nacional. Sus datos originales no se redistribuyen en este repositorio porque sus condiciones de
+uso restringen la publicación de los catálogos descargados por Internet. El visor enlaza al mapa
+oficial del IG-EPN y mantiene separado su origen del catálogo USGS. La proximidad visual entre un
+epicentro y una traza no demuestra una relación causal.
 
 ## Autor
 

@@ -741,7 +741,7 @@ footer {
 }
 
 .summary-grid {
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .layer-panel {
@@ -817,6 +817,43 @@ footer {
 .layer-switch input:focus-visible + .switch-track {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
+}
+
+.layer-switch + .layer-switch {
+  margin-top: 0.55rem;
+}
+
+.layer-status,
+.layer-caution {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.45;
+}
+
+.layer-status[data-state="loaded"] {
+  color: #83dbc8;
+}
+
+.layer-status[data-state="error"] {
+  color: #ff9b8f;
+}
+
+.official-source-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.65rem;
+  color: #ff9b8f;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.official-source-link:hover {
+  color: #ffd1cb;
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
 }
 
 .demo-link {
@@ -900,6 +937,59 @@ footer {
 
 .evidence-marker {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+}
+
+.earthquake-marker {
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.45));
+}
+
+.legend-divider {
+  height: 1px;
+  margin: 0.65rem 0 0.55rem;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.legend-subtitle {
+  margin: 0;
+  color: #dce4e6;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.earthquake-legend {
+  grid-template-columns: repeat(2, auto);
+  font-size: 0.72rem;
+}
+
+.legend i.earthquake-depth {
+  width: 0.72rem;
+  height: 0.72rem;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+}
+
+.earthquake-depth.shallow {
+  background: #ef4444;
+}
+
+.earthquake-depth.intermediate {
+  background: #f59e0b;
+}
+
+.earthquake-depth.deep {
+  background: #a78bfa;
+}
+
+.earthquake-depth.very-deep {
+  background: #38bdf8;
+}
+
+.event-link {
+  display: inline-block;
+  margin-top: 0.65rem;
+  color: #087863;
+  font-size: 0.78rem;
+  font-weight: 700;
 }
 
 @media (max-width: 48rem) {
