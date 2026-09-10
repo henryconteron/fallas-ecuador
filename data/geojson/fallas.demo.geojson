@@ -1,0 +1,104 @@
+{
+  "type": "FeatureCollection",
+  "name": "fallas_demo_sinteticas",
+  "description": "Geometrías ficticias para probar la interfaz. No representan fallas geológicas reales.",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "demo-norte",
+      "properties": {
+        "nombre": "Traza sintética Norte",
+        "sistema": "Sistema de demostración A",
+        "provincia": "Zona norte de prueba",
+        "tipo_movimiento": "inversa",
+        "actividad": "Dato ficticio",
+        "confianza": "Demostración",
+        "fuente": "Demostración interna — sin valor científico",
+        "escala": "No aplica",
+        "descripcion": "Geometría creada únicamente para comprobar colores, selección, fichas y navegación del visor."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-78.75, 0.25],
+          [-78.64, 0.05],
+          [-78.5, -0.2]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "demo-centro",
+      "properties": {
+        "nombre": "Traza sintética Centro",
+        "sistema": "Sistema de demostración A",
+        "provincia": "Zona central de prueba",
+        "tipo_movimiento": "dextral",
+        "actividad": "Dato ficticio",
+        "confianza": "Demostración",
+        "fuente": "Demostración interna — sin valor científico",
+        "escala": "No aplica",
+        "descripcion": "Ejemplo artificial destinado a validar la búsqueda por nombre, zona y sistema."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-79.12, -1.0],
+          [-78.98, -1.18],
+          [-78.82, -1.35]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "demo-sur",
+      "properties": {
+        "nombre": "Traza sintética Sur",
+        "sistema": "Sistema de demostración B",
+        "provincia": "Zona sur de prueba",
+        "tipo_movimiento": "normal",
+        "actividad": "Dato ficticio",
+        "confianza": "Demostración",
+        "fuente": "Demostración interna — sin valor científico",
+        "escala": "No aplica",
+        "descripcion": "Línea ficticia para revisar el encuadre automático y el contenido explicativo de la ficha."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-79.35, -2.2],
+          [-79.18, -2.38],
+          [-79.0, -2.55]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "demo-suroeste",
+      "properties": {
+        "nombre": "Traza sintética Suroeste",
+        "sistema": "Sistema de demostración B",
+        "provincia": "Zona suroeste de prueba",
+        "tipo_movimiento": "sinestral",
+        "actividad": "Dato ficticio",
+        "confianza": "Demostración",
+        "fuente": "Demostración interna — sin valor científico",
+        "escala": "No aplica",
+        "descripcion": "Segmento sin interpretación geológica utilizado para comprobar filtros y simbología."
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [-80.0, -3.0],
+            [-79.82, -3.12]
+          ],
+          [
+            [-79.76, -3.17],
+            [-79.58, -3.3]
+          ]
+        ]
+      }
+    }
+  ]
+}

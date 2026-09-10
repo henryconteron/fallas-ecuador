@@ -14,6 +14,7 @@ las trazas se incorporarán únicamente después de verificar su procedencia, at
 - búsqueda por nombre, provincia o sistema de fallas;
 - filtro por tipo de movimiento;
 - simbología y fichas emergentes generadas desde GeoJSON;
+- modo de demostración con geometrías sintéticas, separado del catálogo científico;
 - documentación separada para las fuentes cartográficas.
 
 ## Estructura
@@ -25,7 +26,9 @@ fallas-ecuador/
 │   ├── css/styles.css
 │   └── js/map.js
 ├── data/
-│   └── geojson/fallas.geojson
+│   └── geojson/
+│       ├── fallas.geojson
+│       └── fallas.demo.geojson
 └── documentation/
     └── references/README.md
 ```
@@ -52,6 +55,15 @@ WGS 84 (EPSG:4326), con coordenadas en el orden longitud–latitud. Sus propieda
 Como el visor carga archivos mediante JavaScript, debe abrirse desde un servidor local. Puede
 utilizarse la extensión **Live Server** de Visual Studio Code. Abrir `index.html` directamente con
 doble clic puede impedir la lectura del GeoJSON por las reglas de seguridad del navegador.
+
+Para probar filtros, simbología, selección y fichas sin incorporar datos científicos, abra la URL
+local con `?demo=1`, por ejemplo `http://localhost:5500/?demo=1`. Las geometrías de
+`fallas.demo.geojson` son completamente ficticias y no deben reutilizarse como información
+geológica.
+
+La vista inicial y el botón de restablecimiento cubren Ecuador continental. La incorporación de
+Galápagos se definirá como una vista geográfica independiente para evitar reducir excesivamente la
+escala del territorio continental.
 
 ## Autor
 

@@ -25,10 +25,37 @@
             <small>Atlas geológico interactivo</small>
           </span>
         </a>
-        <span class="project-status"><span aria-hidden="true"></span> Proyecto en desarrollo</span>
+        <span class="project-status" aria-label="Proyecto en desarrollo">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-full" aria-hidden="true">Proyecto en desarrollo</span>
+          <span class="status-short" aria-hidden="true">Beta</span>
+        </span>
       </header>
 
       <main class="workspace">
+        <section class="map-panel" aria-label="Mapa de fallas geológicas">
+          <div class="map-title">
+            <span class="map-region">Ecuador continental</span>
+            <span id="data-mode" class="data-mode" hidden>Datos sintéticos</span>
+            <button id="reset-view" type="button">Restablecer vista</button>
+          </div>
+          <div id="map" tabindex="0" aria-label="Mapa interactivo del Ecuador continental"></div>
+          <div id="map-error" class="map-error" role="alert" hidden>
+            <strong>El mapa no está disponible</strong>
+            <p>Comprueba la conexión y vuelve a cargar la página.</p>
+          </div>
+          <details class="legend" open>
+            <summary>Leyenda</summary>
+            <div class="legend-items" aria-label="Tipos de movimiento">
+              <span><i class="reverse"></i> Inversa</span>
+              <span><i class="normal"></i> Normal</span>
+              <span><i class="dextral"></i> Dextral</span>
+              <span><i class="sinistral"></i> Sinestral</span>
+              <span><i class="unknown"></i> No determinado</span>
+            </div>
+          </details>
+        </section>
+
         <aside class="sidebar" aria-label="Catálogo y filtros">
           <section class="intro">
             <p class="eyebrow">Explorador tectónico</p>
@@ -53,7 +80,9 @@
           <section class="filters" aria-labelledby="filters-title">
             <div class="section-heading">
               <h2 id="filters-title">Buscar en el catálogo</h2>
-              <button id="clear-filters" class="text-button" type="button">Limpiar</button>
+              <button id="clear-filters" class="text-button" type="button" disabled>
+                Limpiar
+              </button>
             </div>
 
             <label for="fault-search">Nombre, provincia o sistema</label>
@@ -62,10 +91,11 @@
               type="search"
               placeholder="Ej.: Pallatanga"
               autocomplete="off"
+              disabled
             />
 
             <label for="movement-filter">Tipo de movimiento</label>
-            <select id="movement-filter">
+            <select id="movement-filter" disabled>
               <option value="all">Todos</option>
               <option value="inversa">Inversa</option>
               <option value="normal">Normal</option>
@@ -81,8 +111,8 @@
               <span id="result-count">0</span>
             </div>
             <div id="catalog-state" class="empty-state" role="status">
-              <strong>Catálogo en preparación</strong>
-              <p>El mapa está listo para recibir las primeras trazas verificadas.</p>
+              <strong>Cargando catálogo</strong>
+              <p>Estamos preparando las trazas disponibles.</p>
             </div>
             <ul id="fault-list" class="fault-list" aria-live="polite"></ul>
           </section>
@@ -95,22 +125,6 @@
             </p>
           </section>
         </aside>
-
-        <section class="map-panel" aria-label="Mapa de fallas geológicas">
-          <div class="map-title">
-            <span>República del Ecuador</span>
-            <button id="reset-view" type="button">Ver todo el país</button>
-          </div>
-          <div id="map" tabindex="0" aria-label="Mapa interactivo del Ecuador"></div>
-          <div class="legend" aria-label="Leyenda de tipos de movimiento">
-            <strong>Tipo de movimiento</strong>
-            <span><i class="reverse"></i> Inversa</span>
-            <span><i class="normal"></i> Normal</span>
-            <span><i class="dextral"></i> Dextral</span>
-            <span><i class="sinistral"></i> Sinestral</span>
-            <span><i class="unknown"></i> No determinado</span>
-          </div>
-        </section>
       </main>
 
       <footer>
