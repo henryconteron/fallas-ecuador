@@ -27,6 +27,7 @@ Las trazas derivadas de trabajos propios se identificarán explícitamente como 
 | Fallas de los Andes del norte | Veloza et al. (2012), [Open-source archive of active faults for northwest South America](https://doi.org/10.1130/GSAT-G156A.1) | Referencia científica y control de nombres, geometría y cinemática | **Aprobada como referencia**; la geometría se incorporará mediante GEM |
 | Fallas de Ecuador | Egüez et al. (2003), [Database and Map of Quaternary Faults and Folds of Ecuador and its Offshore Regions](https://pubs.usgs.gov/of/2003/ofr-03-289/) | Contraste del inventario nacional y de la nomenclatura | **Aprobada como referencia**; compilación antigua y de escala regional |
 | Fallas de Sudamérica | Costa et al. (2020), [Hazardous faults of South America: compilation and overview](https://doi.org/10.1016/j.jsames.2020.102837) | Contraste científico regional | **Pendiente** verificar la licencia de cualquier archivo geométrico suplementario |
+| Límites para selección | [geoBoundaries — Ecuador ADM0 y ADM1](https://www.geoboundaries.org/) | Selección espacial y asignación preliminar de provincias | **Aprobada**: CC0 1.0 |
 | Sismicidad de Ecuador | [Instituto Geofísico de la Escuela Politécnica Nacional](https://www.igepn.edu.ec/) | Fuente oficial nacional y enlace de consulta | **Restringida para redistribución** |
 | Sismicidad consultable por API | [USGS Earthquake Catalog — FDSN Event Web Service](https://earthquake.usgs.gov/fdsnws/event/1/) | Capa interactiva de eventos recientes | **Aprobada** con atribución |
 
@@ -34,7 +35,9 @@ Las trazas derivadas de trabajos propios se identificarán explícitamente como 
 
 ### Fallas
 
-La capa inicial se obtendrá del archivo armonizado de GEM y se recortará al territorio continental y marítimo de interés para Ecuador. No se publicará el archivo mundial completo.
+La capa inicial se obtuvo del archivo armonizado de GEM, identificado por el blob `fb164770b529695544fa864abe2cc9dd8aa5793d`. Se seleccionaron 145 geometrías originales de los catálogos SARA y *Active Tectonics of the Andes* que intersectan el límite de Ecuador de geoBoundaries. No se publicó el archivo mundial completo y las geometrías seleccionadas no fueron recortadas ni simplificadas.
+
+La versión publicada contiene 61 registros de SARA y 84 de *Active Tectonics of the Andes*. Ambos catálogos pueden ofrecer interpretaciones parcialmente superpuestas. Esas coincidencias se conservan para no eliminar información científica de manera automática y se distinguen mediante `catalog_id`, `catalog_name` y `fuente`.
 
 Se conservarán, cuando estén disponibles, los atributos originales:
 
@@ -48,6 +51,8 @@ Se conservarán, cuando estén disponibles, los atributos originales:
 - `reference` y `notes`.
 
 Toda simplificación geométrica, traducción o reclasificación se documentará. La capa derivada mantendrá la atribución y la licencia **Creative Commons Attribution-ShareAlike 4.0** de GEM.
+
+La categoría visual `tipo_movimiento` se derivó de `slip_type` para permitir filtros. El valor original permanece en `movimiento_original`; por ello la simbología simplificada nunca debe sustituir la clasificación cinemática de la fuente.
 
 Referencia principal:
 

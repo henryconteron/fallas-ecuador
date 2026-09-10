@@ -224,22 +224,46 @@ function initializeAtlas() {
     const rows = [
       ["popup.system", "sistema"],
       ["popup.movement", "tipo_movimiento"],
+      ["popup.originalMovement", "movimiento_original"],
       ["popup.province", "provincia"],
       ["popup.activity", "actividad"],
       ["popup.confidence", "confianza"],
       ["popup.scale", "escala"],
       ["popup.source", "fuente"],
+      ["popup.reference", "reference"],
+      ["popup.catalogId", "catalog_id"],
+      ["popup.license", "licencia"],
     ];
     rows.forEach(([labelKey, key]) => {
+      const value = key === "tipo_movimiento" ? movementLabel(feature) : localizedProperty(feature, key);
+      if (value === t("value.unavailable")) return;
       const term = document.createElement("dt");
       const description = document.createElement("dd");
       term.textContent = t(labelKey);
-      description.textContent = key === "tipo_movimiento" ? movementLabel(feature) : localizedProperty(feature, key);
+      description.textContent = value;
       list.append(term, description);
     });
     const explanation = document.createElement("p");
     explanation.textContent = localizedProperty(feature, "descripcion");
     wrapper.append(list, explanation);
+
+    const sourceUrl = feature.properties?.fuente_url;
+    if (typeof sourceUrl === "string") {
+      try {
+        const parsedUrl = new URL(sourceUrl);
+        if (parsedUrl.protocol === "https:") {
+          const link = document.createElement("a");
+          link.className = "event-link";
+          link.href = parsedUrl.href;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = `${t("popup.openSource")} ↗`;
+          wrapper.append(link);
+        }
+      } catch (error) {
+        console.warn("Invalid fault source URL", error);
+      }
+    }
     return wrapper;
   }
 

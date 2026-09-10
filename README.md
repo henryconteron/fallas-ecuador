@@ -5,14 +5,15 @@ clara, su contexto tectónico, evidencias geomorfológicas y fuentes científica
 
 ## Estado
 
-El proyecto se encuentra en su fase inicial. La interfaz y el lector de GeoJSON están preparados,
-y la primera capa científica consulta sismicidad reciente mediante el servicio FDSN del USGS. Las
-trazas se incorporarán únicamente después de verificar su procedencia, atributos y licencia.
+El proyecto se encuentra en su fase inicial científica. La primera versión del catálogo reúne 145
+trazas originales de GEM GAF-DB que intersectan Ecuador, procedentes de SARA y *Active Tectonics of
+the Andes*. La sismicidad reciente se consulta mediante el servicio FDSN del USGS.
 
 ## Funciones iniciales
 
 - mapa web adaptable a computadoras y teléfonos;
 - mapa topográfico principal y mapa de calles alternativo;
+- catálogo inicial de fallas activas derivado de GEM GAF-DB;
 - búsqueda por nombre, provincia o sistema de fallas;
 - filtro por tipo de movimiento;
 - capa independiente para indicadores geomorfológicos;
@@ -40,11 +41,15 @@ fallas-ecuador/
 │       ├── i18n.js
 │       └── map.js
 ├── data/
+│   ├── README.md
 │   └── geojson/
 │       ├── estructuras.geojson
 │       ├── estructuras.demo.geojson
 │       ├── fallas.geojson
 │       └── fallas.demo.geojson
+├── scripts/
+│   └── build_fault_catalog.py
+├── requirements-dev.txt
 └── documentation/
     └── references/README.md
 ```
@@ -60,11 +65,14 @@ WGS 84 (EPSG:4326), con coordenadas en el orden longitud–latitud. Sus propieda
 | `sistema` | Sistema de fallas al que pertenece |
 | `provincia` | Provincia o provincias atravesadas |
 | `tipo_movimiento` | inversa, normal, dextral, sinestral o desconocido |
+| `movimiento_original` | Clasificación cinemática conservada desde GEM |
 | `actividad` | Edad o evidencia más reciente reportada |
 | `confianza` | Observada, inferida o aproximada |
 | `fuente` | Cita abreviada de la geometría |
 | `escala` | Escala de la fuente cartográfica |
 | `descripcion` | Explicación científica breve |
+| `catalog_id` | Identificador estable del catálogo de origen |
+| `licencia` | Condiciones de reutilización del registro |
 
 Los indicadores de relieve se almacenan por separado en `estructuras.geojson` como geometrías
 `Point` o `MultiPoint`. Su esquema inicial utiliza `nombre`, `tipo`, `observacion` y `fuente`.
@@ -86,6 +94,26 @@ formas del relieve.
 La vista inicial y el botón de restablecimiento cubren Ecuador continental. La incorporación de
 Galápagos se definirá como una vista geográfica independiente para evitar reducir excesivamente la
 escala del territorio continental.
+
+## Catálogo de fallas
+
+
+El archivo `fallas.geojson` se genera desde la versión armonizada de [GEM Global Active Faults
+Database](https://github.com/GEMScienceTools/gem-global-active-faults), bajo licencia CC BY-SA 4.0.
+Se seleccionan las geometrías de SARA y *Active Tectonics of the Andes* que intersectan Ecuador. Las
+geometrías originales no se recortan ni se simplifican. Los límites de [geoBoundaries](https://www.geoboundaries.org/)
+se utilizan únicamente para la selección espacial y para identificar las provincias atravesadas.
+
+Los dos catálogos pueden contener interpretaciones alternativas o parcialmente superpuestas. El
+visor conserva `catalog_id`, `catalog_name`, `slip_type` y los demás atributos originales para que
+esas diferencias sean rastreables; no deben interpretarse automáticamente como duplicados.
+
+Para regenerar el archivo se requiere Python y Shapely:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python scripts/build_fault_catalog.py --gem gem_active_faults_harmonized.geojson --countries geoBoundaries-ECU-ADM0.geojson --provinces geoBoundaries-ECU-ADM1.geojson
+```
 
 ## Sismicidad reciente
 
