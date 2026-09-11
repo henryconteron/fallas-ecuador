@@ -12,7 +12,8 @@ the Andes*. La sismicidad reciente se consulta mediante el servicio FDSN del USG
 
 ## Funciones iniciales
 
-- identidad y navegación por los sistemas Tierra, Agua, Cielo, Vida y Riesgo;
+- navegación contextual por Tierra, Agua, Cielo, Vida y Riesgo: cada selección muestra solo
+  sus capas, explicación y fuentes, conserva los controles activados y se refleja en la URL;
 - herramienta **Explícame este lugar** para relacionar un punto con las evidencias disponibles,
   mostrando distancias aproximadas y una advertencia explícita contra interpretaciones causales;
 - registro modular de proveedores conectados y fuentes candidatas;
@@ -20,6 +21,8 @@ the Andes*. La sismicidad reciente se consulta mediante el servicio FDSN del USG
 - control independiente para activar o desactivar las fallas sin perder el catálogo de búsqueda;
 - primera experiencia **Agua/Cielo** con tasa de precipitación NASA GPM IMERG por fecha y
   opacidad, servida mediante NASA GIBS sin descargar mosaicos;
+- observación diaria de inundaciones NASA LANCE VIIRS a 250 m, separada de la lluvia y presentada
+  como señal satelital que requiere validación oficial y de campo;
 - módulo **Ecuador Ahora** con anomalías térmicas VIIRS NOAA-20 por fecha, servido mediante
   NASA GIBS sin publicar claves privadas;
 - explicación interactiva de por qué una anomalía térmica no equivale automáticamente a un incendio;
@@ -59,12 +62,14 @@ fallas-ecuador/
 │       └── map/
 │           ├── config.js
 │           ├── data.js
+│           ├── flood.js
 │           ├── place.js
 │           ├── popups.js
 │           ├── precipitation.js
 │           ├── seismicity.js
 │           ├── source-catalog.js
 │           ├── symbology.js
+│           ├── systems.js
 │           ├── thermal.js
 │           └── utils.js
 ├── data/
@@ -82,10 +87,12 @@ fallas-ecuador/
 │   └── validate-catalog.mjs
 ├── tests/
 │   ├── test_build_fault_catalog.py
+│   ├── test-flood.mjs
 │   ├── test-i18n.mjs
 │   ├── test-map-modules.mjs
 │   ├── test-place.mjs
 │   ├── test-precipitation.mjs
+│   ├── test-systems.mjs
 │   └── test-thermal.mjs
 ├── LICENSE
 ├── LICENSE-DATA.md
@@ -224,6 +231,17 @@ la humedad antecedente, el relieve, los suelos, el drenaje y la ocupación de la
 seguimiento hidrometeorológico nacional, el atlas mantiene un enlace explícito a
 INAMHI–GEOGLOWS y conserva a INAMHI como fuente institucional en evaluación para futuras capas de
 estaciones, caudales y alertas.
+
+## Inundación observada
+
+La capa `VIIRS_Combined_Flood_1-Day` de NASA LANCE combina observaciones de NOAA-20 y NOAA-21 en
+una cuadrícula de 250 m y una ventana diaria. Se consulta mediante WMS de GIBS, con fecha y opacidad
+configurables, sin almacenar rásteres pesados en el repositorio. Es una observación de agua
+superficial, no una predicción, una declaratoria de emergencia ni un cálculo de riesgo.
+
+Las nubes, sombras, vegetación, agua permanente y condiciones de adquisición pueden ocultar o
+confundir señales. Por ello la interfaz remite al monitoreo oficial de INAMHI y explica que toda
+interpretación debe contrastarse con estaciones, reportes locales y observación de campo.
 
 ## Autor
 

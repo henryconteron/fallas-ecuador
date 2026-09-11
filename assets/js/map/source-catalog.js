@@ -1,7 +1,7 @@
 export const SOURCE_CATALOG = Object.freeze([
   {
     id: "gem-faults",
-    system: "earth",
+    systems: ["earth"],
     status: "connected",
     access: "GeoJSON",
     institution: "GEM Foundation",
@@ -11,7 +11,7 @@ export const SOURCE_CATALOG = Object.freeze([
   },
   {
     id: "usgs-earthquakes",
-    system: "earth",
+    systems: ["earth"],
     status: "connected",
     access: "FDSN API",
     institution: "USGS",
@@ -21,7 +21,7 @@ export const SOURCE_CATALOG = Object.freeze([
   },
   {
     id: "igm-geoservices",
-    system: "earth",
+    systems: ["earth"],
     status: "candidate",
     access: "WMS / WFS / CSW",
     institution: "Instituto Geográfico Militar",
@@ -31,7 +31,7 @@ export const SOURCE_CATALOG = Object.freeze([
   },
   {
     id: "inamhi-services",
-    system: "water",
+    systems: ["water", "sky", "risk"],
     status: "candidate",
     access: { es: "Servicios y descargas", en: "Services and downloads" },
     institution: "INAMHI",
@@ -41,7 +41,7 @@ export const SOURCE_CATALOG = Object.freeze([
   },
   {
     id: "nasa-imerg",
-    system: "sky",
+    systems: ["water", "sky"],
     status: "connected",
     access: "NASA GIBS WMS",
     institution: "NASA GPM / GIBS",
@@ -50,8 +50,18 @@ export const SOURCE_CATALOG = Object.freeze([
     url: "https://gpm.nasa.gov/data/imerg",
   },
   {
+    id: "nasa-viirs-flood",
+    systems: ["water", "risk"],
+    status: "connected",
+    access: "NASA GIBS WMS",
+    institution: "NASA LANCE / VIIRS",
+    name: { es: "Inundación observada en 1 día", en: "Observed flooding in a 1-day window" },
+    purpose: { es: "Señales satelitales de agua superficial a 250 m", en: "Satellite surface-water signals at 250 m" },
+    url: "https://www.earthdata.nasa.gov/data/instruments/viirs",
+  },
+  {
     id: "nasa-firms",
-    system: "life",
+    systems: ["life"],
     status: "connected",
     access: "NASA GIBS WMS",
     institution: "NASA FIRMS / GIBS",
@@ -61,7 +71,7 @@ export const SOURCE_CATALOG = Object.freeze([
   },
   {
     id: "mapbiomas-ecuador",
-    system: "life",
+    systems: ["life"],
     status: "candidate",
     access: { es: "Plataforma / descargas", en: "Platform / downloads" },
     institution: "MapBiomas Ecuador",
@@ -79,4 +89,8 @@ export function catalogForLanguage(language = "es") {
     purpose: source.purpose[locale],
     access: typeof source.access === "string" ? source.access : source.access[locale],
   }));
+}
+
+export function catalogForSystem(language = "es", system = "earth") {
+  return catalogForLanguage(language).filter((source) => source.systems.includes(system));
 }

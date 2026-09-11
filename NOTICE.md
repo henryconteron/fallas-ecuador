@@ -10,6 +10,8 @@
   Community, con atribución visible dentro del mapa.
 - **NASA GPM IMERG / GIBS:** visualización diaria de la tasa de precipitación servida por WMS,
   con atribución visible dentro del mapa.
+- **NASA LANCE VIIRS / GIBS:** compuesto diario de agua superficial e inundación observada a
+  250 m; requiere validación con fuentes oficiales y observación local.
 - **NASA FIRMS / GIBS:** visualización diaria de anomalías térmicas VIIRS; no se presenta como
   confirmación automática de incendios.
 - **Leaflet:** biblioteca cartográfica cargada por la interfaz conforme a su

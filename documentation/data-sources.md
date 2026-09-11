@@ -30,6 +30,7 @@ fuente original.
 | Agua/Cielo | INAMHI | estaciones, precipitación, caudales e inundaciones | servicios y descargas | candidate |
 | Agua | INAMHI GEOGLOWS | pronósticos e históricos de caudal | servicio por verificar | candidate |
 | Agua/Cielo | NASA GPM / GIBS | tasa de precipitación IMERG por día | WMS público de GIBS | connected |
+| Agua/Riesgo | NASA LANCE / VIIRS | agua superficial e inundación observada en 1 día | WMS público de GIBS | connected |
 | Vida | NASA FIRMS / GIBS | anomalías térmicas VIIRS por día | WMS público de GIBS | connected |
 | Vida | MapBiomas Ecuador / SNMB | cobertura y cambio de bosque | plataforma o descarga | candidate |
 
@@ -65,6 +66,18 @@ La visualización no sustituye pluviómetros, pronósticos ni alertas. Tampoco p
 habrá inundación: se requiere integrar duración de la lluvia, humedad antecedente, pendiente,
 suelos, drenaje, caudal y exposición. INAMHI–GEOGLOWS se enlaza como referencia nacional de
 consulta mientras se documentan sus servicios antes de convertirlos en capas interoperables.
+
+## Inundación VIIRS
+
+La capa `VIIRS_Combined_Flood_1-Day` es un compuesto diario casi en tiempo real de NOAA-20 y
+NOAA-21/VIIRS producido por NASA LANCE y servido mediante GIBS. La metadata oficial describe una
+cuadrícula global de 250 m y una ventana de un día. El atlas solicita únicamente la fecha visible y
+mantiene la atribución en el mapa.
+
+El producto representa **inundación observada o señal de agua superficial**, no lluvia, pronóstico
+de caudal, alerta oficial ni riesgo. La detección puede ser limitada por nubes y vegetación o
+confundirse con sombras y agua permanente. La interfaz exige contrastar la señal con INAMHI,
+estaciones, reportes locales y verificación de campo.
 
 ## Anomalías térmicas
 

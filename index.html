@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://tile.openstreetmap.org" />
     <link rel="preconnect" href="https://tile.opentopomap.org" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260911-3" />
   </head>
   <body data-page="map">
     <a class="skip-link" href="#map" data-i18n="skip.map">Ir directamente al mapa</a>
@@ -114,7 +114,12 @@
             <section class="legend-section" data-legend-layer="flood" hidden>
               <div class="legend-divider" aria-hidden="true"></div>
               <p class="legend-subtitle" data-i18n="legend.flood">Inundación observada</p>
-              <div class="legend-items flood-legend"><span><i class="flood-symbol"></i><span data-i18n="flood.detection">Señal de agua superficial VIIRS</span></span></div>
+              <div class="legend-items flood-legend" data-i18n-aria="legend.floodAria" aria-label="Clases del producto satelital de inundación">
+                <span><i class="flood-symbol surface-water"></i><span data-i18n="flood.surfaceWater">Agua superficial</span></span>
+                <span><i class="flood-symbol recurring"></i><span data-i18n="flood.recurring">Inundación recurrente</span></span>
+                <span><i class="flood-symbol detected"></i><span data-i18n="flood.detected">Inundación detectada</span></span>
+                <span><i class="flood-symbol insufficient"></i><span data-i18n="flood.insufficient">Datos insuficientes</span></span>
+              </div>
             </section>
             <section class="legend-section" data-legend-layer="thermal" hidden>
               <div class="legend-divider" aria-hidden="true"></div>
@@ -136,10 +141,10 @@
 
         <aside class="sidebar" data-i18n-aria="sidebar.aria" aria-label="Explorador, catálogo y filtros">
           <section class="intro">
-            <p class="eyebrow" data-i18n="intro.eyebrow">Ecuador Vivo · Tierra</p>
-            <h1 data-i18n="intro.title">Todo paisaje es una historia en movimiento</h1>
-            <p data-i18n="intro.copy">Comenzamos bajo tus pies: fallas, sismos y formas del relieve. Después conectaremos agua, atmósfera y vida.</p>
-            <a class="learn-link" href="learn.html"><span data-i18n="intro.learn">Aprende a leer el paisaje</span><span aria-hidden="true">↗</span></a>
+            <p id="system-eyebrow" class="eyebrow" data-i18n="intro.eyebrow">Ecuador Vivo · Tierra</p>
+            <h1 id="system-intro-title" data-i18n="intro.title">Todo paisaje es una historia en movimiento</h1>
+            <p id="system-intro-copy" data-i18n="intro.copy">Comenzamos bajo tus pies: fallas, sismos y formas del relieve. Después conectaremos agua, atmósfera y vida.</p>
+            <a class="learn-link" href="learn.html" data-system-content="earth"><span data-i18n="intro.learn">Aprende a leer el paisaje</span><span aria-hidden="true">↗</span></a>
           </section>
 
           <section class="system-explorer" aria-labelledby="systems-title">
@@ -147,17 +152,17 @@
               <h2 id="systems-title" data-i18n="systems.title">Sistemas del atlas</h2>
               <span data-i18n="systems.phase">Fundación</span>
             </div>
-            <div class="system-grid" role="list" data-i18n-aria="systems.aria" aria-label="Sistemas naturales del atlas">
-              <button class="is-active" type="button" data-system="earth" aria-pressed="true"><i aria-hidden="true">◒</i><span data-i18n="systems.earth">Tierra</span><small data-i18n="systems.active">Activo</small></button>
-              <button type="button" data-system="water" aria-pressed="false"><i aria-hidden="true">≋</i><span data-i18n="systems.water">Agua</span><small data-i18n="systems.twoLayers">2 capas</small></button>
-              <button type="button" data-system="sky" aria-pressed="false"><i aria-hidden="true">⌁</i><span data-i18n="systems.sky">Cielo</span><small data-i18n="systems.oneLayer">1 capa</small></button>
-              <button type="button" data-system="life" aria-pressed="false"><i aria-hidden="true">✦</i><span data-i18n="systems.life">Vida</span><small data-i18n="systems.oneLayer">1 capa</small></button>
-              <button type="button" data-system="risk" aria-pressed="false"><i aria-hidden="true">△</i><span data-i18n="systems.risk">Riesgo</span><small data-i18n="systems.oneLayer">1 capa</small></button>
+            <div class="system-grid" role="navigation" data-i18n-aria="systems.aria" aria-label="Sistemas naturales del atlas">
+              <button class="is-active" type="button" data-system="earth" aria-pressed="true" aria-describedby="system-note"><i aria-hidden="true">◒</i><span data-i18n="systems.earth">Tierra</span><small data-system-count-key="systems.fourLayers" data-i18n="systems.active">Activo</small></button>
+              <button type="button" data-system="water" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">≋</i><span data-i18n="systems.water">Agua</span><small data-system-count-key="systems.twoLayers" data-i18n="systems.twoLayers">2 capas</small></button>
+              <button type="button" data-system="sky" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">⌁</i><span data-i18n="systems.sky">Cielo</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
+              <button type="button" data-system="life" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">✦</i><span data-i18n="systems.life">Vida</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
+              <button type="button" data-system="risk" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">△</i><span data-i18n="systems.risk">Riesgo</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
             </div>
             <p id="system-note" class="system-note" role="status" data-i18n="systems.earthNote">La primera mirada conecta tectónica, sismicidad y relieve.</p>
           </section>
 
-          <section class="summary-grid" data-i18n-aria="summary.aria" aria-label="Resumen del catálogo">
+          <section class="summary-grid" data-system-content="earth" data-i18n-aria="summary.aria" aria-label="Resumen del catálogo">
             <article><strong id="fault-count">0</strong><span data-i18n="summary.faults">trazas visibles</span></article>
             <article><strong id="evidence-count">0</strong><span data-i18n="summary.evidence">formas del relieve</span></article>
             <article><strong id="earthquake-count">—</strong><span data-i18n="summary.earthquakes">sismos M ≥ 3</span></article>
@@ -165,28 +170,28 @@
           </section>
 
           <section class="layer-panel" aria-labelledby="layers-title">
-            <div class="section-heading"><h2 id="layers-title" data-i18n="layers.title">Capas interpretativas</h2></div>
-            <label class="layer-switch" for="hillshade-toggle">
+            <div class="section-heading"><h2 id="layers-title" data-i18n="systems.earthLayers">Capas de Tierra</h2></div>
+            <label class="layer-switch" for="hillshade-toggle" data-system-content="earth">
               <span><strong data-i18n="layers.hillshade">Relieve sombreado</strong><small data-i18n="layers.hillshadeHint">Esri World Hillshade · contexto regional</small></span>
               <input id="hillshade-toggle" type="checkbox" checked />
               <span class="switch-track" aria-hidden="true"><span></span></span>
             </label>
-            <label class="opacity-control" for="hillshade-opacity">
+            <label class="opacity-control" for="hillshade-opacity" data-system-content="earth">
               <span data-i18n="layers.hillshadeOpacity">Intensidad del relieve</span>
               <input id="hillshade-opacity" type="range" min="0" max="70" value="34" step="1" />
               <output id="hillshade-opacity-value" for="hillshade-opacity">34%</output>
             </label>
-            <label class="layer-switch" for="fault-toggle">
+            <label class="layer-switch" for="fault-toggle" data-system-content="earth">
               <span><strong data-i18n="layers.faults">Fallas geológicas</strong><small data-i18n="layers.faultsHint">Trazas clasificadas por tipo de movimiento</small></span>
               <input id="fault-toggle" type="checkbox" checked disabled />
               <span class="switch-track" aria-hidden="true"><span></span></span>
             </label>
-            <label class="layer-switch" for="evidence-toggle">
+            <label class="layer-switch" for="evidence-toggle" data-system-content="earth">
               <span><strong data-i18n="layers.evidence">Indicadores geomorfológicos</strong><small data-i18n="layers.evidenceHint">Escarpes, facetas y drenajes desplazados</small></span>
               <input id="evidence-toggle" type="checkbox" disabled />
               <span class="switch-track" aria-hidden="true"><span></span></span>
             </label>
-            <div id="precipitation-layer-card" class="now-layer-card precipitation-layer-card">
+            <div id="precipitation-layer-card" class="now-layer-card precipitation-layer-card" data-system-content="water sky" hidden>
               <div class="now-layer-heading"><span data-i18n="now.badge">Ecuador ahora</span><small>NASA GPM · IMERG</small></div>
               <label class="layer-switch" for="precipitation-toggle">
                 <span><strong data-i18n="layers.precipitation">Tasa de precipitación</strong><small data-i18n="layers.precipitationHint">IMERG · mosaico satelital diario</small></span>
@@ -205,7 +210,7 @@
                 <a href="https://inamhi.geoglows.org/apps" target="_blank" rel="noopener noreferrer"><span data-i18n="precipitation.inamhi">Consulta INAMHI–GEOGLOWS</span><span aria-hidden="true">↗</span></a>
               </details>
             </div>
-            <div id="flood-layer-card" class="now-layer-card flood-layer-card">
+            <div id="flood-layer-card" class="now-layer-card flood-layer-card" data-system-content="water risk" hidden>
               <div class="now-layer-heading"><span data-i18n="now.badge">Ecuador ahora</span><small>NASA LANCE · VIIRS</small></div>
               <label class="layer-switch" for="flood-toggle">
                 <span><strong data-i18n="layers.flood">Inundación observada</strong><small data-i18n="layers.floodHint">VIIRS · agua superficial · ventana de 1 día</small></span>
@@ -224,7 +229,7 @@
                 <a href="https://servicios.inamhi.gob.ec/aplicaciones-web/" target="_blank" rel="noopener noreferrer"><span data-i18n="flood.inamhi">Monitoreo oficial de INAMHI</span><span aria-hidden="true">↗</span></a>
               </details>
             </div>
-            <div id="thermal-layer-card" class="now-layer-card">
+            <div id="thermal-layer-card" class="now-layer-card" data-system-content="life" hidden>
               <div class="now-layer-heading"><span data-i18n="now.badge">Ecuador ahora</span><small>NASA GIBS</small></div>
               <label class="layer-switch" for="thermal-toggle">
                 <span><strong data-i18n="layers.thermal">Anomalías térmicas</strong><small data-i18n="layers.thermalHint">VIIRS NOAA-20 · visualización diaria</small></span>
@@ -242,12 +247,12 @@
                 <a href="https://firms.modaps.eosdis.nasa.gov/active_fire/" target="_blank" rel="noopener noreferrer"><span data-i18n="thermal.learnMore">Cómo interpreta FIRMS los datos</span><span aria-hidden="true">↗</span></a>
               </details>
             </div>
-            <label class="layer-switch" for="earthquake-toggle">
+            <label class="layer-switch" for="earthquake-toggle" data-system-content="earth">
               <span><strong data-i18n="layers.earthquakes">Sismicidad reciente</strong><small data-i18n="layers.earthquakesHint">USGS · consulta configurable</small></span>
               <input id="earthquake-toggle" type="checkbox" disabled />
               <span class="switch-track" aria-hidden="true"><span></span></span>
             </label>
-            <fieldset id="earthquake-filters" class="seismic-filters">
+            <fieldset id="earthquake-filters" class="seismic-filters" data-system-content="earth">
               <legend data-i18n="earthquakes.filtersTitle">Filtrar sismicidad</legend>
               <label for="earthquake-days">
                 <span data-i18n="earthquakes.period">Periodo</span>
@@ -276,19 +281,19 @@
                 </select>
               </label>
             </fieldset>
-            <p id="earthquake-status" class="layer-status" role="status" data-i18n="earthquakes.loading">Consultando el catálogo del USGS…</p>
-            <a class="official-source-link" href="https://www.igepn.edu.ec/mapas/sismicidad/mapa-sismicidad-tectonica-365.html" target="_blank" rel="noopener noreferrer">
+            <p id="earthquake-status" class="layer-status" role="status" data-i18n="earthquakes.loading" data-system-content="earth">Consultando el catálogo del USGS…</p>
+            <a class="official-source-link" href="https://www.igepn.edu.ec/mapas/sismicidad/mapa-sismicidad-tectonica-365.html" target="_blank" rel="noopener noreferrer" data-system-content="earth">
               <span data-i18n="layers.officialEarthquakes">Ver mapa oficial del IG-EPN</span><span aria-hidden="true">↗</span>
             </a>
-            <p class="layer-caution" data-i18n="earthquakes.caution">La cercanía entre un epicentro y una traza no demuestra que esa falla originó el sismo.</p>
-            <details class="earthquake-results">
+            <p class="layer-caution" data-i18n="earthquakes.caution" data-system-content="earth">La cercanía entre un epicentro y una traza no demuestra que esa falla originó el sismo.</p>
+            <details class="earthquake-results" data-system-content="earth">
               <summary><span data-i18n="earthquakes.listTitle">Lista accesible de sismos</span><span id="earthquake-list-count">0</span></summary>
               <p data-i18n="earthquakes.listHint">Selecciona un evento para localizarlo y abrir su ficha en el mapa.</p>
               <ul id="earthquake-list" data-i18n-aria="earthquakes.listAria" aria-label="Sismos que cumplen los filtros"></ul>
             </details>
           </section>
 
-          <section class="filters" aria-labelledby="filters-title">
+          <section class="filters" aria-labelledby="filters-title" data-system-content="earth">
             <div class="section-heading">
               <h2 id="filters-title" data-i18n="filters.title">Buscar en el catálogo</h2>
               <button id="clear-filters" class="text-button" type="button" disabled data-i18n="filters.clear">Limpiar</button>
@@ -306,7 +311,7 @@
             </select>
           </section>
 
-          <section class="catalog" aria-labelledby="catalog-title">
+          <section class="catalog" aria-labelledby="catalog-title" data-system-content="earth">
             <div class="section-heading"><h2 id="catalog-title" data-i18n="catalog.title">Resultados</h2><span id="result-count">0</span></div>
             <div id="catalog-state" class="empty-state" role="status">
               <strong data-i18n="catalog.loadingTitle">Cargando catálogo</strong><p data-i18n="catalog.loadingCopy">Estamos preparando las trazas disponibles.</p>
@@ -314,7 +319,7 @@
             <ul id="fault-list" class="fault-list" aria-live="polite"></ul>
           </section>
 
-          <section class="method-note">
+          <section class="method-note" data-system-content="earth">
             <p class="eyebrow" data-i18n="responsible.eyebrow">Nota científica</p>
             <h2 data-i18n="responsible.title">Leer el mapa con criterio</h2>
             <p data-i18n="responsible.copy">Una forma del relieve es una pista, no una prueba aislada. Este visor es educativo y no sustituye un estudio oficial de amenaza.</p>
@@ -332,8 +337,8 @@
       <footer><span data-i18n="footer.credit">Desarrollado por Henry P. Conteron Moreta</span><span data-i18n="footer.disciplines">Geociencias · SIG · Ecuador</span></footer>
     </div>
 
-    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/i18n.js?v=20260911-3"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script type="module" src="assets/js/map.js"></script>
+    <script type="module" src="assets/js/map.js?v=20260911-3"></script>
   </body>
 </html>

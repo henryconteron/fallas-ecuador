@@ -38,6 +38,11 @@ const keys = [
     ...[...runtimeSource.matchAll(/\bt\("([^"]+)"\)/g)].map(
       (match) => match[1],
     ),
+    ...["earth", "water", "sky", "life", "risk"].flatMap((system) =>
+      ["Eyebrow", "Title", "Copy", "Layers", "Note"].map(
+        (field) => `systems.${system}${field}`,
+      ),
+    ),
     ...["normal", "reverse", "strike"].flatMap((scenario) =>
       ["kicker", "question", "clue", "imageAlt", "explanation"].map(
         (field) => `lab.scenario.${scenario}.${field}`,

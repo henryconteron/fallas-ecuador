@@ -20,13 +20,15 @@ import {
   createFaultPopup as buildFaultPopup,
 } from "./map/popups.js";
 import { nearestFeature } from "./map/place.js";
+import { floodDateRange, FLOOD_SOURCE, floodWmsOptions, normalizeFloodDate } from "./map/flood.js";
 import {
   normalizePrecipitationDate,
   precipitationDateRange,
   PRECIPITATION_SOURCE,
   precipitationWmsOptions,
 } from "./map/precipitation.js";
-import { catalogForLanguage } from "./map/source-catalog.js";
+import { catalogForSystem } from "./map/source-catalog.js";
+import { ATLAS_SYSTEMS, contentBelongsToSystem, normalizeAtlasSystem } from "./map/systems.js";
 import { normalizeThermalDate, thermalDateRange, THERMAL_SOURCE, thermalWmsOptions } from "./map/thermal.js";
 import { catalogKey, createTextTools, normalize } from "./map/utils.js";
 
@@ -39,6 +41,7 @@ if (typeof window.L === "undefined") {
   mapElement.setAttribute("aria-hidden", "true");
   document.querySelector("#reset-view").disabled = true;
   document.querySelector("#fault-toggle").disabled = true;
+  document.querySelector("#flood-toggle").disabled = true;
   document.querySelector("#earthquake-toggle").disabled = true;
   document.querySelector(".legend").hidden = true;
   mapError.hidden = false;
@@ -117,6 +120,14 @@ function initializeAtlas() {
     { ...precipitationWmsOptions(precipitationRange.selected), pane: "precipitation" },
   );
 
+  const floodRange = floodDateRange();
+  map.createPane("flood-observation");
+  map.getPane("flood-observation").style.zIndex = "290";
+  const floodLayer = L.tileLayer.wms(
+    FLOOD_SOURCE.endpoint,
+    { ...floodWmsOptions(floodRange.selected), pane: "flood-observation" },
+  );
+
   const thermalRange = thermalDateRange();
   map.createPane("thermal-anomalies");
   map.getPane("thermal-anomalies").style.zIndex = "370";
@@ -146,6 +157,12 @@ function initializeAtlas() {
     precipitationOpacity: document.querySelector("#precipitation-opacity"),
     precipitationOpacityValue: document.querySelector("#precipitation-opacity-value"),
     precipitationStatus: document.querySelector("#precipitation-status"),
+    floodCard: document.querySelector("#flood-layer-card"),
+    floodToggle: document.querySelector("#flood-toggle"),
+    floodDate: document.querySelector("#flood-date"),
+    floodOpacity: document.querySelector("#flood-opacity"),
+    floodOpacityValue: document.querySelector("#flood-opacity-value"),
+    floodStatus: document.querySelector("#flood-status"),
     thermalCard: document.querySelector("#thermal-layer-card"),
     thermalToggle: document.querySelector("#thermal-toggle"),
     thermalDate: document.querySelector("#thermal-date"),
@@ -172,6 +189,12 @@ function initializeAtlas() {
     basemapButtons: [...document.querySelectorAll("[data-basemap]")],
     systemButtons: [...document.querySelectorAll("[data-system]")],
     systemNote: document.querySelector("#system-note"),
+    systemContent: [...document.querySelectorAll("[data-system-content]")],
+    sidebar: document.querySelector(".sidebar"),
+    systemEyebrow: document.querySelector("#system-eyebrow"),
+    systemIntroTitle: document.querySelector("#system-intro-title"),
+    systemIntroCopy: document.querySelector("#system-intro-copy"),
+    layersTitle: document.querySelector("#layers-title"),
     explainPlace: document.querySelector("#explain-place"),
     placeExplainer: document.querySelector("#place-explainer"),
     closePlaceExplainer: document.querySelector("#close-place-explainer"),
@@ -207,9 +230,11 @@ function initializeAtlas() {
   let selectedFeature = null;
   let selectedPoint = null;
   let placeMode = false;
-  let previewSystem = "earth";
+  let activeSystem = normalizeAtlasSystem(urlParameters.get("system"));
   let precipitationState = "off";
   let precipitationTileErrors = 0;
+  let floodState = "off";
+  let floodTileErrors = 0;
   let thermalState = "off";
   let thermalTileErrors = 0;
   const featureIds = new WeakMap();
@@ -217,6 +242,9 @@ function initializeAtlas() {
   elements.precipitationDate.min = precipitationRange.min;
   elements.precipitationDate.max = precipitationRange.max;
   elements.precipitationDate.value = precipitationRange.selected;
+  elements.floodDate.min = floodRange.min;
+  elements.floodDate.max = floodRange.max;
+  elements.floodDate.value = floodRange.selected;
   elements.thermalDate.min = thermalRange.min;
   elements.thermalDate.max = thermalRange.max;
   elements.thermalDate.value = thermalRange.selected;
@@ -254,6 +282,38 @@ function initializeAtlas() {
     if (precipitationTileErrors >= 2) {
       precipitationState = "error";
       updatePrecipitationStatus();
+    }
+  });
+
+  function updateFloodStatus() {
+    elements.floodStatus.dataset.state = floodState;
+    if (floodState === "off") {
+      elements.floodStatus.textContent = t("flood.off");
+    } else if (floodState === "loading") {
+      elements.floodStatus.textContent = template("flood.loading", { date: elements.floodDate.value });
+    } else if (floodState === "error") {
+      elements.floodStatus.textContent = t("flood.error");
+    } else {
+      elements.floodStatus.textContent = template("flood.loaded", { date: elements.floodDate.value });
+    }
+  }
+
+  floodLayer.on("loading", () => {
+    if (!map.hasLayer(floodLayer)) return;
+    floodState = "loading";
+    floodTileErrors = 0;
+    updateFloodStatus();
+  });
+  floodLayer.on("load", () => {
+    if (!map.hasLayer(floodLayer)) return;
+    floodState = floodTileErrors >= 2 ? "error" : "loaded";
+    updateFloodStatus();
+  });
+  floodLayer.on("tileerror", () => {
+    floodTileErrors += 1;
+    if (floodTileErrors >= 2) {
+      floodState = "error";
+      updateFloodStatus();
     }
   });
 
@@ -300,10 +360,16 @@ function initializeAtlas() {
 
   function renderSourceNetwork() {
     elements.sourceNetworkList.replaceChildren();
-    const sources = catalogForLanguage(i18n?.language);
+    const sources = catalogForSystem(i18n?.language, activeSystem);
     const connected = sources.filter((source) => source.status === "connected").length;
     const candidate = sources.filter((source) => source.status === "candidate").length;
-    elements.sourceNetworkBadge.textContent = template("sourcesNetwork.summary", { connected, candidate });
+    const connectedLabel = t(
+      connected === 1 ? "sourcesNetwork.connectedSingular" : "sourcesNetwork.connectedPlural",
+    );
+    const candidateLabel = t(
+      candidate === 1 ? "sourcesNetwork.assessedSingular" : "sourcesNetwork.assessedPlural",
+    );
+    elements.sourceNetworkBadge.textContent = `${connected} ${connectedLabel} · ${candidate} ${candidateLabel}`;
     sources.forEach((source) => {
       const item = document.createElement("li");
       const link = document.createElement("a");
@@ -323,6 +389,40 @@ function initializeAtlas() {
       item.append(link);
       elements.sourceNetworkList.append(item);
     });
+  }
+
+  function renderSystemView({ updateUrl = false } = {}) {
+    elements.sidebar.dataset.activeSystem = activeSystem;
+    elements.systemButtons.forEach((button) => {
+      const isActive = button.dataset.system === activeSystem;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+      const count = button.querySelector("small");
+      if (count) count.textContent = t(isActive ? "systems.active" : count.dataset.systemCountKey);
+    });
+    elements.systemContent.forEach((section) => {
+      section.hidden = !contentBelongsToSystem(section.dataset.systemContent, activeSystem);
+    });
+    elements.systemEyebrow.textContent = t(`systems.${activeSystem}Eyebrow`);
+    elements.systemIntroTitle.textContent = t(`systems.${activeSystem}Title`);
+    elements.systemIntroCopy.textContent = t(`systems.${activeSystem}Copy`);
+    elements.layersTitle.textContent = t(`systems.${activeSystem}Layers`);
+    elements.systemNote.textContent = t(`systems.${activeSystem}Note`);
+    renderSourceNetwork();
+
+    if (updateUrl) {
+      const nextUrl = new URL(window.location.href);
+      if (activeSystem === "earth") nextUrl.searchParams.delete("system");
+      else nextUrl.searchParams.set("system", activeSystem);
+      window.history.pushState({ system: activeSystem }, "", nextUrl);
+    }
+  }
+
+  function selectSystem(system, options) {
+    const nextSystem = normalizeAtlasSystem(system);
+    if (nextSystem === activeSystem && options?.updateUrl) return;
+    activeSystem = nextSystem;
+    renderSystemView(options);
   }
 
   function createPlaceResult(label, title, detail) {
@@ -410,6 +510,14 @@ function initializeAtlas() {
         t("precipitation.placeLabel"),
         t("precipitation.placeActive"),
         template("precipitation.placeDetail", { date: elements.precipitationDate.value }),
+      ));
+    }
+
+    if (map.hasLayer(floodLayer)) {
+      elements.placeResults.append(createPlaceResult(
+        t("flood.placeLabel"),
+        t("flood.placeActive"),
+        template("flood.placeDetail", { date: elements.floodDate.value }),
       ));
     }
 
@@ -516,6 +624,7 @@ function initializeAtlas() {
       faults: map.hasLayer(faultLayer),
       evidence: map.hasLayer(evidenceLayer),
       precipitation: map.hasLayer(precipitationLayer),
+      flood: map.hasLayer(floodLayer),
       thermal: map.hasLayer(thermalLayer),
       earthquakes: map.hasLayer(earthquakeLayer),
     };
@@ -584,7 +693,9 @@ function initializeAtlas() {
     if (!map.hasLayer(faultLayer)) {
       elements.faultToggle.checked = true;
       faultLayer.addTo(map);
+      elements.count.textContent = elements.resultCount.textContent;
       updateLegendVisibility();
+      updateSourceCount();
     }
     setSelectedFeature(feature);
     const bounds = L.geoJSON(feature).getBounds();
@@ -762,6 +873,7 @@ function initializeAtlas() {
     if (map.hasLayer(hillshadeLayer)) sources.add("Esri World Hillshade");
     if (map.hasLayer(thermalLayer)) sources.add("NASA FIRMS / GIBS");
     if (map.hasLayer(precipitationLayer)) sources.add("NASA GPM IMERG / GIBS");
+    if (map.hasLayer(floodLayer)) sources.add("NASA LANCE VIIRS / GIBS");
     elements.sourceCount.textContent = String(sources.size);
   }
 
@@ -850,19 +962,25 @@ function initializeAtlas() {
 
   elements.systemButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      previewSystem = button.dataset.system || "earth";
-      elements.systemButtons.forEach((item) => {
-        item.classList.toggle("is-previewed", item === button && previewSystem !== "earth");
-      });
-      elements.systemNote.textContent = t(`systems.${previewSystem}Note`);
-      if (["water", "sky", "life"].includes(previewSystem)) {
-        const targetCard = previewSystem === "life" ? elements.thermalCard : elements.precipitationCard;
-        targetCard.scrollIntoView({
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
-          block: "center",
-        });
-      }
+      selectSystem(button.dataset.system, { updateUrl: true });
     });
+    button.addEventListener("keydown", (event) => {
+      const currentIndex = ATLAS_SYSTEMS.indexOf(button.dataset.system);
+      const offsets = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+      let nextIndex;
+      if (event.key in offsets) nextIndex = (currentIndex + offsets[event.key] + ATLAS_SYSTEMS.length) % ATLAS_SYSTEMS.length;
+      else if (event.key === "Home") nextIndex = 0;
+      else if (event.key === "End") nextIndex = ATLAS_SYSTEMS.length - 1;
+      else return;
+      event.preventDefault();
+      const nextButton = elements.systemButtons.find((item) => item.dataset.system === ATLAS_SYSTEMS[nextIndex]);
+      nextButton?.focus();
+      selectSystem(ATLAS_SYSTEMS[nextIndex], { updateUrl: true });
+    });
+  });
+
+  window.addEventListener("popstate", () => {
+    selectSystem(new URLSearchParams(window.location.search).get("system"));
   });
 
   elements.explainPlace.addEventListener("click", () => setPlaceMode(!placeMode));
@@ -927,6 +1045,42 @@ function initializeAtlas() {
     if (selectedPoint) renderPlaceExplanation();
   });
   elements.precipitationOpacity.addEventListener("input", updatePrecipitationOpacity);
+
+  function updateFloodOpacity() {
+    const opacity = Number(elements.floodOpacity.value) / 100;
+    floodLayer.setOpacity(opacity);
+    elements.floodOpacityValue.value = `${Math.round(opacity * 100)}%`;
+  }
+  updateFloodOpacity();
+
+  elements.floodToggle.addEventListener("change", () => {
+    const active = elements.floodToggle.checked;
+    elements.floodDate.disabled = !active;
+    elements.floodOpacity.disabled = !active;
+    if (active) {
+      floodState = "loading";
+      floodTileErrors = 0;
+      floodLayer.addTo(map);
+    } else {
+      map.removeLayer(floodLayer);
+      floodState = "off";
+    }
+    updateFloodStatus();
+    updateLegendVisibility();
+    updateSourceCount();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+
+  elements.floodDate.addEventListener("change", () => {
+    elements.floodDate.value = normalizeFloodDate(elements.floodDate.value, floodRange);
+    floodState = "loading";
+    floodTileErrors = 0;
+    floodLayer.setParams({ time: elements.floodDate.value }, false);
+    floodLayer.redraw();
+    updateFloodStatus();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+  elements.floodOpacity.addEventListener("input", updateFloodOpacity);
 
   function updateThermalOpacity() {
     const opacity = Number(elements.thermalOpacity.value) / 100;
@@ -1032,10 +1186,10 @@ function initializeAtlas() {
     if (earthquakeState === "loaded") renderEarthquakes();
     else updateEarthquakeStatus();
     updatePrecipitationStatus();
+    updateFloodStatus();
     updateThermalStatus();
     updateLegendVisibility();
-    elements.systemNote.textContent = t(`systems.${previewSystem}Note`);
-    renderSourceNetwork();
+    renderSystemView();
     renderPlaceExplanation();
     if (mapError.hidden === false) {
       mapError.querySelector("strong").textContent = t("errors.mapUnavailable");
@@ -1043,7 +1197,7 @@ function initializeAtlas() {
     }
   });
 
-  renderSourceNetwork();
+  renderSystemView();
   loadAtlasData();
   loadEarthquakeData();
 }
