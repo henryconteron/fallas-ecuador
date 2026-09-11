@@ -87,6 +87,77 @@
         </div>
       </section>
 
+      <section class="field-lab" aria-labelledby="field-lab-title">
+        <div class="content-width">
+          <header class="section-title-row field-lab-heading">
+            <div>
+              <p class="eyebrow" data-i18n="lab.eyebrow">Laboratorio interactivo</p>
+              <h2 id="field-lab-title" data-i18n="lab.title">Interpreta las pistas como geólogo</h2>
+            </div>
+            <p data-i18n="lab.copy">Observa el movimiento y el relieve, formula una hipótesis y recibe retroalimentación inmediata.</p>
+          </header>
+
+          <div class="field-lab-shell" data-field-lab>
+            <div class="lab-visual">
+              <div class="lab-visual-topline"><span data-i18n="lab.caseLabel">Caso de campo</span><strong data-lab-case>01</strong></div>
+              <svg class="lab-diagram" viewBox="0 0 720 420" role="img" data-lab-image aria-label="Bloques separados por una falla normal">
+                <defs>
+                  <linearGradient id="lab-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#163a43"/><stop offset="1" stop-color="#0c2024"/></linearGradient>
+                  <linearGradient id="lab-rock" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d8a870"/><stop offset="1" stop-color="#7e573c"/></linearGradient>
+                  <linearGradient id="lab-rock-light" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e7c18f"/><stop offset="1" stop-color="#9d704a"/></linearGradient>
+                  <filter id="lab-shadow"><feDropShadow dx="0" dy="10" stdDeviation="9" flood-color="#020b0d" flood-opacity=".42"/></filter>
+                </defs>
+                <rect width="720" height="420" rx="20" fill="url(#lab-sky)"/>
+                <g opacity=".25" fill="none" stroke="#9bd1c8" stroke-width="2"><path d="M20 85c90-55 180-55 270 0s180 55 270 0 120-35 150-18"/><path d="M8 112c100-48 195-46 282 7s177 52 264 0 119-42 160-20"/><path d="M0 145c95-40 185-35 270 14s180 46 270 0 125-47 180-22"/></g>
+
+                <g class="lab-scene is-active" data-lab-scene="normal" filter="url(#lab-shadow)">
+                  <path d="M52 174L302 126L350 205L350 382L52 382Z" fill="url(#lab-rock-light)"/><path d="M350 246L666 205L666 382L350 382Z" fill="url(#lab-rock)"/>
+                  <path d="M52 218L315 170M52 266L331 214M52 316L346 258M350 289L666 248M350 333L666 292" fill="none" stroke="#f0d5ad" stroke-width="7" opacity=".75"/>
+                  <path d="M320 137L383 382" stroke="#ff765f" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M220 96v75m0 0-19-25m19 25 19-25M520 139v75m0 0-19-25m19 25 19-25" fill="none" stroke="#ffd05c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+
+                <g class="lab-scene" data-lab-scene="reverse" filter="url(#lab-shadow)">
+                  <path d="M52 218L325 165L370 382L52 382Z" fill="url(#lab-rock)"/><path d="M325 112L666 173L666 382L370 382Z" fill="url(#lab-rock-light)"/>
+                  <path d="M52 261L336 208M52 309L346 253M52 351L356 300M338 157L666 216M348 204L666 260M358 252L666 306" fill="none" stroke="#f0d5ad" stroke-width="7" opacity=".75"/>
+                  <path d="M325 124L398 382" stroke="#ff765f" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M190 198h88m0 0-27-18m27 18-27 18M548 198h-88m0 0 27-18m-27 18 27 18" fill="none" stroke="#ffd05c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+
+                <g class="lab-scene" data-lab-scene="strike" filter="url(#lab-shadow)">
+                  <path d="M52 76H342V382H52Z" fill="#8aa06b"/><path d="M378 76H666V382H378Z" fill="#789360"/>
+                  <path d="M342 70L378 388" stroke="#ff765f" stroke-width="8" stroke-linecap="round"/>
+                  <path d="M72 95c92 42 190 35 270 95M378 230c84 62 177 47 268 104" fill="none" stroke="#58c6de" stroke-width="19" stroke-linecap="round"/>
+                  <path d="M150 330V174m0 0-19 28m19-28 19 28M565 142v158m0 0-19-28m19 28 19-28" fill="none" stroke="#ffd05c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g fill="none" stroke="#b9c99c" stroke-width="3" opacity=".55"><path d="M75 120c70 46 150 57 238 35"/><path d="M83 295c85-45 158-48 229-12"/><path d="M412 118c75 38 148 40 220 4"/><path d="M420 331c70-34 137-29 205 15"/></g>
+                </g>
+              </svg>
+              <p class="lab-visual-note" data-i18n="lab.visualNote">Esquema conceptual · no está a escala</p>
+            </div>
+
+            <div class="lab-panel">
+              <div class="lab-progress-row"><span data-lab-progress>1 / 3</span><progress data-lab-progress-bar value="1" max="3">1 de 3</progress></div>
+              <p class="lab-kicker" data-lab-kicker></p>
+              <h3 data-lab-question></h3>
+              <p class="lab-clue" data-lab-clue></p>
+
+              <fieldset class="lab-answers" data-lab-answers>
+                <legend data-i18n="lab.answerLegend">Elige la interpretación más probable</legend>
+                <button type="button" data-lab-answer="normal"><span>A</span><strong data-i18n="types.normal">Falla normal</strong></button>
+                <button type="button" data-lab-answer="reverse"><span>B</span><strong data-i18n="types.reverse">Falla inversa</strong></button>
+                <button type="button" data-lab-answer="strike"><span>C</span><strong data-i18n="types.strike">Falla de rumbo</strong></button>
+              </fieldset>
+
+              <div class="lab-feedback" data-lab-feedback role="status" aria-live="polite" hidden></div>
+              <div class="lab-actions">
+                <button class="lab-next" type="button" data-lab-next hidden><span data-i18n="lab.next">Siguiente caso</span><b aria-hidden="true">→</b></button>
+                <button class="lab-restart" type="button" data-lab-restart hidden data-i18n="lab.restart">Intentar de nuevo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="facts-section">
         <div class="content-width">
           <header><p class="eyebrow" data-i18n="facts.eyebrow">Detalles que cambian la mirada</p><h2 data-i18n="facts.title">Cuatro ideas para mirar mejor</h2></header>
@@ -110,10 +181,21 @@
 
       <section class="sources-section content-width">
         <div><p class="eyebrow" data-i18n="sources.eyebrow">Para seguir explorando</p><h2 data-i18n="sources.title">Fuentes y lecturas</h2><p data-i18n="sources.copy">La explicación se apoya en recursos públicos del USGS. Las ilustraciones de esta página son conceptuales y no sustituyen fotografías de campo ni cartografía validada.</p></div>
-        <nav aria-label="Fuentes científicas">
+        <nav aria-label="Fuentes científicas" data-i18n-aria="sources.aria">
           <a href="https://www.usgs.gov/programs/earthquake-hazards/faults" target="_blank" rel="noreferrer"><span data-i18n="sources.basics">Fundamentos sobre fallas — USGS</span><b aria-hidden="true">↗</b></a>
           <a href="https://pubs.usgs.gov/of/2003/ofr-03-289/ofr-03-289.html" target="_blank" rel="noreferrer"><span data-i18n="sources.ecuador">Fallas cuaternarias de Ecuador — USGS</span><b aria-hidden="true">↗</b></a>
           <a href="https://opentopomap.org/about" target="_blank" rel="noreferrer"><span data-i18n="sources.topo">Acerca del mapa topográfico — OpenTopoMap</span><b aria-hidden="true">↗</b></a>
+          <details class="reading-references">
+            <summary data-i18n="sources.readings">Lecturas que inspiraron esta guía</summary>
+            <p data-i18n="sources.readingsNote">Se usaron para orientar la secuencia pedagógica y las futuras herramientas de análisis; no sustituyen las fuentes de cada traza.</p>
+            <ul>
+              <li><span lang="es">Tarbuck, E. J., Lutgens, F. K. y Tasa, D. (2005). <cite>Ciencias de la Tierra: una introducción a la geología física</cite>, 8.ª ed.</span></li>
+              <li><span lang="es">Dávila Sguerra, M. (2023). <cite>Algoritmos para el procesamiento de imágenes utilizando satélites del programa Copernicus</cite>.</span></li>
+              <li><span lang="es">Prieto, G. A. (2024). <cite>Introducción a Python para geociencias</cite>.</span></li>
+              <li><span lang="es">López, H. H. (2006). <cite>Geociencias: topografía, cartografía, GPS–GLONASS y POSGAR 94</cite>.</span></li>
+              <li>Binetti, M. S., Massarelli, C. y Uricchio, V. F. (2024). <cite>Machine Learning in Geosciences: A Review of Complex Environmental Monitoring Applications</cite>.</li>
+            </ul>
+          </details>
         </nav>
       </section>
 
@@ -125,5 +207,6 @@
 
     <footer class="learn-footer"><span data-i18n="footer.credit">Desarrollado por Henry P. Conteron Moreta</span><span data-i18n="footer.disciplines">Geociencias · SIG · Ecuador</span></footer>
     <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/learn.js"></script>
   </body>
 </html>

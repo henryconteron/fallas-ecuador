@@ -24,6 +24,7 @@ the Andes*. La sismicidad reciente se consulta mediante el servicio FDSN del USG
 - enlace al mapa oficial de sismicidad del IG-EPN;
 - contenido y navegación bilingües en español e inglés;
 - guía visual con imágenes WebP responsivas sobre fallas, escarpes, facetas triangulares y drenajes desplazados;
+- laboratorio bilingüe con tres casos interactivos y retroalimentación sobre tipos de falla;
 - simbología y fichas emergentes generadas desde GeoJSON;
 - modo de demostración con geometrías sintéticas, separado del catálogo científico;
 - documentación separada para las fuentes cartográficas.
@@ -41,6 +42,7 @@ fallas-ecuador/
 │   ├── images/education/
 │   └── js/
 │       ├── i18n.js
+│       ├── learn.js
 │       ├── map.js
 │       └── map/
 │           ├── config.js

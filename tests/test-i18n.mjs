@@ -27,12 +27,21 @@ vm.runInContext(fs.readFileSync("assets/js/i18n.js", "utf8"), context);
 const markup = ["index.html", "learn.html"]
   .map((file) => fs.readFileSync(file, "utf8"))
   .join("\n");
+const runtimeSource = fs.readFileSync("assets/js/learn.js", "utf8");
 const keys = [
-  ...new Set(
-    [...markup.matchAll(/data-i18n(?:-[a-z-]+)?="([^"]+)"/g)].map(
+  ...new Set([
+    ...[...markup.matchAll(/data-i18n(?:-[a-z-]+)?="([^"]+)"/g)].map(
       (match) => match[1],
     ),
-  ),
+    ...[...runtimeSource.matchAll(/\bt\("([^"]+)"\)/g)].map(
+      (match) => match[1],
+    ),
+    ...["normal", "reverse", "strike"].flatMap((scenario) =>
+      ["kicker", "question", "clue", "imageAlt", "explanation"].map(
+        (field) => `lab.scenario.${scenario}.${field}`,
+      ),
+    ),
+  ]),
 ];
 
 for (const language of ["es", "en"]) {
