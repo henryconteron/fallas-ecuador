@@ -192,11 +192,15 @@ async function validateBuildManifest() {
   const outputPath = `data/geojson/${manifest.output?.filename ?? ""}`;
   try {
     const content = await readFile(outputPath);
-    const checksum = createHash("sha256").update(content).digest("hex");
+    const canonicalContent = Buffer.from(
+      content.toString("utf8").replace(/\r\n?/g, "\n"),
+      "utf8",
+    );
+    const checksum = createHash("sha256").update(canonicalContent).digest("hex");
     if (checksum !== manifest.output?.sha256) {
       fail(`${path}: output SHA-256 does not match ${outputPath}`);
     }
-    if (content.length !== manifest.output?.size_bytes) {
+    if (canonicalContent.length !== manifest.output?.size_bytes) {
       fail(`${path}: output size does not match ${outputPath}`);
     }
   } catch (error) {

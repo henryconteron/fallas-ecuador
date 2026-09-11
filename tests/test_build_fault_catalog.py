@@ -29,6 +29,20 @@ class CatalogBuildIntegrityTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "checksum mismatch"):
             require_checksum("test", "actual", "expected")
 
+    def test_geojson_fingerprint_is_independent_of_line_endings(self):
+        with tempfile.TemporaryDirectory() as directory:
+            lf_path = Path(directory) / "lf.geojson"
+            crlf_path = Path(directory) / "crlf.geojson"
+            lf_path.write_bytes(b'{\n  "type": "FeatureCollection"\n}\n')
+            crlf_path.write_bytes(b'{\r\n  "type": "FeatureCollection"\r\n}\r\n')
+
+            lf_fingerprint = file_fingerprint(lf_path)
+            crlf_fingerprint = file_fingerprint(crlf_path)
+
+        self.assertEqual(lf_fingerprint["size_bytes"], crlf_fingerprint["size_bytes"])
+        self.assertEqual(lf_fingerprint["sha256"], crlf_fingerprint["sha256"])
+        self.assertEqual(lf_fingerprint["git_blob_sha1"], crlf_fingerprint["git_blob_sha1"])
+
 
 if __name__ == "__main__":
     unittest.main()

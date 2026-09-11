@@ -17,6 +17,10 @@ GEM_SOURCE_URL = (
 
 def file_fingerprint(path: Path) -> dict[str, Any]:
     content = path.read_bytes()
+    if path.suffix.casefold() in {".json", ".geojson"}:
+        # Git may check text files out as CRLF on Windows and LF in CI. Hash the
+        # repository's canonical text representation so both environments agree.
+        content = content.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
     git_header = f"blob {len(content)}\0".encode()
     return {
         "filename": path.name,
