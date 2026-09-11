@@ -15,6 +15,9 @@
 - **INAMHI / MAATE:** capa remota `geonode:cuencas_maate`, visualizada mediante WMS y consultada
   puntualmente mediante WFS. La ficha pública no especifica licencia ni atribución; las geometrías
   no se redistribuyen en este repositorio.
+- **INAMHI — red hidrometeorológica:** instantánea reproducible de estaciones continentales cuyo
+  estado fue `TRANSMITIENDO` al consultar la API pública del visor. Solo conserva metadatos de los
+  puntos, no observaciones ni series; el estado puede cambiar y debe verificarse en el visor oficial.
 - **NASA FIRMS / GIBS:** visualización diaria de anomalías térmicas VIIRS; no se presenta como
   confirmación automática de incendios.
 - **Leaflet:** biblioteca cartográfica cargada por la interfaz conforme a su

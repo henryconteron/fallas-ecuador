@@ -47,6 +47,9 @@ const keys = [
     ...["placeLabel", "placeLoading", "placeUnavailable", "placeOutside", "placeDetail"].map(
       (field) => `basins.${field}`,
     ),
+    ...["ready", "visible", "altitude", "transmitting", "placeLabel"].map(
+      (field) => `stations.${field}`,
+    ),
     ...["normal", "reverse", "strike"].flatMap((scenario) =>
       ["kicker", "question", "clue", "imageAlt", "explanation"].map(
         (field) => `lab.scenario.${scenario}.${field}`,

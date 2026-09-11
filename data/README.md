@@ -34,3 +34,10 @@ trazas relacionadas. El esquema formal está en `schemas/estructuras.schema.json
 ## Sismicidad
 
 Los eventos del USGS se consultan dinámicamente y no se almacenan en este directorio. Los catálogos descargados del IG-EPN no se redistribuyen en este repositorio.
+
+## `geojson/estaciones-inamhi.geojson`
+
+Instantánea reproducible de la red continental que la API del visor hidrometeorológico de INAMHI
+marcó como `TRANSMITIENDO` al recuperarla. Conserva ubicación y metadatos básicos de las estaciones,
+pero no mediciones, series temporales ni pronósticos. La fecha, el endpoint, los filtros y los
+conteos se guardan en `metadata`; el archivo se renueva con `npm run update:stations`.

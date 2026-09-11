@@ -53,6 +53,19 @@ export const SOURCE_CATALOG = Object.freeze([
     url: "https://geoservicios.inamhi.gob.ec/catalogue/#/dataset/8",
   },
   {
+    id: "inamhi-observation-network",
+    systems: ["water", "sky"],
+    status: "connected",
+    access: { es: "API oficial · instantánea reproducible", en: "Official API · reproducible snapshot" },
+    institution: "INAMHI",
+    name: { es: "Red hidrometeorológica", en: "Hydrometeorological network" },
+    purpose: {
+      es: "Ubicación, tipo y estado informado de estaciones continentales",
+      en: "Location, type, and reported status of continental stations",
+    },
+    url: "https://inamhi.gob.ec/info/visor/",
+  },
+  {
     id: "nasa-imerg",
     systems: ["water", "sky"],
     status: "connected",

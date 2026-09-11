@@ -25,6 +25,8 @@ the Andes*. La sismicidad reciente se consulta mediante el servicio FDSN del USG
   como señal satelital que requiere validación oficial y de campo;
 - cuencas hidrográficas INAMHI/MAATE servidas por WMS, con identificación puntual del nombre y
   sistema hidrográfico mediante una consulta WFS mínima que no descarga las geometrías;
+- red hidrometeorológica de INAMHI con 214 estaciones continentales marcadas como transmitiendo
+  al actualizar la instantánea, filtro por tipo, fichas seguras y estación más próxima;
 - módulo **Ecuador Ahora** con anomalías térmicas VIIRS NOAA-20 por fecha, servido mediante
   NASA GIBS sin publicar claves privadas;
 - explicación interactiva de por qué una anomalía térmica no equivale automáticamente a un incendio;
@@ -71,6 +73,7 @@ fallas-ecuador/
 │           ├── precipitation.js
 │           ├── seismicity.js
 │           ├── source-catalog.js
+│           ├── stations.js
 │           ├── symbology.js
 │           ├── systems.js
 │           ├── thermal.js
@@ -79,6 +82,7 @@ fallas-ecuador/
 │   ├── README.md
 │   ├── geojson/
 │   │   ├── estructuras.geojson
+│   │   ├── estaciones-inamhi.geojson
 │   │   ├── estructuras.demo.geojson
 │   │   ├── fallas.geojson
 │   │   └── fallas.demo.geojson
@@ -87,6 +91,7 @@ fallas-ecuador/
 ├── scripts/
 │   ├── build_fault_catalog.py
 │   ├── catalog_integrity.py
+│   ├── update_inamhi_stations.mjs
 │   └── validate-catalog.mjs
 ├── tests/
 │   ├── test_build_fault_catalog.py
@@ -97,6 +102,7 @@ fallas-ecuador/
 │   ├── test-place.mjs
 │   ├── test-precipitation.mjs
 │   ├── test-systems.mjs
+│   ├── test-stations.mjs
 │   └── test-thermal.mjs
 ├── LICENSE
 ├── LICENSE-DATA.md
@@ -164,6 +170,11 @@ formas del relieve.
 La vista inicial y el botón de restablecimiento cubren Ecuador continental. La incorporación de
 Galápagos se definirá como una vista geográfica independiente para evitar reducir excesivamente la
 escala del territorio continental.
+
+La instantánea de estaciones se renueva con `npm run update:stations`. El proceso consulta la API
+pública usada por el visor hidrometeorológico de INAMHI, conserva solo puntos dentro de la vista
+continental cuyo estado informado es `TRANSMITIENDO`, y registra fecha, endpoint, filtros y conteos
+en el propio GeoJSON. No descarga observaciones, pronósticos ni series temporales.
 
 ## Catálogo de fallas
 

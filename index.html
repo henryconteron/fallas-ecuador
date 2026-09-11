@@ -118,6 +118,15 @@
                 <span><i class="basin-symbol" aria-hidden="true"></i><span data-i18n="basins.boundaries">Límite de cuenca</span></span>
               </div>
             </section>
+            <section class="legend-section" data-legend-layer="stations" hidden>
+              <div class="legend-divider" aria-hidden="true"></div>
+              <p class="legend-subtitle" data-i18n="legend.stations">Estaciones en transmisión</p>
+              <div class="legend-items station-legend" data-i18n-aria="legend.stationsAria" aria-label="Tipos de estaciones hidrometeorológicas">
+                <span><i class="station-symbol meteorological" aria-hidden="true"></i><span data-i18n="stations.meteorological">Meteorológica</span></span>
+                <span><i class="station-symbol hydrological" aria-hidden="true"></i><span data-i18n="stations.hydrological">Hidrológica</span></span>
+                <span><i class="station-symbol mixed" aria-hidden="true"></i><span data-i18n="stations.mixed">Hidro-meteorológica</span></span>
+              </div>
+            </section>
             <section class="legend-section" data-legend-layer="flood" hidden>
               <div class="legend-divider" aria-hidden="true"></div>
               <p class="legend-subtitle" data-i18n="legend.flood">Inundación observada</p>
@@ -161,7 +170,7 @@
             </div>
             <div class="system-grid" role="navigation" data-i18n-aria="systems.aria" aria-label="Sistemas naturales del atlas">
               <button class="is-active" type="button" data-system="earth" aria-pressed="true" aria-describedby="system-note"><i aria-hidden="true">◒</i><span data-i18n="systems.earth">Tierra</span><small data-system-count-key="systems.fourLayers" data-i18n="systems.active">Activo</small></button>
-              <button type="button" data-system="water" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">≋</i><span data-i18n="systems.water">Agua</span><small data-system-count-key="systems.threeLayers" data-i18n="systems.threeLayers">3 capas</small></button>
+              <button type="button" data-system="water" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">≋</i><span data-i18n="systems.water">Agua</span><small data-system-count-key="systems.fourLayers" data-i18n="systems.fourLayers">4 capas</small></button>
               <button type="button" data-system="sky" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">⌁</i><span data-i18n="systems.sky">Cielo</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
               <button type="button" data-system="life" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">✦</i><span data-i18n="systems.life">Vida</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
               <button type="button" data-system="risk" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">△</i><span data-i18n="systems.risk">Riesgo</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
@@ -196,6 +205,31 @@
                 <a href="https://geoservicios.inamhi.gob.ec/catalogue/#/dataset/8" target="_blank" rel="noopener noreferrer"><span data-i18n="basins.openSource">Abrir ficha en INAMHI</span><span aria-hidden="true">↗</span></a>
               </details>
               <p class="layer-caution basin-metadata-note" data-i18n="basins.metadataCaution">La ficha pública no especifica licencia, escala ni método de elaboración. El atlas consulta el servicio sin redistribuir las geometrías.</p>
+            </div>
+            <div id="station-layer-card" class="now-layer-card station-layer-card" data-system-content="water" hidden>
+              <div class="now-layer-heading"><span data-i18n="stations.badge">La cuenca toma el pulso</span><small data-i18n="stations.network">INAMHI · Red nacional</small></div>
+              <label class="layer-switch" for="station-toggle">
+                <span><strong data-i18n="layers.stations">Estaciones hidrometeorológicas</strong><small data-i18n="layers.stationsHint">Puntos continentales marcados como transmitiendo</small></span>
+                <input id="station-toggle" type="checkbox" />
+                <span class="switch-track" aria-hidden="true"><span></span></span>
+              </label>
+              <label class="station-filter" for="station-category">
+                <span data-i18n="stations.filter">Tipo de estación</span>
+                <select id="station-category" disabled>
+                  <option value="all" data-i18n="stations.all">Todas</option>
+                  <option value="meteorological" data-i18n="stations.meteorologicalPlural">Meteorológicas</option>
+                  <option value="hydrological" data-i18n="stations.hydrologicalPlural">Hidrológicas</option>
+                  <option value="mixed" data-i18n="stations.mixedPlural">Hidro-meteorológicas</option>
+                </select>
+              </label>
+              <p id="station-status" class="layer-status" role="status" data-i18n="stations.loading">Preparando la red de observación…</p>
+              <p class="station-snapshot"><span data-i18n="stations.snapshot">Instantánea consultada</span> <time id="station-retrieved-at">—</time></p>
+              <details class="thermal-story station-story">
+                <summary data-i18n="stations.question">¿Una estación describe toda la cuenca?</summary>
+                <p data-i18n="stations.answer">No. Mide condiciones en un punto. Su valor crece cuando se combina con otras estaciones, satélites, relieve y conocimiento local.</p>
+                <a href="https://inamhi.gob.ec/info/visor/" target="_blank" rel="noopener noreferrer"><span data-i18n="stations.openViewer">Abrir visor oficial de INAMHI</span><span aria-hidden="true">↗</span></a>
+              </details>
+              <p class="layer-caution" data-i18n="stations.caution">El color indica el tipo de estación, no lluvia ni caudal. “Transmitiendo” es el estado informado por INAMHI al actualizar la instantánea; no garantiza una observación válida en este momento.</p>
             </div>
             <label class="layer-switch" for="hillshade-toggle" data-system-content="earth">
               <span><strong data-i18n="layers.hillshade">Relieve sombreado</strong><small data-i18n="layers.hillshadeHint">Esri World Hillshade · contexto regional</small></span>
@@ -363,8 +397,8 @@
       <footer><span data-i18n="footer.credit">Desarrollado por Henry P. Conteron Moreta</span><span data-i18n="footer.disciplines">Geociencias · SIG · Ecuador</span></footer>
     </div>
 
-    <script src="assets/js/i18n.js?v=20260911-4"></script>
+    <script src="assets/js/i18n.js?v=20260911-5"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script type="module" src="assets/js/map.js?v=20260911-4"></script>
+    <script type="module" src="assets/js/map.js?v=20260911-5"></script>
   </body>
 </html>

@@ -29,6 +29,13 @@ import {
   precipitationWmsOptions,
 } from "./map/precipitation.js";
 import { catalogForSystem } from "./map/source-catalog.js";
+import {
+  filterStations,
+  loadStationSnapshot,
+  normalizeStationCategory,
+  STATION_SOURCE,
+  stationMarkerOptions,
+} from "./map/stations.js";
 import { ATLAS_SYSTEMS, contentBelongsToSystem, normalizeAtlasSystem } from "./map/systems.js";
 import { normalizeThermalDate, thermalDateRange, THERMAL_SOURCE, thermalWmsOptions } from "./map/thermal.js";
 import { catalogKey, createTextTools, normalize } from "./map/utils.js";
@@ -43,6 +50,7 @@ if (typeof window.L === "undefined") {
   document.querySelector("#reset-view").disabled = true;
   document.querySelector("#fault-toggle").disabled = true;
   document.querySelector("#basin-toggle").disabled = true;
+  document.querySelector("#station-toggle").disabled = true;
   document.querySelector("#flood-toggle").disabled = true;
   document.querySelector("#earthquake-toggle").disabled = true;
   document.querySelector(".legend").hidden = true;
@@ -121,6 +129,26 @@ function initializeAtlas() {
     { ...basinWmsOptions(), pane: "hydrographic-basins", opacity: 0.34 },
   );
 
+  map.createPane("observation-stations");
+  map.getPane("observation-stations").style.zIndex = "350";
+  const stationRenderer = L.canvas({ pane: "observation-stations", padding: 0.35 });
+  const stationLayer = L.geoJSON(null, {
+    pointToLayer(feature, latlng) {
+      return L.circleMarker(latlng, {
+        ...stationMarkerOptions(feature),
+        pane: "observation-stations",
+        renderer: stationRenderer,
+      });
+    },
+    onEachFeature(feature, layer) {
+      layer.bindPopup(createStationPopup(feature));
+      layer.bindTooltip(feature.properties?.codigo || t("value.unavailable"), {
+        direction: "top",
+        offset: [0, -4],
+      });
+    },
+  });
+
   const precipitationRange = precipitationDateRange();
   map.createPane("precipitation");
   map.getPane("precipitation").style.zIndex = "270";
@@ -164,6 +192,10 @@ function initializeAtlas() {
     basinOpacity: document.querySelector("#basin-opacity"),
     basinOpacityValue: document.querySelector("#basin-opacity-value"),
     basinStatus: document.querySelector("#basin-status"),
+    stationToggle: document.querySelector("#station-toggle"),
+    stationCategory: document.querySelector("#station-category"),
+    stationStatus: document.querySelector("#station-status"),
+    stationRetrievedAt: document.querySelector("#station-retrieved-at"),
     precipitationCard: document.querySelector("#precipitation-layer-card"),
     precipitationToggle: document.querySelector("#precipitation-toggle"),
     precipitationDate: document.querySelector("#precipitation-date"),
@@ -249,6 +281,10 @@ function initializeAtlas() {
   let basinLookupState = "idle";
   let selectedBasin = null;
   let basinLookupRequestId = 0;
+  let stationCatalog = [];
+  let visibleStationCatalog = [];
+  let stationMetadata = {};
+  let stationState = "loading";
   let precipitationState = "off";
   let precipitationTileErrors = 0;
   let floodState = "off";
@@ -479,6 +515,50 @@ function initializeAtlas() {
     return article;
   }
 
+  function stationCategoryLabel(feature) {
+    return t(`stations.${normalizeStationCategory(feature.properties?.categoria)}`);
+  }
+
+  function popupDetail(term, value) {
+    const group = document.createElement("div");
+    const label = document.createElement("dt");
+    const description = document.createElement("dd");
+    label.textContent = term;
+    description.textContent = value || t("value.unavailable");
+    group.append(label, description);
+    return group;
+  }
+
+  function createStationPopup(feature) {
+    const properties = feature.properties ?? {};
+    const article = document.createElement("article");
+    const eyebrow = document.createElement("p");
+    const title = document.createElement("h3");
+    const name = document.createElement("p");
+    const details = document.createElement("dl");
+    const link = document.createElement("a");
+
+    article.className = "station-popup";
+    eyebrow.className = "station-popup-kicker";
+    eyebrow.textContent = stationCategoryLabel(feature);
+    title.textContent = properties.codigo || t("value.unavailable");
+    name.textContent = properties.nombre || t("value.unavailable");
+    details.append(
+      popupDetail(t("stations.popupAltitude"), Number.isFinite(properties.altitud_m)
+        ? template("stations.altitude", { altitude: formatNumber(properties.altitud_m, 0) })
+        : t("value.unavailable")),
+      popupDetail(t("stations.popupOwner"), properties.propietario),
+      popupDetail(t("stations.popupLocation"), [properties.canton, properties.provincia].filter(Boolean).join(", ")),
+      popupDetail(t("stations.popupState"), t("stations.transmitting")),
+    );
+    link.href = STATION_SOURCE.viewer;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = t("stations.openViewer");
+    article.append(eyebrow, title, name, details, link);
+    return article;
+  }
+
   function formatApproximateDistance(distanceKm) {
     return template("place.approxDistance", {
       distance: formatNumber(distanceKm, distanceKm < 10 ? 1 : 0),
@@ -552,6 +632,18 @@ function initializeAtlas() {
           t("basins.placeLabel"),
           t("basins.placeOutside"),
           "INAMHI / MAATE",
+        ));
+      }
+    }
+
+    if (map.hasLayer(stationLayer) && visibleStationCatalog.length > 0) {
+      const closestStation = nearestFeature(selectedPoint, visibleStationCatalog);
+      if (closestStation.feature) {
+        const properties = closestStation.feature.properties ?? {};
+        elements.placeResults.append(createPlaceResult(
+          t("stations.placeLabel"),
+          `${properties.codigo || t("value.unavailable")} · ${properties.nombre || t("value.unavailable")}`,
+          `${formatApproximateDistance(closestStation.distanceKm)} · ${stationCategoryLabel(closestStation.feature)}`,
         ));
       }
     }
@@ -722,6 +814,7 @@ function initializeAtlas() {
       faults: map.hasLayer(faultLayer),
       evidence: map.hasLayer(evidenceLayer),
       basins: map.hasLayer(basinLayer),
+      stations: map.hasLayer(stationLayer),
       precipitation: map.hasLayer(precipitationLayer),
       flood: map.hasLayer(floodLayer),
       thermal: map.hasLayer(thermalLayer),
@@ -971,6 +1064,7 @@ function initializeAtlas() {
     if (earthquakeCatalog.length > 0) sources.add("USGS");
     if (map.hasLayer(hillshadeLayer)) sources.add("Esri World Hillshade");
     if (map.hasLayer(basinLayer)) sources.add("INAMHI / MAATE");
+    if (map.hasLayer(stationLayer)) sources.add("INAMHI Red Hidrometeorológica");
     if (map.hasLayer(thermalLayer)) sources.add("NASA FIRMS / GIBS");
     if (map.hasLayer(precipitationLayer)) sources.add("NASA GPM IMERG / GIBS");
     if (map.hasLayer(floodLayer)) sources.add("NASA LANCE VIIRS / GIBS");
@@ -1098,6 +1192,66 @@ function initializeAtlas() {
     hillshadeLayer.setOpacity(opacity);
     elements.hillshadeOpacityValue.value = `${Math.round(opacity * 100)}%`;
   }
+
+  function updateStationStatus() {
+    elements.stationStatus.dataset.state = stationState;
+    if (stationState === "loading") {
+      elements.stationStatus.textContent = t("stations.loading");
+    } else if (stationState === "error") {
+      elements.stationStatus.textContent = t("stations.error");
+    } else if (map.hasLayer(stationLayer)) {
+      elements.stationStatus.textContent = template("stations.visible", {
+        visible: visibleStationCatalog.length,
+        total: stationCatalog.length,
+      });
+    } else {
+      elements.stationStatus.textContent = template("stations.ready", { count: stationCatalog.length });
+    }
+  }
+
+  function updateStationRetrievedAt() {
+    elements.stationRetrievedAt.dateTime = stationMetadata.retrievedAt || "";
+    elements.stationRetrievedAt.textContent = stationMetadata.retrievedAt
+      ? formatUtcDate(stationMetadata.retrievedAt)
+      : t("value.unavailable");
+  }
+
+  function renderStations() {
+    visibleStationCatalog = filterStations(stationCatalog, elements.stationCategory.value);
+    stationLayer.clearLayers();
+    stationLayer.addData({ type: "FeatureCollection", features: visibleStationCatalog });
+    updateStationStatus();
+    updateLegendVisibility();
+    updateSourceCount();
+    if (selectedPoint) renderPlaceExplanation();
+  }
+
+  async function loadStationData() {
+    stationState = "loading";
+    elements.stationToggle.disabled = true;
+    updateStationStatus();
+    try {
+      const result = await loadStationSnapshot();
+      stationCatalog = result.features;
+      stationMetadata = result.metadata;
+      stationState = "loaded";
+      elements.stationToggle.disabled = false;
+      updateStationRetrievedAt();
+      map.attributionControl.addAttribution(
+        '<a href="https://inamhi.gob.ec/info/visor/" target="_blank" rel="noopener">Estaciones INAMHI</a>',
+      );
+      renderStations();
+    } catch (error) {
+      console.error(error);
+      stationCatalog = [];
+      visibleStationCatalog = [];
+      stationState = "error";
+      elements.stationToggle.checked = false;
+      elements.stationToggle.disabled = true;
+      elements.stationCategory.disabled = true;
+      updateStationStatus();
+    }
+  }
   updateHillshadeOpacity();
 
   elements.hillshadeToggle.addEventListener("change", () => {
@@ -1136,6 +1290,18 @@ function initializeAtlas() {
     updateSourceCount();
   });
   elements.basinOpacity.addEventListener("input", updateBasinOpacity);
+
+  elements.stationToggle.addEventListener("change", () => {
+    const active = elements.stationToggle.checked;
+    elements.stationCategory.disabled = !active;
+    if (active) stationLayer.addTo(map);
+    else map.removeLayer(stationLayer);
+    updateStationStatus();
+    updateLegendVisibility();
+    updateSourceCount();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+  elements.stationCategory.addEventListener("change", renderStations);
 
   function updatePrecipitationOpacity() {
     const opacity = Number(elements.precipitationOpacity.value) / 100;
@@ -1319,6 +1485,9 @@ function initializeAtlas() {
     if (earthquakeState === "loaded") renderEarthquakes();
     else updateEarthquakeStatus();
     updateBasinStatus();
+    if (stationState === "loaded") renderStations();
+    else updateStationStatus();
+    updateStationRetrievedAt();
     updatePrecipitationStatus();
     updateFloodStatus();
     updateThermalStatus();
@@ -1334,4 +1503,5 @@ function initializeAtlas() {
   renderSystemView();
   loadAtlasData();
   loadEarthquakeData();
+  loadStationData();
 }

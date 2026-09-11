@@ -1,0 +1,4945 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "Estaciones hidrometeorológicas continentales en transmisión",
+    "source": "https://inamhi.gob.ec/api_visor/station_information/estaciones/visores/?id_aplicacion=vs_1h_inh",
+    "officialViewer": "https://inamhi.gob.ec/info/visor/",
+    "retrievedAt": "2026-09-11T20:58:57.784Z",
+    "sourceRecordCount": 1894,
+    "featureCount": 214,
+    "filters": {
+      "transmissionStatus": "TRANSMITIENDO",
+      "continentalBounds": {
+        "west": -81.2,
+        "south": -5.2,
+        "east": -74.8,
+        "north": 1.7
+      }
+    },
+    "note": "Instantánea de ubicación y estado de transmisión. No contiene observaciones, pronósticos ni series temporales."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "inamhi-61589",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.457789,
+          0.879061
+        ]
+      },
+      "properties": {
+        "id_estacion": 61589,
+        "codigo": "H0011",
+        "nombre": "MIRA EN LITA",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "ESMERALDAS",
+        "canton": "SAN LORENZO",
+        "altitud_m": 483
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-61595",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.84847,
+          0.49705
+        ]
+      },
+      "properties": {
+        "id_estacion": 61595,
+        "codigo": "H0017",
+        "nombre": "APAQUI D GRUTA LA PAZ #3",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "CARCHI",
+        "canton": "MONTUFAR",
+        "altitud_m": 2914
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64070",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.680556,
+          0.15
+        ]
+      },
+      "properties": {
+        "id_estacion": 64070,
+        "codigo": "H0136",
+        "nombre": "ALAMBI EN CHURUPAMBA",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 920
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-65023",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.741667,
+          0.236111
+        ]
+      },
+      "properties": {
+        "id_estacion": 65023,
+        "codigo": "H0146",
+        "nombre": "GUAYLLABAMBA DJ ALAMBI",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC CCS",
+        "provincia": "IMBABURA",
+        "canton": "COTACACHI",
+        "altitud_m": 625
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63962",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.405711,
+          0.008217
+        ]
+      },
+      "properties": {
+        "id_estacion": 63962,
+        "codigo": "H0148",
+        "nombre": "GUAYLLABAMBA DJ PISQUE",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "PEDRO MONCAYO",
+        "altitud_m": 1742
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63963",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.640389,
+          0.177331
+        ]
+      },
+      "properties": {
+        "id_estacion": 63963,
+        "codigo": "H0149",
+        "nombre": "GUAYLLABAMBA EN PTE.CHACAPATA",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 913
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64071",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.623333,
+          0.221111
+        ]
+      },
+      "properties": {
+        "id_estacion": 64071,
+        "codigo": "H0150",
+        "nombre": "INTAG DJ PAMPLONA",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "IMBABURA",
+        "canton": "COTACACHI",
+        "altitud_m": 1000
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63799",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.424753,
+          -0.574556
+        ]
+      },
+      "properties": {
+        "id_estacion": 63799,
+        "codigo": "H0158",
+        "nombre": "PITA AJ SALTO",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "MEJIA",
+        "altitud_m": 3649
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66173",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.705,
+          0.85806
+        ]
+      },
+      "properties": {
+        "id_estacion": 66173,
+        "codigo": "H0173",
+        "nombre": "TEAONE AJ ESMERALDAS",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "ESMERALDAS",
+        "canton": "ESMERALDAS",
+        "altitud_m": 38
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63831",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.1625,
+          -0.848444
+        ]
+      },
+      "properties": {
+        "id_estacion": 63831,
+        "codigo": "H0229",
+        "nombre": "CARRIZAL EN CALCETA",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "MANABI",
+        "canton": "BOLIVAR",
+        "altitud_m": 47
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63864",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.2175,
+          -1.108056
+        ]
+      },
+      "properties": {
+        "id_estacion": 63864,
+        "codigo": "H0266",
+        "nombre": "PORTOVIEJO EN H.VASQUEZ (GUARUMO)",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "MANABI",
+        "canton": "SANTA ANA",
+        "altitud_m": 100
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-61826",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.441111,
+          -1.835361
+        ]
+      },
+      "properties": {
+        "id_estacion": 61826,
+        "codigo": "H0371",
+        "nombre": "SAN PABLO EN PALMAR",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "LOS RIOS",
+        "canton": "MONTALVO",
+        "altitud_m": 17
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-61897",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.556835,
+          -2.25621
+        ]
+      },
+      "properties": {
+        "id_estacion": 61897,
+        "codigo": "H0448",
+        "nombre": "PAYO AJ BULUBULU",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "GUAYAS",
+        "canton": "EL TRIUNFO",
+        "altitud_m": 21
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-61970",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.635919,
+          -3.764475
+        ]
+      },
+      "properties": {
+        "id_estacion": 61970,
+        "codigo": "H0587",
+        "nombre": "PINDO AJ AMARILLO",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "LOJA",
+        "canton": "CHAGUARPAMBA",
+        "altitud_m": 520
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-61974",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.08196,
+          -3.88293
+        ]
+      },
+      "properties": {
+        "id_estacion": 61974,
+        "codigo": "H0591",
+        "nombre": "PUYANGO EN CPTO.MILITAR (PTE.CARRETERA)",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "EL ORO",
+        "canton": "LAS LAJAS",
+        "altitud_m": 300
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63828",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.862111,
+          -4.160667
+        ]
+      },
+      "properties": {
+        "id_estacion": 63828,
+        "codigo": "H0620",
+        "nombre": "CATAMAYO EN PTE.SANTA ROSA",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "LOJA",
+        "canton": "CELICA",
+        "altitud_m": 641
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62023",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.7898,
+          -0.31832
+        ]
+      },
+      "properties": {
+        "id_estacion": 62023,
+        "codigo": "H0719",
+        "nombre": "QUIJOS DJ OYACACHI",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "NAPO",
+        "canton": "EL CHACO",
+        "altitud_m": 1490
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-65012",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.663333,
+          -0.152778
+        ]
+      },
+      "properties": {
+        "id_estacion": 65012,
+        "codigo": "H0728",
+        "nombre": "SALADO AJ COCA(AJ GUAYTARINGO)",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC CCS",
+        "provincia": "NAPO",
+        "canton": "EL CHACO",
+        "altitud_m": 1480
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-65008",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.859405,
+          -0.468555
+        ]
+      },
+      "properties": {
+        "id_estacion": 65008,
+        "codigo": "H0731",
+        "nombre": "COSANGA AJ QUIJOS",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC CCS",
+        "provincia": "NAPO",
+        "canton": "QUIJOS",
+        "altitud_m": 1699
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63800",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.60782,
+          -0.74355
+        ]
+      },
+      "properties": {
+        "id_estacion": 63800,
+        "codigo": "H0854",
+        "nombre": "CUTUCHI EN CASPI",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "COTOPAXI",
+        "canton": "LATACUNGA",
+        "altitud_m": 3007
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62179",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.74,
+          -2.75861
+        ]
+      },
+      "properties": {
+        "id_estacion": 62179,
+        "codigo": "H0894",
+        "nombre": "PAUTE EN PAUTE(DJ GUALACEO)",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "AZUAY",
+        "canton": "PAUTE",
+        "altitud_m": 2104
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63965",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.810481,
+          0.040688
+        ]
+      },
+      "properties": {
+        "id_estacion": 63965,
+        "codigo": "H1133",
+        "nombre": "AGUARICO EN NUEVA LOJA (LA GABARRA)",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "SUCUMBIOS",
+        "canton": "LAGO AGRIO",
+        "altitud_m": 279
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-34",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.007411,
+          -0.342844
+        ]
+      },
+      "properties": {
+        "id_estacion": 34,
+        "codigo": "H1134",
+        "nombre": "COCA EN SAN SEBASTIAN",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "ORELLANA",
+        "canton": "ORELLANA",
+        "altitud_m": 355
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-65024",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -76.978938,
+          -0.473266
+        ]
+      },
+      "properties": {
+        "id_estacion": 65024,
+        "codigo": "H1135",
+        "nombre": "NAPO EN FRANCISCO DE ORELLANA",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "ORELLANA",
+        "canton": "ORELLANA",
+        "altitud_m": 249
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62385",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.398575,
+          -0.920647
+        ]
+      },
+      "properties": {
+        "id_estacion": 62385,
+        "codigo": "H1136",
+        "nombre": "NAPO EN NUEVO ROCAFUERTE",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "ORELLANA",
+        "canton": "AGUARICO",
+        "altitud_m": 175
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63987",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.221331,
+          0.344769
+        ]
+      },
+      "properties": {
+        "id_estacion": 63987,
+        "codigo": "H5026",
+        "nombre": "CARIHUAYCO EN PALUGUILLO",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "NO DELIMITADA",
+        "canton": "NO DEFINIDO",
+        "altitud_m": 34
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63966",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.882,
+          -1.7377
+        ]
+      },
+      "properties": {
+        "id_estacion": 63966,
+        "codigo": "H5029",
+        "nombre": "RIO PASTAZA EN NUEVO PUENTE A PALORA",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PASTAZA",
+        "canton": "PASTAZA",
+        "altitud_m": 784
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64383",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.62918,
+          0.887574
+        ]
+      },
+      "properties": {
+        "id_estacion": 64383,
+        "codigo": "H5033",
+        "nombre": "ESMERALDAS EN SAN MATEO",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "ESMERALDAS",
+        "canton": "ESMERALDAS",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66995",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.20175,
+          -4.02188
+        ]
+      },
+      "properties": {
+        "id_estacion": 66995,
+        "codigo": "H5045",
+        "nombre": "PARQUE LINEAL",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2090.25
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66996",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.20447,
+          -4.00252
+        ]
+      },
+      "properties": {
+        "id_estacion": 66996,
+        "codigo": "H5046",
+        "nombre": "PUENTE LOURDES",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2062.95
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66997",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.20364,
+          -3.98879
+        ]
+      },
+      "properties": {
+        "id_estacion": 66997,
+        "codigo": "H5047",
+        "nombre": "RIO ZAMORA",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2047.01
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66998",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.20329,
+          -3.98837
+        ]
+      },
+      "properties": {
+        "id_estacion": 66998,
+        "codigo": "H5048",
+        "nombre": "MAYORISTA",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2045.73
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66999",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.207492,
+          -3.978664
+        ]
+      },
+      "properties": {
+        "id_estacion": 66999,
+        "codigo": "H5049",
+        "nombre": "SHUSHUHUAYCO",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2045.73
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67000",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.22334,
+          -3.93072
+        ]
+      },
+      "properties": {
+        "id_estacion": 67000,
+        "codigo": "H5050",
+        "nombre": "EL PETAR",
+        "categoria": "HIDROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2004.93
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66883",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.468989,
+          -0.672118
+        ]
+      },
+      "properties": {
+        "id_estacion": 66883,
+        "codigo": "HM018",
+        "nombre": "CHAUNE - CELEC EP",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "LOS RIOS",
+        "canton": "BUENA FE",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66884",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.415507,
+          -0.670925
+        ]
+      },
+      "properties": {
+        "id_estacion": 66884,
+        "codigo": "HM019",
+        "nombre": "DIQUE1 - CELEC EP",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "LOS RIOS",
+        "canton": "QUEVEDO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66890",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.997726,
+          -1.699235
+        ]
+      },
+      "properties": {
+        "id_estacion": 66890,
+        "codigo": "HM021",
+        "nombre": "LA CAPILLA - CELEC EP",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "GUAYAS",
+        "canton": "SANTA LUCIA",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66895",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.981575,
+          -1.623486
+        ]
+      },
+      "properties": {
+        "id_estacion": 66895,
+        "codigo": "HM022",
+        "nombre": "PALESTINA - CELEC EP",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "GUAYAS",
+        "canton": "COLIMES",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66897",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.750538,
+          -0.923509
+        ]
+      },
+      "properties": {
+        "id_estacion": 66897,
+        "codigo": "HM023",
+        "nombre": "PRESA - CELEC EP",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "MANABI",
+        "canton": "PICHINCHA",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66900",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.467247,
+          -0.890423
+        ]
+      },
+      "properties": {
+        "id_estacion": 66900,
+        "codigo": "HM025",
+        "nombre": "QUEVEDO AJ LULU - CELEC EP",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "LOS RIOS",
+        "canton": "QUEVEDO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66904",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.990023,
+          -1.71536
+        ]
+      },
+      "properties": {
+        "id_estacion": 66904,
+        "codigo": "HM027",
+        "nombre": "SANTA LUCIA - CELEC EP",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "GUAYAS",
+        "canton": "SANTA LUCIA",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66908",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.425624,
+          -0.948159
+        ]
+      },
+      "properties": {
+        "id_estacion": 66908,
+        "codigo": "HM028",
+        "nombre": "SAN PABLO - CELEC EP",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "LOS RIOS",
+        "canton": "QUEVEDO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62416",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.405238,
+          0.256938
+        ]
+      },
+      "properties": {
+        "id_estacion": 62416,
+        "codigo": "M0001",
+        "nombre": "INGUINCHO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "IMBABURA",
+        "canton": "OTAVALO",
+        "altitud_m": 3140
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-12",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.370433,
+          -0.231789
+        ]
+      },
+      "properties": {
+        "id_estacion": 12,
+        "codigo": "M0002",
+        "nombre": "LA TOLA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2493
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63757",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.370433,
+          -0.231789
+        ]
+      },
+      "properties": {
+        "id_estacion": 63757,
+        "codigo": "M0002",
+        "nombre": "LA TOLA",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2493
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.55512,
+          -0.36592
+        ]
+      },
+      "properties": {
+        "id_estacion": 5,
+        "codigo": "M0003",
+        "nombre": "IZOBAMBA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "MEJIA",
+        "altitud_m": 3060
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63770",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.55512,
+          -0.36592
+        ]
+      },
+      "properties": {
+        "id_estacion": 63770,
+        "codigo": "M0003",
+        "nombre": "IZOBAMBA",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "MEJIA",
+        "altitud_m": 3060
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63758",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.5946,
+          -1.02
+        ]
+      },
+      "properties": {
+        "id_estacion": 63758,
+        "codigo": "M0004",
+        "nombre": "RUMIPAMBA SALCEDO",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "COTOPAXI",
+        "canton": "SALCEDO",
+        "altitud_m": 2685
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-26",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.5946,
+          -1.02
+        ]
+      },
+      "properties": {
+        "id_estacion": 26,
+        "codigo": "M0004",
+        "nombre": "RUMIPAMBA SALCEDO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "COTOPAXI",
+        "canton": "SALCEDO",
+        "altitud_m": 2685
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.492908,
+          -1.074343
+        ]
+      },
+      "properties": {
+        "id_estacion": 1,
+        "codigo": "M0006",
+        "nombre": "PICHILINGUE",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "LOS RIOS",
+        "canton": "MOCACHE",
+        "altitud_m": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63768",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -75.403028,
+          -0.920028
+        ]
+      },
+      "properties": {
+        "id_estacion": 63768,
+        "codigo": "M0007",
+        "nombre": "NUEVO ROCAFUERTE",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "ORELLANA",
+        "canton": "AGUARICO",
+        "altitud_m": 176
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.95828,
+          -1.50567
+        ]
+      },
+      "properties": {
+        "id_estacion": 2,
+        "codigo": "M0008",
+        "nombre": "PUYO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PASTAZA",
+        "canton": "PASTAZA",
+        "altitud_m": 949
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63767",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.95828,
+          -1.50567
+        ]
+      },
+      "properties": {
+        "id_estacion": 63767,
+        "codigo": "M0008",
+        "nombre": "PUYO",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PASTAZA",
+        "canton": "PASTAZA",
+        "altitud_m": 949
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62420",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.081667,
+          -3.496944
+        ]
+      },
+      "properties": {
+        "id_estacion": 62420,
+        "codigo": "M0012",
+        "nombre": "LA CUCA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "EL ORO",
+        "canton": "ARENILLAS",
+        "altitud_m": 53
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63777",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.48773,
+          -0.1783
+        ]
+      },
+      "properties": {
+        "id_estacion": 63777,
+        "codigo": "M0024",
+        "nombre": "IÑAQUITO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2789
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63771",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.48773,
+          -0.1783
+        ]
+      },
+      "properties": {
+        "id_estacion": 63771,
+        "codigo": "M0024",
+        "nombre": "IÑAQUITO",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2789
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63761",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.380278,
+          -0.024778
+        ]
+      },
+      "properties": {
+        "id_estacion": 63761,
+        "codigo": "M0025",
+        "nombre": "LA CONCORDIA",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "ESMERALDAS",
+        "canton": "LA CONCORDIA",
+        "altitud_m": 243
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63751",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3489,
+          -0.4928
+        ]
+      },
+      "properties": {
+        "id_estacion": 63751,
+        "codigo": "M0026",
+        "nombre": "PUERTO ILA",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "SANTO DOMINGO",
+        "canton": "SANTO DOMINGO",
+        "altitud_m": 319
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-57",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.3489,
+          -0.4928
+        ]
+      },
+      "properties": {
+        "id_estacion": 57,
+        "codigo": "M0026",
+        "nombre": "PUERTO ILA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "SANTO DOMINGO",
+        "canton": "SANTO DOMINGO",
+        "altitud_m": 319
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63760",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.9452,
+          -2.5522
+        ]
+      },
+      "properties": {
+        "id_estacion": 63760,
+        "codigo": "M0031",
+        "nombre": "CAÑAR",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "CAÑAR",
+        "canton": "CAÑAR",
+        "altitud_m": 3083
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.2034,
+          -4.0375
+        ]
+      },
+      "properties": {
+        "id_estacion": 3,
+        "codigo": "M0033",
+        "nombre": "LOJA - LA ARGELIA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2160
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.600381,
+          -2.118053
+        ]
+      },
+      "properties": {
+        "id_estacion": 15,
+        "codigo": "M0037",
+        "nombre": "MILAGRO (INGENIO VALDEZ)",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "GUAYAS",
+        "canton": "MILAGRO",
+        "altitud_m": 13
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63865",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.485,
+          -0.14
+        ]
+      },
+      "properties": {
+        "id_estacion": 63865,
+        "codigo": "M0055",
+        "nombre": "QUITO AEROPUERTO- PARQUE BICENTENARIO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2794
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62504",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.944965,
+          0.618999
+        ]
+      },
+      "properties": {
+        "id_estacion": 62504,
+        "codigo": "M0102",
+        "nombre": "EL ANGEL",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "CARCHI",
+        "canton": "ESPEJO",
+        "altitud_m": 3000
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63753",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.819444,
+          0.604167
+        ]
+      },
+      "properties": {
+        "id_estacion": 63753,
+        "codigo": "M0103",
+        "nombre": "SAN GABRIEL",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "CARCHI",
+        "canton": "MONTUFAR",
+        "altitud_m": 2860
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62505",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.819444,
+          0.604167
+        ]
+      },
+      "properties": {
+        "id_estacion": 62505,
+        "codigo": "M0103",
+        "nombre": "SAN GABRIEL",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "CARCHI",
+        "canton": "MONTUFAR",
+        "altitud_m": 2860
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62507",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.250059,
+          0.243424
+        ]
+      },
+      "properties": {
+        "id_estacion": 62507,
+        "codigo": "M0105",
+        "nombre": "OTAVALO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "IMBABURA",
+        "canton": "OTAVALO",
+        "altitud_m": 2550
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63826",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.540556,
+          -0.524167
+        ]
+      },
+      "properties": {
+        "id_estacion": 63826,
+        "codigo": "M0117",
+        "nombre": "MACHACHI",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "GAD MEJIA",
+        "provincia": "PICHINCHA",
+        "canton": "MEJIA",
+        "altitud_m": 2944
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62526",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.245556,
+          -0.916389
+        ]
+      },
+      "properties": {
+        "id_estacion": 62526,
+        "codigo": "M0124",
+        "nombre": "SAN JUAN LA MANA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "COTOPAXI",
+        "canton": "LA MANA",
+        "altitud_m": 215
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64441",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.9222,
+          -2.2743
+        ]
+      },
+      "properties": {
+        "id_estacion": 64441,
+        "codigo": "M0136",
+        "nombre": "CHUNCHI",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "ESCUELA POLITECNICA DEL CHIMBORAZO",
+        "provincia": "CHIMBORAZO",
+        "canton": "CHUNCHI",
+        "altitud_m": 2177
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62541",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.7806,
+          -2.8981
+        ]
+      },
+      "properties": {
+        "id_estacion": 62541,
+        "codigo": "M0139",
+        "nombre": "GUALACEO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "AZUAY",
+        "canton": "GUALACEO",
+        "altitud_m": 2230
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62548",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.554333,
+          -4.333389
+        ]
+      },
+      "properties": {
+        "id_estacion": 62548,
+        "codigo": "M0146",
+        "nombre": "CARIAMANGA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "LOJA",
+        "canton": "CALVAS",
+        "altitud_m": 1950
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63830",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.430556,
+          -4.584722
+        ]
+      },
+      "properties": {
+        "id_estacion": 63830,
+        "codigo": "M0150",
+        "nombre": "AMALUZA 1",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "LOJA",
+        "canton": "ESPINDOLA",
+        "altitud_m": 1672
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62558",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.471083,
+          0.319444
+        ]
+      },
+      "properties": {
+        "id_estacion": 62558,
+        "codigo": "M0156",
+        "nombre": "QUININDE",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "ESMERALDAS",
+        "canton": "QUININDE",
+        "altitud_m": 115
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64181",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.426944,
+          -0.259722
+        ]
+      },
+      "properties": {
+        "id_estacion": 64181,
+        "codigo": "M0160",
+        "nombre": "EL CARMEN",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "MANABI",
+        "canton": "EL CARMEN",
+        "altitud_m": 260
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-62564",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.03651,
+          -0.6308
+        ]
+      },
+      "properties": {
+        "id_estacion": 62564,
+        "codigo": "M0162",
+        "nombre": "CHONE-U.CATOLICA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "MANABI",
+        "canton": "CHONE",
+        "altitud_m": 36
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63759",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.605539,
+          -1.3671
+        ]
+      },
+      "properties": {
+        "id_estacion": 63759,
+        "codigo": "M0258",
+        "nombre": "QUEROCHACA",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "TUNGURAHUA",
+        "canton": "CEVALLOS",
+        "altitud_m": 2865
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-13",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.605539,
+          -1.3671
+        ]
+      },
+      "properties": {
+        "id_estacion": 13,
+        "codigo": "M0258",
+        "nombre": "QUEROCHACA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "TUNGURAHUA",
+        "canton": "CEVALLOS",
+        "altitud_m": 2865
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-65074",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.70229,
+          0.81909
+        ]
+      },
+      "properties": {
+        "id_estacion": 65074,
+        "codigo": "M0444",
+        "nombre": "TEAONE-TABIAZO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "ESMERALDAS",
+        "canton": "ESMERALDAS",
+        "altitud_m": 100
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63427",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.685214,
+          -1.650833
+        ]
+      },
+      "properties": {
+        "id_estacion": 63427,
+        "codigo": "M1036",
+        "nombre": "RIOBAMBA POLITECNICA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "CHIMBORAZO",
+        "canton": "RIOBAMBA",
+        "altitud_m": 2850
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63431",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.12501,
+          -2.22982
+        ]
+      },
+      "properties": {
+        "id_estacion": 63431,
+        "codigo": "M1040",
+        "nombre": "MACAS SAN ISIDRO-PNS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "MORONA SANTIAGO",
+        "canton": "MORONA",
+        "altitud_m": 1110
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63485",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.25505,
+          0.01116
+        ]
+      },
+      "properties": {
+        "id_estacion": 63485,
+        "codigo": "M1094",
+        "nombre": "TOMALON-TABACUNDO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "PEDRO MONCAYO",
+        "altitud_m": 2760
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63756",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.25505,
+          0.01116
+        ]
+      },
+      "properties": {
+        "id_estacion": 63756,
+        "codigo": "M1094",
+        "nombre": "TOMALON-TABACUNDO",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "PEDRO MONCAYO",
+        "altitud_m": 2760
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63781",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.919355,
+          -0.674175
+        ]
+      },
+      "properties": {
+        "id_estacion": 63781,
+        "codigo": "M1124",
+        "nombre": "SIERRAZUL",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "NAPO",
+        "canton": "ARCHIDONA",
+        "altitud_m": 2240
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.87507,
+          -2.23358
+        ]
+      },
+      "properties": {
+        "id_estacion": 4,
+        "codigo": "M1170",
+        "nombre": "SANTA ELENA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "SANTA ELENA",
+        "canton": "LA LIBERTAD",
+        "altitud_m": 13
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63593",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.06279,
+          -1.92154
+        ]
+      },
+      "properties": {
+        "id_estacion": 63593,
+        "codigo": "M1207",
+        "nombre": "NOBOL",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "GUAYAS",
+        "canton": "NOBOL",
+        "altitud_m": 7
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63979",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.38736,
+          -1.17343
+        ]
+      },
+      "properties": {
+        "id_estacion": 63979,
+        "codigo": "M1208",
+        "nombre": "LA TEODOMIRA",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "MANABI",
+        "canton": "SANTA ANA",
+        "altitud_m": 60
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63594",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.38736,
+          -1.17343
+        ]
+      },
+      "properties": {
+        "id_estacion": 63594,
+        "codigo": "M1208",
+        "nombre": "LA TEODOMIRA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "MANABI",
+        "canton": "SANTA ANA",
+        "altitud_m": 60
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63603",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.397467,
+          -0.659378
+        ]
+      },
+      "properties": {
+        "id_estacion": 63603,
+        "codigo": "M1217",
+        "nombre": "BAHIA DE CARAQUEZ-PUCE",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "MANABI",
+        "canton": "SUCRE",
+        "altitud_m": 12
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63617",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.729,
+          -1.28688
+        ]
+      },
+      "properties": {
+        "id_estacion": 63617,
+        "codigo": "M1233",
+        "nombre": "CANTAGALLO-GRANJA UNESUM",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "MANABI",
+        "canton": "JIPIJAPA",
+        "altitud_m": 64
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63624",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.1322,
+          0.32978
+        ]
+      },
+      "properties": {
+        "id_estacion": 63624,
+        "codigo": "M1240",
+        "nombre": "IBARRA - 1",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "IMBABURA",
+        "canton": "IBARRA",
+        "altitud_m": 2256
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63796",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.79508,
+          -4.044
+        ]
+      },
+      "properties": {
+        "id_estacion": 63796,
+        "codigo": "M1242",
+        "nombre": "EL ALMENDRAL - GRANJA ALMENDRAL",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "LOJA",
+        "canton": "PALTAS",
+        "altitud_m": 1088
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.06093,
+          -3.79264
+        ]
+      },
+      "properties": {
+        "id_estacion": 9,
+        "codigo": "M1246",
+        "nombre": "LAS LAJAS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "EL ORO",
+        "canton": "LAS LAJAS",
+        "altitud_m": 435
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63802",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.02417,
+          -2.1925
+        ]
+      },
+      "properties": {
+        "id_estacion": 63802,
+        "codigo": "M1253",
+        "nombre": "PUERTO HONDO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "GUAYAS",
+        "canton": "GUAYAQUIL",
+        "altitud_m": 4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63814",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.605278,
+          0.654722
+        ]
+      },
+      "properties": {
+        "id_estacion": 63814,
+        "codigo": "M1256",
+        "nombre": "RANCHEROS DEL NORTE-EL CARMELO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "CARCHI",
+        "canton": "TULCAN",
+        "altitud_m": 2963
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-65597",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.93361,
+          -0.31417
+        ]
+      },
+      "properties": {
+        "id_estacion": 65597,
+        "codigo": "M1262",
+        "nombre": "LA PALMA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "MEJIA",
+        "altitud_m": 902
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64379",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.05845,
+          0.15602
+        ]
+      },
+      "properties": {
+        "id_estacion": 64379,
+        "codigo": "M1266",
+        "nombre": "SAN MARCOS -LA CELICA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "PEDRO VICENTE MALDONADO",
+        "altitud_m": 536
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63813",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.917338,
+          -2.146463
+        ]
+      },
+      "properties": {
+        "id_estacion": 63813,
+        "codigo": "M1271",
+        "nombre": "GUAYAQUIL (FACULTAD CCNN)",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "GUAYAS",
+        "canton": "GUAYAQUIL",
+        "altitud_m": 21
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63920",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.565717,
+          -0.229912
+        ]
+      },
+      "properties": {
+        "id_estacion": 63920,
+        "codigo": "M1273",
+        "nombre": "LLOA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3228
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63937",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.110556,
+          -0.188333
+        ]
+      },
+      "properties": {
+        "id_estacion": 63937,
+        "codigo": "M5021",
+        "nombre": "SALVEFACHA-OYACACHI",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "NAPO",
+        "canton": "EL CHACO",
+        "altitud_m": 3710
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63941",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.198333,
+          -0.333611
+        ]
+      },
+      "properties": {
+        "id_estacion": 63941,
+        "codigo": "M5025",
+        "nombre": "LA VIRGEN-PAPALLACTA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "NAPO",
+        "canton": "QUIJOS",
+        "altitud_m": 3920
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63942",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.443333,
+          -0.563611
+        ]
+      },
+      "properties": {
+        "id_estacion": 63942,
+        "codigo": "M5026",
+        "nombre": "COTOPAXI-CONTROL NORTE (MACHACHI)",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "MEJIA",
+        "altitud_m": 3670
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63944",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.390556,
+          -0.483056
+        ]
+      },
+      "properties": {
+        "id_estacion": 63944,
+        "codigo": "M5028",
+        "nombre": "MIRANDA (PINTAG)",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3526
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63946",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.357222,
+          -0.418333
+        ]
+      },
+      "properties": {
+        "id_estacion": 63946,
+        "codigo": "M5030",
+        "nombre": "GORDILLO (PINTAG)",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3248
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63947",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.210556,
+          -0.094722
+        ]
+      },
+      "properties": {
+        "id_estacion": 63947,
+        "codigo": "M5031",
+        "nombre": "CHUMILLOS (CANGAHUA)",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "CAYAMBE",
+        "altitud_m": 3750
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63958",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.491667,
+          -0.104444
+        ]
+      },
+      "properties": {
+        "id_estacion": 63958,
+        "codigo": "M5035",
+        "nombre": "COTOCOLLAO - MUNICIPIO QUITO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "RED METROPOLITANA DE MONITOREO ATMOSFÉRICO (REMMAQ)",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2807
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63959",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.475,
+          -0.092222
+        ]
+      },
+      "properties": {
+        "id_estacion": 63959,
+        "codigo": "M5036",
+        "nombre": "CARAPUNGO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "RED METROPOLITANA DE MONITOREO ATMOSFÉRICO (REMMAQ)",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63954",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.487222,
+          -0.174444
+        ]
+      },
+      "properties": {
+        "id_estacion": 63954,
+        "codigo": "M5037",
+        "nombre": "BELISARIO - REMMAQ-SA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "RED METROPOLITANA DE MONITOREO ATMOSFÉRICO (REMMAQ)",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63960",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.550833,
+          -0.325
+        ]
+      },
+      "properties": {
+        "id_estacion": 63960,
+        "codigo": "M5039",
+        "nombre": "GUAMANI",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "RED METROPOLITANA DE MONITOREO ATMOSFÉRICO (REMMAQ)",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63956",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.4,
+          -0.205833
+        ]
+      },
+      "properties": {
+        "id_estacion": 63956,
+        "codigo": "M5040",
+        "nombre": "TUMBACO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "RED METROPOLITANA DE MONITOREO ATMOSFÉRICO (REMMAQ)",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63957",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.455833,
+          -0.3
+        ]
+      },
+      "properties": {
+        "id_estacion": 63957,
+        "codigo": "M5041",
+        "nombre": "LOS CHILLOS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "RED METROPOLITANA DE MONITOREO ATMOSFÉRICO (REMMAQ)",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63961",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.453056,
+          -0.015
+        ]
+      },
+      "properties": {
+        "id_estacion": 63961,
+        "codigo": "M5042",
+        "nombre": "SAN ANTONIO - EPMAPS QUITO",
+        "categoria": "HIDRO - METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2420
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64430",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.306011,
+          -0.163959
+        ]
+      },
+      "properties": {
+        "id_estacion": 64430,
+        "codigo": "M5044",
+        "nombre": "YARUQUI -EPMAPS QUITO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2679.45
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64437",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.523172,
+          -0.332972
+        ]
+      },
+      "properties": {
+        "id_estacion": 64437,
+        "codigo": "M5050",
+        "nombre": "EL TROJE - EPMAPS QUITO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3122.83
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66257",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.516667,
+          -0.175833
+        ]
+      },
+      "properties": {
+        "id_estacion": 66257,
+        "codigo": "M5055",
+        "nombre": "RUMIPAMBA BODEGAS - EPMAPS QUITO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3340
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66260",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.525,
+          -0.2025
+        ]
+      },
+      "properties": {
+        "id_estacion": 66260,
+        "codigo": "M5056",
+        "nombre": "TOCTIUCO - EPMAPS QUITO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3225
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64436",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.492673,
+          -0.236268
+        ]
+      },
+      "properties": {
+        "id_estacion": 64436,
+        "codigo": "M5057",
+        "nombre": "PUENGASI -EPMAPS QUITO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2970.92
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64438",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.569416,
+          -0.247897
+        ]
+      },
+      "properties": {
+        "id_estacion": 64438,
+        "codigo": "M5060",
+        "nombre": "EL CINTO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3275.72
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63948",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.220556,
+          -0.165
+        ]
+      },
+      "properties": {
+        "id_estacion": 63948,
+        "codigo": "M5074",
+        "nombre": "PUNTAS (CHECA)",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 4142
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63949",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.263889,
+          -0.290278
+        ]
+      },
+      "properties": {
+        "id_estacion": 63949,
+        "codigo": "M5075",
+        "nombre": "ITULCACHI (PIFO)",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 4029
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63950",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.402222,
+          -0.616833
+        ]
+      },
+      "properties": {
+        "id_estacion": 63950,
+        "codigo": "M5076",
+        "nombre": "MUDADERO (MACHACHI)",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "MEJIA",
+        "altitud_m": 3866
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63951",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.689444,
+          -0.629444
+        ]
+      },
+      "properties": {
+        "id_estacion": 63951,
+        "codigo": "M5077",
+        "nombre": "REI (EL CHAUPI)",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "MEJIA",
+        "altitud_m": 3983
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63952",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.316944,
+          -0.240833
+        ]
+      },
+      "properties": {
+        "id_estacion": 63952,
+        "codigo": "M5078",
+        "nombre": "PIFO -FONAG",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2857
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64382",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.954167,
+          0.101111
+        ]
+      },
+      "properties": {
+        "id_estacion": 64382,
+        "codigo": "M5088",
+        "nombre": "SAN MARCOS-PICHINCHA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "RED METROPOLITANA DE MONITOREO ATMOSFÉRICO (REMMAQ)",
+        "provincia": "PICHINCHA",
+        "canton": "CAYAMBE",
+        "altitud_m": 3427
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66624",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.954167,
+          0.101111
+        ]
+      },
+      "properties": {
+        "id_estacion": 66624,
+        "codigo": "M5088",
+        "nombre": "SAN MARCOS-PICHINCHA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "RED METROPOLITANA DE MONITOREO ATMOSFÉRICO (REMMAQ)",
+        "provincia": "PICHINCHA",
+        "canton": "CAYAMBE",
+        "altitud_m": 3427
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63719",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.502566,
+          -2.528648
+        ]
+      },
+      "properties": {
+        "id_estacion": 63719,
+        "codigo": "M5090",
+        "nombre": "LA LAMPADA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "CAÑAR",
+        "canton": "LA TRONCAL",
+        "altitud_m": 33
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64439",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.432949,
+          -0.077366
+        ]
+      },
+      "properties": {
+        "id_estacion": 64439,
+        "codigo": "M5101",
+        "nombre": "CALDERON - EPMAPS QUITO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2767.83
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66261",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.431089,
+          -0.212397
+        ]
+      },
+      "properties": {
+        "id_estacion": 66261,
+        "codigo": "M5102",
+        "nombre": "CUMBAYA -EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2360
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-7",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.003108,
+          -2.897464
+        ]
+      },
+      "properties": {
+        "id_estacion": 7,
+        "codigo": "M5103",
+        "nombre": "EMOV - EP CUENCA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "AZUAY",
+        "canton": "CUENCA",
+        "altitud_m": 2525
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63821",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.388639,
+          -0.616111
+        ]
+      },
+      "properties": {
+        "id_estacion": 63821,
+        "codigo": "M5124",
+        "nombre": "CAMPO ALEGRE",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "MEJIA",
+        "altitud_m": 3861
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63811",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.259417,
+          -0.503778
+        ]
+      },
+      "properties": {
+        "id_estacion": 63811,
+        "codigo": "M5125",
+        "nombre": "GUAMANI-ANTISANA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "NAPO",
+        "canton": "ARCHIDONA",
+        "altitud_m": 4148
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63803",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.858189,
+          -2.287008
+        ]
+      },
+      "properties": {
+        "id_estacion": 63803,
+        "codigo": "M5131",
+        "nombre": "CAMARONERA-SONGA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "GUAYAS",
+        "canton": "GUAYAQUIL",
+        "altitud_m": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63806",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.940452,
+          -2.089127
+        ]
+      },
+      "properties": {
+        "id_estacion": 63806,
+        "codigo": "M5132",
+        "nombre": "COE-MONTE BELLO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "GUAYAS",
+        "canton": "GUAYAQUIL",
+        "altitud_m": 194
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63783",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.8334,
+          -2.1695
+        ]
+      },
+      "properties": {
+        "id_estacion": 63783,
+        "codigo": "M5133",
+        "nombre": "CUERPO DE BOMBEROS DIVINO NIÑO-DURAN",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "GUAYAS",
+        "canton": "DURAN",
+        "altitud_m": 194
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63804",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.954136,
+          -3.259303
+        ]
+      },
+      "properties": {
+        "id_estacion": 63804,
+        "codigo": "M5134",
+        "nombre": "MINISTERIO DE SALUD MACHALA-SNEM",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "EL ORO",
+        "canton": "MACHALA",
+        "altitud_m": 3
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63807",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.2275,
+          -3.48205
+        ]
+      },
+      "properties": {
+        "id_estacion": 63807,
+        "codigo": "M5135",
+        "nombre": "HOSPITAL PUBLICO-HUAQUILLAS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "EL ORO",
+        "canton": "HUAQUILLAS",
+        "altitud_m": 13
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66867",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.619097,
+          -3.720014
+        ]
+      },
+      "properties": {
+        "id_estacion": 66867,
+        "codigo": "M5136",
+        "nombre": "COLEGIO 13 DE MAYO-PORTOVELO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "INAMHI",
+        "provincia": "EL ORO",
+        "canton": "PORTOVELO",
+        "altitud_m": 983
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-63969",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.51,
+          -0.22
+        ]
+      },
+      "properties": {
+        "id_estacion": 63969,
+        "codigo": "M5172",
+        "nombre": "EL CENTRO - REMMAQ_SA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "RED METROPOLITANA DE MONITOREO ATMOSFÉRICO (REMMAQ)",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2820
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64424",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.58607,
+          -0.17924
+        ]
+      },
+      "properties": {
+        "id_estacion": 64424,
+        "codigo": "M5181",
+        "nombre": "YURACYACU GUAGUA PICHINCHA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FONAG",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66369",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.3638,
+          -2.4055
+        ]
+      },
+      "properties": {
+        "id_estacion": 66369,
+        "codigo": "M5185",
+        "nombre": "CAIMITO-PROGRESO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EMAPAG-INTERAGUA",
+        "provincia": "NO DELIMITADA",
+        "canton": "NO DEFINIDO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-65009",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.472864,
+          -0.137408
+        ]
+      },
+      "properties": {
+        "id_estacion": 65009,
+        "codigo": "M5187",
+        "nombre": "Embalse Compensador - CCS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC CCS",
+        "provincia": "NAPO",
+        "canton": "EL CHACO",
+        "altitud_m": 1233.5
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-65005",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.02442,
+          -0.41604
+        ]
+      },
+      "properties": {
+        "id_estacion": 65005,
+        "codigo": "M5188",
+        "nombre": "Cuyuja Toma Papallacta - CCS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC CCS",
+        "provincia": "NAPO",
+        "canton": "QUIJOS",
+        "altitud_m": 2372
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-65010",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.45573,
+          -0.13094
+        ]
+      },
+      "properties": {
+        "id_estacion": 65010,
+        "codigo": "M5189",
+        "nombre": "Casa de Máquinas central - CCS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC CCS",
+        "provincia": "NAPO",
+        "canton": "EL CHACO",
+        "altitud_m": 643
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-65011",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -77.68304,
+          -0.19886
+        ]
+      },
+      "properties": {
+        "id_estacion": 65011,
+        "codigo": "M5190",
+        "nombre": "Captación Central - CCS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC CCS",
+        "provincia": "NAPO",
+        "canton": "EL CHACO",
+        "altitud_m": 1289.9
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64447",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.775114,
+          0.236715
+        ]
+      },
+      "properties": {
+        "id_estacion": 64447,
+        "codigo": "M5192",
+        "nombre": "EL CHONTAL",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "PROYECTO ADAPTACLIMA",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 0.24
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66361",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.67759,
+          -1.65459
+        ]
+      },
+      "properties": {
+        "id_estacion": 66361,
+        "codigo": "M5195",
+        "nombre": "ESPOCH",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "ESCUELA POLITECNICA DEL CHIMBORAZO",
+        "provincia": "CHIMBORAZO",
+        "canton": "RIOBAMBA",
+        "altitud_m": 2754
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66362",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.57259,
+          -1.65959
+        ]
+      },
+      "properties": {
+        "id_estacion": 66362,
+        "codigo": "M5197",
+        "nombre": "QUIMIAG",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "ESCUELA POLITECNICA DEL CHIMBORAZO",
+        "provincia": "CHIMBORAZO",
+        "canton": "RIOBAMBA",
+        "altitud_m": 2709
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64445",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.76034,
+          -2.15753
+        ]
+      },
+      "properties": {
+        "id_estacion": 64445,
+        "codigo": "M5198",
+        "nombre": "TIXAN",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "ESCUELA POLITECNICA DEL CHIMBORAZO",
+        "provincia": "NO DELIMITADA",
+        "canton": "NO DEFINIDO",
+        "altitud_m": 3538
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66366",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.62843,
+          -1.75107
+        ]
+      },
+      "properties": {
+        "id_estacion": 66366,
+        "codigo": "M5199",
+        "nombre": "TUNSHI",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "ESCUELA POLITECNICA DEL CHIMBORAZO",
+        "provincia": "CHIMBORAZO",
+        "canton": "RIOBAMBA",
+        "altitud_m": 2840
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64427",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.537059,
+          -0.129352
+        ]
+      },
+      "properties": {
+        "id_estacion": 64427,
+        "codigo": "M5230",
+        "nombre": "RUMIHURCO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3563.4
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64428",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.53087,
+          -0.175017
+        ]
+      },
+      "properties": {
+        "id_estacion": 64428,
+        "codigo": "M5231",
+        "nombre": "RUMIPAMBA EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "COTOPAXI",
+        "canton": "LATACUNGA",
+        "altitud_m": 3327.13
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64429",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.461283,
+          -0.181241
+        ]
+      },
+      "properties": {
+        "id_estacion": 64429,
+        "codigo": "M5232",
+        "nombre": "BELLAVISTA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3355
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64432",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.227802,
+          -0.546045
+        ]
+      },
+      "properties": {
+        "id_estacion": 64432,
+        "codigo": "M5234",
+        "nombre": "LA MICA PRESA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "NAPO",
+        "canton": "ARCHIDONA",
+        "altitud_m": 3922.42
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64433",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.437868,
+          -0.495755
+        ]
+      },
+      "properties": {
+        "id_estacion": 64433,
+        "codigo": "M5235",
+        "nombre": "PITA CAMPAMENTO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "MEJIA",
+        "altitud_m": 3360
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-64435",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.121584,
+          -0.297211
+        ]
+      },
+      "properties": {
+        "id_estacion": 64435,
+        "codigo": "M5237",
+        "nombre": "GUAYTALOMA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "NAPO",
+        "canton": "QUIJOS",
+        "altitud_m": 3782.98
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66259",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.523586,
+          -0.165623
+        ]
+      },
+      "properties": {
+        "id_estacion": 66259,
+        "codigo": "M5239",
+        "nombre": "ANTENAS - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3800.49
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66263",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.442681,
+          -0.29332
+        ]
+      },
+      "properties": {
+        "id_estacion": 66263,
+        "codigo": "M5240",
+        "nombre": "EL TINGO - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2478.21
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66264",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.370109,
+          -0.231481
+        ]
+      },
+      "properties": {
+        "id_estacion": 66264,
+        "codigo": "M5241",
+        "nombre": "LA TOLA - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2480
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66266",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.539267,
+          -0.201792
+        ]
+      },
+      "properties": {
+        "id_estacion": 66266,
+        "codigo": "M5243",
+        "nombre": "SAN FRANCISCO - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3578.5
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66267",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.537556,
+          -0.181847
+        ]
+      },
+      "properties": {
+        "id_estacion": 66267,
+        "codigo": "M5244",
+        "nombre": "CRUZ LOMA - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3996.12
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66268",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.602193,
+          -0.254609
+        ]
+      },
+      "properties": {
+        "id_estacion": 66268,
+        "codigo": "M5245",
+        "nombre": "SANTA ROSA - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2920
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66269",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.571124,
+          -0.115417
+        ]
+      },
+      "properties": {
+        "id_estacion": 66269,
+        "codigo": "M5246",
+        "nombre": "PICHAN - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3516.6
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66270",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.140988,
+          -0.380224
+        ]
+      },
+      "properties": {
+        "id_estacion": 66270,
+        "codigo": "M5247",
+        "nombre": "PAPALLACTA - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "NO DELIMITADA",
+        "canton": "NO DEFINIDO",
+        "altitud_m": 3156.68
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66271",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.347479,
+          -0.083975
+        ]
+      },
+      "properties": {
+        "id_estacion": 66271,
+        "codigo": "M5248",
+        "nombre": "GUAYLLABAMBA HACIENDA - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2368.8
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66272",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.290778,
+          -0.110934
+        ]
+      },
+      "properties": {
+        "id_estacion": 66272,
+        "codigo": "M5249",
+        "nombre": "EL QUINCHE - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2679.9
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66273",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.375874,
+          -0.362243
+        ]
+      },
+      "properties": {
+        "id_estacion": 66273,
+        "codigo": "M5250",
+        "nombre": "PINTAG - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2814.1
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66274",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.28669,
+          -0.267018
+        ]
+      },
+      "properties": {
+        "id_estacion": 66274,
+        "codigo": "M5251",
+        "nombre": "PALAGUILLO - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3102.15
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66275",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.364783,
+          -0.454013
+        ]
+      },
+      "properties": {
+        "id_estacion": 66275,
+        "codigo": "M5252",
+        "nombre": "EL CARMEN - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3283.65
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66276",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.530322,
+          -0.281335
+        ]
+      },
+      "properties": {
+        "id_estacion": 66276,
+        "codigo": "M5253",
+        "nombre": "TANQUE SOLANDA - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2916.85
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66277",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.169677,
+          -0.233828
+        ]
+      },
+      "properties": {
+        "id_estacion": 66277,
+        "codigo": "M5254",
+        "nombre": "SALVE FACCHA ALTO - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "NO DELIMITADA",
+        "canton": "NO DEFINIDO",
+        "altitud_m": 3919.77
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66278",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.496946,
+          -0.161292
+        ]
+      },
+      "properties": {
+        "id_estacion": 66278,
+        "codigo": "M5255",
+        "nombre": "CC EL BOSQUE - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2886.19
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66279",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.472793,
+          -0.122211
+        ]
+      },
+      "properties": {
+        "id_estacion": 66279,
+        "codigo": "M5256",
+        "nombre": "COLLALOMA - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 2955.11
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66280",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.522635,
+          -0.102435
+        ]
+      },
+      "properties": {
+        "id_estacion": 66280,
+        "codigo": "M5257",
+        "nombre": "COLINAS ALTO - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "PICHINCHA",
+        "canton": "QUITO",
+        "altitud_m": 3079.5
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66281",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.099663,
+          -0.24857
+        ]
+      },
+      "properties": {
+        "id_estacion": 66281,
+        "codigo": "M5258",
+        "nombre": "LAGUNA LOS PATOS - EPMAPS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "EPMAPS",
+        "provincia": "NO DELIMITADA",
+        "canton": "NO DEFINIDO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66381",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.772003,
+          -1.30756
+        ]
+      },
+      "properties": {
+        "id_estacion": 66381,
+        "codigo": "M5263",
+        "nombre": "TAMBOLOMA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "GAD TUNGURAHUA",
+        "provincia": "TUNGURAHUA",
+        "canton": "AMBATO",
+        "altitud_m": 3610
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66382",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.380768,
+          -1.396888
+        ]
+      },
+      "properties": {
+        "id_estacion": 66382,
+        "codigo": "M5264",
+        "nombre": "PARQUE DE LA FAMILIA - BAÑOS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "GAD TUNGURAHUA",
+        "provincia": "TUNGURAHUA",
+        "canton": "BA?OS DE AGUA SANTA",
+        "altitud_m": 1695
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66384",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.810139,
+          -1.211333
+        ]
+      },
+      "properties": {
+        "id_estacion": 66384,
+        "codigo": "M5266",
+        "nombre": "Embalse Chiqui - Urcu",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "GAD TUNGURAHUA",
+        "provincia": "TUNGURAHUA",
+        "canton": "AMBATO",
+        "altitud_m": 3875
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66886",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.904477,
+          -0.454535
+        ]
+      },
+      "properties": {
+        "id_estacion": 66886,
+        "codigo": "M5268",
+        "nombre": "FLAVIO ALFARO - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "MANABI",
+        "canton": "FLAVIO ALFARO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66887",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.274854,
+          -0.760712
+        ]
+      },
+      "properties": {
+        "id_estacion": 66887,
+        "codigo": "M5269",
+        "nombre": "GUALIPE - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "LOS RIOS",
+        "canton": "QUEVEDO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66888",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.160789,
+          -0.888916
+        ]
+      },
+      "properties": {
+        "id_estacion": 66888,
+        "codigo": "M5272",
+        "nombre": "GUAYACAN - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "COTOPAXI",
+        "canton": "PUJILI",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66889",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.559932,
+          -0.429113
+        ]
+      },
+      "properties": {
+        "id_estacion": 66889,
+        "codigo": "M5273",
+        "nombre": "LA CANCHA - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "MANABI",
+        "canton": "EL CARMEN",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66864",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.17374,
+          0.4048
+        ]
+      },
+      "properties": {
+        "id_estacion": 66864,
+        "codigo": "M5279",
+        "nombre": "YACHAY HDA SAN JOSE - CAMPUS PRINCIPAL",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "YACHAY",
+        "provincia": "IMBABURA",
+        "canton": "SAN MIGUEL DE URCUQUI",
+        "altitud_m": 2072
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66880",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.238599,
+          -0.77162
+        ]
+      },
+      "properties": {
+        "id_estacion": 66880,
+        "codigo": "M5280",
+        "nombre": "TOSAGUA - ULEAM",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "ULEAM",
+        "provincia": "MANABI",
+        "canton": "TOSAGUA",
+        "altitud_m": 9
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66891",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.589412,
+          -0.54753
+        ]
+      },
+      "properties": {
+        "id_estacion": 66891,
+        "codigo": "M5281",
+        "nombre": "LA PALIZADA - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "MANABI",
+        "canton": "EL CARMEN",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66892",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.187954,
+          -0.449027
+        ]
+      },
+      "properties": {
+        "id_estacion": 66892,
+        "codigo": "M5282",
+        "nombre": "MET BABA - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "SANTO DOMINGO",
+        "canton": "SANTO DOMINGO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66893",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.198957,
+          -0.609214
+        ]
+      },
+      "properties": {
+        "id_estacion": 66893,
+        "codigo": "M5283",
+        "nombre": "MET TOACHI - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "SANTO DOMINGO",
+        "canton": "SANTO DOMINGO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66894",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.646781,
+          -0.900605
+        ]
+      },
+      "properties": {
+        "id_estacion": 66894,
+        "codigo": "M5284",
+        "nombre": "MURUCUMBA - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "GUAYAS",
+        "canton": "EMPALME",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66896",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.813673,
+          -1.049396
+        ]
+      },
+      "properties": {
+        "id_estacion": 66896,
+        "codigo": "M5285",
+        "nombre": "PICHINCHA - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "GUAYAS",
+        "canton": "EMPALME",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66899",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.372314,
+          -0.390667
+        ]
+      },
+      "properties": {
+        "id_estacion": 66899,
+        "codigo": "M5286",
+        "nombre": "PUERTO LIMON - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "SANTO DOMINGO",
+        "canton": "SANTO DOMINGO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66903",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.694522,
+          -1.038477
+        ]
+      },
+      "properties": {
+        "id_estacion": 66903,
+        "codigo": "M5288",
+        "nombre": "RIO CONGO - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "GUAYAS",
+        "canton": "EMPALME",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66905",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.486692,
+          -0.559751
+        ]
+      },
+      "properties": {
+        "id_estacion": 66905,
+        "codigo": "M5289",
+        "nombre": "UNION 71 - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "LOS RIOS",
+        "canton": "BUENA FE",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66906",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.022222,
+          -0.578889
+        ]
+      },
+      "properties": {
+        "id_estacion": 66906,
+        "codigo": "M5290",
+        "nombre": "LA COCHA - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "COTOPAXI",
+        "canton": "SIGCHOS",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66907",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.236199,
+          -0.321723
+        ]
+      },
+      "properties": {
+        "id_estacion": 66907,
+        "codigo": "M5291",
+        "nombre": "SAN MIGUEL - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "SANTO DOMINGO",
+        "canton": "SANTO DOMINGO",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66909",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.437044,
+          -1.557072
+        ]
+      },
+      "properties": {
+        "id_estacion": 66909,
+        "codigo": "M5292",
+        "nombre": "PAJAN - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "MANABI",
+        "canton": "PAJAN",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66910",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.214613,
+          -1.393197
+        ]
+      },
+      "properties": {
+        "id_estacion": 66910,
+        "codigo": "M5293",
+        "nombre": "OLMEDO - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "MANABI",
+        "canton": "SANTA ANA",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66911",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.804133,
+          -0.763742
+        ]
+      },
+      "properties": {
+        "id_estacion": 66911,
+        "codigo": "M5294",
+        "nombre": "CERRADORA - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "MANABI",
+        "canton": "PICHINCHA",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66912",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.720204,
+          -0.616483
+        ]
+      },
+      "properties": {
+        "id_estacion": 66912,
+        "codigo": "M5295",
+        "nombre": "SAN PEDRO DE ORO - CELEC EP",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "CELEC-EP",
+        "provincia": "MANABI",
+        "canton": "CHONE",
+        "altitud_m": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67001",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.188333,
+          -4.038208
+        ]
+      },
+      "properties": {
+        "id_estacion": 67001,
+        "codigo": "M5318",
+        "nombre": "PARQUE UNIVERSITARIO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2430
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67004",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.187967,
+          -4.107483
+        ]
+      },
+      "properties": {
+        "id_estacion": 67004,
+        "codigo": "M5319",
+        "nombre": "PODOCARPUS",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2630
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67005",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.196878,
+          -4.007219
+        ]
+      },
+      "properties": {
+        "id_estacion": 67005,
+        "codigo": "M5320",
+        "nombre": "PUCARA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2150
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67006",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.21578,
+          -4.009961
+        ]
+      },
+      "properties": {
+        "id_estacion": 67006,
+        "codigo": "M5321",
+        "nombre": "EPOCA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2200
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67007",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.201975,
+          -3.995975
+        ]
+      },
+      "properties": {
+        "id_estacion": 67007,
+        "codigo": "M5322",
+        "nombre": "MUNICIPIO DE LOJA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2060
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67008",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.217157,
+          -3.957702
+        ]
+      },
+      "properties": {
+        "id_estacion": 67008,
+        "codigo": "M5323",
+        "nombre": "ZOOLOGICO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2020
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67009",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.206742,
+          -3.980567
+        ]
+      },
+      "properties": {
+        "id_estacion": 67009,
+        "codigo": "M5324",
+        "nombre": "ZONA MILIYTAR 7",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2075
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67010",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.221753,
+          -3.930411
+        ]
+      },
+      "properties": {
+        "id_estacion": 67010,
+        "codigo": "M5325",
+        "nombre": "PETAR",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 1996
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67011",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.203171,
+          -4.019317
+        ]
+      },
+      "properties": {
+        "id_estacion": 67011,
+        "codigo": "M5326",
+        "nombre": "TEBIADA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2100
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67012",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.185018,
+          -4.016363
+        ]
+      },
+      "properties": {
+        "id_estacion": 67012,
+        "codigo": "M5327",
+        "nombre": "ESCUELA LICEO",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2121
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67013",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.195107,
+          -4.052446
+        ]
+      },
+      "properties": {
+        "id_estacion": 67013,
+        "codigo": "M5328",
+        "nombre": "DOS PUENTES",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2170
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67014",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.210476,
+          -4.041055
+        ]
+      },
+      "properties": {
+        "id_estacion": 67014,
+        "codigo": "M5329",
+        "nombre": "PUNZARA UNL",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2225
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67015",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.16112,
+          -4.052884
+        ]
+      },
+      "properties": {
+        "id_estacion": 67015,
+        "codigo": "M5330",
+        "nombre": "SAN SIMON",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2600
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-67016",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.249627,
+          -3.942192
+        ]
+      },
+      "properties": {
+        "id_estacion": 67016,
+        "codigo": "M5331",
+        "nombre": "TENERIA",
+        "categoria": "METEOROLOGICA",
+        "captor": "ELECTROMECANICA",
+        "estado": "TRANSMITIENDO",
+        "propietario": "UNIVERSIDAD NACIONAL DE LOJA (UNL)",
+        "provincia": "LOJA",
+        "canton": "LOJA",
+        "altitud_m": 2365
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66938",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.291,
+          -1.4181
+        ]
+      },
+      "properties": {
+        "id_estacion": 66938,
+        "codigo": "VM0069",
+        "nombre": "SAN ANTONIO - 24 DE MAYO",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FAO",
+        "provincia": "MANABI",
+        "canton": "24 DE MAYO",
+        "altitud_m": 89
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66939",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -79.837,
+          -0.9717
+        ]
+      },
+      "properties": {
+        "id_estacion": 66939,
+        "codigo": "VM0070",
+        "nombre": "SAN ANTONIO - 24 DE MAYO",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FAO",
+        "provincia": "MANABI",
+        "canton": "PICHINCHA",
+        "altitud_m": 139
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "inamhi-66949",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.073,
+          -0.7115
+        ]
+      },
+      "properties": {
+        "id_estacion": 66949,
+        "codigo": "VM0080",
+        "nombre": "LOS SUCHES - CHONE",
+        "categoria": "METEOROLOGICA",
+        "captor": "MANUAL",
+        "estado": "TRANSMITIENDO",
+        "propietario": "FAO",
+        "provincia": "MANABI",
+        "canton": "CHONE",
+        "altitud_m": 22
+      }
+    }
+  ]
+}

@@ -567,6 +567,65 @@ footer {
   color: #604513;
 }
 
+.station-popup {
+  min-width: 13rem;
+}
+
+.station-popup .station-popup-kicker {
+  margin: 0 0 0.2rem;
+  color: #087863;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.station-popup h3 {
+  margin: 0;
+  color: #10272a;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+}
+
+.station-popup > p:not(.station-popup-kicker) {
+  margin: 0.2rem 0 0.55rem;
+  color: #33484c;
+  font-size: 0.8rem;
+}
+
+.station-popup dl {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.55rem 0;
+}
+
+.station-popup dl div {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 0.5rem;
+}
+
+.station-popup dt,
+.station-popup dd {
+  margin: 0;
+  font-size: 0.72rem;
+}
+
+.station-popup dt {
+  color: #63777b;
+}
+
+.station-popup dd {
+  color: #1e3539;
+  font-weight: 700;
+}
+
+.station-popup a {
+  color: #087863;
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
 .leaflet-control-zoom a,
 .leaflet-touch .leaflet-control-zoom a {
   width: 2.75rem;
@@ -930,6 +989,92 @@ footer {
   border: 2px solid #d9f4f0;
   border-radius: 0.12rem;
   background: rgba(174, 174, 174, 0.45);
+}
+
+.station-layer-card {
+  border-color: rgba(114, 220, 194, 0.42);
+  background:
+    radial-gradient(circle at 100% 0, rgba(50, 182, 216, 0.18), transparent 48%),
+    #0b1316;
+}
+
+.station-layer-card .now-layer-heading span,
+.station-story summary {
+  color: #8be7d1;
+}
+
+.station-layer-card .layer-switch {
+  border-color: rgba(114, 220, 194, 0.27);
+}
+
+.station-story a {
+  color: #8be7d1;
+}
+
+.station-filter {
+  display: grid;
+  grid-template-columns: auto minmax(9rem, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.55rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.station-filter select {
+  width: 100%;
+  min-height: 2.35rem;
+  border: 1px solid var(--line);
+  border-radius: 0.48rem;
+  background: #101a1d;
+  color: var(--ink);
+  padding: 0.38rem 0.5rem;
+  font-size: 0.76rem;
+}
+
+.station-filter:has(select:disabled) {
+  opacity: 0.48;
+}
+
+.station-snapshot {
+  margin: 0.4rem 0 0;
+  color: #829499;
+  font-size: 0.7rem;
+}
+
+.station-snapshot time {
+  color: #b9c8cc;
+  font-variant-numeric: tabular-nums;
+}
+
+.station-legend {
+  grid-template-columns: repeat(2, auto);
+  font-size: 0.78rem;
+}
+
+.legend i.station-symbol {
+  width: 0.72rem;
+  height: 0.72rem;
+  flex: 0 0 auto;
+  border: 1.5px solid #071215;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.58);
+}
+
+.station-symbol.meteorological {
+  background: #f2b84b;
+}
+
+.station-symbol.hydrological {
+  background: #32b6d8;
+}
+
+.station-symbol.mixed {
+  background: #72dcc2;
+}
+
+.station-marker {
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
 }
 
 .thermal-controls {

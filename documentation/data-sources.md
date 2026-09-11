@@ -27,7 +27,8 @@ fuente original.
 | Tierra | USGS | sismicidad reciente | FDSN API | connected |
 | Tierra | Instituto Geográfico Militar | cartografía, ortofotos y relieve | WMS/WFS/CSW | candidate |
 | Tierra | Instituto Geofísico EPN | sismicidad y volcanismo nacional | enlace o servicio autorizado | candidate |
-| Agua/Cielo | INAMHI | estaciones, precipitación, caudales e inundaciones | servicios y descargas | candidate |
+| Agua/Cielo | INAMHI | red de estaciones hidrometeorológicas | API oficial e instantánea reproducible | connected |
+| Agua/Cielo | INAMHI | precipitación, caudales e inundaciones | servicios y descargas | candidate |
 | Agua | INAMHI / MAATE | cuencas hidrográficas | WMS y consulta puntual WFS públicos | connected |
 | Agua | INAMHI GEOGLOWS | pronósticos e históricos de caudal | servicio por verificar | candidate |
 | Agua/Cielo | NASA GPM / GIBS | tasa de precipitación IMERG por día | WMS público de GIBS | connected |
@@ -49,12 +50,33 @@ fuente original.
 ## Primera experiencia transversal
 
 `Explícame este lugar` relaciona solamente las capas activas: coordenadas, falla, evidencia
-geomorfológica y sismo reciente. Si las visualizaciones térmica o de precipitación están activas,
+geomorfológica, sismo reciente y estación en transmisión más próxima. Si las visualizaciones térmica o de precipitación están activas,
 también registra su fecha y alcance, pero no afirma que el píxel seleccionado contenga una
 detección o valor exacto porque los WMS no exponen atributos puntuales en esta interfaz. Las
 siguientes iteraciones añadirán, solo cuando las fuentes estén validadas, cuencas, caudales,
 cobertura y cambios históricos. Las coincidencias espaciales se presentan como contexto y nunca
 como causalidad automática o cálculo de riesgo.
+
+## Red hidrometeorológica INAMHI
+
+El visor oficial consulta
+`https://inamhi.gob.ec/api_visor/station_information/estaciones/visores/?id_aplicacion=vs_1h_inh`.
+El servicio no devuelve una cabecera CORS que permita usarlo directamente desde GitHub Pages; por
+eso `scripts/update_inamhi_stations.mjs` genera una instantánea pequeña y auditable. En la consulta
+del 11 de septiembre de 2026, la API entregó 1.894 registros: 219 estaban marcados como
+`TRANSMITIENDO` y 214 cayeron dentro de la extensión continental del atlas. La colección conservada
+contiene 171 estaciones meteorológicas, 32 hidrológicas y 11 hidro-meteorológicas.
+
+La capa solo conserva ubicación, código, nombre, tipo, captor, responsable, localización, altitud y
+estado informado. No contiene valores medidos, series temporales ni pronósticos. “Transmitiendo”
+describe el estado reportado al recuperar la instantánea y no garantiza que una observación sea
+válida o esté disponible al momento de leer el mapa. El color representa el tipo de estación, nunca
+la intensidad de lluvia o el caudal. La interfaz enlaza el visor de INAMHI para la consulta oficial.
+
+INAMHI anunció acceso público libre a la información hidrometeorológica, pero la respuesta de esta
+API no incluye por sí misma una licencia o versión de esquema. Por ello se registra la procedencia,
+la fecha de recuperación y la transformación aplicada; cualquier uso analítico debe volver a la
+fuente oficial y revisar sus condiciones vigentes.
 
 ## Precipitación IMERG
 
