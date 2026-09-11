@@ -1,0 +1,82 @@
+export const SOURCE_CATALOG = Object.freeze([
+  {
+    id: "gem-faults",
+    system: "earth",
+    status: "connected",
+    access: "GeoJSON",
+    institution: "GEM Foundation",
+    name: { es: "Fallas activas globales", en: "Global active faults" },
+    purpose: { es: "Trazas tectónicas y atributos originales", en: "Fault traces and original attributes" },
+    url: "https://github.com/GEMScienceTools/gem-global-active-faults",
+  },
+  {
+    id: "usgs-earthquakes",
+    system: "earth",
+    status: "connected",
+    access: "FDSN API",
+    institution: "USGS",
+    name: { es: "Sismicidad reciente", en: "Recent seismicity" },
+    purpose: { es: "Eventos consultados por fecha y magnitud", en: "Events queried by date and magnitude" },
+    url: "https://earthquake.usgs.gov/fdsnws/event/1/",
+  },
+  {
+    id: "igm-geoservices",
+    system: "earth",
+    status: "candidate",
+    access: "WMS / WFS / CSW",
+    institution: "Instituto Geográfico Militar",
+    name: { es: "Cartografía oficial del Ecuador", en: "Official mapping of Ecuador" },
+    purpose: { es: "Relieve, cartografía base y metadatos", en: "Terrain, basemaps, and metadata" },
+    url: "https://www.geoportaligm.gob.ec/portal/index.php/geoservicios/",
+  },
+  {
+    id: "inamhi-services",
+    system: "water",
+    status: "candidate",
+    access: { es: "Servicios y descargas", en: "Services and downloads" },
+    institution: "INAMHI",
+    name: { es: "Clima e hidrología", en: "Climate and hydrology" },
+    purpose: { es: "Estaciones, precipitación, caudales e inundaciones", en: "Stations, rainfall, streamflow, and floods" },
+    url: "https://servicios.inamhi.gob.ec/",
+  },
+  {
+    id: "nasa-imerg",
+    system: "sky",
+    status: "connected",
+    access: "NASA GIBS WMS",
+    institution: "NASA GPM / GIBS",
+    name: { es: "Tasa de precipitación IMERG", en: "IMERG precipitation rate" },
+    purpose: { es: "Contexto satelital diario de la precipitación", en: "Daily satellite precipitation context" },
+    url: "https://gpm.nasa.gov/data/imerg",
+  },
+  {
+    id: "nasa-firms",
+    system: "life",
+    status: "connected",
+    access: "NASA GIBS WMS",
+    institution: "NASA FIRMS / GIBS",
+    name: { es: "Anomalías térmicas", en: "Thermal anomalies" },
+    purpose: { es: "Visualización diaria de detecciones térmicas VIIRS", en: "Daily visualization of VIIRS thermal detections" },
+    url: "https://nasa-gibs.github.io/gibs-api-docs/",
+  },
+  {
+    id: "mapbiomas-ecuador",
+    system: "life",
+    status: "candidate",
+    access: { es: "Plataforma / descargas", en: "Platform / downloads" },
+    institution: "MapBiomas Ecuador",
+    name: { es: "Cobertura y uso del suelo", en: "Land cover and land use" },
+    purpose: { es: "Cambios anuales del territorio desde 1985", en: "Annual landscape change since 1985" },
+    url: "https://ecuador.mapbiomas.org/",
+  },
+]);
+
+export function catalogForLanguage(language = "es") {
+  const locale = language === "en" ? "en" : "es";
+  return SOURCE_CATALOG.map((source) => ({
+    ...source,
+    name: source.name[locale],
+    purpose: source.purpose[locale],
+    access: typeof source.access === "string" ? source.access : source.access[locale],
+  }));
+}

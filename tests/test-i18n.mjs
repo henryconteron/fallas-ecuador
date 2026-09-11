@@ -27,7 +27,9 @@ vm.runInContext(fs.readFileSync("assets/js/i18n.js", "utf8"), context);
 const markup = ["index.html", "learn.html"]
   .map((file) => fs.readFileSync(file, "utf8"))
   .join("\n");
-const runtimeSource = fs.readFileSync("assets/js/learn.js", "utf8");
+const runtimeSource = ["assets/js/learn.js", "assets/js/map.js"]
+  .map((file) => fs.readFileSync(file, "utf8"))
+  .join("\n");
 const keys = [
   ...new Set([
     ...[...markup.matchAll(/data-i18n(?:-[a-z-]+)?="([^"]+)"/g)].map(

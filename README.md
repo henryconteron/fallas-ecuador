@@ -1,7 +1,8 @@
-# Fallas del Ecuador
+# Ecuador Vivo
 
-Atlas geológico interactivo para consultar fallas documentadas en Ecuador y comunicar, de forma
-clara, su contexto tectónico, evidencias geomorfológicas y fuentes científicas.
+Atlas interactivo de los sistemas naturales del Ecuador. El proyecto comienza con fallas,
+sismicidad y geomorfología, y está preparado para conectar progresivamente agua, atmósfera,
+vida y riesgo sin perder trazabilidad científica.
 
 ## Estado
 
@@ -11,6 +12,17 @@ the Andes*. La sismicidad reciente se consulta mediante el servicio FDSN del USG
 
 ## Funciones iniciales
 
+- identidad y navegación por los sistemas Tierra, Agua, Cielo, Vida y Riesgo;
+- herramienta **Explícame este lugar** para relacionar un punto con las evidencias disponibles,
+  mostrando distancias aproximadas y una advertencia explícita contra interpretaciones causales;
+- registro modular de proveedores conectados y fuentes candidatas;
+- leyenda reactiva que muestra únicamente la simbología de las capas encendidas;
+- control independiente para activar o desactivar las fallas sin perder el catálogo de búsqueda;
+- primera experiencia **Agua/Cielo** con tasa de precipitación NASA GPM IMERG por fecha y
+  opacidad, servida mediante NASA GIBS sin descargar mosaicos;
+- módulo **Ecuador Ahora** con anomalías térmicas VIIRS NOAA-20 por fecha, servido mediante
+  NASA GIBS sin publicar claves privadas;
+- explicación interactiva de por qué una anomalía térmica no equivale automáticamente a un incendio;
 - mapa web adaptable a computadoras y teléfonos;
 - mapa topográfico principal y mapa de calles alternativo;
 - catálogo inicial de fallas activas derivado de GEM GAF-DB;
@@ -47,9 +59,13 @@ fallas-ecuador/
 │       └── map/
 │           ├── config.js
 │           ├── data.js
+│           ├── place.js
 │           ├── popups.js
+│           ├── precipitation.js
 │           ├── seismicity.js
+│           ├── source-catalog.js
 │           ├── symbology.js
+│           ├── thermal.js
 │           └── utils.js
 ├── data/
 │   ├── README.md
@@ -67,15 +83,28 @@ fallas-ecuador/
 ├── tests/
 │   ├── test_build_fault_catalog.py
 │   ├── test-i18n.mjs
-│   └── test-map-modules.mjs
+│   ├── test-map-modules.mjs
+│   ├── test-place.mjs
+│   ├── test-precipitation.mjs
+│   └── test-thermal.mjs
 ├── LICENSE
 ├── LICENSE-DATA.md
 ├── NOTICE.md
 ├── package.json
 ├── requirements-dev.txt
 └── documentation/
+    ├── data-sources.md
     └── references/README.md
 ```
+
+## Estrategia de datos
+
+El repositorio no pretende almacenar todas las capas nacionales. Mantiene datos pequeños y
+curados, código, narrativas y metadatos; los conjuntos dinámicos o pesados se incorporarán por
+API, WMS/WFS/WMTS o formatos optimizados para teselas. `assets/js/map/source-catalog.js` registra
+la institución, el método de acceso, el propósito y el estado de cada candidato. El directorio de
+recursos geoespaciales del Observatorio Forestal UTN se usa para descubrir servicios, pero la
+autoridad, licencia y atribución se verifican siempre con la institución productora.
 
 ## Esquema mínimo de datos
 
@@ -181,6 +210,20 @@ nacional. Sus datos originales no se redistribuyen en este repositorio porque su
 uso restringen la publicación de los catálogos descargados por Internet. El visor enlaza al mapa
 oficial del IG-EPN y mantiene separado su origen del catálogo USGS. La proximidad visual entre un
 epicentro y una traza no demuestra una relación causal.
+
+## Precipitación satelital
+
+La primera capa de Agua/Cielo usa `IMERG_Precipitation_Rate`, una visualización diaria de NASA
+GPM servida mediante WMS por GIBS. El producto integra observaciones de precipitación con una
+resolución nativa aproximada de 0,1°; se presenta como **tasa de precipitación**, no como acumulado
+pluviométrico de una estación ni como una alerta de inundación. El visor consulta solamente la
+fecha elegida y permite regular la opacidad, por lo que no guarda mosaicos ráster en el repositorio.
+
+Una lluvia intensa no implica automáticamente una inundación: también intervienen su duración,
+la humedad antecedente, el relieve, los suelos, el drenaje y la ocupación de la cuenca. Para el
+seguimiento hidrometeorológico nacional, el atlas mantiene un enlace explícito a
+INAMHI–GEOGLOWS y conserva a INAMHI como fuente institucional en evaluación para futuras capas de
+estaciones, caudales y alertas.
 
 ## Autor
 

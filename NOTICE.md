@@ -8,6 +8,10 @@
 - **OpenTopoMap / OpenStreetMap / SRTM:** atribución conservada dentro del mapa.
 - **Esri World Hillshade:** relieve regional opcional; fuentes Esri, NASA, NGA, USGS y GIS User
   Community, con atribución visible dentro del mapa.
+- **NASA GPM IMERG / GIBS:** visualización diaria de la tasa de precipitación servida por WMS,
+  con atribución visible dentro del mapa.
+- **NASA FIRMS / GIBS:** visualización diaria de anomalías térmicas VIIRS; no se presenta como
+  confirmación automática de incendios.
 - **Leaflet:** biblioteca cartográfica cargada por la interfaz conforme a su
   licencia BSD-2-Clause.
 - **Ilustraciones educativas:** obras conceptuales originales; no representan

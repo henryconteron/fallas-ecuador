@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Atlas interactivo de fallas geológicas del Ecuador con información tectónica, geomorfológica y bibliográfica." />
-    <title>Fallas del Ecuador | Atlas interactivo</title>
+    <meta name="description" content="Ecuador Vivo es un atlas interactivo para comprender cómo se conectan la Tierra, el agua, el clima y la vida." />
+    <title>Ecuador Vivo | Atlas de una Tierra en movimiento</title>
     <link rel="preconnect" href="https://unpkg.com" />
     <link rel="preconnect" href="https://tile.openstreetmap.org" />
     <link rel="preconnect" href="https://tile.opentopomap.org" />
@@ -16,17 +16,17 @@
 
     <div class="app-shell">
       <header class="topbar">
-        <a class="brand" href="./" data-i18n-aria="brand.homeAria" aria-label="Inicio de Fallas del Ecuador">
-          <span class="brand-mark" aria-hidden="true">FE</span>
+        <a class="brand" href="./" data-i18n-aria="brand.homeAria" aria-label="Inicio de Ecuador Vivo">
+          <span class="brand-mark" aria-hidden="true">EV</span>
           <span class="brand-copy">
-            <strong data-i18n="brand.name">Fallas del Ecuador</strong>
-            <small data-i18n="brand.subtitle">Atlas geológico interactivo</small>
+            <strong data-i18n="brand.name">Ecuador Vivo</strong>
+            <small data-i18n="brand.subtitle">Atlas de una Tierra en movimiento</small>
           </span>
         </a>
 
         <nav class="main-nav" data-i18n-aria="nav.aria" aria-label="Navegación principal">
-          <a class="is-active" href="./" aria-current="page" data-i18n="nav.map">Mapa</a>
-          <a href="learn.html" data-i18n="nav.learn">Aprende</a>
+          <a class="is-active" href="./" aria-current="page" data-i18n="nav.map">Explora</a>
+          <a href="learn.html" data-i18n="nav.learn">Historias</a>
         </nav>
 
         <div class="header-actions">
@@ -40,7 +40,7 @@
       </header>
 
       <main class="workspace">
-        <section class="map-panel" data-i18n-aria="map.panelAria" aria-label="Mapa de fallas geológicas">
+        <section class="map-panel" data-i18n-aria="map.panelAria" aria-label="Mapa de los sistemas naturales del Ecuador">
           <div class="map-title">
             <div class="map-context">
               <span class="map-region" data-i18n="map.region">Ecuador continental</span>
@@ -58,6 +58,9 @@
               <button id="reset-view" class="reset-view" type="button" data-i18n-title="map.reset">
                 <span aria-hidden="true">↗</span><span class="reset-label" data-i18n="map.reset">Restablecer vista</span>
               </button>
+              <button id="explain-place" class="explain-place-button" type="button" aria-pressed="false">
+                <span class="explain-place-icon" aria-hidden="true">◎</span><span class="reset-label" data-i18n="place.action">Explícame este lugar</span>
+              </button>
             </div>
           </div>
 
@@ -66,40 +69,92 @@
             <strong data-i18n="errors.mapUnavailable">El mapa no está disponible</strong>
             <p data-i18n="errors.checkConnection">Comprueba la conexión y vuelve a cargar la página.</p>
           </div>
+          <section id="place-explainer" class="place-explainer" aria-labelledby="place-title" hidden>
+            <header>
+              <div>
+                <p class="eyebrow" data-i18n="place.eyebrow">Lectura del territorio</p>
+                <h2 id="place-title" data-i18n="place.title">¿Qué cuenta este lugar?</h2>
+              </div>
+              <button id="close-place-explainer" type="button" data-i18n-aria="place.close" aria-label="Cerrar lectura del lugar">×</button>
+            </header>
+            <p id="place-instruction" class="place-instruction" data-i18n="place.instruction">Selecciona un punto del mapa para conectar las evidencias disponibles.</p>
+            <div id="place-results" class="place-results"></div>
+            <p class="place-caution" data-i18n="place.caution">Las distancias son aproximadas. La cercanía espacial no demuestra una relación causal ni equivale a un análisis de amenaza.</p>
+          </section>
           <details class="legend" open>
             <summary data-i18n="legend.title">Leyenda</summary>
-            <div class="legend-items" data-i18n-aria="legend.movementAria" aria-label="Tipos de movimiento">
-              <span><i class="reverse"></i><span data-i18n="movement.inversa">Inversa</span></span>
-              <span><i class="normal"></i><span data-i18n="movement.normal">Normal</span></span>
-              <span><i class="dextral"></i><span data-i18n="movement.dextral">Dextral</span></span>
-              <span><i class="sinistral"></i><span data-i18n="movement.sinestral">Sinestral</span></span>
-              <span><i class="unknown"></i><span data-i18n="movement.desconocido">No determinado</span></span>
-            </div>
-            <div class="legend-divider" aria-hidden="true"></div>
-            <p class="legend-subtitle" data-i18n="legend.evidence">Indicadores geomorfológicos</p>
-            <div class="legend-items evidence-legend" data-i18n-aria="legend.evidenceAria" aria-label="Tipos de indicadores geomorfológicos">
-              <span><i class="evidence-symbol scarp"></i><span data-i18n="evidence.escarpe">Escarpe de falla</span></span>
-              <span><i class="evidence-symbol facet"></i><span data-i18n="evidence.faceta_triangular">Faceta triangular</span></span>
-              <span><i class="evidence-symbol stream"></i><span data-i18n="evidence.drenaje_desplazado">Drenaje desplazado</span></span>
-              <span><i class="evidence-symbol sag"></i><span data-i18n="evidence.laguna_sag">Laguna de hundimiento</span></span>
-            </div>
-            <div class="legend-divider" aria-hidden="true"></div>
-            <p class="legend-subtitle" data-i18n="legend.earthquakes">Sismos por profundidad</p>
-            <div class="legend-items earthquake-legend" data-i18n-aria="legend.depthAria" aria-label="Profundidad de los sismos">
-              <span><i class="earthquake-depth shallow"></i><span data-i18n="earthquakes.shallow">0–30 km</span></span>
-              <span><i class="earthquake-depth intermediate"></i><span data-i18n="earthquakes.intermediate">30–70 km</span></span>
-              <span><i class="earthquake-depth deep"></i><span data-i18n="earthquakes.deep">70–300 km</span></span>
-              <span><i class="earthquake-depth very-deep"></i><span data-i18n="earthquakes.veryDeep">Más de 300 km</span></span>
-            </div>
+            <p id="legend-empty" class="legend-empty" data-i18n="legend.empty" hidden>No hay capas temáticas activas.</p>
+            <section class="legend-section" data-legend-layer="faults">
+              <div class="legend-items" data-i18n-aria="legend.movementAria" aria-label="Tipos de movimiento">
+                <span><i class="reverse"></i><span data-i18n="movement.inversa">Inversa</span></span>
+                <span><i class="normal"></i><span data-i18n="movement.normal">Normal</span></span>
+                <span><i class="dextral"></i><span data-i18n="movement.dextral">Dextral</span></span>
+                <span><i class="sinistral"></i><span data-i18n="movement.sinestral">Sinestral</span></span>
+                <span><i class="unknown"></i><span data-i18n="movement.desconocido">No determinado</span></span>
+              </div>
+            </section>
+            <section class="legend-section" data-legend-layer="evidence" hidden>
+              <div class="legend-divider" aria-hidden="true"></div>
+              <p class="legend-subtitle" data-i18n="legend.evidence">Indicadores geomorfológicos</p>
+              <div class="legend-items evidence-legend" data-i18n-aria="legend.evidenceAria" aria-label="Tipos de indicadores geomorfológicos">
+                <span><i class="evidence-symbol scarp"></i><span data-i18n="evidence.escarpe">Escarpe de falla</span></span>
+                <span><i class="evidence-symbol facet"></i><span data-i18n="evidence.faceta_triangular">Faceta triangular</span></span>
+                <span><i class="evidence-symbol stream"></i><span data-i18n="evidence.drenaje_desplazado">Drenaje desplazado</span></span>
+                <span><i class="evidence-symbol sag"></i><span data-i18n="evidence.laguna_sag">Laguna de hundimiento</span></span>
+              </div>
+            </section>
+            <section class="legend-section" data-legend-layer="precipitation" hidden>
+              <div class="legend-divider" aria-hidden="true"></div>
+              <p class="legend-subtitle" data-i18n="legend.precipitation">Tasa de precipitación</p>
+              <div class="precipitation-legend" data-i18n-aria="legend.precipitationAria" aria-label="Tasa de precipitación de menor a mayor">
+                <span class="precipitation-ramp" aria-hidden="true"></span>
+                <span><span data-i18n="precipitation.lower">Menor</span><span data-i18n="precipitation.higher">Mayor</span></span>
+              </div>
+            </section>
+            <section class="legend-section" data-legend-layer="flood" hidden>
+              <div class="legend-divider" aria-hidden="true"></div>
+              <p class="legend-subtitle" data-i18n="legend.flood">Inundación observada</p>
+              <div class="legend-items flood-legend"><span><i class="flood-symbol"></i><span data-i18n="flood.detection">Señal de agua superficial VIIRS</span></span></div>
+            </section>
+            <section class="legend-section" data-legend-layer="thermal" hidden>
+              <div class="legend-divider" aria-hidden="true"></div>
+              <p class="legend-subtitle" data-i18n="legend.thermal">Observación térmica</p>
+              <div class="legend-items thermal-legend"><span><i class="thermal-symbol"></i><span data-i18n="thermal.detection">Anomalía detectada por VIIRS</span></span></div>
+            </section>
+            <section class="legend-section" data-legend-layer="earthquakes" hidden>
+              <div class="legend-divider" aria-hidden="true"></div>
+              <p class="legend-subtitle" data-i18n="legend.earthquakes">Sismos por profundidad</p>
+              <div class="legend-items earthquake-legend" data-i18n-aria="legend.depthAria" aria-label="Profundidad de los sismos">
+                <span><i class="earthquake-depth shallow"></i><span data-i18n="earthquakes.shallow">0–30 km</span></span>
+                <span><i class="earthquake-depth intermediate"></i><span data-i18n="earthquakes.intermediate">30–70 km</span></span>
+                <span><i class="earthquake-depth deep"></i><span data-i18n="earthquakes.deep">70–300 km</span></span>
+                <span><i class="earthquake-depth very-deep"></i><span data-i18n="earthquakes.veryDeep">Más de 300 km</span></span>
+              </div>
+            </section>
           </details>
         </section>
 
-        <aside class="sidebar" data-i18n-aria="sidebar.aria" aria-label="Catálogo y filtros">
+        <aside class="sidebar" data-i18n-aria="sidebar.aria" aria-label="Explorador, catálogo y filtros">
           <section class="intro">
-            <p class="eyebrow" data-i18n="intro.eyebrow">Explorador tectónico</p>
-            <h1 data-i18n="intro.title">Conoce las fallas geológicas del Ecuador</h1>
-            <p data-i18n="intro.copy">Explora trazas documentadas, su movimiento y las huellas que dejan en el relieve.</p>
+            <p class="eyebrow" data-i18n="intro.eyebrow">Ecuador Vivo · Tierra</p>
+            <h1 data-i18n="intro.title">Todo paisaje es una historia en movimiento</h1>
+            <p data-i18n="intro.copy">Comenzamos bajo tus pies: fallas, sismos y formas del relieve. Después conectaremos agua, atmósfera y vida.</p>
             <a class="learn-link" href="learn.html"><span data-i18n="intro.learn">Aprende a leer el paisaje</span><span aria-hidden="true">↗</span></a>
+          </section>
+
+          <section class="system-explorer" aria-labelledby="systems-title">
+            <div class="section-heading">
+              <h2 id="systems-title" data-i18n="systems.title">Sistemas del atlas</h2>
+              <span data-i18n="systems.phase">Fundación</span>
+            </div>
+            <div class="system-grid" role="list" data-i18n-aria="systems.aria" aria-label="Sistemas naturales del atlas">
+              <button class="is-active" type="button" data-system="earth" aria-pressed="true"><i aria-hidden="true">◒</i><span data-i18n="systems.earth">Tierra</span><small data-i18n="systems.active">Activo</small></button>
+              <button type="button" data-system="water" aria-pressed="false"><i aria-hidden="true">≋</i><span data-i18n="systems.water">Agua</span><small data-i18n="systems.twoLayers">2 capas</small></button>
+              <button type="button" data-system="sky" aria-pressed="false"><i aria-hidden="true">⌁</i><span data-i18n="systems.sky">Cielo</span><small data-i18n="systems.oneLayer">1 capa</small></button>
+              <button type="button" data-system="life" aria-pressed="false"><i aria-hidden="true">✦</i><span data-i18n="systems.life">Vida</span><small data-i18n="systems.oneLayer">1 capa</small></button>
+              <button type="button" data-system="risk" aria-pressed="false"><i aria-hidden="true">△</i><span data-i18n="systems.risk">Riesgo</span><small data-i18n="systems.oneLayer">1 capa</small></button>
+            </div>
+            <p id="system-note" class="system-note" role="status" data-i18n="systems.earthNote">La primera mirada conecta tectónica, sismicidad y relieve.</p>
           </section>
 
           <section class="summary-grid" data-i18n-aria="summary.aria" aria-label="Resumen del catálogo">
@@ -121,11 +176,72 @@
               <input id="hillshade-opacity" type="range" min="0" max="70" value="34" step="1" />
               <output id="hillshade-opacity-value" for="hillshade-opacity">34%</output>
             </label>
+            <label class="layer-switch" for="fault-toggle">
+              <span><strong data-i18n="layers.faults">Fallas geológicas</strong><small data-i18n="layers.faultsHint">Trazas clasificadas por tipo de movimiento</small></span>
+              <input id="fault-toggle" type="checkbox" checked disabled />
+              <span class="switch-track" aria-hidden="true"><span></span></span>
+            </label>
             <label class="layer-switch" for="evidence-toggle">
               <span><strong data-i18n="layers.evidence">Indicadores geomorfológicos</strong><small data-i18n="layers.evidenceHint">Escarpes, facetas y drenajes desplazados</small></span>
               <input id="evidence-toggle" type="checkbox" disabled />
               <span class="switch-track" aria-hidden="true"><span></span></span>
             </label>
+            <div id="precipitation-layer-card" class="now-layer-card precipitation-layer-card">
+              <div class="now-layer-heading"><span data-i18n="now.badge">Ecuador ahora</span><small>NASA GPM · IMERG</small></div>
+              <label class="layer-switch" for="precipitation-toggle">
+                <span><strong data-i18n="layers.precipitation">Tasa de precipitación</strong><small data-i18n="layers.precipitationHint">IMERG · mosaico satelital diario</small></span>
+                <input id="precipitation-toggle" type="checkbox" />
+                <span class="switch-track" aria-hidden="true"><span></span></span>
+              </label>
+              <div class="thermal-controls">
+                <label for="precipitation-date"><span data-i18n="precipitation.date">Fecha satelital</span><input id="precipitation-date" type="date" disabled /></label>
+                <label for="precipitation-opacity"><span data-i18n="precipitation.opacity">Opacidad</span><span class="thermal-opacity-row"><input id="precipitation-opacity" type="range" min="20" max="100" value="70" step="1" disabled /><output id="precipitation-opacity-value" for="precipitation-opacity">70%</output></span></label>
+              </div>
+              <p id="precipitation-status" class="layer-status" role="status" data-i18n="precipitation.off">Activa la capa para explorar la lluvia observada desde satélite.</p>
+              <details class="thermal-story precipitation-story">
+                <summary data-i18n="precipitation.question">¿Lluvia intensa significa inundación?</summary>
+                <p data-i18n="precipitation.answer">No necesariamente. También importan la duración, humedad previa, pendiente, suelos, drenaje y ocupación de la cuenca. Esta capa es contexto satelital, no una alerta.</p>
+                <a href="https://nasa-gibs.github.io/gibs-api-docs/python-usage/" target="_blank" rel="noopener noreferrer"><span data-i18n="precipitation.learnMore">Conoce el producto IMERG</span><span aria-hidden="true">↗</span></a>
+                <a href="https://inamhi.geoglows.org/apps" target="_blank" rel="noopener noreferrer"><span data-i18n="precipitation.inamhi">Consulta INAMHI–GEOGLOWS</span><span aria-hidden="true">↗</span></a>
+              </details>
+            </div>
+            <div id="flood-layer-card" class="now-layer-card flood-layer-card">
+              <div class="now-layer-heading"><span data-i18n="now.badge">Ecuador ahora</span><small>NASA LANCE · VIIRS</small></div>
+              <label class="layer-switch" for="flood-toggle">
+                <span><strong data-i18n="layers.flood">Inundación observada</strong><small data-i18n="layers.floodHint">VIIRS · agua superficial · ventana de 1 día</small></span>
+                <input id="flood-toggle" type="checkbox" />
+                <span class="switch-track" aria-hidden="true"><span></span></span>
+              </label>
+              <div class="thermal-controls">
+                <label for="flood-date"><span data-i18n="flood.date">Fecha satelital</span><input id="flood-date" type="date" disabled /></label>
+                <label for="flood-opacity"><span data-i18n="flood.opacity">Opacidad</span><span class="thermal-opacity-row"><input id="flood-opacity" type="range" min="20" max="100" value="78" step="1" disabled /><output id="flood-opacity-value" for="flood-opacity">78%</output></span></label>
+              </div>
+              <p id="flood-status" class="layer-status" role="status" data-i18n="flood.off">Activa la capa para buscar agua superficial detectada por satélite.</p>
+              <details class="thermal-story flood-story">
+                <summary data-i18n="flood.question">¿Una detección confirma una emergencia?</summary>
+                <p data-i18n="flood.answer">No. Es una observación remota que puede verse afectada por nubes, sombras, vegetación o agua permanente. Debe contrastarse con reportes oficiales, estaciones y trabajo de campo.</p>
+                <a href="https://www.earthdata.nasa.gov/s3fs-public/2025-04/MCDWD_VCDWD_UserGuide_RevE_04.22.25.pdf" target="_blank" rel="noopener noreferrer"><span data-i18n="flood.learnMore">Guía del producto de inundaciones</span><span aria-hidden="true">↗</span></a>
+                <a href="https://servicios.inamhi.gob.ec/aplicaciones-web/" target="_blank" rel="noopener noreferrer"><span data-i18n="flood.inamhi">Monitoreo oficial de INAMHI</span><span aria-hidden="true">↗</span></a>
+              </details>
+            </div>
+            <div id="thermal-layer-card" class="now-layer-card">
+              <div class="now-layer-heading"><span data-i18n="now.badge">Ecuador ahora</span><small>NASA GIBS</small></div>
+              <label class="layer-switch" for="thermal-toggle">
+                <span><strong data-i18n="layers.thermal">Anomalías térmicas</strong><small data-i18n="layers.thermalHint">VIIRS NOAA-20 · visualización diaria</small></span>
+                <input id="thermal-toggle" type="checkbox" />
+                <span class="switch-track" aria-hidden="true"><span></span></span>
+              </label>
+              <div class="thermal-controls">
+                <label for="thermal-date"><span data-i18n="thermal.date">Fecha satelital</span><input id="thermal-date" type="date" disabled /></label>
+                <label for="thermal-opacity"><span data-i18n="thermal.opacity">Opacidad</span><span class="thermal-opacity-row"><input id="thermal-opacity" type="range" min="20" max="100" value="88" step="1" disabled /><output id="thermal-opacity-value" for="thermal-opacity">88%</output></span></label>
+              </div>
+              <p id="thermal-status" class="layer-status" role="status" data-i18n="thermal.off">Activa la capa para consultar el día seleccionado.</p>
+              <details class="thermal-story">
+                <summary data-i18n="thermal.question">¿Un punto rojo siempre es un incendio?</summary>
+                <p data-i18n="thermal.answer">No. El sensor registra una anomalía térmica respecto a su entorno. Puede corresponder a fuego, actividad industrial, volcanismo u otra fuente de calor, y las nubes pueden ocultar detecciones.</p>
+                <a href="https://firms.modaps.eosdis.nasa.gov/active_fire/" target="_blank" rel="noopener noreferrer"><span data-i18n="thermal.learnMore">Cómo interpreta FIRMS los datos</span><span aria-hidden="true">↗</span></a>
+              </details>
+            </div>
             <label class="layer-switch" for="earthquake-toggle">
               <span><strong data-i18n="layers.earthquakes">Sismicidad reciente</strong><small data-i18n="layers.earthquakesHint">USGS · consulta configurable</small></span>
               <input id="earthquake-toggle" type="checkbox" disabled />
@@ -203,6 +319,13 @@
             <h2 data-i18n="responsible.title">Leer el mapa con criterio</h2>
             <p data-i18n="responsible.copy">Una forma del relieve es una pista, no una prueba aislada. Este visor es educativo y no sustituye un estudio oficial de amenaza.</p>
           </section>
+
+          <details class="source-network">
+            <summary><span data-i18n="sourcesNetwork.title">Red de datos</span><span id="source-network-badge">—</span></summary>
+            <p data-i18n="sourcesNetwork.copy">Cada servicio conserva su institución, método de acceso y estado antes de convertirse en una capa.</p>
+            <ul id="source-network-list"></ul>
+            <a href="https://observatorioforestal.utn.edu.ec/pages/resources_geo.html" target="_blank" rel="noopener noreferrer"><span data-i18n="sourcesNetwork.directory">Directorio geoespacial de la UTN</span><span aria-hidden="true">↗</span></a>
+          </details>
         </aside>
       </main>
 

@@ -19,6 +19,15 @@ import {
   createEvidencePopup as buildEvidencePopup,
   createFaultPopup as buildFaultPopup,
 } from "./map/popups.js";
+import { nearestFeature } from "./map/place.js";
+import {
+  normalizePrecipitationDate,
+  precipitationDateRange,
+  PRECIPITATION_SOURCE,
+  precipitationWmsOptions,
+} from "./map/precipitation.js";
+import { catalogForLanguage } from "./map/source-catalog.js";
+import { normalizeThermalDate, thermalDateRange, THERMAL_SOURCE, thermalWmsOptions } from "./map/thermal.js";
 import { catalogKey, createTextTools, normalize } from "./map/utils.js";
 
 const mapElement = document.querySelector("#map");
@@ -29,6 +38,7 @@ const { t, template, formatNumber, formatUtcDate, localizedProperty } = createTe
 if (typeof window.L === "undefined") {
   mapElement.setAttribute("aria-hidden", "true");
   document.querySelector("#reset-view").disabled = true;
+  document.querySelector("#fault-toggle").disabled = true;
   document.querySelector("#earthquake-toggle").disabled = true;
   document.querySelector(".legend").hidden = true;
   mapError.hidden = false;
@@ -99,6 +109,22 @@ function initializeAtlas() {
     attribution: HILLSHADE.attribution,
   }).addTo(map);
 
+  const precipitationRange = precipitationDateRange();
+  map.createPane("precipitation");
+  map.getPane("precipitation").style.zIndex = "270";
+  const precipitationLayer = L.tileLayer.wms(
+    PRECIPITATION_SOURCE.endpoint,
+    { ...precipitationWmsOptions(precipitationRange.selected), pane: "precipitation" },
+  );
+
+  const thermalRange = thermalDateRange();
+  map.createPane("thermal-anomalies");
+  map.getPane("thermal-anomalies").style.zIndex = "370";
+  const thermalLayer = L.tileLayer.wms(
+    THERMAL_SOURCE.endpoint,
+    { ...thermalWmsOptions(thermalRange.selected), pane: "thermal-anomalies" },
+  );
+
   const elements = {
     search: document.querySelector("#fault-search"),
     movement: document.querySelector("#movement-filter"),
@@ -112,7 +138,20 @@ function initializeAtlas() {
     hillshadeToggle: document.querySelector("#hillshade-toggle"),
     hillshadeOpacity: document.querySelector("#hillshade-opacity"),
     hillshadeOpacityValue: document.querySelector("#hillshade-opacity-value"),
+    faultToggle: document.querySelector("#fault-toggle"),
     evidenceToggle: document.querySelector("#evidence-toggle"),
+    precipitationCard: document.querySelector("#precipitation-layer-card"),
+    precipitationToggle: document.querySelector("#precipitation-toggle"),
+    precipitationDate: document.querySelector("#precipitation-date"),
+    precipitationOpacity: document.querySelector("#precipitation-opacity"),
+    precipitationOpacityValue: document.querySelector("#precipitation-opacity-value"),
+    precipitationStatus: document.querySelector("#precipitation-status"),
+    thermalCard: document.querySelector("#thermal-layer-card"),
+    thermalToggle: document.querySelector("#thermal-toggle"),
+    thermalDate: document.querySelector("#thermal-date"),
+    thermalOpacity: document.querySelector("#thermal-opacity"),
+    thermalOpacityValue: document.querySelector("#thermal-opacity-value"),
+    thermalStatus: document.querySelector("#thermal-status"),
     earthquakeToggle: document.querySelector("#earthquake-toggle"),
     earthquakeDays: document.querySelector("#earthquake-days"),
     earthquakeMinimumMagnitude: document.querySelector("#earthquake-min-magnitude"),
@@ -124,11 +163,22 @@ function initializeAtlas() {
     list: document.querySelector("#fault-list"),
     state: document.querySelector("#catalog-state"),
     legend: document.querySelector(".legend"),
+    legendEmpty: document.querySelector("#legend-empty"),
+    legendSections: [...document.querySelectorAll("[data-legend-layer]")],
     dataMode: document.querySelector("#data-mode"),
     projectStatus: document.querySelector(".project-status"),
     statusFull: document.querySelector(".status-full"),
     statusShort: document.querySelector(".status-short"),
     basemapButtons: [...document.querySelectorAll("[data-basemap]")],
+    systemButtons: [...document.querySelectorAll("[data-system]")],
+    systemNote: document.querySelector("#system-note"),
+    explainPlace: document.querySelector("#explain-place"),
+    placeExplainer: document.querySelector("#place-explainer"),
+    closePlaceExplainer: document.querySelector("#close-place-explainer"),
+    placeInstruction: document.querySelector("#place-instruction"),
+    placeResults: document.querySelector("#place-results"),
+    sourceNetworkList: document.querySelector("#source-network-list"),
+    sourceNetworkBadge: document.querySelector("#source-network-badge"),
   };
 
   if (demoMode) {
@@ -155,7 +205,227 @@ function initializeAtlas() {
   let earthquakeRequestId = 0;
   let earthquakeAttributionAdded = false;
   let selectedFeature = null;
+  let selectedPoint = null;
+  let placeMode = false;
+  let previewSystem = "earth";
+  let precipitationState = "off";
+  let precipitationTileErrors = 0;
+  let thermalState = "off";
+  let thermalTileErrors = 0;
   const featureIds = new WeakMap();
+
+  elements.precipitationDate.min = precipitationRange.min;
+  elements.precipitationDate.max = precipitationRange.max;
+  elements.precipitationDate.value = precipitationRange.selected;
+  elements.thermalDate.min = thermalRange.min;
+  elements.thermalDate.max = thermalRange.max;
+  elements.thermalDate.value = thermalRange.selected;
+
+  function updatePrecipitationStatus() {
+    elements.precipitationStatus.dataset.state = precipitationState;
+    if (precipitationState === "off") {
+      elements.precipitationStatus.textContent = t("precipitation.off");
+    } else if (precipitationState === "loading") {
+      elements.precipitationStatus.textContent = template("precipitation.loading", {
+        date: elements.precipitationDate.value,
+      });
+    } else if (precipitationState === "error") {
+      elements.precipitationStatus.textContent = t("precipitation.error");
+    } else {
+      elements.precipitationStatus.textContent = template("precipitation.loaded", {
+        date: elements.precipitationDate.value,
+      });
+    }
+  }
+
+  precipitationLayer.on("loading", () => {
+    if (!map.hasLayer(precipitationLayer)) return;
+    precipitationState = "loading";
+    precipitationTileErrors = 0;
+    updatePrecipitationStatus();
+  });
+  precipitationLayer.on("load", () => {
+    if (!map.hasLayer(precipitationLayer)) return;
+    precipitationState = precipitationTileErrors >= 2 ? "error" : "loaded";
+    updatePrecipitationStatus();
+  });
+  precipitationLayer.on("tileerror", () => {
+    precipitationTileErrors += 1;
+    if (precipitationTileErrors >= 2) {
+      precipitationState = "error";
+      updatePrecipitationStatus();
+    }
+  });
+
+  function updateThermalStatus() {
+    elements.thermalStatus.dataset.state = thermalState;
+    if (thermalState === "off") {
+      elements.thermalStatus.textContent = t("thermal.off");
+    } else if (thermalState === "loading") {
+      elements.thermalStatus.textContent = template("thermal.loading", { date: elements.thermalDate.value });
+    } else if (thermalState === "error") {
+      elements.thermalStatus.textContent = t("thermal.error");
+    } else {
+      elements.thermalStatus.textContent = template("thermal.loaded", { date: elements.thermalDate.value });
+    }
+  }
+
+  thermalLayer.on("loading", () => {
+    if (!map.hasLayer(thermalLayer)) return;
+    thermalState = "loading";
+    thermalTileErrors = 0;
+    updateThermalStatus();
+  });
+  thermalLayer.on("load", () => {
+    if (!map.hasLayer(thermalLayer)) return;
+    thermalState = thermalTileErrors >= 2 ? "error" : "loaded";
+    updateThermalStatus();
+  });
+  thermalLayer.on("tileerror", () => {
+    thermalTileErrors += 1;
+    if (thermalTileErrors >= 2) {
+      thermalState = "error";
+      updateThermalStatus();
+    }
+  });
+
+  const placeMarker = L.circleMarker([0, 0], {
+    radius: 8,
+    weight: 3,
+    color: "#ffffff",
+    fillColor: "#e04f3f",
+    fillOpacity: 0.92,
+    className: "place-selection-marker",
+  });
+
+  function renderSourceNetwork() {
+    elements.sourceNetworkList.replaceChildren();
+    const sources = catalogForLanguage(i18n?.language);
+    const connected = sources.filter((source) => source.status === "connected").length;
+    const candidate = sources.filter((source) => source.status === "candidate").length;
+    elements.sourceNetworkBadge.textContent = template("sourcesNetwork.summary", { connected, candidate });
+    sources.forEach((source) => {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      const heading = document.createElement("span");
+      const name = document.createElement("strong");
+      const status = document.createElement("em");
+      const detail = document.createElement("small");
+      link.href = source.url;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      name.textContent = source.name;
+      status.textContent = t(`sourcesNetwork.${source.status}`);
+      status.dataset.status = source.status;
+      detail.textContent = `${source.institution} · ${source.access} · ${source.purpose}`;
+      heading.append(name, status);
+      link.append(heading, detail);
+      item.append(link);
+      elements.sourceNetworkList.append(item);
+    });
+  }
+
+  function createPlaceResult(label, title, detail) {
+    const article = document.createElement("article");
+    const resultLabel = document.createElement("span");
+    const resultTitle = document.createElement("strong");
+    const resultDetail = document.createElement("small");
+    resultLabel.textContent = label;
+    resultTitle.textContent = title;
+    resultDetail.textContent = detail;
+    article.append(resultLabel, resultTitle, resultDetail);
+    return article;
+  }
+
+  function formatApproximateDistance(distanceKm) {
+    return template("place.approxDistance", {
+      distance: formatNumber(distanceKm, distanceKm < 10 ? 1 : 0),
+    });
+  }
+
+  function renderPlaceExplanation() {
+    elements.placeResults.replaceChildren();
+    if (!selectedPoint) {
+      elements.placeInstruction.textContent = t("place.instruction");
+      return;
+    }
+
+    const [longitude, latitude] = selectedPoint;
+    elements.placeInstruction.textContent = t("place.selected");
+    elements.placeResults.append(createPlaceResult(
+      t("place.coordinates"),
+      `${formatNumber(latitude, 4)}, ${formatNumber(longitude, 4)}`,
+      "WGS 84 · EPSG:4326",
+    ));
+
+    const closestFault = map.hasLayer(faultLayer) ? nearestFeature(selectedPoint, catalog) : {};
+    if (closestFault.feature) {
+      elements.placeResults.append(createPlaceResult(
+        t("place.nearestFault"),
+        localizedProperty(closestFault.feature, "nombre"),
+        `${formatApproximateDistance(closestFault.distanceKm)} · ${movementLabel(closestFault.feature)}`,
+      ));
+    }
+
+    const closestEvidence = map.hasLayer(evidenceLayer)
+      ? nearestFeature(selectedPoint, evidenceCatalog)
+      : {};
+    if (closestEvidence.feature) {
+      const properties = closestEvidence.feature.properties ?? {};
+      elements.placeResults.append(createPlaceResult(
+        t("place.nearestEvidence"),
+        t(`evidence.${properties.tipo}`),
+        `${formatApproximateDistance(closestEvidence.distanceKm)} · ${localizedProperty(closestEvidence.feature, "confianza")}`,
+      ));
+    }
+
+    const closestEarthquake = map.hasLayer(earthquakeLayer)
+      ? nearestFeature(selectedPoint, visibleEarthquakeCatalog)
+      : {};
+    if (closestEarthquake.feature) {
+      const properties = closestEarthquake.feature.properties ?? {};
+      elements.placeResults.append(createPlaceResult(
+        t("place.nearestEarthquake"),
+        properties.place || t("value.unavailable"),
+        `${formatApproximateDistance(closestEarthquake.distanceKm)} · ${template("place.magnitude", { magnitude: formatNumber(properties.mag) })}`,
+      ));
+    } else if (earthquakeState === "loading" && elements.earthquakeToggle.checked) {
+      elements.placeResults.append(createPlaceResult(
+        t("place.nearestEarthquake"),
+        t("place.waitingEarthquakes"),
+        "USGS FDSN",
+      ));
+    }
+
+    if (map.hasLayer(thermalLayer)) {
+      elements.placeResults.append(createPlaceResult(
+        t("thermal.placeLabel"),
+        t("thermal.placeActive"),
+        template("thermal.placeDetail", { date: elements.thermalDate.value }),
+      ));
+    }
+
+    if (map.hasLayer(precipitationLayer)) {
+      elements.placeResults.append(createPlaceResult(
+        t("precipitation.placeLabel"),
+        t("precipitation.placeActive"),
+        template("precipitation.placeDetail", { date: elements.precipitationDate.value }),
+      ));
+    }
+
+    if (elements.placeResults.children.length === 1) {
+      elements.placeResults.append(createPlaceResult(t("place.title"), t("place.noData"), ""));
+    }
+  }
+
+  function setPlaceMode(active) {
+    placeMode = active;
+    elements.explainPlace.setAttribute("aria-pressed", String(active));
+    elements.explainPlace.classList.toggle("is-active", active);
+    mapElement.classList.toggle("is-explaining", active);
+    elements.placeExplainer.hidden = !active;
+    if (active) renderPlaceExplanation();
+  }
 
   function movementLabel(feature) {
     return t(`movement.${movementOf(feature)}`);
@@ -241,6 +511,25 @@ function initializeAtlas() {
     },
   });
 
+  function updateLegendVisibility() {
+    const activeLayers = {
+      faults: map.hasLayer(faultLayer),
+      evidence: map.hasLayer(evidenceLayer),
+      precipitation: map.hasLayer(precipitationLayer),
+      thermal: map.hasLayer(thermalLayer),
+      earthquakes: map.hasLayer(earthquakeLayer),
+    };
+    let visibleSections = 0;
+    elements.legendSections.forEach((section) => {
+      const visible = Boolean(activeLayers[section.dataset.legendLayer]);
+      section.hidden = !visible;
+      if (visible) visibleSections += 1;
+    });
+    elements.legendEmpty.hidden = visibleSections > 0;
+  }
+
+  updateLegendVisibility();
+
   function matchesFilters(feature) {
     const query = normalize(elements.search.value);
     const selectedMovement = elements.movement.value;
@@ -271,6 +560,7 @@ function initializeAtlas() {
 
   function updateControls() {
     const hasCatalog = catalog.length > 0;
+    elements.faultToggle.disabled = !hasCatalog;
     elements.search.disabled = !hasCatalog;
     elements.movement.disabled = !hasCatalog;
     elements.clear.disabled = !hasCatalog || !hasActiveFilters();
@@ -291,6 +581,11 @@ function initializeAtlas() {
   }
 
   function zoomToFeature(feature) {
+    if (!map.hasLayer(faultLayer)) {
+      elements.faultToggle.checked = true;
+      faultLayer.addTo(map);
+      updateLegendVisibility();
+    }
     setSelectedFeature(feature);
     const bounds = L.geoJSON(feature).getBounds();
     if (bounds.isValid()) map.fitBounds(bounds.pad(0.35), { maxZoom: 13 });
@@ -330,7 +625,7 @@ function initializeAtlas() {
     faultLayer.clearLayers();
     faultLayer.addData({ type: "FeatureCollection", features: visibleFeatures });
     renderList(visibleFeatures);
-    elements.count.textContent = String(visibleFeatures.length);
+    elements.count.textContent = String(map.hasLayer(faultLayer) ? visibleFeatures.length : 0);
     elements.resultCount.textContent = String(visibleFeatures.length);
 
     if (catalog.length === 0) {
@@ -345,6 +640,8 @@ function initializeAtlas() {
       elements.state.hidden = true;
     }
     updateControls();
+    updateLegendVisibility();
+    if (selectedPoint) renderPlaceExplanation();
   }
 
   function renderEvidence() {
@@ -355,6 +652,8 @@ function initializeAtlas() {
     if (evidenceCatalog.length === 0) elements.evidenceToggle.checked = false;
     if (elements.evidenceToggle.checked && !map.hasLayer(evidenceLayer)) evidenceLayer.addTo(map);
     if (!elements.evidenceToggle.checked && map.hasLayer(evidenceLayer)) map.removeLayer(evidenceLayer);
+    updateLegendVisibility();
+    if (selectedPoint) renderPlaceExplanation();
   }
 
   function getEarthquakeFilters() {
@@ -368,6 +667,7 @@ function initializeAtlas() {
   function locateEarthquake(feature) {
     elements.earthquakeToggle.checked = true;
     if (!map.hasLayer(earthquakeLayer)) earthquakeLayer.addTo(map);
+    updateLegendVisibility();
     const [longitude, latitude] = feature.geometry.coordinates;
     map.setView([latitude, longitude], Math.max(map.getZoom(), 9));
     earthquakeLayer.eachLayer((layer) => {
@@ -445,9 +745,11 @@ function initializeAtlas() {
     if (earthquakeState === "error") elements.earthquakeToggle.checked = false;
     if (elements.earthquakeToggle.checked && !map.hasLayer(earthquakeLayer)) earthquakeLayer.addTo(map);
     if (!elements.earthquakeToggle.checked && map.hasLayer(earthquakeLayer)) map.removeLayer(earthquakeLayer);
+    updateLegendVisibility();
     renderEarthquakeList(visibleEarthquakeCatalog);
     updateEarthquakeStatus();
     updateSourceCount();
+    if (selectedPoint) renderPlaceExplanation();
   }
 
   function updateSourceCount() {
@@ -458,6 +760,8 @@ function initializeAtlas() {
     );
     if (earthquakeCatalog.length > 0) sources.add("USGS");
     if (map.hasLayer(hillshadeLayer)) sources.add("Esri World Hillshade");
+    if (map.hasLayer(thermalLayer)) sources.add("NASA FIRMS / GIBS");
+    if (map.hasLayer(precipitationLayer)) sources.add("NASA GPM IMERG / GIBS");
     elements.sourceCount.textContent = String(sources.size);
   }
 
@@ -506,10 +810,12 @@ function initializeAtlas() {
       console.error(faultResult.reason);
       catalog = [];
       faultLayer.clearLayers();
+      elements.faultToggle.checked = false;
       elements.count.textContent = "0";
       elements.resultCount.textContent = "0";
       showCatalogState(t("catalog.loadErrorTitle"), t("catalog.loadErrorCopy"));
       updateControls();
+      updateLegendVisibility();
     }
 
     if (evidenceResult.status === "fulfilled") {
@@ -542,6 +848,32 @@ function initializeAtlas() {
     });
   });
 
+  elements.systemButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      previewSystem = button.dataset.system || "earth";
+      elements.systemButtons.forEach((item) => {
+        item.classList.toggle("is-previewed", item === button && previewSystem !== "earth");
+      });
+      elements.systemNote.textContent = t(`systems.${previewSystem}Note`);
+      if (["water", "sky", "life"].includes(previewSystem)) {
+        const targetCard = previewSystem === "life" ? elements.thermalCard : elements.precipitationCard;
+        targetCard.scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          block: "center",
+        });
+      }
+    });
+  });
+
+  elements.explainPlace.addEventListener("click", () => setPlaceMode(!placeMode));
+  elements.closePlaceExplainer.addEventListener("click", () => setPlaceMode(false));
+  map.on("click", (event) => {
+    if (!placeMode || event.originalEvent?.target?.closest?.(".leaflet-interactive")) return;
+    selectedPoint = [event.latlng.lng, event.latlng.lat];
+    placeMarker.setLatLng(event.latlng).addTo(map);
+    renderPlaceExplanation();
+  });
+
   function updateHillshadeOpacity() {
     const opacity = Number(elements.hillshadeOpacity.value) / 100;
     hillshadeLayer.setOpacity(opacity);
@@ -557,6 +889,81 @@ function initializeAtlas() {
   });
   elements.hillshadeOpacity.addEventListener("input", updateHillshadeOpacity);
 
+  function updatePrecipitationOpacity() {
+    const opacity = Number(elements.precipitationOpacity.value) / 100;
+    precipitationLayer.setOpacity(opacity);
+    elements.precipitationOpacityValue.value = `${Math.round(opacity * 100)}%`;
+  }
+  updatePrecipitationOpacity();
+
+  elements.precipitationToggle.addEventListener("change", () => {
+    const active = elements.precipitationToggle.checked;
+    elements.precipitationDate.disabled = !active;
+    elements.precipitationOpacity.disabled = !active;
+    if (active) {
+      precipitationState = "loading";
+      precipitationTileErrors = 0;
+      precipitationLayer.addTo(map);
+    } else {
+      map.removeLayer(precipitationLayer);
+      precipitationState = "off";
+    }
+    updatePrecipitationStatus();
+    updateLegendVisibility();
+    updateSourceCount();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+
+  elements.precipitationDate.addEventListener("change", () => {
+    elements.precipitationDate.value = normalizePrecipitationDate(
+      elements.precipitationDate.value,
+      precipitationRange,
+    );
+    precipitationState = "loading";
+    precipitationTileErrors = 0;
+    precipitationLayer.setParams({ time: elements.precipitationDate.value }, false);
+    precipitationLayer.redraw();
+    updatePrecipitationStatus();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+  elements.precipitationOpacity.addEventListener("input", updatePrecipitationOpacity);
+
+  function updateThermalOpacity() {
+    const opacity = Number(elements.thermalOpacity.value) / 100;
+    thermalLayer.setOpacity(opacity);
+    elements.thermalOpacityValue.value = `${Math.round(opacity * 100)}%`;
+  }
+  updateThermalOpacity();
+
+  elements.thermalToggle.addEventListener("change", () => {
+    const active = elements.thermalToggle.checked;
+    elements.thermalDate.disabled = !active;
+    elements.thermalOpacity.disabled = !active;
+    if (active) {
+      thermalState = "loading";
+      thermalTileErrors = 0;
+      thermalLayer.addTo(map);
+    } else {
+      map.removeLayer(thermalLayer);
+      thermalState = "off";
+    }
+    updateThermalStatus();
+    updateLegendVisibility();
+    updateSourceCount();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+
+  elements.thermalDate.addEventListener("change", () => {
+    elements.thermalDate.value = normalizeThermalDate(elements.thermalDate.value, thermalRange);
+    thermalState = "loading";
+    thermalTileErrors = 0;
+    thermalLayer.setParams({ time: elements.thermalDate.value }, false);
+    thermalLayer.redraw();
+    updateThermalStatus();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+  elements.thermalOpacity.addEventListener("input", updateThermalOpacity);
+
   function updateMinimumMagnitudeValue() {
     elements.earthquakeMinimumMagnitudeValue.value = Number(
       elements.earthquakeMinimumMagnitude.value,
@@ -567,13 +974,29 @@ function initializeAtlas() {
   }
   updateMinimumMagnitudeValue();
 
+  elements.faultToggle.addEventListener("change", () => {
+    if (elements.faultToggle.checked) faultLayer.addTo(map);
+    else {
+      map.closePopup();
+      setSelectedFeature(null);
+      map.removeLayer(faultLayer);
+    }
+    renderCatalog();
+    updateLegendVisibility();
+    updateSourceCount();
+  });
+
   elements.evidenceToggle.addEventListener("change", () => {
     if (elements.evidenceToggle.checked) evidenceLayer.addTo(map);
     else map.removeLayer(evidenceLayer);
+    updateLegendVisibility();
+    if (selectedPoint) renderPlaceExplanation();
   });
   elements.earthquakeToggle.addEventListener("change", () => {
     if (elements.earthquakeToggle.checked) earthquakeLayer.addTo(map);
     else map.removeLayer(earthquakeLayer);
+    updateLegendVisibility();
+    if (selectedPoint) renderPlaceExplanation();
   });
   elements.earthquakeDays.addEventListener("change", loadEarthquakeData);
   elements.earthquakeMinimumMagnitude.addEventListener("input", updateMinimumMagnitudeValue);
@@ -592,6 +1015,9 @@ function initializeAtlas() {
   elements.reset.addEventListener("click", () => {
     map.closePopup();
     setSelectedFeature(null);
+    selectedPoint = null;
+    placeMarker.removeFrom(map);
+    setPlaceMode(false);
     map.fitBounds(ecuadorBounds);
   });
 
@@ -605,12 +1031,19 @@ function initializeAtlas() {
     updateMinimumMagnitudeValue();
     if (earthquakeState === "loaded") renderEarthquakes();
     else updateEarthquakeStatus();
+    updatePrecipitationStatus();
+    updateThermalStatus();
+    updateLegendVisibility();
+    elements.systemNote.textContent = t(`systems.${previewSystem}Note`);
+    renderSourceNetwork();
+    renderPlaceExplanation();
     if (mapError.hidden === false) {
       mapError.querySelector("strong").textContent = t("errors.mapUnavailable");
       mapError.querySelector("p").textContent = t("errors.checkConnection");
     }
   });
 
+  renderSourceNetwork();
   loadAtlasData();
   loadEarthquakeData();
 }
