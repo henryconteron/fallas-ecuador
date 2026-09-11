@@ -5,6 +5,7 @@ import {
   SOURCE_REGISTRY,
 } from "./map/config.js";
 import { loadGeoJson, loadRecentEarthquakes } from "./map/data.js";
+import { BASIN_SOURCE, basinWmsOptions, queryBasinAtPoint } from "./map/basins.js";
 import {
   earthquakeColor,
   earthquakeDashArray,
@@ -41,6 +42,7 @@ if (typeof window.L === "undefined") {
   mapElement.setAttribute("aria-hidden", "true");
   document.querySelector("#reset-view").disabled = true;
   document.querySelector("#fault-toggle").disabled = true;
+  document.querySelector("#basin-toggle").disabled = true;
   document.querySelector("#flood-toggle").disabled = true;
   document.querySelector("#earthquake-toggle").disabled = true;
   document.querySelector(".legend").hidden = true;
@@ -112,6 +114,13 @@ function initializeAtlas() {
     attribution: HILLSHADE.attribution,
   }).addTo(map);
 
+  map.createPane("hydrographic-basins");
+  map.getPane("hydrographic-basins").style.zIndex = "260";
+  const basinLayer = L.tileLayer.wms(
+    BASIN_SOURCE.endpoint,
+    { ...basinWmsOptions(), pane: "hydrographic-basins", opacity: 0.34 },
+  );
+
   const precipitationRange = precipitationDateRange();
   map.createPane("precipitation");
   map.getPane("precipitation").style.zIndex = "270";
@@ -151,6 +160,10 @@ function initializeAtlas() {
     hillshadeOpacityValue: document.querySelector("#hillshade-opacity-value"),
     faultToggle: document.querySelector("#fault-toggle"),
     evidenceToggle: document.querySelector("#evidence-toggle"),
+    basinToggle: document.querySelector("#basin-toggle"),
+    basinOpacity: document.querySelector("#basin-opacity"),
+    basinOpacityValue: document.querySelector("#basin-opacity-value"),
+    basinStatus: document.querySelector("#basin-status"),
     precipitationCard: document.querySelector("#precipitation-layer-card"),
     precipitationToggle: document.querySelector("#precipitation-toggle"),
     precipitationDate: document.querySelector("#precipitation-date"),
@@ -231,6 +244,11 @@ function initializeAtlas() {
   let selectedPoint = null;
   let placeMode = false;
   let activeSystem = normalizeAtlasSystem(urlParameters.get("system"));
+  let basinState = "off";
+  let basinTileErrors = 0;
+  let basinLookupState = "idle";
+  let selectedBasin = null;
+  let basinLookupRequestId = 0;
   let precipitationState = "off";
   let precipitationTileErrors = 0;
   let floodState = "off";
@@ -248,6 +266,30 @@ function initializeAtlas() {
   elements.thermalDate.min = thermalRange.min;
   elements.thermalDate.max = thermalRange.max;
   elements.thermalDate.value = thermalRange.selected;
+
+  function updateBasinStatus() {
+    elements.basinStatus.dataset.state = basinState;
+    elements.basinStatus.textContent = t(`basins.${basinState}`);
+  }
+
+  basinLayer.on("loading", () => {
+    if (!map.hasLayer(basinLayer)) return;
+    basinState = "loading";
+    basinTileErrors = 0;
+    updateBasinStatus();
+  });
+  basinLayer.on("load", () => {
+    if (!map.hasLayer(basinLayer)) return;
+    basinState = basinTileErrors >= 2 ? "error" : "loaded";
+    updateBasinStatus();
+  });
+  basinLayer.on("tileerror", () => {
+    basinTileErrors += 1;
+    if (basinTileErrors >= 2) {
+      basinState = "error";
+      updateBasinStatus();
+    }
+  });
 
   function updatePrecipitationStatus() {
     elements.precipitationStatus.dataset.state = precipitationState;
@@ -443,6 +485,31 @@ function initializeAtlas() {
     });
   }
 
+  async function lookupBasinForSelectedPoint() {
+    const requestId = ++basinLookupRequestId;
+    selectedBasin = null;
+    if (!selectedPoint || !map.hasLayer(basinLayer)) {
+      basinLookupState = "idle";
+      renderPlaceExplanation();
+      return;
+    }
+
+    basinLookupState = "loading";
+    renderPlaceExplanation();
+    try {
+      const [longitude, latitude] = selectedPoint;
+      const properties = await queryBasinAtPoint(longitude, latitude);
+      if (requestId !== basinLookupRequestId || !map.hasLayer(basinLayer)) return;
+      selectedBasin = properties;
+      basinLookupState = "loaded";
+    } catch (error) {
+      if (requestId !== basinLookupRequestId) return;
+      console.warn(error);
+      basinLookupState = "error";
+    }
+    renderPlaceExplanation();
+  }
+
   function renderPlaceExplanation() {
     elements.placeResults.replaceChildren();
     if (!selectedPoint) {
@@ -457,6 +524,37 @@ function initializeAtlas() {
       `${formatNumber(latitude, 4)}, ${formatNumber(longitude, 4)}`,
       "WGS 84 · EPSG:4326",
     ));
+
+    if (map.hasLayer(basinLayer)) {
+      if (basinLookupState === "loading") {
+        elements.placeResults.append(createPlaceResult(
+          t("basins.placeLabel"),
+          t("basins.placeLoading"),
+          "INAMHI / MAATE",
+        ));
+      } else if (basinLookupState === "error") {
+        elements.placeResults.append(createPlaceResult(
+          t("basins.placeLabel"),
+          t("basins.placeUnavailable"),
+          "INAMHI WFS",
+        ));
+      } else if (basinLookupState === "loaded" && selectedBasin) {
+        elements.placeResults.append(createPlaceResult(
+          t("basins.placeLabel"),
+          selectedBasin.nombre_cue || t("value.unavailable"),
+          template("basins.placeDetail", {
+            system: selectedBasin.nombre_sis || t("value.unavailable"),
+            code: selectedBasin.codigo_sis || t("value.unavailable"),
+          }),
+        ));
+      } else if (basinLookupState === "loaded") {
+        elements.placeResults.append(createPlaceResult(
+          t("basins.placeLabel"),
+          t("basins.placeOutside"),
+          "INAMHI / MAATE",
+        ));
+      }
+    }
 
     const closestFault = map.hasLayer(faultLayer) ? nearestFeature(selectedPoint, catalog) : {};
     if (closestFault.feature) {
@@ -623,6 +721,7 @@ function initializeAtlas() {
     const activeLayers = {
       faults: map.hasLayer(faultLayer),
       evidence: map.hasLayer(evidenceLayer),
+      basins: map.hasLayer(basinLayer),
       precipitation: map.hasLayer(precipitationLayer),
       flood: map.hasLayer(floodLayer),
       thermal: map.hasLayer(thermalLayer),
@@ -871,6 +970,7 @@ function initializeAtlas() {
     );
     if (earthquakeCatalog.length > 0) sources.add("USGS");
     if (map.hasLayer(hillshadeLayer)) sources.add("Esri World Hillshade");
+    if (map.hasLayer(basinLayer)) sources.add("INAMHI / MAATE");
     if (map.hasLayer(thermalLayer)) sources.add("NASA FIRMS / GIBS");
     if (map.hasLayer(precipitationLayer)) sources.add("NASA GPM IMERG / GIBS");
     if (map.hasLayer(floodLayer)) sources.add("NASA LANCE VIIRS / GIBS");
@@ -989,7 +1089,8 @@ function initializeAtlas() {
     if (!placeMode || event.originalEvent?.target?.closest?.(".leaflet-interactive")) return;
     selectedPoint = [event.latlng.lng, event.latlng.lat];
     placeMarker.setLatLng(event.latlng).addTo(map);
-    renderPlaceExplanation();
+    if (map.hasLayer(basinLayer)) lookupBasinForSelectedPoint();
+    else renderPlaceExplanation();
   });
 
   function updateHillshadeOpacity() {
@@ -1006,6 +1107,35 @@ function initializeAtlas() {
     updateSourceCount();
   });
   elements.hillshadeOpacity.addEventListener("input", updateHillshadeOpacity);
+
+  function updateBasinOpacity() {
+    const opacity = Number(elements.basinOpacity.value) / 100;
+    basinLayer.setOpacity(opacity);
+    elements.basinOpacityValue.value = `${Math.round(opacity * 100)}%`;
+  }
+  updateBasinOpacity();
+
+  elements.basinToggle.addEventListener("change", () => {
+    const active = elements.basinToggle.checked;
+    elements.basinOpacity.disabled = !active;
+    if (active) {
+      basinState = "loading";
+      basinTileErrors = 0;
+      basinLayer.addTo(map);
+      if (selectedPoint) lookupBasinForSelectedPoint();
+    } else {
+      map.removeLayer(basinLayer);
+      basinState = "off";
+      basinLookupRequestId += 1;
+      basinLookupState = "idle";
+      selectedBasin = null;
+      if (selectedPoint) renderPlaceExplanation();
+    }
+    updateBasinStatus();
+    updateLegendVisibility();
+    updateSourceCount();
+  });
+  elements.basinOpacity.addEventListener("input", updateBasinOpacity);
 
   function updatePrecipitationOpacity() {
     const opacity = Number(elements.precipitationOpacity.value) / 100;
@@ -1170,6 +1300,9 @@ function initializeAtlas() {
     map.closePopup();
     setSelectedFeature(null);
     selectedPoint = null;
+    basinLookupRequestId += 1;
+    basinLookupState = "idle";
+    selectedBasin = null;
     placeMarker.removeFrom(map);
     setPlaceMode(false);
     map.fitBounds(ecuadorBounds);
@@ -1185,6 +1318,7 @@ function initializeAtlas() {
     updateMinimumMagnitudeValue();
     if (earthquakeState === "loaded") renderEarthquakes();
     else updateEarthquakeStatus();
+    updateBasinStatus();
     updatePrecipitationStatus();
     updateFloodStatus();
     updateThermalStatus();

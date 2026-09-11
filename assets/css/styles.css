@@ -885,6 +885,53 @@ footer {
   margin-left: 0.7rem;
 }
 
+.basin-layer-card {
+  border-color: rgba(45, 212, 191, 0.38);
+  background:
+    radial-gradient(circle at 100% 0, rgba(13, 148, 136, 0.2), transparent 48%),
+    #0b1316;
+}
+
+.basin-layer-card .now-layer-heading span,
+.basin-story summary {
+  color: #7dd6c3;
+}
+
+.basin-layer-card .layer-switch {
+  border-color: rgba(45, 212, 191, 0.25);
+}
+
+.basin-layer-card input[type="range"] {
+  accent-color: #2dd4bf;
+}
+
+.basin-story a {
+  color: #7dd6c3;
+}
+
+.basin-opacity-control {
+  display: grid;
+  grid-template-columns: auto minmax(9rem, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.55rem;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.basin-metadata-note {
+  margin-bottom: 0.15rem;
+}
+
+.legend i.basin-symbol {
+  width: 1.45rem;
+  height: 0.72rem;
+  flex: 0 0 auto;
+  border: 2px solid #d9f4f0;
+  border-radius: 0.12rem;
+  background: rgba(174, 174, 174, 0.45);
+}
+
 .thermal-controls {
   display: grid;
   grid-template-columns: minmax(8.5rem, 1fr) minmax(8rem, 1fr);

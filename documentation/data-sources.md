@@ -28,6 +28,7 @@ fuente original.
 | Tierra | Instituto Geográfico Militar | cartografía, ortofotos y relieve | WMS/WFS/CSW | candidate |
 | Tierra | Instituto Geofísico EPN | sismicidad y volcanismo nacional | enlace o servicio autorizado | candidate |
 | Agua/Cielo | INAMHI | estaciones, precipitación, caudales e inundaciones | servicios y descargas | candidate |
+| Agua | INAMHI / MAATE | cuencas hidrográficas | WMS y consulta puntual WFS públicos | connected |
 | Agua | INAMHI GEOGLOWS | pronósticos e históricos de caudal | servicio por verificar | candidate |
 | Agua/Cielo | NASA GPM / GIBS | tasa de precipitación IMERG por día | WMS público de GIBS | connected |
 | Agua/Riesgo | NASA LANCE / VIIRS | agua superficial e inundación observada en 1 día | WMS público de GIBS | connected |
@@ -66,6 +67,18 @@ La visualización no sustituye pluviómetros, pronósticos ni alertas. Tampoco p
 habrá inundación: se requiere integrar duración de la lluvia, humedad antecedente, pendiente,
 suelos, drenaje, caudal y exposición. INAMHI–GEOGLOWS se enlaza como referencia nacional de
 consulta mientras se documentan sus servicios antes de convertirlos en capas interoperables.
+
+## Cuencas INAMHI / MAATE
+
+La capa `geonode:cuencas_maate` se consulta en
+`https://geoservicios.inamhi.gob.ec/geoserver/ows`. El WMS entrega la representación cartográfica
+de 30 unidades y el WFS se utiliza solo al seleccionar un punto. Esa consulta limita la respuesta a
+los atributos `nombre_cue`, `codigo_sis` y `nombre_sis`; no transfiere la geometría al navegador.
+
+La ficha pública del conjunto, publicada el 16 de septiembre de 2025, no contiene resumen,
+palabras clave, atribución ni licencia especificada. Por ello el repositorio no conserva una copia
+del dato y la interfaz declara esta limitación. La integración deberá reevaluarse cuando la
+institución complete sus metadatos o publique condiciones de reutilización explícitas.
 
 ## Inundación VIIRS
 

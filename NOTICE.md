@@ -12,6 +12,9 @@
   con atribución visible dentro del mapa.
 - **NASA LANCE VIIRS / GIBS:** compuesto diario de agua superficial e inundación observada a
   250 m; requiere validación con fuentes oficiales y observación local.
+- **INAMHI / MAATE:** capa remota `geonode:cuencas_maate`, visualizada mediante WMS y consultada
+  puntualmente mediante WFS. La ficha pública no especifica licencia ni atribución; las geometrías
+  no se redistribuyen en este repositorio.
 - **NASA FIRMS / GIBS:** visualización diaria de anomalías térmicas VIIRS; no se presenta como
   confirmación automática de incendios.
 - **Leaflet:** biblioteca cartográfica cargada por la interfaz conforme a su

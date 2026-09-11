@@ -40,6 +40,19 @@ export const SOURCE_CATALOG = Object.freeze([
     url: "https://servicios.inamhi.gob.ec/",
   },
   {
+    id: "inamhi-maate-basins",
+    systems: ["water"],
+    status: "connected",
+    access: "OGC WMS / WFS",
+    institution: "INAMHI / MAATE",
+    name: { es: "Cuencas hidrográficas", en: "Watersheds" },
+    purpose: {
+      es: "Límites hidrográficos y consulta puntual por cuenca",
+      en: "Hydrographic boundaries and point-based watershed lookup",
+    },
+    url: "https://geoservicios.inamhi.gob.ec/catalogue/#/dataset/8",
+  },
+  {
     id: "nasa-imerg",
     systems: ["water", "sky"],
     status: "connected",

@@ -43,6 +43,10 @@ const keys = [
         (field) => `systems.${system}${field}`,
       ),
     ),
+    ...["off", "loading", "loaded", "error"].map((state) => `basins.${state}`),
+    ...["placeLabel", "placeLoading", "placeUnavailable", "placeOutside", "placeDetail"].map(
+      (field) => `basins.${field}`,
+    ),
     ...["normal", "reverse", "strike"].flatMap((scenario) =>
       ["kicker", "question", "clue", "imageAlt", "explanation"].map(
         (field) => `lab.scenario.${scenario}.${field}`,

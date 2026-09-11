@@ -23,6 +23,8 @@ the Andes*. La sismicidad reciente se consulta mediante el servicio FDSN del USG
   opacidad, servida mediante NASA GIBS sin descargar mosaicos;
 - observación diaria de inundaciones NASA LANCE VIIRS a 250 m, separada de la lluvia y presentada
   como señal satelital que requiere validación oficial y de campo;
+- cuencas hidrográficas INAMHI/MAATE servidas por WMS, con identificación puntual del nombre y
+  sistema hidrográfico mediante una consulta WFS mínima que no descarga las geometrías;
 - módulo **Ecuador Ahora** con anomalías térmicas VIIRS NOAA-20 por fecha, servido mediante
   NASA GIBS sin publicar claves privadas;
 - explicación interactiva de por qué una anomalía térmica no equivale automáticamente a un incendio;
@@ -60,6 +62,7 @@ fallas-ecuador/
 │       ├── learn.js
 │       ├── map.js
 │       └── map/
+│           ├── basins.js
 │           ├── config.js
 │           ├── data.js
 │           ├── flood.js
@@ -87,6 +90,7 @@ fallas-ecuador/
 │   └── validate-catalog.mjs
 ├── tests/
 │   ├── test_build_fault_catalog.py
+│   ├── test-basins.mjs
 │   ├── test-flood.mjs
 │   ├── test-i18n.mjs
 │   ├── test-map-modules.mjs
@@ -242,6 +246,17 @@ superficial, no una predicción, una declaratoria de emergencia ni un cálculo d
 Las nubes, sombras, vegetación, agua permanente y condiciones de adquisición pueden ocultar o
 confundir señales. Por ello la interfaz remite al monitoreo oficial de INAMHI y explica que toda
 interpretación debe contrastarse con estaciones, reportes locales y observación de campo.
+
+## Cuencas hidrográficas
+
+La vista Agua consume remotamente `geonode:cuencas_maate` desde el GeoServer público de INAMHI.
+El mapa solicita imágenes WMS transparentes y no almacena ni redistribuye las 30 geometrías. Al
+usar **Explícame este lugar**, una consulta WFS puntual devuelve únicamente `nombre_cue`,
+`codigo_sis` y `nombre_sis`, suficientes para identificar el contexto hidrográfico del punto.
+
+La ficha pública consultada identifica la publicación, pero no especifica licencia, escala,
+atribución ni método de elaboración. Esta ausencia se muestra en la interfaz y limita el uso de la
+capa a visualización y consulta remota hasta que INAMHI o MAATE completen los metadatos.
 
 ## Autor
 
