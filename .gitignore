@@ -2,6 +2,10 @@
 .DS_Store
 Thumbs.db
 .vscode/
+node_modules/
+.pnpm-store/
+__pycache__/
+*.py[cod]
 
 # Archivos temporales de QGIS
 *.qgz~

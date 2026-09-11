@@ -12,22 +12,25 @@ import argparse
 import json
 import re
 from collections import Counter
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 from shapely.geometry import shape
 
-
-GEM_SOURCE_URL = (
-    "https://github.com/GEMScienceTools/gem-global-active-faults/"
-    "blob/master/geojson/gem_active_faults_harmonized.geojson"
+from catalog_integrity import (
+    GEM_SOURCE_BLOB_SHA,
+    GEM_SOURCE_COMMIT,
+    GEM_SOURCE_URL,
+    file_fingerprint,
+    require_checksum,
 )
-GEM_SOURCE_BLOB_SHA = "fb164770b529695544fa864abe2cc9dd8aa5793d"
+
+
 GEOBOUNDARIES_URL = (
     "https://github.com/wmgeolab/geoBoundaries/tree/9469f09/"
     "releaseData/gbOpen/ECU"
 )
-EXTRACTION_DATE = "2026-09-10"
 ACCEPTED_PREFIXES = ("SA_", "ATA_")
 
 PROVINCE_NAMES = {
@@ -49,6 +52,14 @@ def parse_args() -> argparse.Namespace:
         default=Path("data/geojson/fallas.geojson"),
         help="Output GeoJSON path",
     )
+    parser.add_argument(
+        "--manifest",
+        type=Path,
+        default=Path("data/catalog-build-manifest.json"),
+        help="Reproducibility manifest with checksums for every input and output",
+    )
+    parser.add_argument("--countries-sha256", help="Expected SHA-256 for the ADM0 file")
+    parser.add_argument("--provinces-sha256", help="Expected SHA-256 for the ADM1 file")
     return parser.parse_args()
 
 
@@ -86,15 +97,19 @@ def catalog_source(catalog_id: str) -> str:
     return "ATA (Veloza et al., 2012) vía GEM GAF-DB"
 
 
+def catalog_source_key(catalog_id: str) -> str:
+    return "SARA" if catalog_id.startswith("SA_") else "ATA"
+
+
 def catalog_description(catalog_id: str) -> tuple[str, str]:
     catalog = "SARA" if catalog_id.startswith("SA_") else "Active Tectonics of the Andes"
     spanish = (
         f"Traza regional incorporada por GEM GAF-DB desde el catálogo {catalog}. "
-        "Consulte la clasificación original y la referencia antes de usarla a escala local."
+        "Revise la clasificación original y los metadatos disponibles antes de usarla a escala local."
     )
     english = (
         f"Regional trace incorporated into GEM GAF-DB from the {catalog} catalog. "
-        "Check the original classification and reference before using it at local scale."
+        "Review the original classification and available metadata before using it at local scale."
     )
     return spanish, english
 
@@ -170,6 +185,7 @@ def build_catalog(
                 "movimiento_original": original_movement,
                 "movimiento_original_en": original_movement,
                 "fuente": catalog_source(catalog_id),
+                "source_key": catalog_source_key(catalog_id),
                 "fuente_url": GEM_SOURCE_URL,
                 "licencia": "CC BY-SA 4.0",
                 "descripcion": description,
@@ -203,8 +219,9 @@ def build_catalog(
         "type": "FeatureCollection",
         "name": "fallas_activas_ecuador_gem",
         "metadata": {
-            "generated": EXTRACTION_DATE,
+            "generated": datetime.now(timezone.utc).date().isoformat(),
             "source": GEM_SOURCE_URL,
+            "source_commit": GEM_SOURCE_COMMIT,
             "source_blob_sha": GEM_SOURCE_BLOB_SHA,
             "license": "CC BY-SA 4.0",
             "selection_boundary": GEOBOUNDARIES_URL,
@@ -221,16 +238,41 @@ def build_catalog(
 
 def main() -> None:
     args = parse_args()
+    fingerprints = {
+        "gem": file_fingerprint(args.gem),
+        "countries": file_fingerprint(args.countries),
+        "provinces": file_fingerprint(args.provinces),
+    }
+    require_checksum("GEM Git blob", fingerprints["gem"]["git_blob_sha1"], GEM_SOURCE_BLOB_SHA)
+    require_checksum("ADM0", fingerprints["countries"]["sha256"], args.countries_sha256)
+    require_checksum("ADM1", fingerprints["provinces"]["sha256"], args.provinces_sha256)
+
     catalog = build_catalog(
         read_geojson(args.gem),
         read_geojson(args.countries),
         read_geojson(args.provinces),
     )
+    catalog["metadata"]["input_files"] = fingerprints
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with args.output.open("w", encoding="utf-8", newline="\n") as target:
         json.dump(catalog, target, ensure_ascii=False, indent=2)
         target.write("\n")
+
+    output_fingerprint = file_fingerprint(args.output)
+    manifest = {
+        "schema_version": 1,
+        "generated": catalog["metadata"]["generated"],
+        "source_commit": GEM_SOURCE_COMMIT,
+        "source_blob_sha": GEM_SOURCE_BLOB_SHA,
+        "inputs": fingerprints,
+        "output": output_fingerprint,
+    }
+    args.manifest.parent.mkdir(parents=True, exist_ok=True)
+    with args.manifest.open("w", encoding="utf-8", newline="\n") as target:
+        json.dump(manifest, target, ensure_ascii=False, indent=2)
+        target.write("\n")
     print(f"Wrote {len(catalog['features'])} features to {args.output}")
+    print(f"Wrote reproducibility manifest to {args.manifest}")
 
 
 if __name__ == "__main__":

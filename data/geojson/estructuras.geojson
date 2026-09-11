@@ -1,5 +1,98 @@
 {
   "type": "FeatureCollection",
-  "name": "estructuras_geomorfologicas",
-  "features": []
+  "name": "estructuras_geomorfologicas_ecuador",
+  "metadata": {
+    "generated": "2026-09-10",
+    "status": "starter-documented-evidence",
+    "feature_count": 3,
+    "schema": "../schemas/estructuras.schema.json",
+    "source": "https://pubs.usgs.gov/of/2003/ofr-03-289/ofr-03-289.html",
+    "method_note": "Each geometry is a regional representative point placed on a matching GEM fault trace. It does not delimit the observed landform."
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "EC27a-billecocha-escarpes",
+      "properties": {
+        "nombre": "Escarpes y depresiones de Billecocha",
+        "nombre_en": "Billecocha scarps and depressions",
+        "tipo": "escarpe",
+        "observacion": "La compilación describe escarpes, depresiones húmedas y drenajes desplazados. También señala que parte de la morfología podría relacionarse con procesos gravitacionales, por lo que la interpretación tectónica debe tratarse con cautela.",
+        "observacion_en": "The compilation describes scarps, sag ponds, and offset drainages. It also notes that part of the morphology may be related to gravitational processes, so the tectonic interpretation requires caution.",
+        "confianza": "media",
+        "confianza_en": "medium",
+        "precision": "regional",
+        "precision_en": "regional",
+        "metodo_localizacion": "Punto representativo situado sobre la traza GEM SA_341; no delimita la extensión del escarpe.",
+        "metodo_localizacion_en": "Representative point placed on GEM trace SA_341; it does not delimit the scarp extent.",
+        "geometry_role": "representative_location",
+        "fault_catalog_ids": ["SA_341"],
+        "source_section": "EC-27a, Billecocha section",
+        "fuente": "Eguez et al. (2003), USGS Open-File Report 03-289",
+        "fuente_url": "https://pubs.usgs.gov/of/2003/ofr-03-289/ofr-03-289.html",
+        "licencia": "CC BY-SA 4.0 — ubicación derivada de GEM; observación atribuida a USGS",
+        "reviewed_at": "2026-09-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-78.3101867753992, 0.486843161283048]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "EC27b-huayrapungo-facetas",
+      "properties": {
+        "nombre": "Facetas triangulares de Huayrapungo",
+        "nombre_en": "Huayrapungo triangular facets",
+        "tipo": "faceta_triangular",
+        "observacion": "El informe caracteriza la sección mediante escarpes con facetas triangulares a lo largo de valles lineales y advierte que las facetas, por sí solas, no diagnostican fallamiento.",
+        "observacion_en": "The report characterizes the section by scarps with triangular facets along linear valleys and warns that facets alone are not diagnostic of faulting.",
+        "confianza": "media",
+        "confianza_en": "medium",
+        "precision": "regional",
+        "precision_en": "regional",
+        "metodo_localizacion": "Punto representativo situado sobre la traza GEM SA_347; la correspondencia con ATA_139 se conserva como relación regional y requiere control cartográfico.",
+        "metodo_localizacion_en": "Representative point placed on GEM trace SA_347; correspondence with ATA_139 is retained as a regional relationship and requires cartographic review.",
+        "geometry_role": "representative_location",
+        "fault_catalog_ids": ["SA_347", "ATA_139"],
+        "source_section": "EC-27b, Huayrapungo section",
+        "fuente": "Eguez et al. (2003), USGS Open-File Report 03-289",
+        "fuente_url": "https://pubs.usgs.gov/of/2003/ofr-03-289/ofr-03-289.html",
+        "licencia": "CC BY-SA 4.0 — ubicación derivada de GEM; observación atribuida a USGS",
+        "reviewed_at": "2026-09-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-78.4979859470936, 0.194008313333143]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "EC50a-pallatanga-drenajes",
+      "properties": {
+        "nombre": "Drenajes desplazados de Pallatanga",
+        "nombre_en": "Pallatanga offset drainages",
+        "tipo": "drenaje_desplazado",
+        "observacion": "La sección Pallatanga sigue el valle del río Pangor, donde la compilación registra drenajes y colinas desplazados, bancos y otras expresiones lineales. Hacia el sur también menciona valles colgados y cauces represados o desplazados.",
+        "observacion_en": "The Pallatanga section follows the Pangor River valley, where the compilation records offset drainages and hills, benches, and other linear expressions. Farther south it also notes hanging valleys and dammed or displaced streams.",
+        "confianza": "media",
+        "confianza_en": "medium",
+        "precision": "regional",
+        "precision_en": "regional",
+        "metodo_localizacion": "Punto representativo situado sobre la traza GEM SA_335; no identifica un cauce individual medido en campo.",
+        "metodo_localizacion_en": "Representative point placed on GEM trace SA_335; it does not identify an individually surveyed stream.",
+        "geometry_role": "representative_location",
+        "fault_catalog_ids": ["SA_335"],
+        "source_section": "EC-50a, Pallatanga section",
+        "fuente": "Eguez et al. (2003), USGS Open-File Report 03-289",
+        "fuente_url": "https://pubs.usgs.gov/of/2003/ofr-03-289/ofr-03-289.html",
+        "licencia": "CC BY-SA 4.0 — ubicación derivada de GEM; observación atribuida a USGS",
+        "reviewed_at": "2026-09-10"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-78.927809095813, -1.94210066591285]
+      }
+    }
+  ]
 }

@@ -1,7 +1,30 @@
+import {
+  DATASETS,
+  ECUADOR_CONTINENTAL_BOUNDS,
+  HILLSHADE,
+  SOURCE_REGISTRY,
+} from "./map/config.js";
+import { loadGeoJson, loadRecentEarthquakes } from "./map/data.js";
+import {
+  earthquakeColor,
+  earthquakeDashArray,
+  evidencePointOptions,
+  evidenceStyle,
+  faultStyle,
+  movementOf,
+} from "./map/symbology.js";
+import { filterEarthquakes, normalizeEarthquakeFilters } from "./map/seismicity.js";
+import {
+  createEarthquakePopup as buildEarthquakePopup,
+  createEvidencePopup as buildEvidencePopup,
+  createFaultPopup as buildFaultPopup,
+} from "./map/popups.js";
+import { catalogKey, createTextTools, normalize } from "./map/utils.js";
+
 const mapElement = document.querySelector("#map");
 const mapError = document.querySelector("#map-error");
 const i18n = window.atlasI18n;
-const t = (key) => i18n?.t(key) ?? key;
+const { t, template, formatNumber, formatUtcDate, localizedProperty } = createTextTools(i18n);
 
 if (typeof window.L === "undefined") {
   mapElement.setAttribute("aria-hidden", "true");
@@ -19,23 +42,15 @@ if (typeof window.L === "undefined") {
 
 function initializeAtlas() {
   const L = window.L;
-  const ECUADOR_CONTINENTAL_BOUNDS = L.latLngBounds([-5.15, -81.25], [1.65, -75.05]);
-  const EARTHQUAKE_EXTENT = {
-    minlatitude: -5.5,
-    maxlatitude: 2.5,
-    minlongitude: -82.5,
-    maxlongitude: -74.5,
-  };
+  const ecuadorBounds = L.latLngBounds(ECUADOR_CONTINENTAL_BOUNDS);
   const urlParameters = new URLSearchParams(window.location.search);
   const demoMode = urlParameters.get("demo") === "1";
   document.body.classList.toggle("is-demo", demoMode);
-  const catalogUrl = demoMode ? "data/geojson/fallas.demo.geojson" : "data/geojson/fallas.geojson";
-  const evidenceUrl = demoMode
-    ? "data/geojson/estructuras.demo.geojson"
-    : "data/geojson/estructuras.geojson";
+  const catalogUrl = demoMode ? DATASETS.faults.demo : DATASETS.faults.production;
+  const evidenceUrl = demoMode ? DATASETS.evidence.demo : DATASETS.evidence.production;
 
   const map = L.map("map", { zoomControl: false, minZoom: 5, maxZoom: 18 }).fitBounds(
-    ECUADOR_CONTINENTAL_BOUNDS,
+    ecuadorBounds,
   );
   L.control.zoom({ position: "bottomright" }).addTo(map);
   L.control.scale({ imperial: false, position: "topright" }).addTo(map);
@@ -71,25 +86,18 @@ function initializeAtlas() {
   }
   Object.values(basemaps).forEach(monitorTiles);
 
-  const colors = {
-    inversa: "#ef4444",
-    normal: "#38bdf8",
-    dextral: "#f59e0b",
-    sinestral: "#a78bfa",
-    desconocido: "#e5e7eb",
-  };
-  const evidenceColors = {
-    escarpe: "#ef6f5d",
-    faceta_triangular: "#f0b45b",
-    drenaje_desplazado: "#42b7cd",
-    laguna_sag: "#52c6a5",
-  };
-  const earthquakeColors = {
-    shallow: "#ef4444",
-    intermediate: "#f59e0b",
-    deep: "#a78bfa",
-    veryDeep: "#38bdf8",
-  };
+  map.createPane("terrain-relief");
+  const terrainPane = map.getPane("terrain-relief");
+  terrainPane.style.zIndex = "250";
+  terrainPane.style.pointerEvents = "none";
+  terrainPane.style.mixBlendMode = "multiply";
+  const hillshadeLayer = L.tileLayer(HILLSHADE.url, {
+    pane: "terrain-relief",
+    maxNativeZoom: HILLSHADE.maxNativeZoom,
+    maxZoom: 18,
+    opacity: HILLSHADE.initialOpacity,
+    attribution: HILLSHADE.attribution,
+  }).addTo(map);
 
   const elements = {
     search: document.querySelector("#fault-search"),
@@ -101,9 +109,18 @@ function initializeAtlas() {
     earthquakeCount: document.querySelector("#earthquake-count"),
     resultCount: document.querySelector("#result-count"),
     sourceCount: document.querySelector("#source-count"),
+    hillshadeToggle: document.querySelector("#hillshade-toggle"),
+    hillshadeOpacity: document.querySelector("#hillshade-opacity"),
+    hillshadeOpacityValue: document.querySelector("#hillshade-opacity-value"),
     evidenceToggle: document.querySelector("#evidence-toggle"),
     earthquakeToggle: document.querySelector("#earthquake-toggle"),
+    earthquakeDays: document.querySelector("#earthquake-days"),
+    earthquakeMinimumMagnitude: document.querySelector("#earthquake-min-magnitude"),
+    earthquakeMinimumMagnitudeValue: document.querySelector("#earthquake-min-magnitude-value"),
+    earthquakeDepthFilter: document.querySelector("#earthquake-depth-filter"),
     earthquakeStatus: document.querySelector("#earthquake-status"),
+    earthquakeList: document.querySelector("#earthquake-list"),
+    earthquakeListCount: document.querySelector("#earthquake-list-count"),
     list: document.querySelector("#fault-list"),
     state: document.querySelector("#catalog-state"),
     legend: document.querySelector(".legend"),
@@ -132,215 +149,30 @@ function initializeAtlas() {
   let catalog = [];
   let evidenceCatalog = [];
   let earthquakeCatalog = [];
+  let visibleEarthquakeCatalog = [];
   let earthquakeGeneratedAt = null;
   let earthquakeState = "loading";
+  let earthquakeRequestId = 0;
   let earthquakeAttributionAdded = false;
   let selectedFeature = null;
   const featureIds = new WeakMap();
-
-  function template(key, values = {}) {
-    return Object.entries(values).reduce(
-      (message, [name, value]) => message.replaceAll(`{${name}}`, String(value)),
-      t(key),
-    );
-  }
-
-  function locale() {
-    return i18n?.language === "en" ? "en" : "es-EC";
-  }
-
-  function formatNumber(value, maximumFractionDigits = 1) {
-    const numericValue = Number(value);
-    if (!Number.isFinite(numericValue)) return t("value.unavailable");
-    return new Intl.NumberFormat(locale(), { maximumFractionDigits }).format(numericValue);
-  }
-
-  function formatUtcDate(value) {
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return t("value.unavailable");
-    return `${new Intl.DateTimeFormat(locale(), {
-      dateStyle: "medium",
-      timeStyle: "short",
-      timeZone: "UTC",
-    }).format(date)} UTC`;
-  }
-
-  function buildEarthquakeUrl() {
-    const endDate = new Date();
-    const startDate = new Date(endDate);
-    startDate.setUTCDate(startDate.getUTCDate() - 365);
-    const parameters = new URLSearchParams({
-      format: "geojson",
-      starttime: startDate.toISOString(),
-      endtime: endDate.toISOString(),
-      minmagnitude: "3",
-      orderby: "time",
-      limit: "20000",
-      ...Object.fromEntries(Object.entries(EARTHQUAKE_EXTENT).map(([key, value]) => [key, String(value)])),
-    });
-    return `https://earthquake.usgs.gov/fdsnws/event/1/query?${parameters}`;
-  }
-
-  function normalize(value) {
-    return String(value ?? "")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .trim();
-  }
-
-  function localizedProperty(feature, key) {
-    const properties = feature.properties ?? {};
-    const localizedKey = i18n?.language === "en" ? `${key}_en` : key;
-    const value = properties[localizedKey] ?? properties[key];
-    return value === null || value === undefined || value === "" ? t("value.unavailable") : String(value);
-  }
-
-  function movementOf(feature) {
-    const value = normalize(feature.properties?.tipo_movimiento);
-    return Object.prototype.hasOwnProperty.call(colors, value) ? value : "desconocido";
-  }
 
   function movementLabel(feature) {
     return t(`movement.${movementOf(feature)}`);
   }
 
+  const popupContext = {
+    t,
+    template,
+    formatNumber,
+    formatUtcDate,
+    localizedProperty,
+    movementLabel,
+    demoMode,
+  };
+
   function styleFeature(feature) {
-    return {
-      color: colors[movementOf(feature)],
-      weight: feature === selectedFeature ? 6 : 3,
-      opacity: feature === selectedFeature ? 1 : 0.92,
-    };
-  }
-
-  function createFaultPopup(feature) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "fault-popup";
-    const title = document.createElement("h3");
-    title.textContent = localizedProperty(feature, "nombre");
-    wrapper.append(title);
-
-    const list = document.createElement("dl");
-    const rows = [
-      ["popup.system", "sistema"],
-      ["popup.movement", "tipo_movimiento"],
-      ["popup.originalMovement", "movimiento_original"],
-      ["popup.province", "provincia"],
-      ["popup.activity", "actividad"],
-      ["popup.confidence", "confianza"],
-      ["popup.scale", "escala"],
-      ["popup.source", "fuente"],
-      ["popup.reference", "reference"],
-      ["popup.catalogId", "catalog_id"],
-      ["popup.license", "licencia"],
-    ];
-    rows.forEach(([labelKey, key]) => {
-      const value = key === "tipo_movimiento" ? movementLabel(feature) : localizedProperty(feature, key);
-      if (value === t("value.unavailable")) return;
-      const term = document.createElement("dt");
-      const description = document.createElement("dd");
-      term.textContent = t(labelKey);
-      description.textContent = value;
-      list.append(term, description);
-    });
-    const explanation = document.createElement("p");
-    explanation.textContent = localizedProperty(feature, "descripcion");
-    wrapper.append(list, explanation);
-
-    const sourceUrl = feature.properties?.fuente_url;
-    if (typeof sourceUrl === "string") {
-      try {
-        const parsedUrl = new URL(sourceUrl);
-        if (parsedUrl.protocol === "https:") {
-          const link = document.createElement("a");
-          link.className = "event-link";
-          link.href = parsedUrl.href;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = `${t("popup.openSource")} ↗`;
-          wrapper.append(link);
-        }
-      } catch (error) {
-        console.warn("Invalid fault source URL", error);
-      }
-    }
-    return wrapper;
-  }
-
-  function createEvidencePopup(feature) {
-    const wrapper = document.createElement("div");
-    wrapper.className = "fault-popup evidence-popup";
-    const kicker = document.createElement("p");
-    kicker.className = "evidence-kicker";
-    kicker.textContent = t(`evidence.${feature.properties?.tipo}`);
-    const title = document.createElement("h3");
-    title.textContent = localizedProperty(feature, "nombre");
-    const list = document.createElement("dl");
-    [["popup.observation", "observacion"], ["popup.source", "fuente"]].forEach(([labelKey, key]) => {
-      const term = document.createElement("dt");
-      const description = document.createElement("dd");
-      term.textContent = t(labelKey);
-      description.textContent = localizedProperty(feature, key);
-      list.append(term, description);
-    });
-    wrapper.append(kicker, title, list);
-    return wrapper;
-  }
-
-  function earthquakeDepthClass(feature) {
-    const depth = Number(feature.geometry?.coordinates?.[2]);
-    if (!Number.isFinite(depth) || depth <= 30) return "shallow";
-    if (depth <= 70) return "intermediate";
-    if (depth <= 300) return "deep";
-    return "veryDeep";
-  }
-
-  function createEarthquakePopup(feature) {
-    const properties = feature.properties ?? {};
-    const depth = feature.geometry?.coordinates?.[2];
-    const magnitude = formatNumber(properties.mag);
-    const depthValue = Number(depth);
-    const depthLabel = Number.isFinite(depthValue) ? `${formatNumber(depthValue)} km` : t("value.unavailable");
-    const place = properties.place || t("value.unavailable");
-    const wrapper = document.createElement("div");
-    wrapper.className = "fault-popup earthquake-popup";
-
-    const title = document.createElement("h3");
-    title.textContent = `M ${magnitude} · ${place}`;
-    const list = document.createElement("dl");
-    const rows = [
-      [t("popup.magnitude"), magnitude],
-      [t("popup.depth"), depthLabel],
-      [t("popup.dateUtc"), formatUtcDate(properties.time)],
-      [t("popup.place"), place],
-      [t("popup.catalog"), properties.net ? `USGS · ${String(properties.net).toUpperCase()}` : "USGS"],
-    ];
-    rows.forEach(([label, value]) => {
-      const term = document.createElement("dt");
-      const description = document.createElement("dd");
-      term.textContent = label;
-      description.textContent = value;
-      list.append(term, description);
-    });
-    wrapper.append(title, list);
-
-    if (typeof properties.url === "string") {
-      try {
-        const eventUrl = new URL(properties.url);
-        if (eventUrl.protocol === "https:") {
-          const link = document.createElement("a");
-          link.className = "event-link";
-          link.href = eventUrl.href;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          link.textContent = `${t("popup.openEvent")} ↗`;
-          wrapper.append(link);
-        }
-      } catch (error) {
-        console.warn("Invalid USGS event URL", error);
-      }
-    }
-    return wrapper;
+    return faultStyle(feature, selectedFeature);
   }
 
   function featureId(feature) {
@@ -357,26 +189,27 @@ function initializeAtlas() {
   }
 
   function onEachFault(feature, layer) {
-    layer.bindPopup(createFaultPopup(feature));
+    layer.bindPopup(buildFaultPopup(feature, popupContext));
     layer.on("click", () => setSelectedFeature(feature));
     layer.on("mouseover", () => layer.setStyle({ weight: feature === selectedFeature ? 6 : 5 }));
     layer.on("mouseout", () => layer.setStyle(styleFeature(feature)));
   }
 
   const faultLayer = L.geoJSON([], { style: styleFeature, onEachFeature: onEachFault }).addTo(map);
+  map.createPane("evidence");
+  map.getPane("evidence").style.zIndex = "420";
   const evidenceLayer = L.geoJSON([], {
+    pane: "evidence",
+    style(feature) {
+      return ["Point", "MultiPoint"].includes(feature.geometry?.type)
+        ? evidencePointOptions(feature)
+        : evidenceStyle(feature);
+    },
     pointToLayer(feature, latlng) {
-      return L.circleMarker(latlng, {
-        radius: 7,
-        weight: 2,
-        color: "#102523",
-        fillColor: evidenceColors[feature.properties?.tipo] ?? "#6ee7c8",
-        fillOpacity: 0.95,
-        className: "evidence-marker",
-      });
+      return L.circleMarker(latlng, { pane: "evidence", ...evidencePointOptions(feature) });
     },
     onEachFeature(feature, layer) {
-      layer.bindPopup(createEvidencePopup(feature));
+      layer.bindPopup(buildEvidencePopup(feature, popupContext));
       layer.bindTooltip(t(`evidence.${feature.properties?.tipo}`), { direction: "top", offset: [0, -5] });
     },
   });
@@ -392,16 +225,17 @@ function initializeAtlas() {
         pane: "earthquakes",
         renderer: earthquakeRenderer,
         radius: Number.isFinite(magnitude) ? Math.max(4, Math.min(13, 1.5 + magnitude * 1.45)) : 4,
-        weight: 1.25,
+        weight: 1.1,
         color: "#ffffff",
-        fillColor: earthquakeColors[earthquakeDepthClass(feature)],
-        fillOpacity: 0.78,
-        opacity: 0.9,
+        fillColor: earthquakeColor(feature),
+        fillOpacity: 0.58,
+        opacity: 0.82,
+        dashArray: earthquakeDashArray(feature),
         className: "earthquake-marker",
       });
     },
     onEachFeature(feature, layer) {
-      layer.bindPopup(createEarthquakePopup(feature));
+      layer.bindPopup(buildEarthquakePopup(feature, popupContext));
       const magnitude = formatNumber(feature.properties?.mag);
       layer.bindTooltip(`M ${magnitude}`, { direction: "top", offset: [0, -4] });
     },
@@ -412,7 +246,18 @@ function initializeAtlas() {
     const selectedMovement = elements.movement.value;
     const properties = feature.properties ?? {};
     const searchableText = normalize(
-      [properties.nombre, properties.nombre_en, properties.provincia, properties.provincia_en, properties.sistema, properties.sistema_en]
+      [
+        properties.nombre,
+        properties.nombre_en,
+        properties.provincia,
+        properties.provincia_en,
+        properties.sistema,
+        properties.sistema_en,
+        properties.catalog_id,
+        properties.catalog_name,
+        properties.fuente,
+        properties.reference,
+      ]
         .filter(Boolean)
         .join(" "),
     );
@@ -468,7 +313,10 @@ function initializeAtlas() {
         button.dataset.featureId = featureId(feature);
         if (feature === selectedFeature) button.setAttribute("aria-current", "true");
         name.textContent = localizedProperty(feature, "nombre");
-        detail.textContent = `${localizedProperty(feature, "provincia")} · ${movementLabel(feature)}`;
+        const source = SOURCE_REGISTRY[catalogKey(feature)];
+        const catalogId = String(feature.properties?.catalog_id ?? feature.id ?? t("value.unavailable"));
+        const identity = source ? `${source.label} · ${catalogId}` : catalogId;
+        detail.textContent = `${localizedProperty(feature, "provincia")} · ${movementLabel(feature)} · ${identity}`;
         button.append(name, detail);
         button.addEventListener("click", () => zoomToFeature(feature));
         item.append(button);
@@ -509,6 +357,69 @@ function initializeAtlas() {
     if (!elements.evidenceToggle.checked && map.hasLayer(evidenceLayer)) map.removeLayer(evidenceLayer);
   }
 
+  function getEarthquakeFilters() {
+    return normalizeEarthquakeFilters({
+      days: elements.earthquakeDays.value,
+      minimumMagnitude: elements.earthquakeMinimumMagnitude.value,
+      depth: elements.earthquakeDepthFilter.value,
+    });
+  }
+
+  function locateEarthquake(feature) {
+    elements.earthquakeToggle.checked = true;
+    if (!map.hasLayer(earthquakeLayer)) earthquakeLayer.addTo(map);
+    const [longitude, latitude] = feature.geometry.coordinates;
+    map.setView([latitude, longitude], Math.max(map.getZoom(), 9));
+    earthquakeLayer.eachLayer((layer) => {
+      if (layer.feature === feature) layer.openPopup();
+    });
+    if (window.matchMedia("(max-width: 64rem)").matches) {
+      mapElement.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+        block: "start",
+      });
+    }
+  }
+
+  function renderEarthquakeList(features) {
+    elements.earthquakeList.replaceChildren();
+    elements.earthquakeListCount.textContent = String(features.length);
+    if (features.length === 0) {
+      const empty = document.createElement("li");
+      empty.className = "earthquake-list-empty";
+      empty.textContent = t("earthquakes.listEmpty");
+      elements.earthquakeList.append(empty);
+      return;
+    }
+    const maximumListedEvents = 200;
+    features.slice(0, maximumListedEvents).forEach((feature) => {
+      const properties = feature.properties ?? {};
+      const depth = Number(feature.geometry.coordinates?.[2]);
+      const item = document.createElement("li");
+      const button = document.createElement("button");
+      const title = document.createElement("strong");
+      const detail = document.createElement("small");
+      button.type = "button";
+      title.textContent = `M ${formatNumber(properties.mag)} · ${properties.place || t("value.unavailable")}`;
+      detail.textContent = `${formatUtcDate(properties.time)} · ${t("popup.depth")} ${
+        Number.isFinite(depth) ? `${formatNumber(depth)} km` : t("value.unavailable")
+      }`;
+      button.append(title, detail);
+      button.addEventListener("click", () => locateEarthquake(feature));
+      item.append(button);
+      elements.earthquakeList.append(item);
+    });
+    if (features.length > maximumListedEvents) {
+      const limitNotice = document.createElement("li");
+      limitNotice.className = "earthquake-list-empty";
+      limitNotice.textContent = template("earthquakes.listLimited", {
+        shown: maximumListedEvents,
+        total: features.length,
+      });
+      elements.earthquakeList.append(limitNotice);
+    }
+  }
+
   function updateEarthquakeStatus() {
     elements.earthquakeStatus.dataset.state = earthquakeState;
     if (earthquakeState === "loading") {
@@ -520,19 +431,21 @@ function initializeAtlas() {
       return;
     }
     elements.earthquakeStatus.textContent = template("earthquakes.loaded", {
-      count: earthquakeCatalog.length,
+      count: visibleEarthquakeCatalog.length,
       date: formatUtcDate(earthquakeGeneratedAt),
     });
   }
 
   function renderEarthquakes() {
+    visibleEarthquakeCatalog = filterEarthquakes(earthquakeCatalog, getEarthquakeFilters());
     earthquakeLayer.clearLayers();
-    earthquakeLayer.addData({ type: "FeatureCollection", features: earthquakeCatalog });
-    elements.earthquakeCount.textContent = String(earthquakeCatalog.length);
+    earthquakeLayer.addData({ type: "FeatureCollection", features: visibleEarthquakeCatalog });
+    elements.earthquakeCount.textContent = String(visibleEarthquakeCatalog.length);
     elements.earthquakeToggle.disabled = earthquakeState !== "loaded";
     if (earthquakeState === "error") elements.earthquakeToggle.checked = false;
     if (elements.earthquakeToggle.checked && !map.hasLayer(earthquakeLayer)) earthquakeLayer.addTo(map);
     if (!elements.earthquakeToggle.checked && map.hasLayer(earthquakeLayer)) map.removeLayer(earthquakeLayer);
+    renderEarthquakeList(visibleEarthquakeCatalog);
     updateEarthquakeStatus();
     updateSourceCount();
   }
@@ -544,27 +457,24 @@ function initializeAtlas() {
         .filter((value) => typeof value === "string" && value.trim() !== ""),
     );
     if (earthquakeCatalog.length > 0) sources.add("USGS");
+    if (map.hasLayer(hillshadeLayer)) sources.add("Esri World Hillshade");
     elements.sourceCount.textContent = String(sources.size);
   }
 
   async function loadEarthquakeData() {
+    const requestId = ++earthquakeRequestId;
+    const filters = getEarthquakeFilters();
     earthquakeState = "loading";
+    elements.earthquakeToggle.disabled = true;
     updateEarthquakeStatus();
     try {
-      const response = await fetch(buildEarthquakeUrl(), {
-        cache: "no-store",
-        headers: { Accept: "application/geo+json, application/json" },
+      const result = await loadRecentEarthquakes({
+        days: filters.days,
+        minimumMagnitude: filters.minimumMagnitude,
       });
-      if (!response.ok) throw new Error(`USGS query failed (${response.status})`);
-      const data = await response.json();
-      if (data?.type !== "FeatureCollection" || !Array.isArray(data.features)) {
-        throw new Error("Invalid USGS GeoJSON FeatureCollection");
-      }
-      earthquakeCatalog = data.features.filter(
-        (feature) => feature?.type === "Feature" && feature.geometry?.type === "Point" &&
-          Array.isArray(feature.geometry.coordinates) && feature.geometry.coordinates.length >= 2,
-      );
-      earthquakeGeneratedAt = Number(data.metadata?.generated) || Date.now();
+      if (requestId !== earthquakeRequestId) return;
+      earthquakeCatalog = result.features;
+      earthquakeGeneratedAt = result.generatedAt;
       earthquakeState = "loaded";
       if (!earthquakeAttributionAdded) {
         map.attributionControl.addAttribution(
@@ -573,6 +483,7 @@ function initializeAtlas() {
         earthquakeAttributionAdded = true;
       }
     } catch (error) {
+      if (requestId !== earthquakeRequestId) return;
       console.error(error);
       earthquakeCatalog = [];
       earthquakeGeneratedAt = null;
@@ -581,25 +492,10 @@ function initializeAtlas() {
     renderEarthquakes();
   }
 
-  function validateFeatureCollection(data, acceptedGeometry) {
-    if (data?.type !== "FeatureCollection" || !Array.isArray(data.features)) throw new Error("Invalid GeoJSON FeatureCollection");
-    const invalidFeature = data.features.find(
-      (feature) => feature?.type !== "Feature" || !acceptedGeometry.includes(feature.geometry?.type),
-    );
-    if (invalidFeature) throw new Error("Unsupported GeoJSON geometry");
-    return data.features;
-  }
-
-  async function loadGeoJson(url, acceptedGeometry) {
-    const response = await fetch(url, { cache: "no-store" });
-    if (!response.ok) throw new Error(`Could not load ${url} (${response.status})`);
-    return validateFeatureCollection(await response.json(), acceptedGeometry);
-  }
-
   async function loadAtlasData() {
     const [faultResult, evidenceResult] = await Promise.allSettled([
-      loadGeoJson(catalogUrl, ["LineString", "MultiLineString"]),
-      loadGeoJson(evidenceUrl, ["Point", "MultiPoint"]),
+      loadGeoJson(catalogUrl, DATASETS.faults.geometries),
+      loadGeoJson(evidenceUrl, DATASETS.evidence.geometries),
     ]);
 
     if (faultResult.status === "fulfilled") {
@@ -618,7 +514,7 @@ function initializeAtlas() {
 
     if (evidenceResult.status === "fulfilled") {
       evidenceCatalog = evidenceResult.value;
-      elements.evidenceToggle.checked = demoMode && evidenceCatalog.length > 0;
+      elements.evidenceToggle.checked = evidenceCatalog.length > 0;
       renderEvidence();
     } else {
       console.error(evidenceResult.reason);
@@ -646,6 +542,31 @@ function initializeAtlas() {
     });
   });
 
+  function updateHillshadeOpacity() {
+    const opacity = Number(elements.hillshadeOpacity.value) / 100;
+    hillshadeLayer.setOpacity(opacity);
+    elements.hillshadeOpacityValue.value = `${Math.round(opacity * 100)}%`;
+  }
+  updateHillshadeOpacity();
+
+  elements.hillshadeToggle.addEventListener("change", () => {
+    if (elements.hillshadeToggle.checked) hillshadeLayer.addTo(map);
+    else map.removeLayer(hillshadeLayer);
+    elements.hillshadeOpacity.disabled = !elements.hillshadeToggle.checked;
+    updateSourceCount();
+  });
+  elements.hillshadeOpacity.addEventListener("input", updateHillshadeOpacity);
+
+  function updateMinimumMagnitudeValue() {
+    elements.earthquakeMinimumMagnitudeValue.value = Number(
+      elements.earthquakeMinimumMagnitude.value,
+    ).toLocaleString(i18n.language, {
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    });
+  }
+  updateMinimumMagnitudeValue();
+
   elements.evidenceToggle.addEventListener("change", () => {
     if (elements.evidenceToggle.checked) evidenceLayer.addTo(map);
     else map.removeLayer(evidenceLayer);
@@ -653,6 +574,12 @@ function initializeAtlas() {
   elements.earthquakeToggle.addEventListener("change", () => {
     if (elements.earthquakeToggle.checked) earthquakeLayer.addTo(map);
     else map.removeLayer(earthquakeLayer);
+  });
+  elements.earthquakeDays.addEventListener("change", loadEarthquakeData);
+  elements.earthquakeMinimumMagnitude.addEventListener("input", updateMinimumMagnitudeValue);
+  elements.earthquakeMinimumMagnitude.addEventListener("change", loadEarthquakeData);
+  elements.earthquakeDepthFilter.addEventListener("change", () => {
+    if (earthquakeState === "loaded") renderEarthquakes();
   });
   elements.search.addEventListener("input", renderCatalog);
   elements.movement.addEventListener("change", renderCatalog);
@@ -665,7 +592,7 @@ function initializeAtlas() {
   elements.reset.addEventListener("click", () => {
     map.closePopup();
     setSelectedFeature(null);
-    map.fitBounds(ECUADOR_CONTINENTAL_BOUNDS);
+    map.fitBounds(ecuadorBounds);
   });
 
   window.addEventListener("atlas:languagechange", () => {
@@ -675,6 +602,7 @@ function initializeAtlas() {
     }
     renderCatalog();
     renderEvidence();
+    updateMinimumMagnitudeValue();
     if (earthquakeState === "loaded") renderEarthquakes();
     else updateEarthquakeStatus();
     if (mapError.hidden === false) {

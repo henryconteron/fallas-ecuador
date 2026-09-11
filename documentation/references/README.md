@@ -27,7 +27,7 @@ Las trazas derivadas de trabajos propios se identificarán explícitamente como 
 | Fallas de los Andes del norte | Veloza et al. (2012), [Open-source archive of active faults for northwest South America](https://doi.org/10.1130/GSAT-G156A.1) | Referencia científica y control de nombres, geometría y cinemática | **Aprobada como referencia**; la geometría se incorporará mediante GEM |
 | Fallas de Ecuador | Egüez et al. (2003), [Database and Map of Quaternary Faults and Folds of Ecuador and its Offshore Regions](https://pubs.usgs.gov/of/2003/ofr-03-289/) | Contraste del inventario nacional y de la nomenclatura | **Aprobada como referencia**; compilación antigua y de escala regional |
 | Fallas de Sudamérica | Costa et al. (2020), [Hazardous faults of South America: compilation and overview](https://doi.org/10.1016/j.jsames.2020.102837) | Contraste científico regional | **Pendiente** verificar la licencia de cualquier archivo geométrico suplementario |
-| Límites para selección | [geoBoundaries — Ecuador ADM0 y ADM1](https://www.geoboundaries.org/) | Selección espacial y asignación preliminar de provincias | **Aprobada**: CC0 1.0 |
+| Límites para selección | [geoBoundaries — Ecuador ADM0 y ADM1](https://www.geoboundaries.org/) | Selección espacial y asignación preliminar de provincias | **Aprobada**: gbOpen, CC BY 4.0 |
 | Sismicidad de Ecuador | [Instituto Geofísico de la Escuela Politécnica Nacional](https://www.igepn.edu.ec/) | Fuente oficial nacional y enlace de consulta | **Restringida para redistribución** |
 | Sismicidad consultable por API | [USGS Earthquake Catalog — FDSN Event Web Service](https://earthquake.usgs.gov/fdsnws/event/1/) | Capa interactiva de eventos recientes | **Aprobada** con atribución |
 
@@ -35,7 +35,7 @@ Las trazas derivadas de trabajos propios se identificarán explícitamente como 
 
 ### Fallas
 
-La capa inicial se obtuvo del archivo armonizado de GEM, identificado por el blob `fb164770b529695544fa864abe2cc9dd8aa5793d`. Se seleccionaron 145 geometrías originales de los catálogos SARA y *Active Tectonics of the Andes* que intersectan el límite de Ecuador de geoBoundaries. No se publicó el archivo mundial completo y las geometrías seleccionadas no fueron recortadas ni simplificadas.
+La capa inicial se obtuvo del archivo armonizado de GEM en el commit `850fd05b48841eb806d61a37043b5567f5bb99dd`, identificado por el blob `fb164770b529695544fa864abe2cc9dd8aa5793d`. Se seleccionaron 145 geometrías originales de los catálogos SARA y *Active Tectonics of the Andes* que intersectan el límite de Ecuador de geoBoundaries. No se publicó el archivo mundial completo y las geometrías seleccionadas no fueron recortadas ni simplificadas.
 
 La versión publicada contiene 61 registros de SARA y 84 de *Active Tectonics of the Andes*. Ambos catálogos pueden ofrecer interpretaciones parcialmente superpuestas. Esas coincidencias se conservan para no eliminar información científica de manera automática y se distinguen mediante `catalog_id`, `catalog_name` y `fuente`.
 
@@ -60,6 +60,18 @@ Referencia principal:
 
 La base de Egüez et al. (2003) fue compilada aproximadamente a escala 1:1 250 000 y no debe interpretarse a escalas más detalladas que 1:750 000. Por ello se usará como control regional, no como una traza de precisión local.
 
+### Evidencias geomorfológicas iniciales
+
+La primera capa de evidencias toma descripciones de Eguez et al. (2003), USGS Open-File Report
+03-289, para tres secciones: EC-27a Billecocha, EC-27b Huayrapungo y EC-50a Pallatanga. El informe
+documenta escarpes y depresiones en Billecocha, facetas triangulares asociadas a escarpes en
+Huayrapungo y drenajes desplazados en el valle del río Pangor para Pallatanga.
+
+El informe no aporta un inventario digital de polígonos individuales para estas formas. Por ello,
+el atlas coloca puntos regionales representativos sobre trazas GEM de nombre y localización
+compatibles. Se etiquetan como `representative_location`, confianza media y precisión regional. No
+deben utilizarse para medir desplazamientos, alturas, áreas ni distancias locales.
+
 ### Sismicidad
 
 El IG-EPN es la referencia institucional principal para el Ecuador. Sin embargo, sus [términos de descarga](https://www.igepn.edu.ec/descarga-de-datos/) establecen uso exclusivo e intransferible y prohíben redistribuir por Internet los datos originales. Por tanto, sin autorización escrita del Instituto:
@@ -68,7 +80,7 @@ El IG-EPN es la referencia institucional principal para el Ecuador. Sin embargo,
 - no se presentarán sus eventos como una capa propia descargable;
 - sí se enlazarán sus mapas oficiales, incluyendo [Sismicidad tectónica de los últimos 365 días](https://www.igepn.edu.ec/mapas/sismicidad/mapa-sismicidad-tectonica-365.html).
 
-Para la primera capa sísmica interactiva se usará el servicio FDSN del USGS, que entrega GeoJSON mediante consultas por fecha, magnitud y extensión geográfica. La interfaz mostrará con claridad:
+Para la primera capa sísmica interactiva se usará el servicio FDSN del USGS, que entrega GeoJSON mediante consultas por fecha, magnitud, tipo de evento y extensión geográfica. La consulta fija `eventtype=earthquake` para no presentar explosiones u otros eventos como sismos tectónicos. La interfaz mostrará con claridad:
 
 - fuente y enlace al evento original;
 - fecha y hora en UTC;

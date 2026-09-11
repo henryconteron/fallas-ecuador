@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://henryconteron.github.io/fallas-ecuador/data/schemas/estructuras.schema.json",
+  "title": "Indicadores geomorfológicos del atlas Fallas del Ecuador",
+  "type": "object",
+  "required": ["type", "name", "metadata", "features"],
+  "properties": {
+    "type": { "const": "FeatureCollection" },
+    "name": { "type": "string", "minLength": 1 },
+    "metadata": {
+      "type": "object",
+      "required": ["status", "feature_count", "source", "method_note"]
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "id", "properties", "geometry"],
+        "properties": {
+          "type": { "const": "Feature" },
+          "id": { "type": "string", "minLength": 1 },
+          "properties": {
+            "type": "object",
+            "required": ["nombre", "tipo", "observacion", "confianza", "precision", "metodo_localizacion", "geometry_role", "fault_catalog_ids", "source_section", "fuente", "fuente_url", "licencia"],
+            "properties": {
+              "tipo": { "enum": ["escarpe", "faceta_triangular", "drenaje_desplazado", "laguna_sag"] },
+              "confianza": { "enum": ["alta", "media", "baja"] },
+              "precision": { "enum": ["sitio", "local", "regional"] },
+              "geometry_role": { "enum": ["mapped_feature", "representative_location"] },
+              "fault_catalog_ids": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string", "minLength": 1 }
+              },
+              "fuente_url": { "type": "string", "format": "uri", "pattern": "^https://" }
+            }
+          },
+          "geometry": {
+            "type": "object",
+            "required": ["type", "coordinates"],
+            "properties": {
+              "type": { "enum": ["Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon"] },
+              "coordinates": { "type": "array", "minItems": 1 }
+            }
+          }
+        }
+      }
+    }
+  }
+}

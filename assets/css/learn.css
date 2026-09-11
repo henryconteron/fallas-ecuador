@@ -119,6 +119,13 @@
   border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
+.hero-visual picture,
+.clue-card picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .hero-visual img {
   width: 100%;
   max-height: 71vh;
@@ -136,7 +143,7 @@
   background: #11191a;
   color: #aab7b9;
   padding: 0.7rem 0.2rem 0;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.04em;
 }
 
@@ -145,7 +152,7 @@
   right: 1.2rem;
   bottom: 1.5rem;
   color: rgba(255, 255, 255, 0.35);
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.12em;
   writing-mode: vertical-rl;
 }
@@ -304,7 +311,7 @@
 .type-tag {
   margin: 1.5rem 0 0;
   color: #79c5bc;
-  font-size: 0.67rem;
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.13em;
   text-transform: uppercase;
@@ -451,7 +458,7 @@
 }
 
 .facts-grid article + article { border-left: 1px solid rgba(255, 255, 255, 0.35); }
-.facts-grid span { font-size: 0.68rem; font-weight: 800; }
+.facts-grid span { font-size: 0.75rem; font-weight: 800; }
 .facts-grid p { margin-top: 3.5rem; font-family: "Newsreader", serif; font-size: 1.55rem; line-height: 1.25; }
 
 .reading-section {

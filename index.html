@@ -76,6 +76,14 @@
               <span><i class="unknown"></i><span data-i18n="movement.desconocido">No determinado</span></span>
             </div>
             <div class="legend-divider" aria-hidden="true"></div>
+            <p class="legend-subtitle" data-i18n="legend.evidence">Indicadores geomorfológicos</p>
+            <div class="legend-items evidence-legend" data-i18n-aria="legend.evidenceAria" aria-label="Tipos de indicadores geomorfológicos">
+              <span><i class="evidence-symbol scarp"></i><span data-i18n="evidence.escarpe">Escarpe de falla</span></span>
+              <span><i class="evidence-symbol facet"></i><span data-i18n="evidence.faceta_triangular">Faceta triangular</span></span>
+              <span><i class="evidence-symbol stream"></i><span data-i18n="evidence.drenaje_desplazado">Drenaje desplazado</span></span>
+              <span><i class="evidence-symbol sag"></i><span data-i18n="evidence.laguna_sag">Laguna de hundimiento</span></span>
+            </div>
+            <div class="legend-divider" aria-hidden="true"></div>
             <p class="legend-subtitle" data-i18n="legend.earthquakes">Sismos por profundidad</p>
             <div class="legend-items earthquake-legend" data-i18n-aria="legend.depthAria" aria-label="Profundidad de los sismos">
               <span><i class="earthquake-depth shallow"></i><span data-i18n="earthquakes.shallow">0–30 km</span></span>
@@ -103,21 +111,65 @@
 
           <section class="layer-panel" aria-labelledby="layers-title">
             <div class="section-heading"><h2 id="layers-title" data-i18n="layers.title">Capas interpretativas</h2></div>
+            <label class="layer-switch" for="hillshade-toggle">
+              <span><strong data-i18n="layers.hillshade">Relieve sombreado</strong><small data-i18n="layers.hillshadeHint">Esri World Hillshade · contexto regional</small></span>
+              <input id="hillshade-toggle" type="checkbox" checked />
+              <span class="switch-track" aria-hidden="true"><span></span></span>
+            </label>
+            <label class="opacity-control" for="hillshade-opacity">
+              <span data-i18n="layers.hillshadeOpacity">Intensidad del relieve</span>
+              <input id="hillshade-opacity" type="range" min="0" max="70" value="34" step="1" />
+              <output id="hillshade-opacity-value" for="hillshade-opacity">34%</output>
+            </label>
             <label class="layer-switch" for="evidence-toggle">
               <span><strong data-i18n="layers.evidence">Indicadores geomorfológicos</strong><small data-i18n="layers.evidenceHint">Escarpes, facetas y drenajes desplazados</small></span>
               <input id="evidence-toggle" type="checkbox" disabled />
               <span class="switch-track" aria-hidden="true"><span></span></span>
             </label>
             <label class="layer-switch" for="earthquake-toggle">
-              <span><strong data-i18n="layers.earthquakes">Sismicidad reciente</strong><small data-i18n="layers.earthquakesHint">USGS · últimos 365 días · M ≥ 3,0</small></span>
-              <input id="earthquake-toggle" type="checkbox" checked disabled />
+              <span><strong data-i18n="layers.earthquakes">Sismicidad reciente</strong><small data-i18n="layers.earthquakesHint">USGS · consulta configurable</small></span>
+              <input id="earthquake-toggle" type="checkbox" disabled />
               <span class="switch-track" aria-hidden="true"><span></span></span>
             </label>
+            <fieldset id="earthquake-filters" class="seismic-filters">
+              <legend data-i18n="earthquakes.filtersTitle">Filtrar sismicidad</legend>
+              <label for="earthquake-days">
+                <span data-i18n="earthquakes.period">Periodo</span>
+                <select id="earthquake-days">
+                  <option value="7" data-i18n="earthquakes.days7">7 días</option>
+                  <option value="30" selected data-i18n="earthquakes.days30">30 días</option>
+                  <option value="90" data-i18n="earthquakes.days90">90 días</option>
+                  <option value="365" data-i18n="earthquakes.days365">365 días</option>
+                </select>
+              </label>
+              <label for="earthquake-min-magnitude">
+                <span data-i18n="earthquakes.minimumMagnitude">Magnitud mínima</span>
+                <span class="seismic-range">
+                  <input id="earthquake-min-magnitude" type="range" min="2.5" max="6" value="3" step="0.5" />
+                  <output id="earthquake-min-magnitude-value" for="earthquake-min-magnitude">3,0</output>
+                </span>
+              </label>
+              <label for="earthquake-depth-filter">
+                <span data-i18n="earthquakes.depthFilter">Profundidad</span>
+                <select id="earthquake-depth-filter">
+                  <option value="all" data-i18n="earthquakes.allDepths">Todas</option>
+                  <option value="shallow" data-i18n="earthquakes.shallow">0–30 km</option>
+                  <option value="intermediate" data-i18n="earthquakes.intermediate">30–70 km</option>
+                  <option value="deep" data-i18n="earthquakes.deep">70–300 km</option>
+                  <option value="veryDeep" data-i18n="earthquakes.veryDeep">Más de 300 km</option>
+                </select>
+              </label>
+            </fieldset>
             <p id="earthquake-status" class="layer-status" role="status" data-i18n="earthquakes.loading">Consultando el catálogo del USGS…</p>
             <a class="official-source-link" href="https://www.igepn.edu.ec/mapas/sismicidad/mapa-sismicidad-tectonica-365.html" target="_blank" rel="noopener noreferrer">
               <span data-i18n="layers.officialEarthquakes">Ver mapa oficial del IG-EPN</span><span aria-hidden="true">↗</span>
             </a>
             <p class="layer-caution" data-i18n="earthquakes.caution">La cercanía entre un epicentro y una traza no demuestra que esa falla originó el sismo.</p>
+            <details class="earthquake-results">
+              <summary><span data-i18n="earthquakes.listTitle">Lista accesible de sismos</span><span id="earthquake-list-count">0</span></summary>
+              <p data-i18n="earthquakes.listHint">Selecciona un evento para localizarlo y abrir su ficha en el mapa.</p>
+              <ul id="earthquake-list" data-i18n-aria="earthquakes.listAria" aria-label="Sismos que cumplen los filtros"></ul>
+            </details>
           </section>
 
           <section class="filters" aria-labelledby="filters-title">
@@ -159,6 +211,6 @@
 
     <script src="assets/js/i18n.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="assets/js/map.js"></script>
+    <script type="module" src="assets/js/map.js"></script>
   </body>
 </html>
