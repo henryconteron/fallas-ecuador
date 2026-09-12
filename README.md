@@ -21,6 +21,8 @@ the Andes*. La sismicidad reciente se consulta mediante el servicio FDSN del USG
 - control independiente para activar o desactivar las fallas sin perder el catálogo de búsqueda;
 - primera experiencia **Agua/Cielo** con tasa de precipitación NASA GPM IMERG por fecha y
   opacidad, servida mediante NASA GIBS sin descargar mosaicos;
+- temperatura del aire diurna Aqua/AIRS por fecha y opacidad en **Cielo**, con escala térmica
+  explícita y advertencias para no confundirla con máximas, sensación térmica o pronóstico;
 - observación diaria de inundaciones NASA LANCE VIIRS a 250 m, separada de la lluvia y presentada
   como señal satelital que requiere validación oficial y de campo;
 - cuencas hidrográficas INAMHI/MAATE servidas por WMS, con identificación puntual del nombre y
@@ -65,6 +67,7 @@ fallas-ecuador/
 │       ├── map.js
 │       └── map/
 │           ├── basins.js
+│           ├── air-temperature.js
 │           ├── config.js
 │           ├── data.js
 │           ├── flood.js
@@ -95,6 +98,7 @@ fallas-ecuador/
 │   └── validate-catalog.mjs
 ├── tests/
 │   ├── test_build_fault_catalog.py
+│   ├── test-air-temperature.mjs
 │   ├── test-basins.mjs
 │   ├── test-flood.mjs
 │   ├── test-i18n.mjs
@@ -246,6 +250,19 @@ la humedad antecedente, el relieve, los suelos, el drenaje y la ocupación de la
 seguimiento hidrometeorológico nacional, el atlas mantiene un enlace explícito a
 INAMHI–GEOGLOWS y conserva a INAMHI como fuente institucional en evaluación para futuras capas de
 estaciones, caudales y alertas.
+
+## Temperatura del aire satelital
+
+La vista Cielo incorpora `AIRS_L3_Surface_Air_Temperature_Daily_Day`, un producto diario L3 de
+Aqua/AIRS servido mediante WMS de NASA GIBS. Su cuadrícula nativa es de 1° × 1° y la escala oficial
+abarca de 200 a 320 K (aproximadamente −73 a 47 °C). El selector ofrece una ventana reciente de
+90 días y comienza seis días antes de la fecha actual para respetar la latencia habitual del
+producto.
+
+La capa representa temperatura del aire próxima a la superficie durante el paso diurno del
+satélite. No equivale a la temperatura máxima diaria, la sensación térmica, una medición de estación
+ni un pronóstico; tampoco debe interpretarse con precisión urbana debido al tamaño de sus celdas.
+Su valor educativo está en comparar patrones regionales con precipitación, altitud y relieve.
 
 ## Inundación observada
 

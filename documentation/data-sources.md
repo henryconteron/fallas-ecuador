@@ -32,6 +32,7 @@ fuente original.
 | Agua | INAMHI / MAATE | cuencas hidrográficas | WMS y consulta puntual WFS públicos | connected |
 | Agua | INAMHI GEOGLOWS | pronósticos e históricos de caudal | servicio por verificar | candidate |
 | Agua/Cielo | NASA GPM / GIBS | tasa de precipitación IMERG por día | WMS público de GIBS | connected |
+| Cielo | NASA Aqua / AIRS / GIBS | temperatura del aire diurna por día | WMS público de GIBS | connected |
 | Agua/Riesgo | NASA LANCE / VIIRS | agua superficial e inundación observada en 1 día | WMS público de GIBS | connected |
 | Vida | NASA FIRMS / GIBS | anomalías térmicas VIIRS por día | WMS público de GIBS | connected |
 | Vida | MapBiomas Ecuador / SNMB | cobertura y cambio de bosque | plataforma o descarga | candidate |
@@ -50,7 +51,7 @@ fuente original.
 ## Primera experiencia transversal
 
 `Explícame este lugar` relaciona solamente las capas activas: coordenadas, falla, evidencia
-geomorfológica, sismo reciente y estación en transmisión más próxima. Si las visualizaciones térmica o de precipitación están activas,
+geomorfológica, sismo reciente y estación en transmisión más próxima. Si las visualizaciones térmica, de precipitación o temperatura del aire están activas,
 también registra su fecha y alcance, pero no afirma que el píxel seleccionado contenga una
 detección o valor exacto porque los WMS no exponen atributos puntuales en esta interfaz. Las
 siguientes iteraciones añadirán, solo cuando las fuentes estén validadas, cuencas, caudales,
@@ -89,6 +90,19 @@ La visualización no sustituye pluviómetros, pronósticos ni alertas. Tampoco p
 habrá inundación: se requiere integrar duración de la lluvia, humedad antecedente, pendiente,
 suelos, drenaje, caudal y exposición. INAMHI–GEOGLOWS se enlaza como referencia nacional de
 consulta mientras se documentan sus servicios antes de convertirlos en capas interoperables.
+
+## Temperatura del aire Aqua/AIRS
+
+La capa `AIRS_L3_Surface_Air_Temperature_Daily_Day` es una visualización diaria L3 del instrumento
+AIRS a bordo de Aqua, servida por NASA GIBS mediante WMS EPSG:3857. La colección AIRS3STD V006
+ofrece una cuadrícula global de 1° × 1°. El atlas consulta una fecha reciente, conserva la
+atribución de NASA y reproduce la escala oficial de 200 a 320 K (aproximadamente −73 a 47 °C).
+
+El dato describe temperatura del aire próxima a la superficie durante el paso diurno del satélite;
+no es temperatura máxima diaria, sensación térmica, pronóstico ni observación de una estación. La
+resolución no permite conclusiones a escala de barrio y pueden existir fechas sin cobertura. El
+selector se limita a 90 días y propone una fecha con seis días de retraso para reducir consultas
+vacías debidas a la latencia de publicación.
 
 ## Cuencas INAMHI / MAATE
 

@@ -76,6 +76,19 @@ export const SOURCE_CATALOG = Object.freeze([
     url: "https://gpm.nasa.gov/data/imerg",
   },
   {
+    id: "nasa-airs-air-temperature",
+    systems: ["sky"],
+    status: "connected",
+    access: "NASA GIBS WMS",
+    institution: "NASA Aqua / AIRS / GIBS",
+    name: { es: "Temperatura del aire diurna", en: "Daytime surface air temperature" },
+    purpose: {
+      es: "Contexto atmosférico diario en una cuadrícula global de 1°",
+      en: "Daily atmospheric context on a global 1° grid",
+    },
+    url: "https://gibs.earthdata.nasa.gov/layer-metadata/v1.0/AIRS_L3_Surface_Air_Temperature_Daily_Day.json",
+  },
+  {
     id: "nasa-viirs-flood",
     systems: ["water", "risk"],
     status: "connected",

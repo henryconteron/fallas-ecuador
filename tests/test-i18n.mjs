@@ -50,6 +50,9 @@ const keys = [
     ...["ready", "visible", "altitude", "transmitting", "placeLabel"].map(
       (field) => `stations.${field}`,
     ),
+    ...["off", "loading", "loaded", "error", "placeLabel", "placeActive", "placeDetail"].map(
+      (field) => `airTemperature.${field}`,
+    ),
     ...["normal", "reverse", "strike"].flatMap((scenario) =>
       ["kicker", "question", "clue", "imageAlt", "explanation"].map(
         (field) => `lab.scenario.${scenario}.${field}`,

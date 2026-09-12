@@ -23,6 +23,12 @@ import {
 import { nearestFeature } from "./map/place.js";
 import { floodDateRange, FLOOD_SOURCE, floodWmsOptions, normalizeFloodDate } from "./map/flood.js";
 import {
+  AIR_TEMPERATURE_SOURCE,
+  airTemperatureDateRange,
+  airTemperatureWmsOptions,
+  normalizeAirTemperatureDate,
+} from "./map/air-temperature.js";
+import {
   normalizePrecipitationDate,
   precipitationDateRange,
   PRECIPITATION_SOURCE,
@@ -51,6 +57,7 @@ if (typeof window.L === "undefined") {
   document.querySelector("#fault-toggle").disabled = true;
   document.querySelector("#basin-toggle").disabled = true;
   document.querySelector("#station-toggle").disabled = true;
+  document.querySelector("#air-temperature-toggle").disabled = true;
   document.querySelector("#flood-toggle").disabled = true;
   document.querySelector("#earthquake-toggle").disabled = true;
   document.querySelector(".legend").hidden = true;
@@ -157,6 +164,14 @@ function initializeAtlas() {
     { ...precipitationWmsOptions(precipitationRange.selected), pane: "precipitation" },
   );
 
+  const airTemperatureRange = airTemperatureDateRange();
+  map.createPane("air-temperature");
+  map.getPane("air-temperature").style.zIndex = "280";
+  const airTemperatureLayer = L.tileLayer.wms(
+    AIR_TEMPERATURE_SOURCE.endpoint,
+    { ...airTemperatureWmsOptions(airTemperatureRange.selected), pane: "air-temperature" },
+  );
+
   const floodRange = floodDateRange();
   map.createPane("flood-observation");
   map.getPane("flood-observation").style.zIndex = "290";
@@ -202,6 +217,12 @@ function initializeAtlas() {
     precipitationOpacity: document.querySelector("#precipitation-opacity"),
     precipitationOpacityValue: document.querySelector("#precipitation-opacity-value"),
     precipitationStatus: document.querySelector("#precipitation-status"),
+    airTemperatureCard: document.querySelector("#air-temperature-layer-card"),
+    airTemperatureToggle: document.querySelector("#air-temperature-toggle"),
+    airTemperatureDate: document.querySelector("#air-temperature-date"),
+    airTemperatureOpacity: document.querySelector("#air-temperature-opacity"),
+    airTemperatureOpacityValue: document.querySelector("#air-temperature-opacity-value"),
+    airTemperatureStatus: document.querySelector("#air-temperature-status"),
     floodCard: document.querySelector("#flood-layer-card"),
     floodToggle: document.querySelector("#flood-toggle"),
     floodDate: document.querySelector("#flood-date"),
@@ -287,6 +308,8 @@ function initializeAtlas() {
   let stationState = "loading";
   let precipitationState = "off";
   let precipitationTileErrors = 0;
+  let airTemperatureState = "off";
+  let airTemperatureTileErrors = 0;
   let floodState = "off";
   let floodTileErrors = 0;
   let thermalState = "off";
@@ -296,6 +319,9 @@ function initializeAtlas() {
   elements.precipitationDate.min = precipitationRange.min;
   elements.precipitationDate.max = precipitationRange.max;
   elements.precipitationDate.value = precipitationRange.selected;
+  elements.airTemperatureDate.min = airTemperatureRange.min;
+  elements.airTemperatureDate.max = airTemperatureRange.max;
+  elements.airTemperatureDate.value = airTemperatureRange.selected;
   elements.floodDate.min = floodRange.min;
   elements.floodDate.max = floodRange.max;
   elements.floodDate.value = floodRange.selected;
@@ -360,6 +386,42 @@ function initializeAtlas() {
     if (precipitationTileErrors >= 2) {
       precipitationState = "error";
       updatePrecipitationStatus();
+    }
+  });
+
+  function updateAirTemperatureStatus() {
+    elements.airTemperatureStatus.dataset.state = airTemperatureState;
+    if (airTemperatureState === "off") {
+      elements.airTemperatureStatus.textContent = t("airTemperature.off");
+    } else if (airTemperatureState === "loading") {
+      elements.airTemperatureStatus.textContent = template("airTemperature.loading", {
+        date: elements.airTemperatureDate.value,
+      });
+    } else if (airTemperatureState === "error") {
+      elements.airTemperatureStatus.textContent = t("airTemperature.error");
+    } else {
+      elements.airTemperatureStatus.textContent = template("airTemperature.loaded", {
+        date: elements.airTemperatureDate.value,
+      });
+    }
+  }
+
+  airTemperatureLayer.on("loading", () => {
+    if (!map.hasLayer(airTemperatureLayer)) return;
+    airTemperatureState = "loading";
+    airTemperatureTileErrors = 0;
+    updateAirTemperatureStatus();
+  });
+  airTemperatureLayer.on("load", () => {
+    if (!map.hasLayer(airTemperatureLayer)) return;
+    airTemperatureState = airTemperatureTileErrors >= 2 ? "error" : "loaded";
+    updateAirTemperatureStatus();
+  });
+  airTemperatureLayer.on("tileerror", () => {
+    airTemperatureTileErrors += 1;
+    if (airTemperatureTileErrors >= 2) {
+      airTemperatureState = "error";
+      updateAirTemperatureStatus();
     }
   });
 
@@ -703,6 +765,14 @@ function initializeAtlas() {
       ));
     }
 
+    if (map.hasLayer(airTemperatureLayer)) {
+      elements.placeResults.append(createPlaceResult(
+        t("airTemperature.placeLabel"),
+        t("airTemperature.placeActive"),
+        template("airTemperature.placeDetail", { date: elements.airTemperatureDate.value }),
+      ));
+    }
+
     if (map.hasLayer(floodLayer)) {
       elements.placeResults.append(createPlaceResult(
         t("flood.placeLabel"),
@@ -816,6 +886,7 @@ function initializeAtlas() {
       basins: map.hasLayer(basinLayer),
       stations: map.hasLayer(stationLayer),
       precipitation: map.hasLayer(precipitationLayer),
+      "air-temperature": map.hasLayer(airTemperatureLayer),
       flood: map.hasLayer(floodLayer),
       thermal: map.hasLayer(thermalLayer),
       earthquakes: map.hasLayer(earthquakeLayer),
@@ -1067,6 +1138,7 @@ function initializeAtlas() {
     if (map.hasLayer(stationLayer)) sources.add("INAMHI Red Hidrometeorológica");
     if (map.hasLayer(thermalLayer)) sources.add("NASA FIRMS / GIBS");
     if (map.hasLayer(precipitationLayer)) sources.add("NASA GPM IMERG / GIBS");
+    if (map.hasLayer(airTemperatureLayer)) sources.add("NASA Aqua AIRS / GIBS");
     if (map.hasLayer(floodLayer)) sources.add("NASA LANCE VIIRS / GIBS");
     elements.sourceCount.textContent = String(sources.size);
   }
@@ -1342,6 +1414,45 @@ function initializeAtlas() {
   });
   elements.precipitationOpacity.addEventListener("input", updatePrecipitationOpacity);
 
+  function updateAirTemperatureOpacity() {
+    const opacity = Number(elements.airTemperatureOpacity.value) / 100;
+    airTemperatureLayer.setOpacity(opacity);
+    elements.airTemperatureOpacityValue.value = `${Math.round(opacity * 100)}%`;
+  }
+  updateAirTemperatureOpacity();
+
+  elements.airTemperatureToggle.addEventListener("change", () => {
+    const active = elements.airTemperatureToggle.checked;
+    elements.airTemperatureDate.disabled = !active;
+    elements.airTemperatureOpacity.disabled = !active;
+    if (active) {
+      airTemperatureState = "loading";
+      airTemperatureTileErrors = 0;
+      airTemperatureLayer.addTo(map);
+    } else {
+      map.removeLayer(airTemperatureLayer);
+      airTemperatureState = "off";
+    }
+    updateAirTemperatureStatus();
+    updateLegendVisibility();
+    updateSourceCount();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+
+  elements.airTemperatureDate.addEventListener("change", () => {
+    elements.airTemperatureDate.value = normalizeAirTemperatureDate(
+      elements.airTemperatureDate.value,
+      airTemperatureRange,
+    );
+    airTemperatureState = "loading";
+    airTemperatureTileErrors = 0;
+    airTemperatureLayer.setParams({ time: elements.airTemperatureDate.value }, false);
+    airTemperatureLayer.redraw();
+    updateAirTemperatureStatus();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+  elements.airTemperatureOpacity.addEventListener("input", updateAirTemperatureOpacity);
+
   function updateFloodOpacity() {
     const opacity = Number(elements.floodOpacity.value) / 100;
     floodLayer.setOpacity(opacity);
@@ -1489,6 +1600,7 @@ function initializeAtlas() {
     else updateStationStatus();
     updateStationRetrievedAt();
     updatePrecipitationStatus();
+    updateAirTemperatureStatus();
     updateFloodStatus();
     updateThermalStatus();
     updateLegendVisibility();

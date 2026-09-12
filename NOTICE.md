@@ -10,6 +10,8 @@
   Community, con atribución visible dentro del mapa.
 - **NASA GPM IMERG / GIBS:** visualización diaria de la tasa de precipitación servida por WMS,
   con atribución visible dentro del mapa.
+- **NASA Aqua AIRS / GIBS:** temperatura del aire próxima a la superficie durante el paso diurno,
+  producto L3 diario de 1° servido por WMS; no es un pronóstico ni una máxima diaria.
 - **NASA LANCE VIIRS / GIBS:** compuesto diario de agua superficial e inundación observada a
   250 m; requiere validación con fuentes oficiales y observación local.
 - **INAMHI / MAATE:** capa remota `geonode:cuencas_maate`, visualizada mediante WMS y consultada

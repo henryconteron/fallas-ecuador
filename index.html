@@ -111,6 +111,14 @@
                 <span><span data-i18n="precipitation.lower">Menor</span><span data-i18n="precipitation.higher">Mayor</span></span>
               </div>
             </section>
+            <section class="legend-section" data-legend-layer="air-temperature" hidden>
+              <div class="legend-divider" aria-hidden="true"></div>
+              <p class="legend-subtitle" data-i18n="legend.airTemperature">Temperatura del aire diurna</p>
+              <div class="air-temperature-legend" data-i18n-aria="legend.airTemperatureAria" aria-label="Temperatura del aire en grados Celsius de menor a mayor">
+                <span aria-hidden="true"></span>
+                <div><small>−73 °C</small><small>−13 °C</small><small>47 °C</small></div>
+              </div>
+            </section>
             <section class="legend-section" data-legend-layer="basins" hidden>
               <div class="legend-divider" aria-hidden="true"></div>
               <p class="legend-subtitle" data-i18n="legend.basins">Cuencas hidrográficas</p>
@@ -171,7 +179,7 @@
             <div class="system-grid" role="navigation" data-i18n-aria="systems.aria" aria-label="Sistemas naturales del atlas">
               <button class="is-active" type="button" data-system="earth" aria-pressed="true" aria-describedby="system-note"><i aria-hidden="true">◒</i><span data-i18n="systems.earth">Tierra</span><small data-system-count-key="systems.fourLayers" data-i18n="systems.active">Activo</small></button>
               <button type="button" data-system="water" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">≋</i><span data-i18n="systems.water">Agua</span><small data-system-count-key="systems.fourLayers" data-i18n="systems.fourLayers">4 capas</small></button>
-              <button type="button" data-system="sky" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">⌁</i><span data-i18n="systems.sky">Cielo</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
+              <button type="button" data-system="sky" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">⌁</i><span data-i18n="systems.sky">Cielo</span><small data-system-count-key="systems.twoLayers" data-i18n="systems.twoLayers">2 capas</small></button>
               <button type="button" data-system="life" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">✦</i><span data-i18n="systems.life">Vida</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
               <button type="button" data-system="risk" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">△</i><span data-i18n="systems.risk">Riesgo</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
             </div>
@@ -269,6 +277,25 @@
                 <a href="https://nasa-gibs.github.io/gibs-api-docs/python-usage/" target="_blank" rel="noopener noreferrer"><span data-i18n="precipitation.learnMore">Conoce el producto IMERG</span><span aria-hidden="true">↗</span></a>
                 <a href="https://inamhi.geoglows.org/apps" target="_blank" rel="noopener noreferrer"><span data-i18n="precipitation.inamhi">Consulta INAMHI–GEOGLOWS</span><span aria-hidden="true">↗</span></a>
               </details>
+            </div>
+            <div id="air-temperature-layer-card" class="now-layer-card air-temperature-layer-card" data-system-content="sky" hidden>
+              <div class="now-layer-heading"><span data-i18n="airTemperature.badge">La atmósfera dibuja el relieve</span><small>NASA Aqua · AIRS</small></div>
+              <label class="layer-switch" for="air-temperature-toggle">
+                <span><strong data-i18n="layers.airTemperature">Temperatura del aire diurna</strong><small data-i18n="layers.airTemperatureHint">AIRS L3 · producto diario · cuadrícula de 1°</small></span>
+                <input id="air-temperature-toggle" type="checkbox" />
+                <span class="switch-track" aria-hidden="true"><span></span></span>
+              </label>
+              <div class="thermal-controls">
+                <label for="air-temperature-date"><span data-i18n="airTemperature.date">Fecha satelital</span><input id="air-temperature-date" type="date" disabled /></label>
+                <label for="air-temperature-opacity"><span data-i18n="airTemperature.opacity">Opacidad</span><span class="thermal-opacity-row"><input id="air-temperature-opacity" type="range" min="20" max="100" value="72" step="1" disabled /><output id="air-temperature-opacity-value" for="air-temperature-opacity">72%</output></span></label>
+              </div>
+              <p id="air-temperature-status" class="layer-status" role="status" data-i18n="airTemperature.off">Activa la capa para comparar el patrón térmico regional.</p>
+              <details class="thermal-story air-temperature-story">
+                <summary data-i18n="airTemperature.question">¿Por qué los Andes aparecen más fríos?</summary>
+                <p data-i18n="airTemperature.answer">Al ascender, el aire se expande y suele enfriarse. Pero altitud no lo explica todo: nubosidad, humedad, circulación y hora de observación también importan.</p>
+                <a href="https://gibs.earthdata.nasa.gov/layer-metadata/v1.0/AIRS_L3_Surface_Air_Temperature_Daily_Day.json" target="_blank" rel="noopener noreferrer"><span data-i18n="airTemperature.openMetadata">Abrir metadatos de NASA</span><span aria-hidden="true">↗</span></a>
+              </details>
+              <p class="layer-caution" data-i18n="airTemperature.caution">Es temperatura del aire observada durante el paso diurno del satélite, no temperatura máxima, sensación térmica ni pronóstico. Cada celda cubre aproximadamente 1°.</p>
             </div>
             <div id="flood-layer-card" class="now-layer-card flood-layer-card" data-system-content="water risk" hidden>
               <div class="now-layer-heading"><span data-i18n="now.badge">Ecuador ahora</span><small>NASA LANCE · VIIRS</small></div>
@@ -397,8 +424,8 @@
       <footer><span data-i18n="footer.credit">Desarrollado por Henry P. Conteron Moreta</span><span data-i18n="footer.disciplines">Geociencias · SIG · Ecuador</span></footer>
     </div>
 
-    <script src="assets/js/i18n.js?v=20260911-5"></script>
+    <script src="assets/js/i18n.js?v=20260911-6"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script type="module" src="assets/js/map.js?v=20260911-5"></script>
+    <script type="module" src="assets/js/map.js?v=20260911-6"></script>
   </body>
 </html>

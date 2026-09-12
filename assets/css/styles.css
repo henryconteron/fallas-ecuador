@@ -916,6 +916,59 @@ footer {
   margin-left: 0.7rem;
 }
 
+.air-temperature-layer-card {
+  border-color: rgba(251, 146, 60, 0.42);
+  background:
+    radial-gradient(circle at 100% 0, rgba(251, 146, 60, 0.16), transparent 48%),
+    #0b1316;
+}
+
+.air-temperature-layer-card .now-layer-heading span,
+.air-temperature-story summary {
+  color: #ffb36b;
+}
+
+.air-temperature-layer-card .layer-switch {
+  border-color: rgba(251, 146, 60, 0.26);
+}
+
+.air-temperature-layer-card .thermal-opacity-row input {
+  accent-color: #fb923c;
+}
+
+.air-temperature-story a {
+  color: #ffb36b;
+}
+
+.air-temperature-legend {
+  margin-top: 0.48rem;
+}
+
+.air-temperature-legend > span {
+  display: block;
+  height: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #e3f5ff 0%,
+    #0a2060 24%,
+    #9feeda 48%,
+    #fff8bd 63%,
+    #fb9550 78%,
+    #7f0a27 100%
+  );
+}
+
+.air-temperature-legend div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.22rem;
+  color: #bdc9cc;
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+}
+
 .flood-layer-card {
   border-color: rgba(34, 211, 238, 0.38);
   background:
