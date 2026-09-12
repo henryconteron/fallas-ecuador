@@ -29,6 +29,12 @@ import {
   normalizeAirTemperatureDate,
 } from "./map/air-temperature.js";
 import {
+  CLOUD_FRACTION_SOURCE,
+  cloudFractionDateRange,
+  cloudFractionWmsOptions,
+  normalizeCloudFractionDate,
+} from "./map/cloud-fraction.js";
+import {
   normalizePrecipitationDate,
   precipitationDateRange,
   PRECIPITATION_SOURCE,
@@ -58,6 +64,7 @@ if (typeof window.L === "undefined") {
   document.querySelector("#basin-toggle").disabled = true;
   document.querySelector("#station-toggle").disabled = true;
   document.querySelector("#air-temperature-toggle").disabled = true;
+  document.querySelector("#cloud-fraction-toggle").disabled = true;
   document.querySelector("#flood-toggle").disabled = true;
   document.querySelector("#earthquake-toggle").disabled = true;
   document.querySelector(".legend").hidden = true;
@@ -172,6 +179,14 @@ function initializeAtlas() {
     { ...airTemperatureWmsOptions(airTemperatureRange.selected), pane: "air-temperature" },
   );
 
+  const cloudFractionRange = cloudFractionDateRange();
+  map.createPane("cloud-fraction");
+  map.getPane("cloud-fraction").style.zIndex = "285";
+  const cloudFractionLayer = L.tileLayer.wms(
+    CLOUD_FRACTION_SOURCE.endpoint,
+    { ...cloudFractionWmsOptions(cloudFractionRange.selected), pane: "cloud-fraction" },
+  );
+
   const floodRange = floodDateRange();
   map.createPane("flood-observation");
   map.getPane("flood-observation").style.zIndex = "290";
@@ -223,6 +238,12 @@ function initializeAtlas() {
     airTemperatureOpacity: document.querySelector("#air-temperature-opacity"),
     airTemperatureOpacityValue: document.querySelector("#air-temperature-opacity-value"),
     airTemperatureStatus: document.querySelector("#air-temperature-status"),
+    cloudFractionCard: document.querySelector("#cloud-fraction-layer-card"),
+    cloudFractionToggle: document.querySelector("#cloud-fraction-toggle"),
+    cloudFractionDate: document.querySelector("#cloud-fraction-date"),
+    cloudFractionOpacity: document.querySelector("#cloud-fraction-opacity"),
+    cloudFractionOpacityValue: document.querySelector("#cloud-fraction-opacity-value"),
+    cloudFractionStatus: document.querySelector("#cloud-fraction-status"),
     floodCard: document.querySelector("#flood-layer-card"),
     floodToggle: document.querySelector("#flood-toggle"),
     floodDate: document.querySelector("#flood-date"),
@@ -310,6 +331,8 @@ function initializeAtlas() {
   let precipitationTileErrors = 0;
   let airTemperatureState = "off";
   let airTemperatureTileErrors = 0;
+  let cloudFractionState = "off";
+  let cloudFractionTileErrors = 0;
   let floodState = "off";
   let floodTileErrors = 0;
   let thermalState = "off";
@@ -322,6 +345,9 @@ function initializeAtlas() {
   elements.airTemperatureDate.min = airTemperatureRange.min;
   elements.airTemperatureDate.max = airTemperatureRange.max;
   elements.airTemperatureDate.value = airTemperatureRange.selected;
+  elements.cloudFractionDate.min = cloudFractionRange.min;
+  elements.cloudFractionDate.max = cloudFractionRange.max;
+  elements.cloudFractionDate.value = cloudFractionRange.selected;
   elements.floodDate.min = floodRange.min;
   elements.floodDate.max = floodRange.max;
   elements.floodDate.value = floodRange.selected;
@@ -422,6 +448,42 @@ function initializeAtlas() {
     if (airTemperatureTileErrors >= 2) {
       airTemperatureState = "error";
       updateAirTemperatureStatus();
+    }
+  });
+
+  function updateCloudFractionStatus() {
+    elements.cloudFractionStatus.dataset.state = cloudFractionState;
+    if (cloudFractionState === "off") {
+      elements.cloudFractionStatus.textContent = t("cloudFraction.off");
+    } else if (cloudFractionState === "loading") {
+      elements.cloudFractionStatus.textContent = template("cloudFraction.loading", {
+        date: elements.cloudFractionDate.value,
+      });
+    } else if (cloudFractionState === "error") {
+      elements.cloudFractionStatus.textContent = t("cloudFraction.error");
+    } else {
+      elements.cloudFractionStatus.textContent = template("cloudFraction.loaded", {
+        date: elements.cloudFractionDate.value,
+      });
+    }
+  }
+
+  cloudFractionLayer.on("loading", () => {
+    if (!map.hasLayer(cloudFractionLayer)) return;
+    cloudFractionState = "loading";
+    cloudFractionTileErrors = 0;
+    updateCloudFractionStatus();
+  });
+  cloudFractionLayer.on("load", () => {
+    if (!map.hasLayer(cloudFractionLayer)) return;
+    cloudFractionState = cloudFractionTileErrors >= 2 ? "error" : "loaded";
+    updateCloudFractionStatus();
+  });
+  cloudFractionLayer.on("tileerror", () => {
+    cloudFractionTileErrors += 1;
+    if (cloudFractionTileErrors >= 2) {
+      cloudFractionState = "error";
+      updateCloudFractionStatus();
     }
   });
 
@@ -773,6 +835,14 @@ function initializeAtlas() {
       ));
     }
 
+    if (map.hasLayer(cloudFractionLayer)) {
+      elements.placeResults.append(createPlaceResult(
+        t("cloudFraction.placeLabel"),
+        t("cloudFraction.placeActive"),
+        template("cloudFraction.placeDetail", { date: elements.cloudFractionDate.value }),
+      ));
+    }
+
     if (map.hasLayer(floodLayer)) {
       elements.placeResults.append(createPlaceResult(
         t("flood.placeLabel"),
@@ -887,6 +957,7 @@ function initializeAtlas() {
       stations: map.hasLayer(stationLayer),
       precipitation: map.hasLayer(precipitationLayer),
       "air-temperature": map.hasLayer(airTemperatureLayer),
+      "cloud-fraction": map.hasLayer(cloudFractionLayer),
       flood: map.hasLayer(floodLayer),
       thermal: map.hasLayer(thermalLayer),
       earthquakes: map.hasLayer(earthquakeLayer),
@@ -1139,6 +1210,7 @@ function initializeAtlas() {
     if (map.hasLayer(thermalLayer)) sources.add("NASA FIRMS / GIBS");
     if (map.hasLayer(precipitationLayer)) sources.add("NASA GPM IMERG / GIBS");
     if (map.hasLayer(airTemperatureLayer)) sources.add("NASA Aqua AIRS / GIBS");
+    if (map.hasLayer(cloudFractionLayer)) sources.add("NASA Aqua MODIS / GIBS");
     if (map.hasLayer(floodLayer)) sources.add("NASA LANCE VIIRS / GIBS");
     elements.sourceCount.textContent = String(sources.size);
   }
@@ -1453,6 +1525,45 @@ function initializeAtlas() {
   });
   elements.airTemperatureOpacity.addEventListener("input", updateAirTemperatureOpacity);
 
+  function updateCloudFractionOpacity() {
+    const opacity = Number(elements.cloudFractionOpacity.value) / 100;
+    cloudFractionLayer.setOpacity(opacity);
+    elements.cloudFractionOpacityValue.value = `${Math.round(opacity * 100)}%`;
+  }
+  updateCloudFractionOpacity();
+
+  elements.cloudFractionToggle.addEventListener("change", () => {
+    const active = elements.cloudFractionToggle.checked;
+    elements.cloudFractionDate.disabled = !active;
+    elements.cloudFractionOpacity.disabled = !active;
+    if (active) {
+      cloudFractionState = "loading";
+      cloudFractionTileErrors = 0;
+      cloudFractionLayer.addTo(map);
+    } else {
+      map.removeLayer(cloudFractionLayer);
+      cloudFractionState = "off";
+    }
+    updateCloudFractionStatus();
+    updateLegendVisibility();
+    updateSourceCount();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+
+  elements.cloudFractionDate.addEventListener("change", () => {
+    elements.cloudFractionDate.value = normalizeCloudFractionDate(
+      elements.cloudFractionDate.value,
+      cloudFractionRange,
+    );
+    cloudFractionState = "loading";
+    cloudFractionTileErrors = 0;
+    cloudFractionLayer.setParams({ time: elements.cloudFractionDate.value }, false);
+    cloudFractionLayer.redraw();
+    updateCloudFractionStatus();
+    if (selectedPoint) renderPlaceExplanation();
+  });
+  elements.cloudFractionOpacity.addEventListener("input", updateCloudFractionOpacity);
+
   function updateFloodOpacity() {
     const opacity = Number(elements.floodOpacity.value) / 100;
     floodLayer.setOpacity(opacity);
@@ -1601,6 +1712,7 @@ function initializeAtlas() {
     updateStationRetrievedAt();
     updatePrecipitationStatus();
     updateAirTemperatureStatus();
+    updateCloudFractionStatus();
     updateFloodStatus();
     updateThermalStatus();
     updateLegendVisibility();

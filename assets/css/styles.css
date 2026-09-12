@@ -969,6 +969,67 @@ footer {
   font-variant-numeric: tabular-nums;
 }
 
+.cloud-fraction-layer-card {
+  border-color: rgba(129, 140, 248, 0.42);
+  background:
+    radial-gradient(circle at 100% 0, rgba(99, 102, 241, 0.18), transparent 48%),
+    #0b1316;
+}
+
+.cloud-fraction-layer-card .now-layer-heading span,
+.cloud-fraction-story summary {
+  color: #b7c2ff;
+}
+
+.cloud-fraction-layer-card .layer-switch {
+  border-color: rgba(129, 140, 248, 0.28);
+}
+
+.cloud-fraction-layer-card .thermal-opacity-row input {
+  accent-color: #818cf8;
+}
+
+.cloud-fraction-story a {
+  color: #b7c2ff;
+}
+
+.cloud-fraction-legend {
+  margin-top: 0.48rem;
+}
+
+.cloud-fraction-legend > span {
+  display: block;
+  height: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    #660077 0%,
+    #b70f8d 10%,
+    #0000aa 19%,
+    #0000ff 25%,
+    #0088ee 32%,
+    #005000 38%,
+    #00dc00 50%,
+    #ffff00 57%,
+    #f0be40 63%,
+    #bb8800 69%,
+    #7a5a03 76%,
+    #6e0000 82%,
+    #aa0000 88%,
+    #ff0000 100%
+  );
+}
+
+.cloud-fraction-legend div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.22rem;
+  color: #bdc9cc;
+  font-size: 0.68rem;
+  font-variant-numeric: tabular-nums;
+}
+
 .flood-layer-card {
   border-color: rgba(34, 211, 238, 0.38);
   background:

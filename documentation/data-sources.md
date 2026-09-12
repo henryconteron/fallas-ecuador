@@ -33,6 +33,7 @@ fuente original.
 | Agua | INAMHI GEOGLOWS | pronósticos e históricos de caudal | servicio por verificar | candidate |
 | Agua/Cielo | NASA GPM / GIBS | tasa de precipitación IMERG por día | WMS público de GIBS | connected |
 | Cielo | NASA Aqua / AIRS / GIBS | temperatura del aire diurna por día | WMS público de GIBS | connected |
+| Cielo | NASA Aqua / MODIS / GIBS | fracción de nube diurna por día | WMS público de GIBS | connected |
 | Agua/Riesgo | NASA LANCE / VIIRS | agua superficial e inundación observada en 1 día | WMS público de GIBS | connected |
 | Vida | NASA FIRMS / GIBS | anomalías térmicas VIIRS por día | WMS público de GIBS | connected |
 | Vida | MapBiomas Ecuador / SNMB | cobertura y cambio de bosque | plataforma o descarga | candidate |
@@ -51,7 +52,7 @@ fuente original.
 ## Primera experiencia transversal
 
 `Explícame este lugar` relaciona solamente las capas activas: coordenadas, falla, evidencia
-geomorfológica, sismo reciente y estación en transmisión más próxima. Si las visualizaciones térmica, de precipitación o temperatura del aire están activas,
+geomorfológica, sismo reciente y estación en transmisión más próxima. Si las visualizaciones térmica, de precipitación, temperatura del aire o fracción de nube están activas,
 también registra su fecha y alcance, pero no afirma que el píxel seleccionado contenga una
 detección o valor exacto porque los WMS no exponen atributos puntuales en esta interfaz. Las
 siguientes iteraciones añadirán, solo cuando las fuentes estén validadas, cuencas, caudales,
@@ -103,6 +104,18 @@ no es temperatura máxima diaria, sensación térmica, pronóstico ni observaci�
 resolución no permite conclusiones a escala de barrio y pueden existir fechas sin cobertura. El
 selector se limita a 90 días y propone una fecha con seis días de retraso para reducir consultas
 vacías debidas a la latencia de publicación.
+
+## Fracción de nube Aqua/MODIS
+
+La capa `MODIS_Aqua_Cloud_Fraction_Day` usa el producto MYD06_L2 V6.1 de Aqua/MODIS y se sirve
+mediante WMS EPSG:3857 de NASA GIBS. Sus observaciones L2 diurnas tienen componentes de 1 y 5 km,
+periodicidad diaria y una escala discreta oficial de 0 a 100%. El visor propone el día anterior y
+ofrece una ventana reciente de 60 días para reducir consultas sin datos todavía publicados.
+
+La fracción de nube representa el porcentaje cubierto por nubes dentro de la observación, no lluvia,
+probabilidad de precipitación ni pronóstico. La geometría orbital produce franjas de cobertura y
+puede dejar huecos; por eso un espacio transparente no debe leerse como cielo despejado. Para saber
+si llueve se debe contrastar con IMERG, estaciones y fuentes meteorológicas oficiales.
 
 ## Cuencas INAMHI / MAATE
 

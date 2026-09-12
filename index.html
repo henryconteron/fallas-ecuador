@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://tile.openstreetmap.org" />
     <link rel="preconnect" href="https://tile.opentopomap.org" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="assets/css/styles.css?v=20260911-4" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=20260912-1" />
   </head>
   <body data-page="map">
     <a class="skip-link" href="#map" data-i18n="skip.map">Ir directamente al mapa</a>
@@ -119,6 +119,14 @@
                 <div><small>−73 °C</small><small>−13 °C</small><small>47 °C</small></div>
               </div>
             </section>
+            <section class="legend-section" data-legend-layer="cloud-fraction" hidden>
+              <div class="legend-divider" aria-hidden="true"></div>
+              <p class="legend-subtitle" data-i18n="legend.cloudFraction">Fracción de nube diurna</p>
+              <div class="cloud-fraction-legend" data-i18n-aria="legend.cloudFractionAria" aria-label="Porcentaje de cobertura nubosa de menor a mayor">
+                <span aria-hidden="true"></span>
+                <div><small>0%</small><small>50%</small><small>100%</small></div>
+              </div>
+            </section>
             <section class="legend-section" data-legend-layer="basins" hidden>
               <div class="legend-divider" aria-hidden="true"></div>
               <p class="legend-subtitle" data-i18n="legend.basins">Cuencas hidrográficas</p>
@@ -179,7 +187,7 @@
             <div class="system-grid" role="navigation" data-i18n-aria="systems.aria" aria-label="Sistemas naturales del atlas">
               <button class="is-active" type="button" data-system="earth" aria-pressed="true" aria-describedby="system-note"><i aria-hidden="true">◒</i><span data-i18n="systems.earth">Tierra</span><small data-system-count-key="systems.fourLayers" data-i18n="systems.active">Activo</small></button>
               <button type="button" data-system="water" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">≋</i><span data-i18n="systems.water">Agua</span><small data-system-count-key="systems.fourLayers" data-i18n="systems.fourLayers">4 capas</small></button>
-              <button type="button" data-system="sky" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">⌁</i><span data-i18n="systems.sky">Cielo</span><small data-system-count-key="systems.twoLayers" data-i18n="systems.twoLayers">2 capas</small></button>
+              <button type="button" data-system="sky" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">⌁</i><span data-i18n="systems.sky">Cielo</span><small data-system-count-key="systems.threeLayers" data-i18n="systems.threeLayers">3 capas</small></button>
               <button type="button" data-system="life" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">✦</i><span data-i18n="systems.life">Vida</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
               <button type="button" data-system="risk" aria-pressed="false" aria-describedby="system-note"><i aria-hidden="true">△</i><span data-i18n="systems.risk">Riesgo</span><small data-system-count-key="systems.oneLayer" data-i18n="systems.oneLayer">1 capa</small></button>
             </div>
@@ -296,6 +304,25 @@
                 <a href="https://gibs.earthdata.nasa.gov/layer-metadata/v1.0/AIRS_L3_Surface_Air_Temperature_Daily_Day.json" target="_blank" rel="noopener noreferrer"><span data-i18n="airTemperature.openMetadata">Abrir metadatos de NASA</span><span aria-hidden="true">↗</span></a>
               </details>
               <p class="layer-caution" data-i18n="airTemperature.caution">Es temperatura del aire observada durante el paso diurno del satélite, no temperatura máxima, sensación térmica ni pronóstico. Cada celda cubre aproximadamente 1°.</p>
+            </div>
+            <div id="cloud-fraction-layer-card" class="now-layer-card cloud-fraction-layer-card" data-system-content="sky" hidden>
+              <div class="now-layer-heading"><span data-i18n="cloudFraction.badge">El cielo no es un techo</span><small>NASA Aqua · MODIS</small></div>
+              <label class="layer-switch" for="cloud-fraction-toggle">
+                <span><strong data-i18n="layers.cloudFraction">Fracción de nube diurna</strong><small data-i18n="layers.cloudFractionHint">MODIS L2 · producto diario · 1 y 5 km</small></span>
+                <input id="cloud-fraction-toggle" type="checkbox" />
+                <span class="switch-track" aria-hidden="true"><span></span></span>
+              </label>
+              <div class="thermal-controls">
+                <label for="cloud-fraction-date"><span data-i18n="cloudFraction.date">Fecha satelital</span><input id="cloud-fraction-date" type="date" disabled /></label>
+                <label for="cloud-fraction-opacity"><span data-i18n="cloudFraction.opacity">Opacidad</span><span class="thermal-opacity-row"><input id="cloud-fraction-opacity" type="range" min="20" max="100" value="68" step="1" disabled /><output id="cloud-fraction-opacity-value" for="cloud-fraction-opacity">68%</output></span></label>
+              </div>
+              <p id="cloud-fraction-status" class="layer-status" role="status" data-i18n="cloudFraction.off">Activa la capa para observar cuánto cielo cubren las nubes.</p>
+              <details class="thermal-story cloud-fraction-story">
+                <summary data-i18n="cloudFraction.question">¿Más nubes significa que está lloviendo?</summary>
+                <p data-i18n="cloudFraction.answer">No. La fracción indica qué parte de cada observación está cubierta por nubes, pero no revela por sí sola si producen lluvia ni cuánto precipita.</p>
+                <a href="https://gibs.earthdata.nasa.gov/layer-metadata/v1.0/MODIS_Aqua_Cloud_Fraction_Day.json" target="_blank" rel="noopener noreferrer"><span data-i18n="cloudFraction.openMetadata">Abrir metadatos de NASA</span><span aria-hidden="true">↗</span></a>
+              </details>
+              <p class="layer-caution" data-i18n="cloudFraction.caution">Es una fracción de nube observada durante el paso diurno de Aqua, no un pronóstico ni una probabilidad de lluvia. Las franjas sin datos reflejan la órbita o condiciones de recuperación.</p>
             </div>
             <div id="flood-layer-card" class="now-layer-card flood-layer-card" data-system-content="water risk" hidden>
               <div class="now-layer-heading"><span data-i18n="now.badge">Ecuador ahora</span><small>NASA LANCE · VIIRS</small></div>
@@ -424,8 +451,8 @@
       <footer><span data-i18n="footer.credit">Desarrollado por Henry P. Conteron Moreta</span><span data-i18n="footer.disciplines">Geociencias · SIG · Ecuador</span></footer>
     </div>
 
-    <script src="assets/js/i18n.js?v=20260911-6"></script>
+    <script src="assets/js/i18n.js?v=20260912-1"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script type="module" src="assets/js/map.js?v=20260911-6"></script>
+    <script type="module" src="assets/js/map.js?v=20260912-1"></script>
   </body>
 </html>

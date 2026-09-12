@@ -23,6 +23,8 @@ the Andes*. La sismicidad reciente se consulta mediante el servicio FDSN del USG
   opacidad, servida mediante NASA GIBS sin descargar mosaicos;
 - temperatura del aire diurna Aqua/AIRS por fecha y opacidad en **Cielo**, con escala térmica
   explícita y advertencias para no confundirla con máximas, sensación térmica o pronóstico;
+- fracción de nube diurna Aqua/MODIS en porcentaje, con escala oficial, fecha configurable y una
+  explicación que separa nubosidad, lluvia y probabilidad de precipitación;
 - observación diaria de inundaciones NASA LANCE VIIRS a 250 m, separada de la lluvia y presentada
   como señal satelital que requiere validación oficial y de campo;
 - cuencas hidrográficas INAMHI/MAATE servidas por WMS, con identificación puntual del nombre y
@@ -68,6 +70,7 @@ fallas-ecuador/
 │       └── map/
 │           ├── basins.js
 │           ├── air-temperature.js
+│           ├── cloud-fraction.js
 │           ├── config.js
 │           ├── data.js
 │           ├── flood.js
@@ -99,6 +102,7 @@ fallas-ecuador/
 ├── tests/
 │   ├── test_build_fault_catalog.py
 │   ├── test-air-temperature.mjs
+│   ├── test-cloud-fraction.mjs
 │   ├── test-basins.mjs
 │   ├── test-flood.mjs
 │   ├── test-i18n.mjs
@@ -263,6 +267,16 @@ La capa representa temperatura del aire próxima a la superficie durante el paso
 satélite. No equivale a la temperatura máxima diaria, la sensación térmica, una medición de estación
 ni un pronóstico; tampoco debe interpretarse con precisión urbana debido al tamaño de sus celdas.
 Su valor educativo está en comparar patrones regionales con precipitación, altitud y relieve.
+
+## Fracción de nube satelital
+
+La vista Cielo también integra `MODIS_Aqua_Cloud_Fraction_Day`, un producto L2 diurno de Aqua/MODIS
+servido por NASA GIBS. La colección MYD06_L2 V6.1 trabaja con observaciones de 1 y 5 km; el atlas
+consulta una fecha por WMS, permite regular la opacidad y reproduce la escala oficial de 0 a 100%.
+
+La fracción de nube expresa cuánto de una observación está cubierto por nubes. No indica por sí sola
+si esas nubes producen lluvia, cuánto precipita ni qué ocurrirá después. Las franjas sin datos pueden
+corresponder al recorrido orbital o a condiciones en las que no fue posible recuperar el valor.
 
 ## Inundación observada
 

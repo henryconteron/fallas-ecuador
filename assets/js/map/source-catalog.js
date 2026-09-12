@@ -89,6 +89,19 @@ export const SOURCE_CATALOG = Object.freeze([
     url: "https://gibs.earthdata.nasa.gov/layer-metadata/v1.0/AIRS_L3_Surface_Air_Temperature_Daily_Day.json",
   },
   {
+    id: "nasa-modis-cloud-fraction",
+    systems: ["sky"],
+    status: "connected",
+    access: "NASA GIBS WMS",
+    institution: "NASA Aqua / MODIS / GIBS",
+    name: { es: "Fracción de nube diurna", en: "Daytime cloud fraction" },
+    purpose: {
+      es: "Cobertura nubosa satelital diaria en porcentaje",
+      en: "Daily satellite cloud cover as a percentage",
+    },
+    url: "https://gibs.earthdata.nasa.gov/layer-metadata/v1.0/MODIS_Aqua_Cloud_Fraction_Day.json",
+  },
+  {
     id: "nasa-viirs-flood",
     systems: ["water", "risk"],
     status: "connected",
