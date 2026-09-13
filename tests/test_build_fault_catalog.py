@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from scripts.catalog_integrity import (
+    CATALOG_INPUT_URLS,
     GEM_SOURCE_COMMIT,
     GEM_SOURCE_URL,
     file_fingerprint,
@@ -11,6 +12,14 @@ from scripts.catalog_integrity import (
 
 
 class CatalogBuildIntegrityTests(unittest.TestCase):
+    def test_catalog_input_urls_are_pinned_https_geojson_sources(self):
+        self.assertEqual(len(CATALOG_INPUT_URLS), 3)
+        for filename, url in CATALOG_INPUT_URLS.items():
+            self.assertTrue(filename.endswith(".geojson"))
+            self.assertTrue(url.startswith("https://"))
+            self.assertNotIn("/main/", url)
+            self.assertNotIn("/master/", url)
+
     def test_source_url_is_pinned_to_declared_commit(self):
         self.assertIn(GEM_SOURCE_COMMIT, GEM_SOURCE_URL)
         self.assertNotIn("/master/", GEM_SOURCE_URL)

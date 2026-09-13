@@ -201,8 +201,23 @@ Para regenerar el archivo se requiere Python y Shapely:
 
 ```bash
 python -m pip install -r requirements-dev.txt
-python scripts/build_fault_catalog.py --gem gem_active_faults_harmonized.geojson --countries geoBoundaries-ECU-ADM0.geojson --provinces geoBoundaries-ECU-ADM1.geojson
+python scripts/fetch_catalog_inputs.py
+python scripts/build_fault_catalog.py --gem data/raw/catalog-inputs/gem_active_faults_harmonized.geojson --countries data/raw/catalog-inputs/geoBoundaries-ECU-ADM0.geojson --provinces data/raw/catalog-inputs/geoBoundaries-ECU-ADM1.geojson
 ```
+
+El descargador recupera exclusivamente las tres entradas GeoJSON desde revisiones fijadas de GEM
+y geoBoundaries y las guarda en `data/raw/catalog-inputs/`, un directorio ignorado por Git. Antes
+de regenerar, copie las rutas impresas por el descargador en el comando de compilación, por ejemplo:
+
+```bash
+python scripts/build_fault_catalog.py \
+  --gem data/raw/catalog-inputs/gem_active_faults_harmonized.geojson \
+  --countries data/raw/catalog-inputs/geoBoundaries-ECU-ADM0.geojson \
+  --provinces data/raw/catalog-inputs/geoBoundaries-ECU-ADM1.geojson
+```
+
+Cada descarga se verifica como JSON y su SHA-256 se imprime para revisión. El proceso nunca
+publica los insumos mundiales ni sustituye automáticamente el catálogo versionado.
 
 El generador verifica el Git blob de GEM contra la versión aprobada, calcula SHA-256 para todas las
 entradas y genera `data/catalog-build-manifest.json`. También pueden proporcionarse los SHA-256

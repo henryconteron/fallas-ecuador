@@ -14,6 +14,25 @@ GEM_SOURCE_URL = (
     f"blob/{GEM_SOURCE_COMMIT}/geojson/gem_active_faults_harmonized.geojson"
 )
 
+# Download endpoints are deliberately immutable: each path includes the source
+# revision used by the catalog build. Raw inputs belong in data/raw/ and are
+# ignored by Git; the public repository only carries the derived Ecuador subset
+# and its fingerprints.
+CATALOG_INPUT_URLS = {
+    "gem_active_faults_harmonized.geojson": (
+        "https://raw.githubusercontent.com/GEMScienceTools/gem-global-active-faults/"
+        f"{GEM_SOURCE_COMMIT}/geojson/gem_active_faults_harmonized.geojson"
+    ),
+    "geoBoundaries-ECU-ADM0.geojson": (
+        "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/"
+        "9469f09/releaseData/gbOpen/ECU/ADM0/geoBoundaries-ECU-ADM0.geojson"
+    ),
+    "geoBoundaries-ECU-ADM1.geojson": (
+        "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/"
+        "9469f09/releaseData/gbOpen/ECU/ADM1/geoBoundaries-ECU-ADM1.geojson"
+    ),
+}
+
 
 def file_fingerprint(path: Path) -> dict[str, Any]:
     content = path.read_bytes()
