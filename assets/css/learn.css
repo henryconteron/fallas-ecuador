@@ -203,67 +203,15 @@
   min-height: 29rem;
   overflow: hidden;
   border: 1px solid #aaa393;
-  background:
-    repeating-radial-gradient(ellipse at 50% 120%, transparent 0 31px, rgba(49, 95, 83, 0.13) 32px 33px),
-    rgba(255, 255, 255, 0.23);
+  background: #11191a;
 }
 
-.diagram-surface {
-  position: absolute;
-  top: 38%;
-  left: -5%;
-  width: 110%;
-  height: 2px;
-  transform: rotate(-7deg);
-  background: var(--moss);
-}
-
-.diagram-plane {
-  position: absolute;
-  top: 5%;
-  left: 52%;
-  width: 2px;
-  height: 95%;
-  transform: rotate(27deg);
-  background: var(--soil);
-  box-shadow: 0 0 0 6px rgba(189, 78, 59, 0.08);
-}
-
-.diagram-dot {
-  position: absolute;
-  top: 35%;
-  left: 44%;
-  width: 0.8rem;
-  height: 0.8rem;
-  border: 3px solid var(--paper);
-  border-radius: 50%;
-  background: var(--soil);
-  box-shadow: 0 0 0 1px var(--soil);
-}
-
-.diagram-label {
-  position: absolute;
-  max-width: 10rem;
-}
-
-.diagram-label strong,
-.diagram-label small {
+.definition-diagram img {
+  width: 100%;
+  height: 100%;
   display: block;
+  object-fit: contain;
 }
-
-.diagram-label strong {
-  font-family: "Newsreader", serif;
-  font-size: 1.15rem;
-}
-
-.diagram-label small {
-  margin-top: 0.3rem;
-  color: #666358;
-  line-height: 1.45;
-}
-
-.trace-label { top: 11%; left: 7%; }
-.plane-label { right: 6%; bottom: 8%; }
 
 .types-section {
   background: #172122;
