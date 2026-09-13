@@ -11,6 +11,11 @@ __pycache__/
 *.qgz~
 *.qgs~
 
+# Biblioteca privada y renders efímeros de revisión.
+# El repositorio conserva citas, DOI y metadatos; no distribuye PDFs completos.
+/documentation/references/*.pdf
+/tmp/
+
 # Datos pesados de trabajo (no publicar en GitHub)
 data/raw/
 assets/images/raw/
