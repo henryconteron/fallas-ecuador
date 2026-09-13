@@ -567,6 +567,28 @@ footer {
   color: #604513;
 }
 
+.fault-popup .source-attributes {
+  margin-top: 0.65rem;
+  border-top: 1px solid #d9e2e3;
+  padding-top: 0.5rem;
+}
+
+.fault-popup .source-attributes summary {
+  cursor: pointer;
+  color: #24575a;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.fault-popup .source-attributes dl {
+  margin-top: 0.5rem;
+}
+
+.fault-popup .source-attributes p {
+  color: #617074;
+  font-size: 0.72rem;
+}
+
 .station-popup {
   min-width: 13rem;
 }

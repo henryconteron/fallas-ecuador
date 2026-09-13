@@ -29,6 +29,36 @@ function appendHttpsLink(wrapper, url, text, warningLabel) {
   }
 }
 
+function appendOriginalSourceAttributes(wrapper, feature, context) {
+  const { t, localizedProperty } = context;
+  const fields = [
+    ["popup.netSlipRate", "net_slip_rate"],
+    ["popup.averageDip", "average_dip"],
+    ["popup.dipDirection", "dip_dir"],
+    ["popup.upperSeisDepth", "upper_seis_depth"],
+    ["popup.lowerSeisDepth", "lower_seis_depth"],
+  ].filter(([, key]) => {
+    const value = feature.properties?.[key];
+    return value !== null && value !== undefined && String(value).trim() !== "";
+  });
+  if (!fields.length) return;
+
+  const details = document.createElement("details");
+  details.className = "source-attributes";
+  const summary = document.createElement("summary");
+  summary.textContent = t("popup.sourceAttributes");
+  const list = document.createElement("dl");
+  appendDefinitionRows(
+    list,
+    fields.map(([labelKey, key]) => [labelKey, localizedProperty(feature, key)]),
+    t,
+  );
+  const note = document.createElement("p");
+  note.textContent = t("popup.sourceAttributesNote");
+  details.append(summary, list, note);
+  wrapper.append(details);
+}
+
 export function createFaultPopup(feature, context) {
   const { t, template, localizedProperty, movementLabel, demoMode } = context;
   const wrapper = document.createElement("div");
@@ -77,6 +107,8 @@ export function createFaultPopup(feature, context) {
     });
     wrapper.append(notice);
   }
+
+  if (!demoMode) appendOriginalSourceAttributes(wrapper, feature, context);
 
   appendHttpsLink(
     wrapper,
