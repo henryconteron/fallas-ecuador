@@ -1,4 +1,76 @@
 (() => {
+  const storyNav = document.querySelector("[data-story-nav]");
+
+  if (storyNav) {
+    const links = [...storyNav.querySelectorAll("[data-story-link]")];
+    const sections = links
+      .map((link) => document.querySelector(`[data-story-section="${link.dataset.storyLink}"]`))
+      .filter(Boolean);
+    const progress = storyNav.querySelector("[data-story-progress]");
+    let frameRequested = false;
+
+    const setActiveSection = (sectionId) => {
+      links.forEach((link) => {
+        const isActive = link.dataset.storyLink === sectionId;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) {
+          link.setAttribute("aria-current", "location");
+          link.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const updateProgress = () => {
+      frameRequested = false;
+      if (!progress || sections.length === 0) return;
+      const start = sections[0].offsetTop;
+      const end = sections.at(-1).offsetTop + sections.at(-1).offsetHeight - window.innerHeight;
+      const ratio = end <= start ? 1 : Math.min(1, Math.max(0, (window.scrollY - start) / (end - start)));
+      progress.style.width = `${ratio * 100}%`;
+    };
+
+    const requestProgressUpdate = () => {
+      if (frameRequested) return;
+      frameRequested = true;
+      window.requestAnimationFrame(updateProgress);
+    };
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+          if (visible) setActiveSection(visible.target.dataset.storySection);
+        },
+        { rootMargin: "-30% 0px -55%", threshold: [0, 0.1, 0.35] },
+      );
+      sections.forEach((section) => observer.observe(section));
+    } else if (sections[0]) {
+      setActiveSection(sections[0].dataset.storySection);
+    }
+
+    links.forEach((link) => {
+      link.addEventListener("click", () => setActiveSection(link.dataset.storyLink));
+    });
+    window.addEventListener("hashchange", () => {
+      const sectionId = window.location.hash.slice(1);
+      if (links.some((link) => link.dataset.storyLink === sectionId)) {
+        setActiveSection(sectionId);
+      }
+    });
+    const initialSectionId = window.location.hash.slice(1);
+    if (links.some((link) => link.dataset.storyLink === initialSectionId)) {
+      setActiveSection(initialSectionId);
+    }
+
+    window.addEventListener("scroll", requestProgressUpdate, { passive: true });
+    window.addEventListener("resize", requestProgressUpdate);
+    requestProgressUpdate();
+  }
+
   const lab = document.querySelector("[data-field-lab]");
   if (!lab || !window.atlasI18n) return;
 

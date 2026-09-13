@@ -26,40 +26,53 @@
       <div class="header-actions"><button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button></div>
     </header>
 
+    <nav class="story-nav" data-story-nav data-i18n-aria="storyNav.aria" aria-label="Capítulos de la historia">
+      <div class="story-nav-track">
+        <a href="#observar" data-story-link="observar"><span>01</span><b data-i18n="storyNav.observe">Observar</b></a>
+        <a href="#fundamentos" data-story-link="fundamentos"><span>02</span><b data-i18n="storyNav.basics">Fundamentos</b></a>
+        <a href="#sismo" data-story-link="sismo"><span>03</span><b data-i18n="storyNav.quake">Sismo</b></a>
+        <a href="#paleosismologia" data-story-link="paleosismologia"><span>04</span><b data-i18n="storyNav.archive">Archivo</b></a>
+        <a href="#caso-ecuador" data-story-link="caso-ecuador"><span>05</span><b data-i18n="storyNav.case">Ecuador</b></a>
+        <a href="#laboratorio" data-story-link="laboratorio"><span>06</span><b data-i18n="storyNav.lab">Tu turno</b></a>
+      </div>
+      <span class="story-nav-progress" aria-hidden="true"><i data-story-progress></i></span>
+    </nav>
+
     <main id="learn-content">
       <!-- 01 — La pregunta -->
       <section class="learn-hero">
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="hero.eyebrow">Guía visual de campo</p>
-          <h1 data-i18n="hero.title">Una falla deja pistas en el paisaje</h1>
-          <p class="hero-lead" data-i18n="hero.copy">Una montaña, un valle o un río pueden parecer simples formas del relieve. Pero cuando varias pistas coinciden, el paisaje puede contarnos que la Tierra se ha estado deformando bajo nuestros pies.</p>
+          <h1 data-i18n="hero.title">Un terremoto dura segundos. Su huella puede durar milenios.</h1>
+          <p class="hero-lead" data-i18n="hero.copy">Si nadie vio aquel terremoto y ningún instrumento lo registró, ¿cómo sabemos que ocurrió? La respuesta está escrita en pendientes, ríos y capas de roca. Esta historia te enseña a leerlas.</p>
           <a class="primary-action" href="./"><span data-i18n="hero.cta">Explorar el mapa</span><span aria-hidden="true">↗</span></a>
         </div>
         <figure class="hero-visual">
           <picture>
-            <source type="image/webp" srcset="assets/images/education/fault-scarp-768.webp 768w, assets/images/education/fault-scarp-1536.webp 1536w" sizes="(max-width: 58rem) 92vw, 48vw" />
-            <img src="assets/images/education/fault-scarp.png" width="1536" height="1024" alt="Ilustración conceptual de un escarpe asociado a deformación tectónica" data-i18n-alt="alt.hero" fetchpriority="high" decoding="async" />
+            <source type="image/webp" srcset="assets/images/education/riobamba-lican-scarp-768.webp 768w, assets/images/education/riobamba-lican-scarp-1287.webp 1283w" sizes="(max-width: 58rem) 92vw, 48vw" />
+            <img src="assets/images/education/riobamba-lican-scarp.jpg" width="1283" height="435" alt="Vista del escarpe acumulado del segmento Riobamba-Licán y croquis interpretativo" data-i18n-alt="alt.hero" fetchpriority="high" decoding="async" />
           </picture>
-          <figcaption><span data-i18n="hero.caption">Ilustración conceptual — una forma del relieve no demuestra por sí sola una falla</span><span aria-hidden="true">01 / 03</span></figcaption>
+          <figcaption><span><span data-i18n="hero.caption">Escarpe acumulado de Riobamba-Licán.</span> <a href="#ref-baize-2015" data-i18n="figure.sourceBaize">Baize et al. (2015), fig. 6C</a></span><span aria-hidden="true">01 / 06</span></figcaption>
         </figure>
-        <span class="hero-coordinate" aria-hidden="true">0.1807° S / 78.4678° W</span>
+        <span class="hero-coordinate" data-i18n="hero.place">Riobamba · Chimborazo</span>
       </section>
 
       <!-- 02 — Observar -->
-      <section class="definition-section content-width">
+      <section class="definition-section content-width" id="observar" data-story-section="observar">
         <div class="section-index" data-i18n="definition.number">01 — Observar</div>
         <div class="definition-copy">
           <h2 data-i18n="definition.title">Antes de buscar una falla, mira qué está haciendo el paisaje</h2>
           <p class="section-lead" data-i18n="definition.lead">La primera pista no es una línea dibujada en un mapa. Es una anomalía: un cambio de pendiente, una cresta demasiado recta, un valle alineado o un drenaje que parece desplazado.</p>
           <p data-i18n="definition.copy">Cada una de esas formas puede tener varias explicaciones. La erosión, los deslizamientos, la sedimentación y la actividad volcánica también construyen relieve. Por eso la pregunta correcta no es “¿hay una forma que parezca una falla?”, sino “¿qué explicación explica mejor todas las pistas juntas?”.</p>
         </div>
-        <figure class="definition-diagram">
-          <img src="assets/images/education/fault-trace-plane-photo.jpg" alt="Fotografía de un afloramiento donde una superficie de falla corta el terreno" loading="lazy" decoding="async" />
+        <figure class="definition-diagram landform-diagram">
+          <img src="assets/images/education/papers/papanikolaou-fault-landforms.webp" width="900" height="455" alt="Esquema científico de formas del relieve asociadas a una falla inversa u oblicua" data-i18n-alt="alt.landforms" loading="lazy" decoding="async" />
+          <figcaption><span data-i18n="figure.papanikolaou">Formas del relieve, sedimentos y evidencias sísmicas a escalas de escarpe y frente montañoso.</span> <a href="#ref-papanikolaou-2015" data-i18n="figure.sourcePapanikolaou">Papanikolaou et al. (2015), fig. 2</a></figcaption>
         </figure>
       </section>
 
       <!-- 03 — Evidencia convergente -->
-      <section class="types-section">
+      <section class="types-section" id="movimientos">
         <div class="content-width">
           <header class="section-title-row">
             <div>
@@ -70,8 +83,8 @@
           <div class="fault-types">
             <article class="fault-type normal-type">
               <figure class="fault-type-figure">
-                <img src="assets/images/education/types/falla-normal.jpg" alt="Fotografía de campo o esquema de una falla normal, mostrando el bloque colgante descendido" loading="lazy" decoding="async" />
-                <span class="fault-motion-tag">↙ bloque colgante desciende</span>
+                <img src="assets/images/education/papers/tarbuck-normal-fault.webp" width="600" height="1460" alt="Bloques diagrama publicados que muestran la evolución de una falla normal y el relieve que produce" data-i18n-alt="alt.normal" loading="lazy" decoding="async" />
+                <figcaption><a href="#ref-tarbuck" data-i18n="figure.sourceTarbuckNormal">Tarbuck et al., fig. 10.18</a></figcaption>
               </figure>
               <p class="type-tag" data-i18n="types.normalTag">Extensión</p>
               <h3 data-i18n="types.normal">Falla normal</h3>
@@ -79,8 +92,8 @@
             </article>
             <article class="fault-type reverse-type">
               <figure class="fault-type-figure">
-                <img src="assets/images/education/types/falla-inversa.jpg" alt="Fotografía de campo o esquema de una falla inversa, mostrando el bloque colgante ascendido" loading="lazy" decoding="async" />
-                <span class="fault-motion-tag">↗ bloque colgante asciende</span>
+                <img src="assets/images/education/papers/tarbuck-reverse-fault.webp" width="590" height="430" alt="Bloque diagrama publicado de una falla inversa" data-i18n-alt="alt.reverse" loading="lazy" decoding="async" />
+                <figcaption><a href="#ref-tarbuck" data-i18n="figure.sourceTarbuckReverse">Tarbuck et al., fig. 10.20</a></figcaption>
               </figure>
               <p class="type-tag" data-i18n="types.reverseTag">Compresión</p>
               <h3 data-i18n="types.reverse">Falla inversa</h3>
@@ -88,103 +101,114 @@
             </article>
             <article class="fault-type strike-type">
               <figure class="fault-type-figure">
-                <img src="assets/images/education/types/falla-rumbo.jpg" alt="Fotografía aérea o esquema de una falla de rumbo, mostrando el desplazamiento lateral de un cauce o cresta" loading="lazy" decoding="async" />
-                <span class="fault-motion-tag">↔ desplazamiento lateral</span>
+                <img src="assets/images/education/papers/tarbuck-strike-slip.webp" width="830" height="560" alt="Bloque diagrama publicado de una falla de rumbo que desplaza cauces" data-i18n-alt="alt.strike" loading="lazy" decoding="async" />
+                <figcaption><a href="#ref-tarbuck" data-i18n="figure.sourceTarbuckStrike">Tarbuck et al., fig. 10.22</a></figcaption>
               </figure>
               <p class="type-tag" data-i18n="types.strikeTag">Cizalla</p>
               <h3 data-i18n="types.strike">Falla de rumbo</h3>
               <p data-i18n="types.strikeCopy">Los bloques se desplazan principalmente en horizontal, siguiendo el rumbo de la falla. El movimiento puede ser dextral o sinestral.</p>
             </article>
           </div>
-          <p class="section-note">La forma del relieve sugiere una historia; la geometría de la falla, la geología de campo y otras mediciones permiten ponerla a prueba. No confundas una hipótesis razonable con una demostración.</p>
+          <p class="section-note" data-i18n="types.note">La forma del relieve sugiere una historia; la geometría de la falla, la geología de campo y otras mediciones permiten ponerla a prueba. No confundas una hipótesis razonable con una demostración.</p>
         </div>
       </section>
 
       <!-- 04 — Qué es una falla -->
-      <section class="definition-section content-width">
-        <div class="section-index">02 — Fundamentos</div>
+      <section class="definition-section content-width" id="fundamentos" data-story-section="fundamentos">
+        <div class="section-index" data-i18n="fundamentals.number">02 — Fundamentos</div>
         <div class="definition-copy">
-          <h2>Entonces, ¿qué es una falla geológica?</h2>
-          <p class="section-lead">Es una fractura —o una zona de fracturas— en la corteza donde existe desplazamiento relativo entre bloques de roca.</p>
-          <p>En superficie solemos hablar de <strong>traza</strong>: la intersección aproximada entre el plano o la zona de falla y el terreno. Pero una falla no es simplemente una línea. Puede ser una zona compleja, con varias superficies, fracturas secundarias, pliegues y cambios de geometría que se prolongan hacia profundidad.</p>
-          <p>Por eso, cuando mapeamos una falla, en realidad estamos intentando reconstruir una estructura tridimensional a partir de pistas que vemos en superficie y de mediciones que hacemos en el subsuelo.</p>
+          <h2 data-i18n="fundamentals.title">Entonces, ¿qué es una falla geológica?</h2>
+          <p class="section-lead" data-i18n="fundamentals.lead">Es una fractura —o una zona de fracturas— en la corteza donde existe desplazamiento relativo entre bloques de roca.</p>
+          <p data-i18n="fundamentals.copy">En superficie observamos la traza: la intersección aproximada entre la falla y el terreno. En profundidad, la estructura puede inclinarse, ramificarse y formar una zona compleja de deformación.</p>
+          <p data-i18n="fundamentals.model">Mapear una falla es reconstruir una estructura tridimensional a partir de señales incompletas en la superficie y el subsuelo.</p>
         </div>
         <figure class="definition-diagram">
-          <img src="assets/images/education/fault-trace-plane-photo.jpg" alt="Ejemplo de una superficie de falla y su expresión en superficie" loading="lazy" decoding="async" />
+          <img src="assets/images/education/papers/tarbuck-fault-anatomy.webp" width="580" height="850" alt="Bloque diagrama publicado que identifica el techo, muro, traza y plano de una falla" data-i18n-alt="alt.anatomy" loading="lazy" decoding="async" />
+          <figcaption><span data-i18n="figure.tarbuckAnatomy">La geometría básica de una falla: plano, traza, techo y muro.</span> <a href="#ref-tarbuck" data-i18n="figure.sourceTarbuckAnatomy">Tarbuck et al., fig. 10.17</a></figcaption>
         </figure>
       </section>
 
       <!-- 05 — Qué es un sismo -->
-      <section class="quake-section content-width" id="que-es-un-sismo">
-        <div class="section-index">03 — Cuando la roca se rompe</div>
+      <section class="quake-section content-width" id="sismo" data-story-section="sismo">
+        <div class="section-index" data-i18n="quake.number">03 — Cuando la roca se rompe</div>
         <div class="definition-copy">
-          <h2>¿Qué es un sismo?</h2>
-          <p class="section-lead">Un sismo ocurre cuando la deformación y el esfuerzo acumulados en la corteza producen una ruptura o un deslizamiento súbito en una zona de falla, liberando energía que se propaga como ondas sísmicas.</p>
-          <p>El punto donde comienza la ruptura en profundidad se denomina <strong>hipocentro</strong>; su proyección sobre la superficie es el <strong>epicentro</strong>. La <strong>magnitud</strong> cuantifica el tamaño físico del terremoto, mientras que la <strong>intensidad</strong> describe cómo se siente o qué efectos produce en un lugar concreto.</p>
-          <p>Pero aquí aparece un problema: los instrumentos solo han observado directamente una pequeña fracción de la historia de la Tierra. Para muchas fallas, la recurrencia de grandes terremotos se mide en escalas de cientos o miles de años. El paisaje y las rocas pueden conservar pistas mucho más antiguas.</p>
+          <h2 data-i18n="quake.title">¿Qué es un sismo?</h2>
+          <p class="section-lead" data-i18n="quake.lead">Las rocas pueden deformarse lentamente y almacenar energía. Cuando una zona de falla pierde resistencia y desliza de forma súbita, parte de esa energía viaja como ondas sísmicas.</p>
+          <p data-i18n="quake.terms">El hipocentro es el punto donde comienza la ruptura en profundidad; el epicentro es su proyección en la superficie. La magnitud describe el tamaño físico del terremoto, mientras la intensidad describe sus efectos en un lugar.</p>
+          <p data-i18n="quake.problem">Aquí aparece el problema que impulsa esta historia: los instrumentos solo han visto una fracción diminuta de la vida de muchas fallas.</p>
         </div>
+        <ol class="concept-sequence" aria-label="Secuencia simplificada del ciclo sísmico" data-i18n-aria="quake.sequenceAria">
+          <li><span>01</span><b data-i18n="quake.step1">La corteza se deforma</b></li>
+          <li><span>02</span><b data-i18n="quake.step2">La energía se acumula</b></li>
+          <li><span>03</span><b data-i18n="quake.step3">La falla desliza</b></li>
+          <li><span>04</span><b data-i18n="quake.step4">Las ondas se propagan</b></li>
+        </ol>
       </section>
 
       <!-- Quiebre visual — el problema del tiempo -->
       <figure class="interlude">
-        <img src="assets/images/education/interlude-tiempo-profundo.jpg" alt="" role="presentation" loading="lazy" decoding="async" />
-        <blockquote>Los instrumentos solo han visto una fracción diminuta de la historia de una falla. El paisaje y las rocas vieron el resto.</blockquote>
-        <cite>Por eso hace falta leer la Tierra, no solo medirla</cite>
+        <div class="time-window" aria-hidden="true"><span></span><span></span><span></span><i></i></div>
+        <blockquote data-i18n="time.quote">Los instrumentos solo han visto una fracción diminuta de la historia de una falla. El paisaje y las rocas vieron el resto.</blockquote>
+        <cite data-i18n="time.cite">Por eso hace falta leer la Tierra, no solo medirla</cite>
+        <div class="time-labels"><span data-i18n="time.instrumental">Décadas instrumentales</span><span data-i18n="time.geologic">Miles de años registrados por la geología</span></div>
       </figure>
 
       <!-- 06 — Paleosismología -->
-      <section class="paleoseis-section content-width" id="paleosismologia">
-        <div class="section-index">04 — Registro geológico</div>
+      <section class="paleoseis-section content-width" id="paleosismologia" data-story-section="paleosismologia">
+        <div class="section-index" data-i18n="paleo.number">04 — Registro geológico</div>
         <div class="definition-copy">
-          <h2>Paleosismología: cuando la Tierra conserva la memoria</h2>
-          <p class="section-lead">Cuando una falla alcanza la superficie durante un terremoto, puede desplazar, fracturar, inclinar o plegar el terreno. Si después se depositan nuevos sedimentos, parte de esa deformación puede quedar enterrada y preservada.</p>
-          <p>La paleosismología busca esas huellas para reconstruir terremotos que ocurrieron antes de los instrumentos y, en muchos casos, antes de los registros históricos. No se trata de “leer” un terremoto como una fecha escrita en una roca: se construye una secuencia de eventos comparando capas, desplazamientos, relaciones de corte y edades.</p>
+          <h2 data-i18n="paleo.title">Paleosismología: cuando la Tierra conserva la memoria</h2>
+          <p class="section-lead" data-i18n="paleo.lead">Una ruptura puede desplazar, fracturar, inclinar o plegar el terreno. Si nuevos sedimentos cubren después esa deformación, parte de la historia queda enterrada.</p>
+          <p data-i18n="paleo.copy">La paleosismología reconstruye terremotos anteriores a los instrumentos comparando capas, desplazamientos, relaciones de corte y edades. No encuentra una fecha escrita: construye la explicación que mejor satisface todas las observaciones.</p>
         </div>
 
         <div class="clue-grid">
           <article class="clue-card clue-wide">
             <figure>
-              <img src="assets/images/education/paleoseis-santa-rosa-outcrop.jpg" alt="Corte Santa Rosa de la falla Porotoyacu con unidades estratigráficas y planos de ruptura interpretados" loading="lazy" decoding="async" />
+              <img src="assets/images/education/paleoseis-santa-rosa-outcrop.webp" alt="Fotomosaico e interpretación estratigráfica del corte Santa Rosa de la falla Porotoyacu" data-i18n-alt="alt.santaRosa" loading="lazy" decoding="async" />
               <span>04</span>
             </figure>
             <div>
-              <h3>Un caso real: Santa Rosa y la falla Porotoyacu</h3>
-              <p>Un corte antrópico puede convertirse en una ventana al subsuelo. En Santa Rosa, las unidades de la Formación Tena están afectadas por superficies de ruptura y estructuras de deformación. La reconstrucción de las relaciones entre unidades permite proponer una historia de deformación y paleoeventos.</p>
-              <small>Observa: unidades desplazadas, relaciones de corte, microfallas y estructuras de deformación sedimentaria. Una señal aislada puede tener varias causas; el conjunto de relaciones es lo que permite construir una interpretación.</small>
+              <h3 data-i18n="paleo.caseTitle">Un caso real: Santa Rosa y la falla Porotoyacu</h3>
+              <p data-i18n="paleo.caseCopy">Un corte antrópico se convirtió en una ventana al subsuelo. Allí se reconocieron once unidades y dos planos principales de ruptura. Su orden y desplazamiento permiten proponer al menos dos paleoeventos.</p>
+              <small><span data-i18n="paleo.caseLook">Observa las capas U1-U11 y los planos R1 y R2. La interpretación combina relaciones de corte, microfallas y deformación sedimentaria.</span> <a href="#ref-cornejo-2024" data-i18n="figure.sourceCornejo">Cornejo et al. (2024), fig. 3</a></small>
             </div>
           </article>
           <article class="clue-card">
             <figure>
-              <img src="assets/images/education/paleoseis-stratigraphic-column.jpg" alt="Columna estratigráfica usada para correlacionar unidades afectadas por una falla" loading="lazy" decoding="async" />
+              <img src="assets/images/education/paleoseis-stratigraphic-column.webp" alt="Columna estratigráfica de las unidades U1 a U11 descritas en Santa Rosa" data-i18n-alt="alt.column" loading="lazy" decoding="async" />
               <span>05</span>
             </figure>
             <div>
-              <h3>Primero, correlacionar</h3>
-              <p>La litología, el color, el tamaño de grano y las estructuras sedimentarias ayudan a reconocer qué capas equivalentes se encontraban originalmente a cada lado de la falla.</p>
+              <h3 data-i18n="paleo.correlateTitle">Primero, correlacionar</h3>
+              <p data-i18n="paleo.correlateCopy">Litología, color, tamaño de grano y estructuras sedimentarias permiten reconocer unidades y comparar qué ocurre a ambos lados de la ruptura.</p>
+              <small><a href="#ref-cornejo-2024" data-i18n="figure.sourceCornejo4">Cornejo et al. (2024), fig. 4</a></small>
             </div>
           </article>
           <article class="clue-card">
             <figure>
-              <img src="assets/images/education/paleoseis-vertical-offset-diagram.jpg" alt="Esquema del desplazamiento vertical entre puntos equivalentes a ambos lados de una ruptura" loading="lazy" decoding="async" />
+              <img src="assets/images/education/paleoseis-vertical-offset-diagram.webp" alt="Restauración del desplazamiento vertical de unidades a lo largo del plano R1" data-i18n-alt="alt.offset" loading="lazy" decoding="async" />
               <span>06</span>
             </figure>
             <div>
-              <h3>Luego, medir</h3>
-              <p>El desplazamiento entre marcadores equivalentes cuantifica cuánto se deformó el terreno. Su interpretación debe hacerse junto con la geometría de la falla y con la edad de las unidades afectadas.</p>
+              <h3 data-i18n="paleo.measureTitle">Luego, restaurar y medir</h3>
+              <p data-i18n="paleo.measureCopy">Los marcadores equivalentes se llevan mentalmente a su posición anterior. La separación necesaria cuantifica el desplazamiento vertical observado.</p>
+              <small><a href="#ref-cornejo-2024" data-i18n="figure.sourceCornejo7">Cornejo et al. (2024), fig. 7</a></small>
             </div>
           </article>
         </div>
 
         <div class="definition-copy">
-          <h3>De una huella a una historia</h3>
-          <p>Cuando diferentes capas contienen evidencias de ruptura en posiciones sucesivas de la secuencia, podemos separar eventos antiguos y establecer relaciones de “antes y después”. Si además obtenemos edades independientes, la historia puede expresarse en el tiempo.</p>
-          <p>La magnitud de un paleoterremoto puede estimarse mediante relaciones empíricas que conectan parámetros observables, como la longitud de ruptura y el desplazamiento, con magnitud sísmica. Estas relaciones proporcionan estimaciones; no convierten automáticamente una medición local en una magnitud exacta.</p>
-          <p>Ese principio también explica por qué los <strong>efectos ambientales de los terremotos</strong> son tan útiles: ruptura superficial, plegamiento, desplazamiento de depósitos, deslizamientos y licuefacción pueden ampliar la evidencia disponible más allá del daño a construcciones.</p>
+          <h3 data-i18n="paleo.historyTitle">De una huella a una historia</h3>
+          <p data-i18n="paleo.historyCopy">Las capas establecen relaciones de antes y después; las edades independientes sitúan esos intervalos en el tiempo. Así se separan eventos posibles sin asumir que cada anomalía fue necesariamente un terremoto.</p>
+          <p data-i18n="paleo.estimate">La longitud de ruptura y el desplazamiento pueden alimentar relaciones empíricas de magnitud. El resultado es una estimación con incertidumbre, no una lectura exacta.</p>
+          <p data-i18n="paleo.effects">Ruptura superficial, plegamiento, deslizamientos y licuefacción amplían el registro más allá del daño a construcciones, pero cada señal debe contrastarse con causas no sísmicas.</p>
         </div>
+        <aside class="evidence-rule"><span data-i18n="paleo.ruleLabel">Regla de oro</span><p data-i18n="paleo.rule">Una señal propone una hipótesis. Varias evidencias independientes pueden volverla convincente.</p></aside>
       </section>
 
       <!-- 07 — Geomorfología tectónica -->
-      <section class="clues-section content-width">
+      <section class="clues-section content-width" id="caso-ecuador" data-story-section="caso-ecuador">
         <header class="section-title-row clues-heading">
           <div>
             <p class="eyebrow" data-i18n="clues.eyebrow">Geomorfología tectónica</p>
@@ -195,63 +219,53 @@
         <div class="clue-grid">
           <article class="clue-card clue-wide">
             <figure>
-              <picture>
-                <source type="image/webp" srcset="assets/images/education/fault-scarp-768.webp 768w, assets/images/education/fault-scarp-1536.webp 1536w" sizes="(max-width: 40rem) 100vw, 60vw" />
-                <img src="assets/images/education/fault-scarp.png" width="1536" height="1024" alt="Ilustración conceptual de un escarpe de falla" data-i18n-alt="alt.scarp" loading="lazy" decoding="async" />
-              </picture>
+              <img src="assets/images/education/papers/pallatanga-riobamba-scarp.webp" width="1410" height="530" alt="Fotografía y croquis científico del escarpe acumulado de Riobamba-Licán" data-i18n-alt="alt.scarp" loading="lazy" decoding="async" />
               <span>01</span>
             </figure>
             <div>
               <h3 data-i18n="clues.scarp">Escarpe o flexura</h3>
               <p data-i18n="clues.scarpCopy">Un cambio lineal o abrupto de pendiente puede reflejar desplazamiento o plegamiento tectónico. También puede ser producido o modificado por erosión y procesos de ladera.</p>
-              <small data-i18n="clues.scarpLook">Observa: continuidad, orientación, cambios de pendiente, relación con depósitos y repetición a lo largo del frente.</small>
+              <small><span data-i18n="clues.scarpLook">Observa el desnivel acumulado y la coincidencia entre la fotografía y el croquis de campo.</span> <a href="#ref-baize-2015" data-i18n="figure.sourceBaize2015C">Baize et al. (2015), fig. 6C</a></small>
             </div>
           </article>
           <article class="clue-card">
             <figure>
-              <picture>
-                <source type="image/webp" srcset="assets/images/education/triangular-facets-768.webp 768w, assets/images/education/triangular-facets-1536.webp 1536w" sizes="(max-width: 40rem) 100vw, 40vw" />
-                <img src="assets/images/education/triangular-facets.png" width="1536" height="1024" alt="Ilustración conceptual de facetas triangulares alineadas" data-i18n-alt="alt.facets" loading="lazy" decoding="async" />
-              </picture>
+              <img src="assets/images/education/papers/pallatanga-yacupamba-offset.webp" width="1470" height="550" alt="Fotografía y croquis científico de crestas lineales y un drenaje desplazado en Yacupamba" data-i18n-alt="alt.facets" loading="lazy" decoding="async" />
               <span>02</span>
             </figure>
             <div>
-              <h3 data-i18n="clues.facets">Facetas triangulares</h3>
-              <p data-i18n="clues.facetsCopy">Frentes montañosos con facetas repetidas y alineadas pueden conservar la geometría de un frente tectónico que ha sido modificado por erosión.</p>
-              <small data-i18n="clues.facetsLook">Observa: repetición, alineamiento, orientación de los abanicos y contraste entre montaña y piedemonte.</small>
+              <h3 data-i18n="clues.facets">Crestas lineales y drenaje desplazado</h3>
+              <p data-i18n="clues.facetsCopy">En Yacupamba, una fotografía de campo y un croquis muestran cómo la alineación de crestas y el desplazamiento lateral de un cauce se comparan para probar una hipótesis tectónica.</p>
+              <small><span data-i18n="clues.facetsLook">Observa la continuidad de las crestas y la separación entre los dos tramos del cauce.</span> <a href="#ref-baize-2015" data-i18n="figure.sourceBaize2015B">Baize et al. (2015), fig. 6B</a></small>
             </div>
           </article>
           <article class="clue-card">
             <figure>
-              <picture>
-                <source type="image/webp" srcset="assets/images/education/offset-stream-768.webp 768w, assets/images/education/offset-stream-1536.webp 1536w" sizes="(max-width: 40rem) 100vw, 40vw" />
-                <img src="assets/images/education/offset-stream.png" width="1536" height="1024" alt="Ilustración conceptual de un drenaje desplazado y una depresión cerrada" data-i18n-alt="alt.stream" loading="lazy" decoding="async" />
-              </picture>
+              <img src="assets/images/education/papers/pallatanga-rumipamba-sagpond.webp" width="1490" height="620" alt="Fotografías científicas de un escarpe de ladera y una depresión húmeda en Rumipamba" data-i18n-alt="alt.stream" loading="lazy" decoding="async" />
               <span>03</span>
             </figure>
             <div>
-              <h3 data-i18n="clues.stream">Drenaje desplazado y depresiones cerradas</h3>
-              <p data-i18n="clues.streamCopy">Un cauce desplazado, una cuenca cerrada o una zona húmeda alineada pueden ser pistas de deformación. Su origen debe comprobarse con la geometría del relieve y la evolución del sistema de drenaje.</p>
-              <small data-i18n="clues.streamLook">Observa: quiebres sistemáticos, cursos desviados, zonas deprimidas y coincidencia espacial con otras evidencias tectónicas.</small>
+              <h3 data-i18n="clues.stream">Escarpe de ladera y depresión húmeda</h3>
+              <p data-i18n="clues.streamCopy">En Rumipamba, el escarpe que mira cuesta arriba retiene sedimento y agua. La foto no demuestra por sí sola la falla: se vuelve evidencia al coincidir con la traza y otras formas.</p>
+              <small><span data-i18n="clues.streamLook">Observa el quiebre de pendiente, la depresión y la relación espacial con la traza marcada.</span> <a href="#ref-baize-2015" data-i18n="figure.sourceBaize2015D">Baize et al. (2015), fig. 6D</a></small>
             </div>
           </article>
         </div>
       </section>
 
       <!-- 08 — Caso Yambo -->
-      <section class="definition-section content-width">
-        <div class="section-index">05 — Leer un paisaje real</div>
+      <section class="definition-section content-width yambo-section">
+        <div class="section-index" data-i18n="yambo.number">05 — Leer un paisaje real</div>
         <div class="definition-copy">
-          <h2>Cuando varias pistas cuentan la misma historia: Salcedo–Yambo</h2>
-          <p class="section-lead">Al norte de las secciones de rumbo del valle Interandino, la topografía alrededor de Ambato y Latacunga muestra pliegues y flexuras asociados a deformación compresiva.</p>
-          <p>El perfil topográfico <strong>A–B</strong> de esta figura cruza varias de esas anomalías del relieve. La geometría es compatible con deformación de componente principalmente vertical y con una componente inversa cerca de la superficie; sin embargo, un perfil topográfico por sí solo no determina de manera única la cinemática de una falla.</p>
-          <p>La interpretación se fortalece cuando el relieve se conecta con otras observaciones: se han documentado fallas inversas que afectan depósitos volcánicos cuaternarios y, alrededor de Yambo, el plegamiento modifica el drenaje y participa en la configuración del paisaje donde se encuentra la laguna.</p>
-          <p><strong>Eso es lo importante:</strong> no estamos mirando una flecha roja y declarando “hay una falla”. Estamos reuniendo observaciones independientes y preguntando qué explicación las conecta mejor.</p>
+          <h2 data-i18n="yambo.title">Cuando varias pistas cuentan la misma historia: Salcedo-Yambo</h2>
+          <p class="section-lead" data-i18n="yambo.lead">Entre Ambato y Latacunga, pliegues, flexuras y superficies inclinadas alteran un valle que, visto de lejos, parece casi plano.</p>
+          <p data-i18n="yambo.profile">El perfil A-A' cruza varias anomalías topográficas compatibles con una componente inversa cerca de la superficie. El perfil, por sí solo, no determina de forma única la cinemática.</p>
+          <p data-i18n="yambo.evidence">La hipótesis se fortalece porque el relieve coincide con observaciones de fallas inversas entre depósitos volcánicos cuaternarios y con pliegues que modifican el drenaje alrededor de Yambo.</p>
+          <p data-i18n="yambo.lesson">La lección no es seguir una flecha roja: es comprobar si topografía, geología y deformación actual pueden contar una historia compatible.</p>
         </div>
-        <!-- TODO: reemplazar cuando subas la figura definitiva del área Salcedo–Yambo -->
         <figure class="definition-diagram">
-          <img src="assets/images/education/salcedo-yambo.png" alt="Perfil topográfico y mapa de sombreado del relieve en el área de Salcedo y Yambo, con evidencias de deformación tectónica señaladas" loading="lazy" decoding="async" />
-          <figcaption><strong>Expresión topográfica de la deformación en Salcedo–Yambo.</strong> Al norte de las secciones de rumbo del valle Interandino, pliegues y flexuras alargadas registran un patrón amplio de deformación compresiva alrededor de Ambato y Latacunga. El perfil superior (A–B) cruza varias de estas anomalías topográficas, mientras el mapa inferior muestra su distribución alrededor de Salcedo y Yambo. Su geometría es compatible con deformación de tipo dip-slip cercana a la superficie con una componente inversa, aunque la topografía por sí sola no determina de manera única la cinemática de la falla. Las observaciones de campo aportan la evidencia adicional: fallas inversas que cortan depósitos volcánicos cuaternarios. En Yambo, además, el plegamiento modifica la red de drenaje y se asocia al desarrollo de la laguna. En conjunto, estas observaciones muestran cómo una deformación que ocurre en profundidad puede ir reescribiendo, poco a poco, el paisaje que vemos en superficie.</figcaption>
+          <img src="assets/images/education/salcedo-yambo.jpg" alt="Perfil topográfico A-A' y relieve sombreado de Salcedo-Yambo con pliegues y flexuras señalados" data-i18n-alt="alt.yambo" loading="lazy" decoding="async" />
+          <figcaption><span data-i18n="yambo.caption">Perfil y relieve sombreado de los pliegues y flexuras de Salcedo-Latacunga.</span> <a href="#ref-baize-2020" data-i18n="figure.sourceBaize2020">Baize et al. (2020), fig. 10</a></figcaption>
         </figure>
       </section>
 
@@ -259,42 +273,42 @@
       <section class="techniques-section content-width" id="tecnicas-de-estudio">
         <header class="section-title-row clues-heading">
           <div>
-            <p class="eyebrow">Del paisaje a la prueba</p>
-            <h2>¿Cómo ponemos a prueba una hipótesis de falla activa?</h2>
+            <p class="eyebrow" data-i18n="techniques.eyebrow">Del paisaje a la prueba</p>
+            <h2 data-i18n="techniques.title">¿Cómo ponemos a prueba una hipótesis de falla activa?</h2>
           </div>
-          <p>No existe una herramienta mágica. La estrategia consiste en combinar observaciones que responden preguntas diferentes: ¿dónde está la estructura?, ¿cuánto se ha movido?, ¿cuándo ocurrió?, ¿y qué parte de esa historia sigue activa?</p>
+          <p data-i18n="techniques.copy">No existe una herramienta mágica. Combinamos observaciones que responden preguntas distintas: dónde está la estructura, cuánto se movió, cuándo ocurrió y qué parte de la deformación continúa.</p>
         </header>
         <div class="facts-grid">
           <article>
             <span>A</span>
-            <p><strong>Cartografía y trabajo de campo.</strong> Permiten reconocer contactos, fracturas, pliegues, desplazamientos y relaciones de corte. Es la base para convertir una forma del relieve en una hipótesis geológica comprobable.</p>
+            <p data-i18n="techniques.field">Cartografía y campo: reconocen contactos, fracturas, pliegues, desplazamientos y relaciones de corte.</p>
           </article>
           <article>
             <span>B</span>
-            <p><strong>Modelos de elevación, fotogrametría y LiDAR.</strong> Hacen visible la geometría del relieve y permiten medir escarpes, flexuras, terrazas y drenajes con alta resolución. El LiDAR es especialmente útil donde la vegetación oculta la superficie.</p>
+            <p data-i18n="techniques.dem">Modelos de elevación, fotogrametría y LiDAR: revelan y miden escarpes, flexuras, terrazas y drenajes.</p>
           </article>
           <article>
             <span>C</span>
-            <p><strong>Geofísica.</strong> Sísmica de refracción o reflexión, GPR y tomografía eléctrica pueden ayudar a rastrear contrastes y estructuras bajo la superficie sin excavar toda el área.</p>
+            <p data-i18n="techniques.geophysics">Geofísica: rastrea contrastes y estructuras bajo la superficie mediante sísmica, GPR o tomografía eléctrica.</p>
           </article>
           <article>
             <span>D</span>
-            <p><strong>Trincheras paleosismológicas.</strong> Se excavan de forma estratégica para observar capas cortadas, plegadas o desplazadas por la falla. Después se correlacionan unidades y se buscan edades que permitan ordenar los eventos.</p>
+            <p data-i18n="techniques.trenches">Trincheras: exponen capas cortadas, plegadas o desplazadas para ordenar eventos y buscar edades.</p>
           </article>
           <article>
             <span>E</span>
-            <p><strong>Geocronología.</strong> Radiocarbono, luminiscencia y otros métodos pueden proporcionar edades para depósitos y superficies. La elección depende del material, el ambiente y la pregunta científica.</p>
+            <p data-i18n="techniques.dating">Geocronología: radiocarbono, luminiscencia y otros métodos acotan la edad de depósitos y superficies.</p>
           </article>
           <article>
             <span>F</span>
-            <p><strong>GNSS, InSAR y monitoreo.</strong> Permiten medir deformación actual o intersísmica. Conectan la historia que vemos en el paisaje con los procesos que están ocurriendo hoy.</p>
+            <p data-i18n="techniques.monitoring">GNSS, InSAR y monitoreo: miden deformación actual o intersísmica y la conectan con el registro geológico.</p>
           </article>
         </div>
-        <p class="section-note">El objetivo final no es coleccionar mapas. Es reducir la incertidumbre: cada técnica aporta una pieza diferente de la historia tectónica, y la interpretación es más sólida cuando esas piezas son compatibles.</p>
+        <p class="section-note" data-i18n="techniques.note">El objetivo no es coleccionar mapas: es reducir incertidumbre. Cada técnica aporta una pieza distinta y la interpretación se fortalece cuando las piezas son compatibles.</p>
       </section>
 
       <!-- 10 — Laboratorio -->
-      <section class="field-lab" aria-labelledby="field-lab-title">
+      <section class="field-lab" id="laboratorio" data-story-section="laboratorio" aria-labelledby="field-lab-title">
         <div class="content-width">
           <header class="section-title-row field-lab-heading">
             <div>
@@ -370,10 +384,10 @@
         <div class="content-width">
           <header><p class="eyebrow" data-i18n="facts.eyebrow">Detalles que cambian la mirada</p><h2 data-i18n="facts.title">Cuatro ideas para salir a mirar el paisaje</h2></header>
           <div class="facts-grid">
-            <article><span>01</span><p><strong>Una falla no tiene por qué verse como una línea.</strong> Puede ser una zona compleja de fracturas, pliegues y estructuras secundarias.</p></article>
-            <article><span>02</span><p><strong>Un relieve grande no necesita un movimiento grande cada año.</strong> Pequeños desplazamientos acumulados durante miles de años pueden construir montañas y cuencas.</p></article>
-            <article><span>03</span><p><strong>Los ríos también guardan memoria.</strong> Sus cambios de curso, terrazas y desviaciones pueden registrar la evolución del relieve, aunque siempre deben interpretarse en su contexto geomorfológico.</p></article>
-            <article><span>04</span><p><strong>“Activa” no significa “inminente”.</strong> Reconocer una falla es un paso para evaluar su comportamiento y amenaza; por sí solo, el mapa de una falla no dice cuándo ocurrirá el próximo terremoto.</p></article>
+            <article><span>01</span><p data-i18n="facts.one">Una falla puede ser una zona ancha y compleja, no una línea fina.</p></article>
+            <article><span>02</span><p data-i18n="facts.two">Pequeños desplazamientos acumulados durante miles de años pueden construir relieves enormes.</p></article>
+            <article><span>03</span><p data-i18n="facts.three">Los ríos guardan memoria, pero sus curvas siempre deben interpretarse dentro del contexto geomorfológico.</p></article>
+            <article><span>04</span><p data-i18n="facts.four">Activa no significa inminente. Una traza no predice la fecha del próximo terremoto.</p></article>
           </div>
         </div>
       </section>
@@ -397,18 +411,23 @@
         </div>
         <nav aria-label="Fuentes científicas" data-i18n-aria="sources.aria">
           <a href="https://www.usgs.gov/programs/earthquake-hazards/faults" target="_blank" rel="noreferrer"><span data-i18n="sources.basics">Fundamentos sobre fallas — USGS</span><b aria-hidden="true">↗</b></a>
-          <a href="https://www.usgs.gov/programs/earthquake-hazards/introduction-paleoseismology" target="_blank" rel="noreferrer"><span>Introducción a la paleosismología — USGS</span><b aria-hidden="true">↗</b></a>
+          <a href="https://www.usgs.gov/programs/earthquake-hazards/introduction-paleoseismology" target="_blank" rel="noreferrer"><span data-i18n="sources.paleo">Introducción a la paleosismología — USGS</span><b aria-hidden="true">↗</b></a>
           <a href="https://pubs.usgs.gov/of/2003/ofr-03-289/ofr-03-289.html" target="_blank" rel="noreferrer"><span data-i18n="sources.ecuador">Fallas cuaternarias de Ecuador — USGS</span><b aria-hidden="true">↗</b></a>
-          <a href="https://doi.org/10.1016/j.geomorph.2015.02.024" target="_blank" rel="noreferrer"><span>Geomorfología de fallamiento activo y amenaza sísmica — Papanikolaou et al. (2015)</span><b aria-hidden="true">↗</b></a>
+          <a href="https://doi.org/10.1016/j.geomorph.2015.02.024" target="_blank" rel="noreferrer"><span data-i18n="sources.geomorphology">Geomorfología de fallamiento activo — Papanikolaou et al. (2015)</span><b aria-hidden="true">↗</b></a>
+          <a href="https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2020.00193/full" target="_blank" rel="noreferrer"><span data-i18n="sources.pallatanga">Tectónica activa de Pallatanga — Baize et al. (2020)</span><b aria-hidden="true">↗</b></a>
           <details class="reading-references" open>
-            <summary>Referencias citadas: fallas, sismos y paleosismología</summary>
-            <p>La secuencia pedagógica parte de una idea central: observar primero, formular hipótesis después y contrastarlas con evidencia independiente.</p>
+            <summary data-i18n="sources.cited">Referencias citadas: fallas, sismos y paleosismología</summary>
+            <p data-i18n="sources.citedNote">Las figuras de artículos y libros se reproducen con permiso y se atribuyen en su pie y en esta bibliografía.</p>
             <ul class="bibliography-list">
               <li id="ref-cornejo-2024">[1] Cornejo, C., Guzmán, O., Campos, C., &amp; Cargua, C. J. (2024). <cite>Análisis paleosismológico en la zona subandina de Ecuador. Implicaciones para la falla Porotoyacu.</cite> En <cite>Geociencias en la Amazonía</cite> (Cap. 03, pp. 44–61). Universidad Regional Amazónica Ikiam.</li>
               <li id="ref-papanikolaou-2015">[2] Papanikolaou, I. D., van Balen, R., Silva, P. G., &amp; Reicherter, K. (2015). <cite>Geomorphology of Active Faulting and seismic hazard assessment: New tools and future challenges.</cite> <cite>Geomorphology</cite>.</li>
               <li id="ref-mccalpin-2009">[3] McCalpin, J. P. (Ed.). (2009). <cite>Paleoseismology</cite> (2.ª ed., Vol. 95). Academic Press / Elsevier.</li>
-              <li id="ref-usgs-paleo">[4] U.S. Geological Survey. <cite>Introduction to Paleoseismology.</cite> Earthquake Hazards Program.</li>
-              <li id="ref-usgs-rupture">[5] U.S. Geological Survey. <cite>What is surface faulting or surface rupture in an earthquake?</cite> Earthquake Hazards Program.</li>
+              <li id="ref-tarbuck">[4] Tarbuck, E. J., Lutgens, F. K., &amp; Tasa, D. (2005). <cite>Ciencias de la Tierra: una introducción a la geología física.</cite> 8.ª ed. Pearson Educación, cap. 10, figs. 10.17–10.22.</li>
+              <li id="ref-usgs-paleo">[5] U.S. Geological Survey. <cite>Introduction to Paleoseismology.</cite> Earthquake Hazards Program.</li>
+              <li id="ref-usgs-rupture">[6] U.S. Geological Survey. <cite>What is surface faulting or surface rupture in an earthquake?</cite> Earthquake Hazards Program.</li>
+              <li id="ref-baize-2015">[7] Baize, S., Audin, L., Winter, T., et al. (2015). <cite>Paleoseismology and tectonic geomorphology of the Pallatanga fault (Central Ecuador), a major structure of the South-American crust.</cite> <cite>Geomorphology</cite>, 237, 14–28. https://doi.org/10.1016/j.geomorph.2014.02.030.</li>
+              <li id="ref-baize-2020">[8] Baize, S., Audin, L., Alvarado, A., et al. (2020). <cite>Active Tectonics and Earthquake Geology Along the Pallatanga Fault, Central Andes of Ecuador.</cite> <cite>Frontiers in Earth Science</cite>, 8, 193. https://doi.org/10.3389/feart.2020.00193.</li>
+              <li id="ref-eguez-2003">[9] Eguez, A., Alvarado, A., Yepes, H., Machette, M. N., Costa, C., &amp; Dart, R. L. (2003). <cite>Database and Map of Quaternary faults and folds of Ecuador and its offshore regions.</cite> USGS Open-File Report 03-289.</li>
             </ul>
           </details>
           <details class="reading-references">
@@ -427,7 +446,7 @@
           <p class="eyebrow" data-i18n="cta.eyebrow">Ahora mira el territorio</p>
           <h2 data-i18n="cta.title">La teoría cobra sentido sobre el mapa</h2>
           <p data-i18n="cta.copy">Activa la topografía, compara capas y sigue las formas del relieve. La idea no es encontrar una línea y llamarla falla: es conectar patrón, evidencia e interpretación.</p>
-          <p>En el visor puedes comparar por separado la distribución de <strong>fallas</strong> y <strong>sismos</strong>, y volver a cada ficha para revisar su fuente y nivel de confianza.</p>
+          <p data-i18n="cta.detail">En el visor puedes comparar fallas, sismos y relieve, y volver a cada ficha para revisar su fuente y nivel de confianza.</p>
         </div>
         <a class="primary-action light-action" href="./"><span data-i18n="cta.button">Entrar al explorador</span><span aria-hidden="true">→</span></a>
       </section>
