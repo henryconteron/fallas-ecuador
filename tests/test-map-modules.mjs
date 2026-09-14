@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 
+import { FAULT_METADATA_PROFILES, SOURCE_REGISTRY } from "../assets/js/map/config.js";
 import { buildEarthquakeUrl } from "../assets/js/map/data.js";
 import { filterEarthquakes, normalizeEarthquakeFilters } from "../assets/js/map/seismicity.js";
 import { earthquakeDepthClass, faultStyle } from "../assets/js/map/symbology.js";
@@ -36,5 +37,10 @@ assert.deepEqual(normalizeEarthquakeFilters({ days: 999, minimumMagnitude: -2, d
 const fault = (movement) => ({ properties: { tipo_movimiento: movement } });
 assert.notEqual(faultStyle(fault("normal"), null).dashArray, faultStyle(fault("dextral"), null).dashArray);
 assert.equal(faultStyle(fault("inversa"), null).dashArray, undefined);
+
+assert.equal(SOURCE_REGISTRY.SARA.metadataProfile, "sara");
+assert.equal(SOURCE_REGISTRY.ATA.metadataProfile, "ata");
+assert.match(FAULT_METADATA_PROFILES.sara.coverage, /^popup\./);
+assert.match(FAULT_METADATA_PROFILES.ata.limits, /^popup\./);
 
 console.log("Map module tests passed.");

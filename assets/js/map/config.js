@@ -59,9 +59,22 @@ export const SOURCE_REGISTRY = Object.freeze({
   SARA: {
     label: "SARA",
     citation: "Alvarado et al. (2017)",
+    metadataProfile: "sara",
   },
   ATA: {
     label: "ATA",
     citation: "Veloza et al. (2012)",
+    metadataProfile: "ata",
+  },
+});
+
+export const FAULT_METADATA_PROFILES = Object.freeze({
+  sara: {
+    coverage: "popup.profileSaraCoverage",
+    limits: "popup.profileSaraLimits",
+  },
+  ata: {
+    coverage: "popup.profileAtaCoverage",
+    limits: "popup.profileAtaLimits",
   },
 });

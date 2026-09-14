@@ -1,4 +1,4 @@
-import { SOURCE_REGISTRY } from "./config.js";
+import { FAULT_METADATA_PROFILES, SOURCE_REGISTRY } from "./config.js";
 import { catalogKey, missingScientificFields } from "./utils.js";
 
 function appendDefinitionRows(list, rows, t) {
@@ -59,6 +59,30 @@ function appendOriginalSourceAttributes(wrapper, feature, context) {
   wrapper.append(details);
 }
 
+function appendCatalogMetadataProfile(wrapper, feature, context) {
+  const { t } = context;
+  const catalogSource = SOURCE_REGISTRY[catalogKey(feature)];
+  const profile = FAULT_METADATA_PROFILES[catalogSource?.metadataProfile];
+  if (!profile) return;
+
+  const details = document.createElement("details");
+  details.className = "source-attributes metadata-profile";
+  const summary = document.createElement("summary");
+  summary.textContent = t("popup.metadataProfile");
+  const list = document.createElement("dl");
+  appendDefinitionRows(
+    list,
+    [
+      ["popup.catalogReference", catalogSource.citation],
+      ["popup.metadataCoverage", t(profile.coverage)],
+      ["popup.metadataLimits", t(profile.limits)],
+    ],
+    t,
+  );
+  details.append(summary, list);
+  wrapper.append(details);
+}
+
 export function createFaultPopup(feature, context) {
   const { t, template, localizedProperty, movementLabel, demoMode } = context;
   const wrapper = document.createElement("div");
@@ -109,6 +133,7 @@ export function createFaultPopup(feature, context) {
   }
 
   if (!demoMode) appendOriginalSourceAttributes(wrapper, feature, context);
+  if (!demoMode) appendCatalogMetadataProfile(wrapper, feature, context);
 
   appendHttpsLink(
     wrapper,
