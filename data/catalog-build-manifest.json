@@ -1,23 +1,32 @@
 {
   "schema_version": 1,
-  "status": "partial-legacy-build",
-  "generated": "2026-09-10",
+  "generated": "2026-09-14",
   "source_commit": "850fd05b48841eb806d61a37043b5567f5bb99dd",
   "source_blob_sha": "fb164770b529695544fa864abe2cc9dd8aa5793d",
   "inputs": {
     "gem": {
-      "git_blob_sha1": "fb164770b529695544fa864abe2cc9dd8aa5793d",
-      "verified": true
+      "filename": "gem_active_faults_harmonized.geojson",
+      "size_bytes": 10622730,
+      "sha256": "37babb516edfac22b5ae91744495d8546b3ae4676b4d4f68cc77da8222df20e1",
+      "git_blob_sha1": "fb164770b529695544fa864abe2cc9dd8aa5793d"
     },
-    "boundaries": {
-      "release_commit": "9469f09",
-      "verified": false,
-      "note": "The individual ADM0 and ADM1 checksums were not retained for the original build. The next regeneration will replace this partial manifest."
+    "countries": {
+      "filename": "geoBoundaries-ECU-ADM0.geojson",
+      "size_bytes": 170839,
+      "sha256": "523cf48366449bb98d562f61e05ef0a3de9afb82f8c3be7b7409a29d508b1fbf",
+      "git_blob_sha1": "04def030e88c60596172ca8fb77fea8f4fd2a72e"
+    },
+    "provinces": {
+      "filename": "geoBoundaries-ECU-ADM1.geojson",
+      "size_bytes": 598883,
+      "sha256": "8b0083c7f7ba221600dfa13c5e2cb75ac25c697ead5bf5f16f0a6b1434d358d7",
+      "git_blob_sha1": "1d4b4ceea6f22c4324cdbd25aca8ad749bef6bb6"
     }
   },
   "output": {
     "filename": "fallas.geojson",
-    "size_bytes": 279395,
-    "sha256": "cb7332d525f6552f6eb34087690173fe9bf27fcc079efe5c7e90ce81d8787e5d"
+    "size_bytes": 290781,
+    "sha256": "1e6fdb303f58e33448b4561c9fb4e07acc61e02fee3e13f144988616d1252dd7",
+    "git_blob_sha1": "ece966ec340e09c884386893dabb0e114eb21fa5"
   }
 }

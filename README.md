@@ -200,6 +200,12 @@ Las fichas enlazan el repositorio regional SARA o la referencia de *Active Tecto
 además de la instantánea armonizada de GEM. La verificación de versiones, licencias y limitaciones
 se mantiene en [`documentation/references/README.md`](documentation/references/README.md).
 
+La cobertura bibliográfica se distingue por traza: `reference` conserva únicamente la cita específica
+que ya venía en el registro fuente y `reference_scope` indica si esa cita es individual o si la ficha
+solo puede ofrecer la cita del catálogo. En esta versión hay 68 referencias individuales y 77 trazas
+con cita únicamente de catálogo (61 SARA y 16 ATA). La ausencia se hace visible en cada ficha y en el
+auditor; no se rellenan referencias a partir de nombres parecidos.
+
 Para regenerar el archivo se requiere Python y Shapely:
 
 ```bash
@@ -222,13 +228,15 @@ python scripts/build_fault_catalog.py \
 Cada descarga se verifica como JSON y su SHA-256 se imprime para revisión. El proceso nunca
 publica los insumos mundiales ni sustituye automáticamente el catálogo versionado.
 
-El generador verifica el Git blob de GEM contra la versión aprobada, calcula SHA-256 para todas las
-entradas y genera `data/catalog-build-manifest.json`. También pueden proporcionarse los SHA-256
-esperados de los límites mediante `--countries-sha256` y `--provinces-sha256`.
+El generador verifica el Git blob y SHA-256 de GEM y compara los SHA-256 de los límites con las
+huellas fijadas para ADM0/ADM1; solo entonces genera `data/catalog-build-manifest.json`. Si una
+fuente se actualiza intencionalmente, sus huellas y URLs se deben revisar y cambiar juntas en
+`scripts/catalog_integrity.py`.
 
-El manifiesto conservado para la compilación actual es parcial: verifica la versión GEM, pero deja
-explícito que los hashes individuales ADM0/ADM1 no fueron guardados durante la extracción original.
-La siguiente regeneración sustituirá ese registro por un manifiesto completo.
+El manifiesto de la compilación actual registra el tamaño, SHA-256 y Git blob de cada entrada
+(GEM, límite nacional ADM0 y provincias ADM1), además de la salida generada. Los archivos de entrada
+permanecen en `data/raw/`, excluidos de Git, mientras el manifiesto público conserva sus huellas
+para auditoría y reconstrucción.
 
 Antes de publicar cualquier cambio puede ejecutarse:
 
@@ -239,8 +247,9 @@ npm run check
 La validación comprueba sintaxis JavaScript, traducciones de la interfaz, módulos del mapa,
 estructura GeoJSON, geometrías admitidas, IDs únicos,
 campos obligatorios, valores cinemáticos, coordenadas WGS 84, URLs HTTPS y coherencia de los
-metadatos. Las referencias o escalas ausentes se reportan como advertencias explícitas porque la
-fuente original no las documenta en todos los registros.
+metadatos. Las referencias individuales ausentes se reportan como advertencia con su alcance de
+cita; las escalas ausentes también se señalan porque la fuente original no las documenta en todos
+los registros.
 
 ## Sismicidad reciente
 

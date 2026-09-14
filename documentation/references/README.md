@@ -2,13 +2,14 @@
 
 Este directorio registra la procedencia, las condiciones de uso y las limitaciones de cada conjunto de datos incorporado al visor.
 
-**Última verificación:** 13 de septiembre de 2026.
+**Última verificación:** 14 de septiembre de 2026.
 
 ## Requisitos mínimos
 
-Antes de publicar una traza o un evento se registrarán:
+Antes de publicar una traza o un evento se registrarán, a escala del dato:
 
-- referencia bibliográfica completa;
+- referencia bibliográfica completa si la fuente la aporta; si no, cita del catálogo y alcance
+  bibliográfico explícitos, sin aparentar que existe una referencia individual;
 - responsable o institución;
 - fecha de consulta o descarga;
 - año y escala de cartografía;
@@ -84,6 +85,46 @@ Por tanto, en textos y fichas del atlas se distingue entre **fuente geométrica/
 **procedencia regional** (SARA o ATA) y **síntesis interpretativa** (Costa et al., 2020). Los totales
 continentales del artículo no se presentan como cobertura completa del archivo SARA ni del atlas.
 
+### Auditoría de referencias por traza
+
+El campo original `reference` se conserva sin completar ni normalizar. Para que una ficha no confunda
+una cita del catálogo con el artículo que sustentó una traza particular, el atlas deriva además
+`reference_scope` exclusivamente de ese campo:
+
+- `individual`: el registro GEM fijado incluye una referencia específica;
+- `catalog_only`: el registro no incluye una referencia específica; la ficha ofrece únicamente la
+  referencia del catálogo y la fuente geométrica versionada.
+
+En la compilación fijada, 68 de 145 trazas tienen referencia individual (todas ATA); las otras 77
+quedan explícitamente en alcance de catálogo: 61 SARA y 16 ATA. Esto **no significa que se haya
+demostrado que esas trazas carezcan de literatura**, sino que la cadena de datos revisada no permite
+atribuir un estudio concreto con seguridad. No se asignaron referencias por coincidencia de nombre,
+proximidad geográfica o similitud de geometría.
+
+Para contrastar las 16 ausencias ATA se revisó la versión disponible del repositorio primario
+[ActiveTectonicsAndes/ATA](https://github.com/ActiveTectonicsAndes/ATA): el [GeoJSON fijado al commit
+revisado](https://github.com/ActiveTectonicsAndes/ATA/blob/7fff3630cfb6f10677e9e10392e26702d5dd506e/geojson/ATA.geojson)
+`7fff3630cfb6f10677e9e10392e26702d5dd506e`, blob
+`721c78fb6b70837d5682f4be3c7dde27d9c43ce3`. Los registros correspondientes
+por identificador `ogc_fid` —`ATA_84`, `ATA_90`, `ATA_118`, `ATA_139`, `ATA_140`, `ATA_141`,
+`ATA_142`, `ATA_144`, `ATA_145`, `ATA_160`, `ATA_175`, `ATA_250`, `ATA_429`, `ATA_430`,
+`ATA_432` y `ATA_489`— tampoco contienen valor en el campo original `source`. El artículo de
+Veloza et al. (2012) explica que referencias y tasas se incorporaron como metadatos **cuando estaban
+disponibles**; eso justifica mantener la cita de ATA para la compilación, no adjudicar a cada uno de
+estos registros una fuente bibliográfica que no consta en su fila.
+
+El archivo GeoJSON SARA fijado en el commit `b5961e4e1176363dc611cc0661dcb6885b3b821c` no incluye
+un campo bibliográfico por traza. GEM conserva la referencia a nivel de registro cuando existe, pero
+no añade esas 61 citas en la instantánea usada aquí. La cobertura declarada por catálogo se guarda
+en `data/geojson/fallas.geojson` (`metadata.reference_coverage`) y se recalcula en cada compilación;
+cada ficha muestra también su alcance de cita en español o inglés. El validador falla si el estado
+derivado no concuerda con el campo `reference` o si el resumen de cobertura queda desactualizado.
+
+**Resultado:** el problema de trazabilidad queda identificado y visible, pero no se fabrican 77
+referencias individuales. Para resolver bibliográficamente esos casos se requiere una tabla de
+correspondencia mantenida por los catálogos originales o revisión científica registro por registro.
+Hasta entonces, se citan los conjuntos SARA/ATA y GEM en el alcance correcto.
+
 La versión publicada contiene 61 registros de SARA y 84 de *Active Tectonics of the Andes*. Ambos catálogos pueden ofrecer interpretaciones parcialmente superpuestas. Esas coincidencias se conservan para no eliminar información científica de manera automática y se distinguen mediante `catalog_id`, `catalog_name` y `fuente`.
 
 Se conservarán, cuando estén disponibles, los atributos originales:
@@ -95,7 +136,8 @@ Se conservarán, cuando estén disponibles, los atributos originales:
 - tasas de desplazamiento;
 - `accuracy`;
 - indicadores de confianza;
-- `reference` y `notes`.
+- `reference` y `notes`;
+- `reference_scope`, derivado del `reference` original (`individual` o `catalog_only`), sin sustituir la cita ausente.
 
 Toda simplificación geométrica, traducción o reclasificación se documentará. La capa derivada mantendrá la atribución y la licencia **Creative Commons Attribution-ShareAlike 4.0** de GEM.
 

@@ -6,19 +6,28 @@ from scripts.catalog_integrity import (
     CATALOG_INPUT_URLS,
     GEM_SOURCE_COMMIT,
     GEM_SOURCE_URL,
+    PINNED_INPUT_SHA256,
     file_fingerprint,
+    reference_scope,
     require_checksum,
 )
 
 
 class CatalogBuildIntegrityTests(unittest.TestCase):
+    def test_reference_scope_never_invents_a_citation(self):
+        self.assertEqual(reference_scope({"reference": "Author et al., 2020"}), "individual")
+        self.assertEqual(reference_scope({"reference": "  "}), "catalog_only")
+        self.assertEqual(reference_scope({}), "catalog_only")
+
     def test_catalog_input_urls_are_pinned_https_geojson_sources(self):
         self.assertEqual(len(CATALOG_INPUT_URLS), 3)
+        self.assertEqual(set(CATALOG_INPUT_URLS), set(PINNED_INPUT_SHA256))
         for filename, url in CATALOG_INPUT_URLS.items():
             self.assertTrue(filename.endswith(".geojson"))
             self.assertTrue(url.startswith("https://"))
             self.assertNotIn("/main/", url)
             self.assertNotIn("/master/", url)
+            self.assertRegex(PINNED_INPUT_SHA256[filename], r"^[a-f\d]{64}$")
 
     def test_source_url_is_pinned_to_declared_commit(self):
         self.assertIn(GEM_SOURCE_COMMIT, GEM_SOURCE_URL)

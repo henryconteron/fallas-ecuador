@@ -56,6 +56,23 @@ console.log(`Catalog: ${catalogPath}`);
 console.log(`Features: ${data.features?.length ?? 0}`);
 console.log(`GEM source commit: ${data.metadata?.source_commit ?? "unknown"}`);
 console.log("");
+console.log("## Citation scope");
+console.log("");
+console.log("| Catalog | Individual study citation | Catalog-level citation only |");
+console.log("| --- | ---: | ---: |");
+for (const key of ["SARA", "ATA"]) {
+  const counts = data.metadata?.reference_coverage?.[key] ?? {};
+  console.log(`| ${CATALOGS[key]} | ${counts.individual ?? 0} | ${counts.catalog_only ?? 0} |`);
+}
+console.log("");
+console.log("Records with catalog-level citation only (review queue):");
+for (const key of ["SARA", "ATA"]) {
+  const ids = (data.features ?? [])
+    .filter((feature) => sourceKey(feature) === key && feature.properties?.reference_scope === "catalog_only")
+    .map((feature) => String(feature.properties?.catalog_id ?? feature.id));
+  console.log(`- ${CATALOGS[key]} (${ids.length}): ${ids.join(", ") || "None"}`);
+}
+console.log("");
 console.log("| Source | Features | Documented fields | Fields absent in this build |");
 console.log("| --- | ---: | --- | --- |");
 

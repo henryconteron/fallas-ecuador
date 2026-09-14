@@ -14,6 +14,14 @@ GEM_SOURCE_URL = (
     f"blob/{GEM_SOURCE_COMMIT}/geojson/gem_active_faults_harmonized.geojson"
 )
 
+# SHA-256 fingerprints captured from the immutable source revisions below.
+# Update these together with the source URLs only after reviewing a new build.
+PINNED_INPUT_SHA256 = {
+    "gem_active_faults_harmonized.geojson": "37babb516edfac22b5ae91744495d8546b3ae4676b4d4f68cc77da8222df20e1",
+    "geoBoundaries-ECU-ADM0.geojson": "523cf48366449bb98d562f61e05ef0a3de9afb82f8c3be7b7409a29d508b1fbf",
+    "geoBoundaries-ECU-ADM1.geojson": "8b0083c7f7ba221600dfa13c5e2cb75ac25c697ead5bf5f16f0a6b1434d358d7",
+}
+
 # Download endpoints are deliberately immutable: each path includes the source
 # revision used by the catalog build. Raw inputs belong in data/raw/ and are
 # ignored by Git; the public repository only carries the derived Ecuador subset
@@ -32,6 +40,12 @@ CATALOG_INPUT_URLS = {
         "9469f09/releaseData/gbOpen/ECU/ADM1/geoBoundaries-ECU-ADM1.geojson"
     ),
 }
+
+
+def reference_scope(properties: dict[str, Any]) -> str:
+    """Describe citation coverage without inventing a record-level source."""
+    reference = properties.get("reference")
+    return "individual" if reference is not None and str(reference).strip() else "catalog_only"
 
 
 def file_fingerprint(path: Path) -> dict[str, Any]:

@@ -32,6 +32,9 @@ const runtimeSource = ["assets/js/learn.js", "assets/js/map.js"]
   .join("\n");
 const keys = [
   ...new Set([
+    "popup.referenceScope",
+    "popup.referenceScope.individual",
+    "popup.referenceScope.catalogOnly",
     ...[...markup.matchAll(/data-i18n(?:-[a-z-]+)?="([^"]+)"/g)].map(
       (match) => match[1],
     ),

@@ -22,7 +22,9 @@ from catalog_integrity import (
     GEM_SOURCE_BLOB_SHA,
     GEM_SOURCE_COMMIT,
     GEM_SOURCE_URL,
+    PINNED_INPUT_SHA256,
     file_fingerprint,
+    reference_scope,
     require_checksum,
 )
 
@@ -58,8 +60,16 @@ def parse_args() -> argparse.Namespace:
         default=Path("data/catalog-build-manifest.json"),
         help="Reproducibility manifest with checksums for every input and output",
     )
-    parser.add_argument("--countries-sha256", help="Expected SHA-256 for the ADM0 file")
-    parser.add_argument("--provinces-sha256", help="Expected SHA-256 for the ADM1 file")
+    parser.add_argument(
+        "--countries-sha256",
+        default=PINNED_INPUT_SHA256["geoBoundaries-ECU-ADM0.geojson"],
+        help="Expected SHA-256 for the ADM0 file (defaults to the pinned source fingerprint)",
+    )
+    parser.add_argument(
+        "--provinces-sha256",
+        default=PINNED_INPUT_SHA256["geoBoundaries-ECU-ADM1.geojson"],
+        help="Expected SHA-256 for the ADM1 file (defaults to the pinned source fingerprint)",
+    )
     return parser.parse_args()
 
 
@@ -186,6 +196,7 @@ def build_catalog(
                 "movimiento_original_en": original_movement,
                 "fuente": catalog_source(catalog_id),
                 "source_key": catalog_source_key(catalog_id),
+                "reference_scope": reference_scope(original),
                 "fuente_url": GEM_SOURCE_URL,
                 "licencia": "CC BY-SA 4.0",
                 "descripcion": description,
@@ -215,6 +226,17 @@ def build_catalog(
         "SARA" if feature["id"].startswith("SA_") else "Active Tectonics of the Andes"
         for feature in output_features
     )
+    reference_coverage = {
+        catalog: {
+            scope: sum(
+                feature["properties"]["source_key"] == catalog
+                and feature["properties"]["reference_scope"] == scope
+                for feature in output_features
+            )
+            for scope in ("individual", "catalog_only")
+        }
+        for catalog in ("SARA", "ATA")
+    }
     return {
         "type": "FeatureCollection",
         "name": "fallas_activas_ecuador_gem",
@@ -231,6 +253,7 @@ def build_catalog(
             ),
             "feature_count": len(output_features),
             "catalog_counts": dict(counts),
+            "reference_coverage": reference_coverage,
         },
         "features": output_features,
     }
@@ -244,6 +267,11 @@ def main() -> None:
         "provinces": file_fingerprint(args.provinces),
     }
     require_checksum("GEM Git blob", fingerprints["gem"]["git_blob_sha1"], GEM_SOURCE_BLOB_SHA)
+    require_checksum(
+        "GEM SHA-256",
+        fingerprints["gem"]["sha256"],
+        PINNED_INPUT_SHA256["gem_active_faults_harmonized.geojson"],
+    )
     require_checksum("ADM0", fingerprints["countries"]["sha256"], args.countries_sha256)
     require_checksum("ADM1", fingerprints["provinces"]["sha256"], args.provinces_sha256)
 

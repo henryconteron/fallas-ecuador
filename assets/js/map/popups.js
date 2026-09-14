@@ -29,6 +29,13 @@ function appendHttpsLink(wrapper, url, text, warningLabel) {
   }
 }
 
+function referenceScopeLabel(feature, t) {
+  const scope = feature.properties?.reference_scope;
+  if (scope === "individual") return t("popup.referenceScope.individual");
+  if (scope === "catalog_only") return t("popup.referenceScope.catalogOnly");
+  return t("value.unavailable");
+}
+
 function appendOriginalSourceAttributes(wrapper, feature, context) {
   const { t, localizedProperty } = context;
   const fields = [
@@ -124,6 +131,7 @@ export function createFaultPopup(feature, context) {
     ["popup.scale", "escala"],
     ["popup.source", "fuente"],
     ["popup.reference", "reference"],
+    ["popup.referenceScope", "reference_scope"],
     ["popup.catalogId", "catalog_id"],
     ["popup.license", "licencia"],
   ];
@@ -131,7 +139,11 @@ export function createFaultPopup(feature, context) {
     list,
     fields.map(([labelKey, key]) => [
       labelKey,
-      key === "tipo_movimiento" ? movementLabel(feature) : localizedProperty(feature, key),
+      key === "tipo_movimiento"
+        ? movementLabel(feature)
+        : key === "reference_scope"
+          ? referenceScopeLabel(feature, t)
+          : localizedProperty(feature, key),
     ]),
     t,
   );

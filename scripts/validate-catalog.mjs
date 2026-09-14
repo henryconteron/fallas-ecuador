@@ -6,6 +6,12 @@ const ALLOWED_MOVEMENTS = new Set(["inversa", "normal", "dextral", "sinestral", 
 const ALLOWED_EVIDENCE = new Set(["escarpe", "faceta_triangular", "drenaje_desplazado", "laguna_sag"]);
 const EVIDENCE_GEOMETRIES = new Set(["Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon"]);
 const PINNED_GEM_COMMIT = "850fd05b48841eb806d61a37043b5567f5bb99dd";
+const PINNED_GEM_BLOB_SHA = "fb164770b529695544fa864abe2cc9dd8aa5793d";
+const REQUIRED_BUILD_INPUTS = Object.freeze({
+  gem: "gem_active_faults_harmonized.geojson",
+  countries: "geoBoundaries-ECU-ADM0.geojson",
+  provinces: "geoBoundaries-ECU-ADM1.geojson",
+});
 const REQUIRED_PROPERTIES = [
   "nombre",
   "provincia",
@@ -14,6 +20,7 @@ const REQUIRED_PROPERTIES = [
   "fuente_url",
   "descripcion",
   "catalog_id",
+  "reference_scope",
   "licencia",
 ];
 
@@ -85,7 +92,10 @@ function validateFaultCatalog(path, data) {
 
   const ids = new Set();
   const names = new Map();
-  let missingReferences = 0;
+  const referenceCoverage = {
+    SARA: { individual: 0, catalog_only: 0 },
+    ATA: { individual: 0, catalog_only: 0 },
+  };
   let missingScales = 0;
 
   data.features.forEach((feature, index) => {
@@ -112,12 +122,29 @@ function validateFaultCatalog(path, data) {
 
     const normalizedName = String(properties.nombre).trim().toLocaleLowerCase("es");
     names.set(normalizedName, (names.get(normalizedName) ?? 0) + 1);
-    if (!isPresent(properties.reference)) missingReferences += 1;
+    const referenceScope = isPresent(properties.reference) ? "individual" : "catalog_only";
+    if (properties.reference_scope !== referenceScope) {
+      fail(`${path} ${id}: reference_scope must be ${referenceScope} based on the source record`);
+    }
+    const sourceKey = String(properties.catalog_id).startsWith("SA_") ? "SARA" : "ATA";
+    referenceCoverage[sourceKey][referenceScope] += 1;
     if (!isPresent(properties.escala)) missingScales += 1;
   });
 
+  if (JSON.stringify(data.metadata?.reference_coverage) !== JSON.stringify(referenceCoverage)) {
+    fail(`${path}: metadata.reference_coverage does not match per-record citation scope`);
+  }
   const repeatedNames = [...names.values()].filter((count) => count > 1).length;
-  if (missingReferences) warn(`${path}: ${missingReferences} records have no individual reference`);
+  const catalogOnlyCount = referenceCoverage.SARA.catalog_only + referenceCoverage.ATA.catalog_only;
+  if (catalogOnlyCount) {
+    const saraTotal = referenceCoverage.SARA.individual + referenceCoverage.SARA.catalog_only;
+    const ataTotal = referenceCoverage.ATA.individual + referenceCoverage.ATA.catalog_only;
+    warn(
+      `${path}: ${catalogOnlyCount} traces have catalog-level citations only ` +
+        `(SARA ${referenceCoverage.SARA.catalog_only}/${saraTotal}; ATA ${referenceCoverage.ATA.catalog_only}/${ataTotal}); ` +
+        "do not present these as trace-specific studies",
+    );
+  }
   if (missingScales) warn(`${path}: ${missingScales} records have no documented map scale`);
   if (repeatedNames) warn(`${path}: ${repeatedNames} names identify multiple catalog records; IDs must remain visible`);
 }
@@ -189,6 +216,33 @@ async function validateBuildManifest() {
   if (manifest.source_commit !== PINNED_GEM_COMMIT) {
     fail(`${path}: source commit does not match the validated catalog`);
   }
+  if (manifest.source_blob_sha !== PINNED_GEM_BLOB_SHA) {
+    fail(`${path}: source blob SHA-1 does not match the validated GEM input`);
+  }
+
+  for (const [key, filename] of Object.entries(REQUIRED_BUILD_INPUTS)) {
+    const input = manifest.inputs?.[key];
+    if (!input) {
+      fail(`${path}: missing fingerprint for ${key} input`);
+      continue;
+    }
+    if (input.filename !== filename) {
+      fail(`${path}: unexpected filename for ${key} input`);
+    }
+    if (!Number.isSafeInteger(input.size_bytes) || input.size_bytes <= 0) {
+      fail(`${path}: invalid size for ${key} input`);
+    }
+    if (!/^[a-f\d]{64}$/i.test(input.sha256 ?? "")) {
+      fail(`${path}: missing or invalid SHA-256 for ${key} input`);
+    }
+    if (!/^[a-f\d]{40}$/i.test(input.git_blob_sha1 ?? "")) {
+      fail(`${path}: missing or invalid Git blob SHA-1 for ${key} input`);
+    }
+  }
+  if (manifest.inputs?.gem?.git_blob_sha1 !== PINNED_GEM_BLOB_SHA) {
+    fail(`${path}: GEM input fingerprint does not match the approved source blob`);
+  }
+
   const outputPath = `data/geojson/${manifest.output?.filename ?? ""}`;
   try {
     const content = await readFile(outputPath);
@@ -203,11 +257,15 @@ async function validateBuildManifest() {
     if (canonicalContent.length !== manifest.output?.size_bytes) {
       fail(`${path}: output size does not match ${outputPath}`);
     }
+    const gitBlobHeader = Buffer.from(`blob ${canonicalContent.length}\0`, "utf8");
+    const gitBlobSha = createHash("sha1")
+      .update(Buffer.concat([gitBlobHeader, canonicalContent]))
+      .digest("hex");
+    if (gitBlobSha !== manifest.output?.git_blob_sha1) {
+      fail(`${path}: output Git blob SHA-1 does not match ${outputPath}`);
+    }
   } catch (error) {
     fail(`${path}: could not verify output (${error.message})`);
-  }
-  if (manifest.status === "partial-legacy-build") {
-    warn(`${path}: ADM0/ADM1 checksums will be completed on the next catalog rebuild`);
   }
 }
 

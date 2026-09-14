@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 from urllib.request import Request, urlopen
 
-from catalog_integrity import CATALOG_INPUT_URLS, file_fingerprint
+from catalog_integrity import CATALOG_INPUT_URLS, PINNED_INPUT_SHA256, file_fingerprint, require_checksum
 
 
 def parse_args() -> argparse.Namespace:
@@ -55,6 +55,7 @@ def main() -> None:
             print(f"Downloading {filename} from its pinned source revision")
             download_json(url, destination, args.timeout)
         fingerprint = file_fingerprint(destination)
+        require_checksum(filename, fingerprint["sha256"], PINNED_INPUT_SHA256[filename])
         print(f"Verified JSON: {destination} · SHA-256 {fingerprint['sha256']}")
 
 
