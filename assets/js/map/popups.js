@@ -91,8 +91,14 @@ function appendCatalogMetadataProfile(wrapper, feature, context) {
   appendHttpsLink(
     links,
     catalogSource.publication,
-    t("popup.catalogPublication"),
+    t(catalogSource.publicationLabel ?? "popup.catalogPublication"),
     "Invalid catalog publication URL",
+  );
+  appendHttpsLink(
+    links,
+    catalogSource.contextPublication,
+    t("popup.catalogContextPublication"),
+    "Invalid catalog context publication URL",
   );
   details.append(summary, list);
   if (links.childElementCount > 0) details.append(links);

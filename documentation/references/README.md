@@ -27,7 +27,7 @@ Las trazas derivadas de trabajos propios se identificarán explícitamente como 
 | Catálogo regional SARA | [SARA Active Faults](https://github.com/GEMScienceTools/SARA-Active-Faults) · [DOI 10.13117/SARA-ACTIVE-FAULTS](https://doi.org/10.13117/SARA-ACTIVE-FAULTS) | Procedencia temática de los registros `SA_*` incorporados por GEM | **Aprobada**: CC BY-SA 4.0 |
 | Fallas de los Andes del norte | Veloza et al. (2012), [Open-source archive of active faults for northwest South America](https://doi.org/10.1130/GSAT-G156A.1) | Referencia científica y control de nombres, geometría y cinemática | **Aprobada como referencia**; la geometría se incorporará mediante GEM |
 | Fallas de Ecuador | Egüez et al. (2003), [Database and Map of Quaternary Faults and Folds of Ecuador and its Offshore Regions](https://pubs.usgs.gov/of/2003/ofr-03-289/) | Contraste del inventario nacional y de la nomenclatura | **Aprobada como referencia**; compilación antigua y de escala regional |
-| Fallas de Sudamérica | Costa et al. (2020), [Hazardous faults of South America: compilation and overview](https://doi.org/10.1016/j.jsames.2020.102837) | Contraste científico regional | **Pendiente** verificar la licencia de cualquier archivo geométrico suplementario |
+| Síntesis de fallas de Sudamérica | Costa et al. (2020), [Hazardous faults of South America: compilation and overview](https://doi.org/10.1016/j.jsames.2020.102837) | Contexto regional, criterios de compilación y limitaciones del inventario SARA | **Aprobada como referencia científica**, no como fuente directa de la geometría servida |
 | Límites para selección | [geoBoundaries — Ecuador ADM0 y ADM1](https://www.geoboundaries.org/) | Selección espacial y asignación preliminar de provincias | **Aprobada**: gbOpen, CC BY 4.0 |
 | Sismicidad de Ecuador | [Instituto Geofísico de la Escuela Politécnica Nacional](https://www.igepn.edu.ec/) | Fuente oficial nacional y enlace de consulta | **Restringida para redistribución** |
 | Sismicidad consultable por API | [USGS Earthquake Catalog — FDSN Event Web Service](https://earthquake.usgs.gov/fdsnws/event/1/) | Capa interactiva de eventos recientes | **Aprobada** con atribución |
@@ -60,6 +60,30 @@ La capa publicada se consume desde esa instantánea armonizada de GEM. El reposi
 como fuente regional original para consulta y atribución, pero no se mezclan automáticamente sus
 geometrías directas con las de GEM.
 
+### Qué respalda cada referencia
+
+- **Alvarado et al. (2017) / repositorio SARA:** identifica el catálogo regional del que proceden
+  registros `SA_*`. Es la cita del conjunto de datos regional, no una afirmación de que las 145
+  geometrías mostradas sean una descarga directa de ese repositorio.
+- **Costa et al. (2020):** es una síntesis revisada por pares sobre fallas peligrosas de Sudamérica y
+  las actividades SARA Topic 2. Sirve para explicar el contexto, criterios de inclusión y limitaciones
+  regionales; no es el archivo GIS fijado por el atlas. La versión PDF pre-proof revisada aquí reporta
+  1.533 fallas en el resumen, mientras que la sección de resultados informa 1.523 estructuras y 3.586
+  trazas, con 497 estructuras seleccionadas para el modelo de amenaza SARA. Como cambian tanto el
+  conteo como la unidad descrita, esos totales no se comparan directamente con las 437 entidades del
+  GeoJSON publicado en el repositorio SARA ni con las 61 entidades SARA que intersectan Ecuador en
+  nuestra instantánea GEM.
+- **Styron y Pagani (2020):** documenta GEM GAF-DB como compilación automatizada de catálogos
+  regionales y enumera SARA y *Active Tectonics of the Andes* como fuentes. También explica que el
+  propósito, resolución y metadatos varían entre catálogos y que la compilación no elimina esas
+  diferencias científicas.
+- **Veloza et al. (2012):** es la referencia regional de *Active Tectonics of the Andes* para los
+  registros `ATA_*`; sus geometrías llegan a esta versión a través de GEM.
+
+Por tanto, en textos y fichas del atlas se distingue entre **fuente geométrica/versionada** (GEM),
+**procedencia regional** (SARA o ATA) y **síntesis interpretativa** (Costa et al., 2020). Los totales
+continentales del artículo no se presentan como cobertura completa del archivo SARA ni del atlas.
+
 La versión publicada contiene 61 registros de SARA y 84 de *Active Tectonics of the Andes*. Ambos catálogos pueden ofrecer interpretaciones parcialmente superpuestas. Esas coincidencias se conservan para no eliminar información científica de manera automática y se distinguen mediante `catalog_id`, `catalog_name` y `fuente`.
 
 Se conservarán, cuando estén disponibles, los atributos originales:
@@ -80,6 +104,12 @@ La categoría visual `tipo_movimiento` se derivó de `slip_type` para permitir f
 Referencia principal:
 
 > Styron, R., & Pagani, M. (2020). The GEM Global Active Faults Database. *Earthquake Spectra, 36*(1_suppl), 160–180. https://doi.org/10.1177/8755293020944182
+
+> Costa, C., Alvarado, A., Audemard, F., Audin, L., Benavente, C., Bezerra, F. H., Cembrano, J., González, G., López, M., Minaya, E., Santibañez, I., Garcia, J., Arcila, M., Pagani, M., Pérez, I., Delgado, F., Paolini, M., & Garro, H. (2020). Hazardous faults of South America; compilation and overview. *Journal of South American Earth Sciences, 104*, 102837. https://doi.org/10.1016/j.jsames.2020.102837
+
+> Alvarado, A., Audemard, F., Benavente Escobar, C., Santibanez Boric, I., Cembrano Perasso, J., Costa, C., Delgado Madera, G. F., García-Pelaez, J. A., Masquelin, E., Minaya, E., López, M. C., Paolini, M., Perez, I., Grupo de Neotectónica de SEGEMAR, & Styron, R. (2017). The South American Risk Assessment Active Fault Database. https://doi.org/10.13117/SARA-ACTIVE-FAULTS
+
+> Veloza, G., Styron, R., Taylor, M., & Mora, A. (2012). Open-source archive of active faults for northwest South America. *GSA Today, 22*(10), 4–10. https://doi.org/10.1130/GSAT-G156A.1
 
 La base de Egüez et al. (2003) fue compilada aproximadamente a escala 1:1 250 000 y no debe interpretarse a escalas más detalladas que 1:750 000. Por ello se usará como control regional, no como una traza de precisión local.
 
