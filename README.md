@@ -196,6 +196,9 @@ se utilizan únicamente para la selección espacial y para identificar las provi
 Los dos catálogos pueden contener interpretaciones alternativas o parcialmente superpuestas. El
 visor conserva `catalog_id`, `catalog_name`, `slip_type` y los demás atributos originales para que
 esas diferencias sean rastreables; no deben interpretarse automáticamente como duplicados.
+Las fichas enlazan el repositorio regional SARA o la referencia de *Active Tectonics of the Andes*,
+además de la instantánea armonizada de GEM. La verificación de versiones, licencias y limitaciones
+se mantiene en [`documentation/references/README.md`](documentation/references/README.md).
 
 Para regenerar el archivo se requiere Python y Shapely:
 

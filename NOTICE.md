@@ -2,6 +2,10 @@
 
 - **GEM GAF-DB:** datos de fallas adaptados bajo CC BY-SA 4.0. Véase
   `LICENSE-DATA.md` para versión, referencia y transformaciones.
+- **SARA Active Faults:** procedencia regional de los registros `SA_*`, citada como
+  Alvarado et al. (2017), https://doi.org/10.13117/SARA-ACTIVE-FAULTS.
+- **Active Tectonics of the Andes:** procedencia regional de los registros `ATA_*`,
+  citada como Veloza et al. (2012), https://doi.org/10.1130/GSAT-G156A.1.
 - **geoBoundaries:** límites gbOpen usados solamente durante el procesamiento.
 - **USGS:** eventos consultados mediante FDSN Event Web Service y enlazados a su
   ficha original.

@@ -1795,6 +1795,10 @@ footer {
   font-weight: 700;
 }
 
+.metadata-links .event-link + .event-link {
+  margin-left: 0.65rem;
+}
+
 /* Ecuador Vivo: systems, place reading and documented data network */
 .system-explorer {
   margin: 1.35rem 0;

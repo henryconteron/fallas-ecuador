@@ -40,6 +40,10 @@ assert.equal(faultStyle(fault("inversa"), null).dashArray, undefined);
 
 assert.equal(SOURCE_REGISTRY.SARA.metadataProfile, "sara");
 assert.equal(SOURCE_REGISTRY.ATA.metadataProfile, "ata");
+assert.equal(SOURCE_REGISTRY.SARA.repository, "https://github.com/GEMScienceTools/SARA-Active-Faults");
+assert.equal(SOURCE_REGISTRY.SARA.publication, "https://doi.org/10.13117/SARA-ACTIVE-FAULTS");
+assert.equal(SOURCE_REGISTRY.ATA.publication, "https://doi.org/10.1130/GSAT-G156A.1");
+assert.equal(SOURCE_REGISTRY.SARA.license, "CC BY-SA 4.0");
 assert.match(FAULT_METADATA_PROFILES.sara.coverage, /^popup\./);
 assert.match(FAULT_METADATA_PROFILES.ata.limits, /^popup\./);
 

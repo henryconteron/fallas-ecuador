@@ -58,12 +58,18 @@ export const EARTHQUAKE_COLORS = Object.freeze({
 export const SOURCE_REGISTRY = Object.freeze({
   SARA: {
     label: "SARA",
-    citation: "Alvarado et al. (2017)",
+    citation: "Alvarado et al. (2017) — SARA Active Faults",
+    repository: "https://github.com/GEMScienceTools/SARA-Active-Faults",
+    publication: "https://doi.org/10.13117/SARA-ACTIVE-FAULTS",
+    license: "CC BY-SA 4.0",
     metadataProfile: "sara",
   },
   ATA: {
     label: "ATA",
-    citation: "Veloza et al. (2012)",
+    citation: "Veloza et al. (2012) — Active Tectonics of the Andes",
+    repository: "https://github.com/GEMScienceTools/gem-global-active-faults",
+    publication: "https://doi.org/10.1130/GSAT-G156A.1",
+    license: "CC BY-SA 4.0",
     metadataProfile: "ata",
   },
 });

@@ -2,7 +2,7 @@
 
 Este directorio registra la procedencia, las condiciones de uso y las limitaciones de cada conjunto de datos incorporado al visor.
 
-**Última verificación:** 10 de septiembre de 2026.
+**Última verificación:** 13 de septiembre de 2026.
 
 ## Requisitos mínimos
 
@@ -24,6 +24,7 @@ Las trazas derivadas de trabajos propios se identificarán explícitamente como 
 | Conjunto | Fuente | Uso previsto | Estado |
 |---|---|---|---|
 | Fallas activas | [GEM Global Active Faults Database](https://github.com/GEMScienceTools/gem-global-active-faults) | Fuente geométrica principal, recortada al Ecuador | **Aprobada**: CC BY-SA 4.0 |
+| Catálogo regional SARA | [SARA Active Faults](https://github.com/GEMScienceTools/SARA-Active-Faults) · [DOI 10.13117/SARA-ACTIVE-FAULTS](https://doi.org/10.13117/SARA-ACTIVE-FAULTS) | Procedencia temática de los registros `SA_*` incorporados por GEM | **Aprobada**: CC BY-SA 4.0 |
 | Fallas de los Andes del norte | Veloza et al. (2012), [Open-source archive of active faults for northwest South America](https://doi.org/10.1130/GSAT-G156A.1) | Referencia científica y control de nombres, geometría y cinemática | **Aprobada como referencia**; la geometría se incorporará mediante GEM |
 | Fallas de Ecuador | Egüez et al. (2003), [Database and Map of Quaternary Faults and Folds of Ecuador and its Offshore Regions](https://pubs.usgs.gov/of/2003/ofr-03-289/) | Contraste del inventario nacional y de la nomenclatura | **Aprobada como referencia**; compilación antigua y de escala regional |
 | Fallas de Sudamérica | Costa et al. (2020), [Hazardous faults of South America: compilation and overview](https://doi.org/10.1016/j.jsames.2020.102837) | Contraste científico regional | **Pendiente** verificar la licencia de cualquier archivo geométrico suplementario |
@@ -36,6 +37,28 @@ Las trazas derivadas de trabajos propios se identificarán explícitamente como 
 ### Fallas
 
 La capa inicial se obtuvo del archivo armonizado de GEM en el commit `850fd05b48841eb806d61a37043b5567f5bb99dd`, identificado por el blob `fb164770b529695544fa864abe2cc9dd8aa5793d`. Se seleccionaron 145 geometrías originales de los catálogos SARA y *Active Tectonics of the Andes* que intersectan el límite de Ecuador de geoBoundaries. No se publicó el archivo mundial completo y las geometrías seleccionadas no fueron recortadas ni simplificadas.
+
+### Validación de los repositorios upstream
+
+La procedencia regional no se infiere únicamente por el nombre del catálogo. En la verificación del
+13 de septiembre de 2026, el repositorio oficial [SARA Active Faults](https://github.com/GEMScienceTools/SARA-Active-Faults)
+contenía el archivo `geojson/sara-active-faults.geojson` (437 trazas) y una licencia
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). Su README es deliberadamente breve:
+describe el conjunto, pero no ofrece un diccionario de campos ni referencias bibliográficas por cada
+traza. Por eso el atlas lo presenta como procedencia del catálogo y no inventa referencias individuales
+cuando el registro no las trae. La revisión quedó identificada por el commit `b5961e4e1176363dc611cc0661dcb6885b3b821c` y el blob
+del GeoJSON `114017672160798e33addf49940ad10a7cb17bf`.
+
+El repositorio oficial [GEM Global Active Faults](https://github.com/GEMScienceTools/gem-global-active-faults)
+documenta el esquema de atributos, el significado de las tuplas de incertidumbre, los formatos GIS,
+la licencia y la compilación de conjuntos regionales. Su commit posterior `56816508ad92fd6846dad1163b1c8c01376a2cd1`
+solo actualiza el README respecto al commit de datos fijado `850fd05b48841eb806d61a37043b5567f5bb99dd`;
+por ello la compilación pública mantiene el pin del archivo GeoJSON y su blob, en vez de seguir
+automáticamente la rama `master`.
+
+La capa publicada se consume desde esa instantánea armonizada de GEM. El repositorio SARA se enlaza
+como fuente regional original para consulta y atribución, pero no se mezclan automáticamente sus
+geometrías directas con las de GEM.
 
 La versión publicada contiene 61 registros de SARA y 84 de *Active Tectonics of the Andes*. Ambos catálogos pueden ofrecer interpretaciones parcialmente superpuestas. Esas coincidencias se conservan para no eliminar información científica de manera automática y se distinguen mediante `catalog_id`, `catalog_name` y `fuente`.
 

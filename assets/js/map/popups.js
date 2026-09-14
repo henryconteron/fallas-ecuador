@@ -74,12 +74,28 @@ function appendCatalogMetadataProfile(wrapper, feature, context) {
     list,
     [
       ["popup.catalogReference", catalogSource.citation],
+      ["popup.catalogLicense", catalogSource.license],
       ["popup.metadataCoverage", t(profile.coverage)],
       ["popup.metadataLimits", t(profile.limits)],
     ],
     t,
   );
+  const links = document.createElement("p");
+  links.className = "metadata-links";
+  appendHttpsLink(
+    links,
+    catalogSource.repository,
+    t("popup.catalogRepository"),
+    "Invalid catalog repository URL",
+  );
+  appendHttpsLink(
+    links,
+    catalogSource.publication,
+    t("popup.catalogPublication"),
+    "Invalid catalog publication URL",
+  );
   details.append(summary, list);
+  if (links.childElementCount > 0) details.append(links);
   wrapper.append(details);
 }
 
