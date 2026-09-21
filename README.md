@@ -1,5 +1,11 @@
 # Ecuador Vivo
 
+[![Validación](https://github.com/henryconteron/fallas-ecuador/actions/workflows/validate.yml/badge.svg)](https://github.com/henryconteron/fallas-ecuador/actions/workflows/validate.yml)
+[![Sitio publicado](https://img.shields.io/badge/atlas-en%20l%C3%ADnea-0f766e)](https://henryconteron.github.io/fallas-ecuador/)
+[![Licencia](https://img.shields.io/badge/c%C3%B3digo-MIT-111827)](LICENSE)
+
+**[Abrir el atlas en línea →](https://henryconteron.github.io/fallas-ecuador/)** · **[Explorar la guía educativa →](https://henryconteron.github.io/fallas-ecuador/learn.html)**
+
 Atlas interactivo de los sistemas naturales del Ecuador. El proyecto comienza con fallas,
 sismicidad y geomorfología, y está preparado para conectar progresivamente agua, atmósfera,
 vida y riesgo sin perder trazabilidad científica.

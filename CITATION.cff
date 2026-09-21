@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Si utilizas Ecuador Vivo, cita esta versión del proyecto y las fuentes de datos indicadas en la interfaz."
+title: "Ecuador Vivo: atlas interactivo de los sistemas naturales del Ecuador"
+abstract: "Atlas web bilingüe de divulgación geocientífica que conecta fallas, sismicidad, geomorfología, agua, clima y riesgo con fuentes trazables."
+type: software
+authors:
+  - family-names: Conteron Moreta
+    given-names: Henry P.
+    affiliation: "Independent researcher"
+repository-code: "https://github.com/henryconteron/fallas-ecuador"
+url: "https://henryconteron.github.io/fallas-ecuador/"
+license: MIT
+version: "0.1.0"
+date-released: 2026-09-21
+keywords:
+  - Ecuador
+  - geology
+  - geospatial data
+  - tectonics
+  - science communication
