@@ -30,8 +30,10 @@
   confirmación automática de incendios.
 - **Leaflet:** biblioteca cartográfica cargada por la interfaz conforme a su
   licencia BSD-2-Clause.
-- **Ilustraciones educativas:** obras conceptuales originales; no representan
-  lugares reales ni evidencia de campo.
+- **Figuras educativas:** las imágenes tomadas de artículos, informes o libros se identifican en
+  cada pie y en la bibliografía de `learn.html`; su reutilización depende del permiso o licencia de
+  la fuente correspondiente. Las ilustraciones conceptuales propias se marcarán explícitamente como
+  originales y no representan lugares reales ni evidencia de campo.
 
 El atlas es educativo y científico. No sustituye cartografía oficial, estudios
 geotécnicos ni evaluaciones de amenaza sísmica.
