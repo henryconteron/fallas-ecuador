@@ -566,7 +566,7 @@
       "sources.paleo": "Introducción a la paleosismología — USGS",
       "sources.geomorphology": "Geomorfología de fallamiento activo — Papanikolaou et al. (2015)",
       "sources.pallatanga": "Tectónica activa de Pallatanga — Baize et al. (2020)",
-      "sources.cited": "Referencias citadas: fallas, sismos y paleosismología",
+      "sources.cited": "Referencias citadas: procesos de la Tierra y lectura del paisaje",
       "sources.citedNote": "Las figuras de artículos y libros se reproducen con permiso y se atribuyen en su pie y en esta bibliografía.",
       "sources.topo": "Acerca del mapa topográfico — OpenTopoMap",
       "sources.aria": "Fuentes científicas y lecturas consultadas",
@@ -575,7 +575,7 @@
       "cta.eyebrow": "Ahora mira el territorio",
       "cta.title": "La teoría cobra sentido sobre el mapa",
       "cta.copy": "Cambia entre topografía y calles, activa las formas del relieve y abre cada ficha para conectar patrón, interpretación y fuente.",
-      "cta.detail": "En el visor puedes comparar fallas, sismos y relieve, y volver a cada ficha para revisar su fuente y nivel de confianza.",
+      "cta.detail": "En el visor puedes conectar fallas, relieve, agua, clima y señales de riesgo, y volver a cada ficha para revisar su fuente y nivel de confianza.",
       "cta.button": "Entrar al explorador"
     },
     en: {
@@ -1144,7 +1144,7 @@
       "sources.paleo": "Introduction to paleoseismology — USGS",
       "sources.geomorphology": "Geomorphology of active faulting — Papanikolaou et al. (2015)",
       "sources.pallatanga": "Active tectonics of Pallatanga — Baize et al. (2020)",
-      "sources.cited": "Cited references: faults, earthquakes, and paleoseismology",
+      "sources.cited": "Cited references: Earth processes and reading landscapes",
       "sources.citedNote": "Figures from articles and books are reproduced with permission and attributed in their captions and in this bibliography.",
       "sources.topo": "About the topographic map — OpenTopoMap",
       "sources.aria": "Scientific sources and consulted readings",
@@ -1153,7 +1153,7 @@
       "cta.eyebrow": "Now look at the territory",
       "cta.title": "Theory comes alive on the map",
       "cta.copy": "Switch between topography and streets, turn on landforms, and open each record to connect pattern, interpretation, and source.",
-      "cta.detail": "In the viewer you can compare faults, earthquakes, and relief, then return to each record to review its source and confidence level.",
+      "cta.detail": "In the viewer you can connect faults, terrain, water, climate, and risk signals, then return to each record to review its source and confidence level.",
       "cta.button": "Enter the explorer"
     }
   };
