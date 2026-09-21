@@ -14,6 +14,10 @@
       "nav.map": "Explora",
       "nav.learn": "Historias",
       "status.development": "Proyecto en desarrollo",
+      "share.button": "Compartir",
+      "share.copied": "Enlace copiado",
+      "share.prompt": "Copia este enlace para compartir la vista",
+      "share.aria": "Compartir la vista actual del atlas",
       "status.synthetic": "Catálogo tectónico sintético",
       "map.panelAria": "Mapa de los sistemas naturales del Ecuador",
       "map.region": "Ecuador continental",
@@ -588,6 +592,10 @@
       "nav.map": "Explore",
       "nav.learn": "Stories",
       "status.development": "Project in development",
+      "share.button": "Share",
+      "share.copied": "Link copied",
+      "share.prompt": "Copy this link to share the current view",
+      "share.aria": "Share the current atlas view",
       "status.synthetic": "Synthetic tectonic catalog",
       "map.panelAria": "Map of Ecuador's natural systems",
       "map.region": "Continental Ecuador",
@@ -1151,8 +1159,13 @@
   };
 
   const supported = ["es", "en"];
-  let language = supported.includes(localStorage.getItem("atlas-language"))
-    ? localStorage.getItem("atlas-language")
+  const urlLanguage = typeof window.location?.search === "string"
+    ? window.location.search.match(/[?&]lang=(es|en)(?:&|$)/)?.[1]
+    : null;
+  let language = supported.includes(urlLanguage)
+    ? urlLanguage
+    : supported.includes(localStorage.getItem("atlas-language"))
+      ? localStorage.getItem("atlas-language")
     : "es";
 
   function t(key) {
@@ -1190,6 +1203,12 @@
   function setLanguage(nextLanguage) {
     language = supported.includes(nextLanguage) ? nextLanguage : "es";
     localStorage.setItem("atlas-language", language);
+    if (typeof URL === "function" && window.history?.replaceState) {
+      const nextUrl = new URL(window.location.href);
+      if (language === "es") nextUrl.searchParams.delete("lang");
+      else nextUrl.searchParams.set("lang", language);
+      window.history.replaceState({ language }, "", nextUrl);
+    }
     apply();
     window.dispatchEvent(new CustomEvent("atlas:languagechange", { detail: { language } }));
   }

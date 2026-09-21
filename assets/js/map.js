@@ -285,6 +285,7 @@ function initializeAtlas() {
     explainPlace: document.querySelector("#explain-place"),
     placeExplainer: document.querySelector("#place-explainer"),
     closePlaceExplainer: document.querySelector("#close-place-explainer"),
+    shareAtlas: document.querySelector("[data-share-atlas]"),
     placeInstruction: document.querySelector("#place-instruction"),
     placeResults: document.querySelector("#place-results"),
     sourceNetworkList: document.querySelector("#source-network-list"),
@@ -626,6 +627,21 @@ function initializeAtlas() {
     activeSystem = nextSystem;
     renderSystemView(options);
   }
+
+  elements.shareAtlas?.addEventListener("click", async () => {
+    const shareUrl = new URL(window.location.href);
+    if (activeSystem === "earth") shareUrl.searchParams.delete("system");
+    else shareUrl.searchParams.set("system", activeSystem);
+    if (i18n?.language === "es") shareUrl.searchParams.delete("lang");
+    else shareUrl.searchParams.set("lang", i18n.language);
+    try {
+      await navigator.clipboard.writeText(shareUrl.href);
+      elements.shareAtlas.textContent = t("share.copied");
+      window.setTimeout(() => { elements.shareAtlas.textContent = t("share.button"); }, 1800);
+    } catch {
+      window.prompt(t("share.prompt"), shareUrl.href);
+    }
+  });
 
   function createPlaceResult(label, title, detail) {
     const article = document.createElement("article");
