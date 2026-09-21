@@ -6,6 +6,9 @@
 
 **[Abrir el atlas en línea →](https://henryconteron.github.io/fallas-ecuador/)** · **[Explorar la guía educativa →](https://henryconteron.github.io/fallas-ecuador/learn.html)**
 
+Documentación del proyecto: [citar el atlas](CITATION.cff) · [registro de cambios](CHANGELOG.md) ·
+[contribuir](CONTRIBUTING.md) · [seguridad y privacidad](SECURITY.md)
+
 Atlas interactivo de los sistemas naturales del Ecuador. El proyecto comienza con fallas,
 sismicidad y geomorfología, y está preparado para conectar progresivamente agua, atmósfera,
 vida y riesgo sin perder trazabilidad científica.
