@@ -150,6 +150,7 @@ WGS 84 (EPSG:4326), con coordenadas en el orden longitud–latitud. Sus propieda
 | `descripcion` | Explicación científica breve |
 | `catalog_id` | Identificador estable del catálogo de origen |
 | `licencia` | Condiciones de reutilización del registro |
+| `reference_scope` | `individual` si el origen aporta una referencia por traza; `catalog_only` si solo puede citarse el catálogo |
 
 Los indicadores de relieve se almacenan por separado en `estructuras.geojson`. El esquema admite
 `Point`, `MultiPoint`, `LineString`, `MultiLineString`, `Polygon` y `MultiPolygon`, y exige tipo,
@@ -157,6 +158,9 @@ observación, confianza, precisión espacial, método de localización, trazas r
 licencia. Los tipos previstos son `escarpe`, `faceta_triangular`, `drenaje_desplazado` y
 `laguna_sag`. Los campos terminados en `_en` permiten añadir traducciones verificadas sin alterar
 el dato base. La definición formal está en `data/schemas/estructuras.schema.json`.
+
+El contrato formal del catálogo de fallas está en `data/schemas/fallas.schema.json`; exige procedencia,
+licencia, identificadores estables y el alcance bibliográfico de cada registro.
 
 La primera colección científica contiene tres ocurrencias documentadas en Eguez et al. (2003):
 Billecocha, Huayrapungo y Pallatanga. Sus coordenadas son puntos regionales representativos

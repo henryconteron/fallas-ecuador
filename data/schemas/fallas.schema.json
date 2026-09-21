@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://henryconteron.github.io/fallas-ecuador/data/schemas/fallas.schema.json",
+  "title": "Catálogo de fallas activas del Ecuador",
+  "description": "Subconjunto ecuatoriano reproducible de GEM GAF-DB; conserva los atributos de origen y declara el alcance de las citas.",
+  "type": "object",
+  "required": ["type", "name", "metadata", "features"],
+  "properties": {
+    "type": { "const": "FeatureCollection" },
+    "name": { "const": "fallas_activas_ecuador_gem" },
+    "metadata": {
+      "type": "object",
+      "required": ["generated", "source", "source_commit", "source_blob_sha", "license", "selection_boundary", "selection_rule", "feature_count", "catalog_counts", "reference_coverage"],
+      "properties": {
+        "generated": { "type": "string", "format": "date" },
+        "source": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "source_commit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "source_blob_sha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "license": { "const": "CC BY-SA 4.0" },
+        "selection_boundary": { "type": "string", "format": "uri", "pattern": "^https://" },
+        "selection_rule": { "type": "string", "minLength": 1 },
+        "feature_count": { "type": "integer", "minimum": 1 },
+        "catalog_counts": {
+          "type": "object",
+          "required": ["SARA", "Active Tectonics of the Andes"],
+          "properties": {
+            "SARA": { "type": "integer", "minimum": 0 },
+            "Active Tectonics of the Andes": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "reference_coverage": {
+          "type": "object",
+          "required": ["SARA", "ATA"],
+          "properties": {
+            "SARA": { "$ref": "#/$defs/referenceCounts" },
+            "ATA": { "$ref": "#/$defs/referenceCounts" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": true
+    },
+    "features": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/faultFeature" }
+    }
+  },
+  "$defs": {
+    "referenceCounts": {
+      "type": "object",
+      "required": ["individual", "catalog_only"],
+      "properties": {
+        "individual": { "type": "integer", "minimum": 0 },
+        "catalog_only": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "faultFeature": {
+      "type": "object",
+      "required": ["type", "id", "properties", "geometry"],
+      "properties": {
+        "type": { "const": "Feature" },
+        "id": { "type": "string", "pattern": "^(SA|ATA)_[0-9]+$" },
+        "properties": {
+          "type": "object",
+          "required": ["catalog_id", "nombre", "nombre_en", "provincia", "tipo_movimiento", "fuente", "source_key", "reference_scope", "fuente_url", "licencia", "descripcion", "descripcion_en"],
+          "properties": {
+            "catalog_id": { "type": "string", "pattern": "^(SA|ATA)_[0-9]+$" },
+            "nombre": { "type": "string", "minLength": 1 },
+            "nombre_en": { "type": "string", "minLength": 1 },
+            "provincia": { "type": "string", "minLength": 1 },
+            "tipo_movimiento": { "enum": ["inversa", "normal", "dextral", "sinestral", "desconocido"] },
+            "fuente": { "type": "string", "minLength": 1 },
+            "source_key": { "enum": ["SARA", "ATA"] },
+            "reference_scope": { "enum": ["individual", "catalog_only"] },
+            "fuente_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+            "licencia": { "const": "CC BY-SA 4.0" },
+            "descripcion": { "type": "string", "minLength": 1 },
+            "descripcion_en": { "type": "string", "minLength": 1 }
+          },
+          "additionalProperties": true
+        },
+        "geometry": {
+          "type": "object",
+          "required": ["type", "coordinates"],
+          "properties": {
+            "type": { "enum": ["LineString", "MultiLineString"] },
+            "coordinates": { "type": "array", "minItems": 1 }
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

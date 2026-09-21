@@ -1,5 +1,6 @@
 import tempfile
 import unittest
+import json
 from pathlib import Path
 
 from scripts.catalog_integrity import (
@@ -14,6 +15,17 @@ from scripts.catalog_integrity import (
 
 
 class CatalogBuildIntegrityTests(unittest.TestCase):
+    def test_fault_schema_declares_citation_scope(self):
+        root = Path(__file__).resolve().parents[1]
+        schema = json.loads((root / "data/schemas/fallas.schema.json").read_text(encoding="utf-8"))
+        self.assertEqual(schema["$schema"], "https://json-schema.org/draft/2020-12/schema")
+        required = schema["$defs"]["faultFeature"]["properties"]["properties"]["required"]
+        self.assertIn("reference_scope", required)
+        self.assertEqual(
+            schema["$defs"]["faultFeature"]["properties"]["properties"]["properties"]["reference_scope"]["enum"],
+            ["individual", "catalog_only"],
+        )
+
     def test_reference_scope_never_invents_a_citation(self):
         self.assertEqual(reference_scope({"reference": "Author et al., 2020"}), "individual")
         self.assertEqual(reference_scope({"reference": "  "}), "catalog_only")
