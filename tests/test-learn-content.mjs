@@ -2,6 +2,9 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 
 const markup = fs.readFileSync("learn.html", "utf8");
+for (const match of markup.matchAll(/<a\b[^>]*target="_blank"[^>]*>/g)) {
+  assert.match(match[0], /rel="[^"]*noopener[^"]*"/, "External links must include noopener");
+}
 const assetPaths = new Set();
 
 for (const match of markup.matchAll(/(?:src|href)="(assets\/[^"?]+)(?:\?[^\"]*)?"/g)) {
