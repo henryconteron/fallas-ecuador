@@ -1,0 +1,36 @@
+name: Proponer una fuente geoespacial
+description: Propón un dataset institucional documentado para el atlas.
+title: "[Fuente] "
+labels: [data, provenance]
+body:
+  - type: input
+    id: provider
+    attributes:
+      label: Institución productora
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL oficial del dataset o servicio
+    validations:
+      required: true
+  - type: textarea
+    id: metadata
+    attributes:
+      label: Metadatos conocidos
+      description: Indica versión, fecha de actualización, cobertura, escala o resolución.
+    validations:
+      required: true
+  - type: textarea
+    id: license
+    attributes:
+      label: Licencia y condiciones de uso
+      description: Copia el enlace a la licencia o términos oficiales.
+    validations:
+      required: true
+  - type: textarea
+    id: limitations
+    attributes:
+      label: Limitaciones o advertencias
+      description: Describe incertidumbres, latencia, restricciones o validaciones pendientes.

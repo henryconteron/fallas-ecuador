@@ -1,0 +1,32 @@
+name: Reportar un problema
+description: Describe un error reproducible del atlas o de su documentación.
+title: "[Problema] "
+labels: [bug]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: ¿Qué ocurrió?
+      description: Explica el comportamiento observado y el resultado esperado.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: URL o vista afectada
+      placeholder: https://henryconteron.github.io/fallas-ecuador/
+  - type: dropdown
+    id: language
+    attributes:
+      label: Idioma
+      options:
+        - Español
+        - English
+        - Ambos
+  - type: textarea
+    id: steps
+    attributes:
+      label: Pasos para reproducir
+      description: Incluye capas activadas, fecha seleccionada y navegador si aplica.
+    validations:
+      required: true
