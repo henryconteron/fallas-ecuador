@@ -203,6 +203,7 @@ esas diferencias sean rastreables; no deben interpretarse automáticamente como 
 Las fichas enlazan el repositorio regional SARA o la referencia de *Active Tectonics of the Andes*,
 además de la instantánea armonizada de GEM. La verificación de versiones, licencias y limitaciones
 se mantiene en [`documentation/references/README.md`](documentation/references/README.md).
+La checklist previa a una release está en [`documentation/RELEASE_CHECKLIST.md`](documentation/RELEASE_CHECKLIST.md).
 
 La cobertura bibliográfica se distingue por traza: `reference` conserva únicamente la cita específica
 que ya venía en el registro fuente y `reference_scope` indica si esa cita es individual o si la ficha
